@@ -1,0 +1,23 @@
+name: mapcss
+version: 0.0.1
+description: >
+  mapcss provides an antlr based parser and a Dart framework for parsing
+  and manipulating MapCSS stylesheets.
+  MapCSS is used to define stylesheets for map rendering in the OpenStreetMap
+  project, see http://wiki.openstreetmap.org/wiki/MapCSS. 
+ 
+authors:
+- Karl Guggisberg <karl.guggisberg@guggis.ch>
+ 
+dependencies:
+  unittest:
+    sdk: unittest
+    
+  args:
+    sdk:
+      args
+      
+  dartlr:
+    git: 
+      url: git://github.com/tiagomazzutti/dartlr.git
+    
