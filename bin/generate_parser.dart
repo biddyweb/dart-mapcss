@@ -18,10 +18,10 @@ generate() {
       process.onExit = (exitCode) {
         if (exitCode == 0) {
           print("""
-              Successfully generated MapCSS lexer and MapCSS grammar, see
-              lib/src/generated/MapCSSLexer.dart
-              lib/src/generated/MapCSSParser.dart 
-          """);
+Successfully generated MapCSS lexer and MapCSS grammar, see
+    lib/src/generated/MapCSSLexer.dart
+    lib/src/generated/MapCSSParser.dart 
+""");
         } else {
           print("Failed.");
           print(errmsg);

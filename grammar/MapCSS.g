@@ -6,9 +6,28 @@ grammar MapCSS;
  *  - allows for quoted strings in double and single quotes ("..." and '...')
  *
  *  - doesn't support the "set <...>" declaration in declaration blocks
- *  - doesn't support regexp yet
  *  - doesn't support eval() yet
  * 
+ * The grammar emits an AST according to the following tree grammar
+ 
+ * STYLESHEET: #((RULE | IMPORT)*);
+ * RULE: #((SIMPLE_SELECTOR | DESCENDANT_COMBINATOR)+ DECLARATION_BLOCK);
+ * SIMPLE_SELECTOR: #(TYPE_SELECTOR CLASS_SELECTOR? ZOOM_SELECTOR? ATTRIBUTE_SELECTOR*)
+ * CLASS_SELECTOR: # ((OP_EXIST | OP_NOT_EXIST) VALUE_KEYWORD)
+ * ZOOM_SELECTOR:  #(VALUE_INT VALUE_INT)
+ * ATTRIBUTE_SELECTOR
+ *     : # ((OP_EQ | OP_NEQ | OP_LE | OP_GE | OP_LT | OP_GT | OP_MATCH) term term
+ *     | # ((OP_EXIST | OP_NOT_EXIST | OP_NEGATE) term)
+ *     ;
+ * term: VALUE_KEYWORD | VALUE_QUOTED | VALUE_FLOAT | VALUE_INT | VALUE_REGEXP;
+ * DECLARATION_BLOCK: #(DECLARATION*);
+ * DECLARATION: #(VALUE_KEYWORD (simple_value VALUE_LIST)); 
+ * simple_value: VALUE_HEXCOLOR | VALUE_RGB | VALUE_RGBA| VALUE_QUOTED
+ *         | VALUE_FLOAT | VALUE_INT | VALUE_PERCENTAGE | VALUE_POINTS| VALUE_PIXELS;
+ * VALUE_RGB: #(VALUE_INT VALUE_INT VALUE_INT);
+ * VALUE_RGBA: #(VALUE_INT VALUE_INT VALUE_INT VALUE_FLOAT);
+ * VALUE_LIST: #(simple_value+);
+ *
  */
  
 options {
@@ -18,27 +37,29 @@ options {
 
 tokens {
    STYLESHEET;
+   RULE;
+   SIMPLE_SELECTOR;
    DESCENDANT_COMBINATOR;
-   TYPE_SELECTOR;
-   ZOOM_SELECTOR;
+   TYPE_SELECTOR;              // .text is the type
+   ZOOM_SELECTOR;              // .text is the value including the leading '|z'
    ATTRIBUTE_SELECTOR;
    CLASS_SELECTOR;
    DECLARATION_BLOCK;
    DECLARATION;
    
-   VALUE_HEXCOLOR;
-   VALUE_RGB;
+   VALUE_HEXCOLOR;             // .text is the value, including the #
+   VALUE_RGB;                  
    VALUE_RGBA;
-   VALUE_URL;
-   VALUE_KEYWORD;
-   VALUE_QUOTED;
-   VALUE_FLOAT;
-   VALUE_INT;
-   VALUE_PERCENTAGE;
-   VALUE_POINTS;
-   VALUE_PIXELS;
-   VALUE_LIST;
-   VALUE_ZOOM_RANGE;
+   VALUE_URL;                  
+   VALUE_KEYWORD;              // .text is the keyword, without quotes 
+   VALUE_QUOTED;               // .text is the value, *with* quotes (".." or '...')
+   VALUE_FLOAT;                // .text is the float value
+   VALUE_INT;                  // .text is the int value 
+   VALUE_PERCENTAGE;           // .text is a float or int, *with* trailing %
+   VALUE_POINTS;               // .text is a float or int, *with* trailing 'pt'
+   VALUE_PIXELS;               // .text is a float or int, *with* trailing 'px'
+   VALUE_LIST;               
+   VALUE_REGEXP;               // .text is a regular expression, *without* quotes 
    
    OP_EXIST;
    OP_NOT_EXIST;
@@ -52,8 +73,16 @@ tokens {
    OP_NEGATE;
 }
 
- @members {
- }
+//NOTE: @parser::header and @lexer::header are specific for the target language Dart
+//  and the Dart package 'mapcss'. Remove or adjust them 
+//  - if your target is another language
+//  - if you want to generate the parser and lexer in their own library 
+@parser::header {
+  part of mapcss;
+}
+@lexer::header {
+  part of mapcss;
+}
 
 fragment DIGIT:  '0'..'9';
 fragment CHAR: 'a'..'z' | 'A'..'Z';
@@ -68,6 +97,9 @@ fragment PT: ('p' | 'P') ('t' | 'T');
 fragment PX: ('p' | 'P') ('x' | 'X');
 
 
+URL: ('u' | 'U') ('r' | 'R') ('l' | 'L');
+RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
+RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
 IDENT: SIDCHAR IDCHAR*;
 
 DQUOTED_STRING: '"' (' ' | '!' | '#'..'[' | ']'..'~' | UNICODE | EDQUOTE | EBACKSLASH )* '"';
@@ -84,6 +116,16 @@ EQ:  		'=';
 MATCH:      '=~';
 IMPORT:     '@import';
 
+fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE;
+fragment REGEX_ESCAPE:   '\\\\' | '\\/' | '\\(' | '\\)' 
+                       | '\\|' | '\\$' | '\\*' | '\\.' | '\\^' | '\\?' | '\\+' | '\\-'
+                       | '\\n' | '\\r' | '\\t'
+                       | '\\s' | '\\S'
+                       | '\\d' | '\\D'
+                       | '\\w' | '\\W';                       
+REGEXP:  '/' (REGEX_CHAR | REGEX_ESCAPE)* '/';
+
+
 WS:			  (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
 SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
 ML_COMMENT:   '/*' (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
@@ -98,25 +140,25 @@ entry
 	;
 			
 rule
-	: selector (',' selector)* declaration_block -> selector* declaration_block
+	: selector (',' selector)* declaration_block -> ^(RULE selector* declaration_block)
 	;
   
 selector
-	: simple_selector
+	: simple_selector                  -> ^(SIMPLE_SELECTOR simple_selector)
 	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+);
 	
 import_statement
-	: IMPORT 'url' '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT $url $id)
+	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
 	;
 
 simple_selector
-	: type_selector  zoom_selector? attribute_selectors  -> ^(TYPE_SELECTOR[$type_selector.text] zoom_selector? attribute_selectors?)
-	| class_selector  
-	| 'canvas'         -> ^(TYPE_SELECTOR['canvas'])
+	: type_selector class_selector? zoom_selector? attribute_selectors  
+	     -> TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selectors?
+	| 'canvas'         -> TYPE_SELECTOR['canvas']
 	;
 
 zoom_selector
-	: r=RANGE -> ^(ZOOM_SELECTOR VALUE_ZOOM_RANGE[$r])
+	: RANGE -> ^(ZOOM_SELECTOR RANGE)
 	;
 
 quoted
@@ -124,11 +166,16 @@ quoted
 	| v=SQUOTED_STRING   -> VALUE_QUOTED[$v]
 	; 
 
-RANGE
-	:  '|z-' DIGIT+ 
-	|  '|z' DIGIT+ ('-' (DIGIT)*)?
-	;
+PIPE_Z: '|z';
 
+RANGE
+	: PIPE_Z (
+		  '-' DIGIT+
+		| DIGIT+ 
+		| DIGIT+ '-' 
+		| DIGIT+ '-' DIGIT+
+	  )
+	;
 
 attribute_selectors
 	: attribute_selector* -> attribute_selector*
@@ -146,6 +193,7 @@ lhs
 condition
 	: lhs                         -> ^(OP_EXIST lhs)
 	| lhs binary_operator rhs     -> ^(binary_operator lhs rhs)
+	| lhs MATCH rhs_match         -> ^(OP_MATCH lhs rhs_match) 
 	| unary_operator lhs          -> ^(unary_operator lhs)
 	;
 
@@ -155,10 +203,15 @@ rhs
 	| quoted   -> quoted
 	;
 
+rhs_match
+	: r=REGEXP                     -> VALUE_REGEXP[$r]
+	| r=DQUOTED_STRING             -> VALUE_QUOTED[$r]
+	| r=SQUOTED_STRING             -> VALUE_QUOTED[$r]
+	; 
+	
 binary_operator
 	: EQ        -> OP_EQ
 	| NEQ 		-> OP_NEQ
-	| MATCH     -> OP_MATCH
 	| LT        -> OP_LT
 	| GT        -> OP_GT
 	| LE        -> OP_LE
@@ -198,7 +251,10 @@ declaration
 	;
 
 declaration_property
-	: k=IDENT ->  VALUE_KEYWORD[$k]
+    : k=URL     ->  VALUE_KEYWORD[$k]
+    | k=RGB     ->  VALUE_KEYWORD[$k]
+    | k=RGBA    ->  VALUE_KEYWORD[$k]
+	| k=IDENT   ->  VALUE_KEYWORD[$k]	
 	;	
 
 declaration_value
@@ -242,7 +298,10 @@ NUMBER
 	  )	  
 	;		 
 
-num: INT | FLOAT;
+num
+	: n=INT       ->   VALUE_INT[$n]
+	| n=FLOAT     ->   VALUE_FLOAT[$n]
+	;
 
 single_value
 	: v=INT            -> VALUE_INT[$v]
@@ -252,9 +311,9 @@ single_value
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 
 	| k=IDENT          -> VALUE_KEYWORD[$k]
 	| quoted           -> VALUE_QUOTED[$quoted.text]
-	|  c=HEXCOLOR      -> VALUE_HEXCOLOR[$c]
-	| 'url' '(' quoted ')'                              -> VALUE_URL[$quoted.text]
-	| 'rgb' '(' r=INT ',' g=INT ',' b=INT ')'           -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
-	| 'rgba' '(' r=INT ',' g=INT ',' b=INT ',' a=num ')'-> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])	
+	| c=HEXCOLOR      -> VALUE_HEXCOLOR[$c]
+	| URL '(' quoted ')'                              -> VALUE_URL[$quoted.text]
+	| RGB '(' r=INT ',' g=INT ',' b=INT ')'           -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
+	| RGBA '(' r=INT ',' g=INT ',' b=INT ',' a=num ')'-> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])	
 	;
 

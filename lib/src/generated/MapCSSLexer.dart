@@ -1,21 +1,12 @@
-// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-18 18:10:03
-library MapCSSLexer;
+// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-20 18:24:04
 
-import 'dart:io';
-import 'package:dartlr/dartlr.dart';
+
+  part of mapcss;
+
 
 class MapCSSLexer extends Lexer {
 
   static const int EOF = -1;
-  static const int T__71 = 71;
-  static const int T__72 = 72;
-  static const int T__73 = 73;
-  static const int T__74 = 74;
-  static const int T__75 = 75;
-  static const int T__76 = 76;
-  static const int T__77 = 77;
-  static const int T__78 = 78;
-  static const int T__79 = 79;
   static const int T__80 = 80;
   static const int T__81 = 81;
   static const int T__82 = 82;
@@ -29,6 +20,12 @@ class MapCSSLexer extends Lexer {
   static const int T__90 = 90;
   static const int T__91 = 91;
   static const int T__92 = 92;
+  static const int T__93 = 93;
+  static const int T__94 = 94;
+  static const int T__95 = 95;
+  static const int T__96 = 96;
+  static const int T__97 = 97;
+  static const int T__98 = 98;
   static const int ATTRIBUTE_SELECTOR = 4;
   static const int CHAR = 5;
   static const int CLASS_SELECTOR = 6;
@@ -68,34 +65,43 @@ class MapCSSLexer extends Lexer {
   static const int OP_NOT_EXIST = 40;
   static const int P = 41;
   static const int PERCENTAGE = 42;
-  static const int PIXELS = 43;
-  static const int POINTS = 44;
-  static const int PT = 45;
-  static const int PX = 46;
-  static const int RANGE = 47;
-  static const int SIDCHAR = 48;
-  static const int SL_COMMENT = 49;
-  static const int SQUOTED_STRING = 50;
-  static const int STYLESHEET = 51;
-  static const int T = 52;
-  static const int TYPE_SELECTOR = 53;
-  static const int UNICODE = 54;
-  static const int VALUE_FLOAT = 55;
-  static const int VALUE_HEXCOLOR = 56;
-  static const int VALUE_INT = 57;
-  static const int VALUE_KEYWORD = 58;
-  static const int VALUE_LIST = 59;
-  static const int VALUE_PERCENTAGE = 60;
-  static const int VALUE_PIXELS = 61;
-  static const int VALUE_POINTS = 62;
-  static const int VALUE_QUOTED = 63;
-  static const int VALUE_RGB = 64;
-  static const int VALUE_RGBA = 65;
-  static const int VALUE_URL = 66;
-  static const int VALUE_ZOOM_RANGE = 67;
-  static const int WS = 68;
-  static const int X = 69;
-  static const int ZOOM_SELECTOR = 70;  
+  static const int PIPE_Z = 43;
+  static const int PIXELS = 44;
+  static const int POINTS = 45;
+  static const int PT = 46;
+  static const int PX = 47;
+  static const int RANGE = 48;
+  static const int REGEXP = 49;
+  static const int REGEX_CHAR = 50;
+  static const int REGEX_ESCAPE = 51;
+  static const int RGB = 52;
+  static const int RGBA = 53;
+  static const int RULE = 54;
+  static const int SIDCHAR = 55;
+  static const int SIMPLE_SELECTOR = 56;
+  static const int SL_COMMENT = 57;
+  static const int SQUOTED_STRING = 58;
+  static const int STYLESHEET = 59;
+  static const int T = 60;
+  static const int TYPE_SELECTOR = 61;
+  static const int UNICODE = 62;
+  static const int URL = 63;
+  static const int VALUE_FLOAT = 64;
+  static const int VALUE_HEXCOLOR = 65;
+  static const int VALUE_INT = 66;
+  static const int VALUE_KEYWORD = 67;
+  static const int VALUE_LIST = 68;
+  static const int VALUE_PERCENTAGE = 69;
+  static const int VALUE_PIXELS = 70;
+  static const int VALUE_POINTS = 71;
+  static const int VALUE_QUOTED = 72;
+  static const int VALUE_REGEXP = 73;
+  static const int VALUE_RGB = 74;
+  static const int VALUE_RGBA = 75;
+  static const int VALUE_URL = 76;
+  static const int WS = 77;
+  static const int X = 78;
+  static const int ZOOM_SELECTOR = 79;  
   
 
   Map<String, DFA> dfas;
@@ -107,264 +113,39 @@ class MapCSSLexer extends Lexer {
   MapCSSLexer([CharStream input]) 
     : super.fromRecognizerSharedState
       (input, new RecognizerSharedState()) {
-    this.dfas = new Map<String, DFA>();
-    this.dfas["dfa19"] = new DFA19(this);
+    dfas = new Map<String, DFA>();
+    dfas["dfa15"] = new DFA_MapCSSLexer_15(this);dfas["dfa22"] = new DFA_MapCSSLexer_22(this);
   }
 
   MapCSSLexer.fromRecognizerSharedState(
     CharStream input, RecognizerSharedState state) 
       : super.fromRecognizerSharedState(input,state) {
-    this.dfas = new Map<String, DFA>();
-    this.dfas["dfa19"] = new DFA19(this);
+    dfas = new Map<String, DFA>();
+    dfas["dfa15"] = new DFA_MapCSSLexer_15(this);dfas["dfa22"] = new DFA_MapCSSLexer_22(this);
   }
 
   String get grammarFileName => "MapCSS.g";
 
   String get recognizerClassName => "MapCSSLexer";
   
-  // $ANTLR start "T__71"
-  void mT__71() {
-    try {
-  	  int _type = T__71;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   7:7: ( '!' )*/
-  	  /* grammar/MapCSS.g:
-  	   7:9: '!'*/
-  	  {
-  	  	this.match(33 /*'!'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__71"
-
-  // $ANTLR start "T__72"
-  void mT__72() {
-    try {
-  	  int _type = T__72;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   8:7: ( '(' )*/
-  	  /* grammar/MapCSS.g:
-  	   8:9: '('*/
-  	  {
-  	  	this.match(40 /*'('*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__72"
-
-  // $ANTLR start "T__73"
-  void mT__73() {
-    try {
-  	  int _type = T__73;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   9:7: ( ')' )*/
-  	  /* grammar/MapCSS.g:
-  	   9:9: ')'*/
-  	  {
-  	  	this.match(41 /*')'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__73"
-
-  // $ANTLR start "T__74"
-  void mT__74() {
-    try {
-  	  int _type = T__74;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   10:7: ( '*' )*/
-  	  /* grammar/MapCSS.g:
-  	   10:9: '*'*/
-  	  {
-  	  	this.match(42 /*'*'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__74"
-
-  // $ANTLR start "T__75"
-  void mT__75() {
-    try {
-  	  int _type = T__75;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   11:7: ( ',' )*/
-  	  /* grammar/MapCSS.g:
-  	   11:9: ','*/
-  	  {
-  	  	this.match(44 /*','*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__75"
-
-  // $ANTLR start "T__76"
-  void mT__76() {
-    try {
-  	  int _type = T__76;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   12:7: ( '-' )*/
-  	  /* grammar/MapCSS.g:
-  	   12:9: '-'*/
-  	  {
-  	  	this.match(45 /*'-'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__76"
-
-  // $ANTLR start "T__77"
-  void mT__77() {
-    try {
-  	  int _type = T__77;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   13:7: ( '.' )*/
-  	  /* grammar/MapCSS.g:
-  	   13:9: '.'*/
-  	  {
-  	  	this.match(46 /*'.'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__77"
-
-  // $ANTLR start "T__78"
-  void mT__78() {
-    try {
-  	  int _type = T__78;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   14:7: ( ':' )*/
-  	  /* grammar/MapCSS.g:
-  	   14:9: ':'*/
-  	  {
-  	  	this.match(58 /*':'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__78"
-
-  // $ANTLR start "T__79"
-  void mT__79() {
-    try {
-  	  int _type = T__79;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   15:7: ( ';' )*/
-  	  /* grammar/MapCSS.g:
-  	   15:9: ';'*/
-  	  {
-  	  	this.match(59 /*';'*/); 
-  	  	if(this.state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__79"
-
   // $ANTLR start "T__80"
   void mT__80() {
     try {
   	  int _type = T__80;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   16:7: ( '[' )*/
+  	   11:7: ( '!' )*/
   	  /* grammar/MapCSS.g:
-  	   16:9: '['*/
+  	   11:9: '!'*/
   	  {
-  	  	this.match(91 /*'['*/); 
-  	  	if(this.state.failed) 
+  	  	match(33 /*'!'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -378,18 +159,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__81;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   17:7: ( ']' )*/
+  	   12:7: ( '(' )*/
   	  /* grammar/MapCSS.g:
-  	   17:9: ']'*/
+  	   12:9: '('*/
   	  {
-  	  	this.match(93 /*']'*/); 
-  	  	if(this.state.failed) 
+  	  	match(40 /*'('*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -403,20 +184,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__82;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   18:7: ( 'area' )*/
+  	   13:7: ( ')' )*/
   	  /* grammar/MapCSS.g:
-  	   18:9: 'area'*/
+  	   13:9: ')'*/
   	  {
-  	  	this.match("area"); 
-  	  	if(this.state.failed) 
+  	  	match(41 /*')'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -430,20 +209,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__83;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   19:7: ( 'canvas' )*/
+  	   14:7: ( '*' )*/
   	  /* grammar/MapCSS.g:
-  	   19:9: 'canvas'*/
+  	   14:9: '*'*/
   	  {
-  	  	this.match("canvas"); 
-  	  	if(this.state.failed) 
+  	  	match(42 /*'*'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -457,20 +234,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__84;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   20:7: ( 'line' )*/
+  	   15:7: ( ',' )*/
   	  /* grammar/MapCSS.g:
-  	   20:9: 'line'*/
+  	   15:9: ','*/
   	  {
-  	  	this.match("line"); 
-  	  	if(this.state.failed) 
+  	  	match(44 /*','*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -484,20 +259,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__85;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   21:7: ( 'node' )*/
+  	   16:7: ( '-' )*/
   	  /* grammar/MapCSS.g:
-  	   21:9: 'node'*/
+  	   16:9: '-'*/
   	  {
-  	  	this.match("node"); 
-  	  	if(this.state.failed) 
+  	  	match(45 /*'-'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -511,20 +284,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__86;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   22:7: ( 'relation' )*/
+  	   17:7: ( '.' )*/
   	  /* grammar/MapCSS.g:
-  	   22:9: 'relation'*/
+  	   17:9: '.'*/
   	  {
-  	  	this.match("relation"); 
-  	  	if(this.state.failed) 
+  	  	match(46 /*'.'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -538,20 +309,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__87;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   23:7: ( 'rgb' )*/
+  	   18:7: ( ':' )*/
   	  /* grammar/MapCSS.g:
-  	   23:9: 'rgb'*/
+  	   18:9: ':'*/
   	  {
-  	  	this.match("rgb"); 
-  	  	if(this.state.failed) 
+  	  	match(58 /*':'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -565,20 +334,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__88;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   24:7: ( 'rgba' )*/
+  	   19:7: ( ';' )*/
   	  /* grammar/MapCSS.g:
-  	   24:9: 'rgba'*/
+  	   19:9: ';'*/
   	  {
-  	  	this.match("rgba"); 
-  	  	if(this.state.failed) 
+  	  	match(59 /*';'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -592,20 +359,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__89;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   25:7: ( 'url' )*/
+  	   20:7: ( '[' )*/
   	  /* grammar/MapCSS.g:
-  	   25:9: 'url'*/
+  	   20:9: '['*/
   	  {
-  	  	this.match("url"); 
-  	  	if(this.state.failed) 
+  	  	match(91 /*'['*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -619,20 +384,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__90;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   26:7: ( 'way' )*/
+  	   21:7: ( ']' )*/
   	  /* grammar/MapCSS.g:
-  	   26:9: 'way'*/
+  	   21:9: ']'*/
   	  {
-  	  	this.match("way"); 
-  	  	if(this.state.failed) 
+  	  	match(93 /*']'*/); 
+  	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -646,18 +409,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__91;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   27:7: ( '{' )*/
+  	   22:7: ( 'area' )*/
   	  /* grammar/MapCSS.g:
-  	   27:9: '{'*/
+  	   22:9: 'area'*/
   	  {
-  	  	this.match(123 /*'{'*/); 
-  	  	if(this.state.failed) 
+  	  	match("area"); 
+  	  	if(state.failed) 
   	  	  return ;
+
+
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -671,18 +436,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__92;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   28:7: ( '}' )*/
+  	   23:7: ( 'canvas' )*/
   	  /* grammar/MapCSS.g:
-  	   28:9: '}'*/
+  	   23:9: 'canvas'*/
   	  {
-  	  	this.match(125 /*'}'*/); 
-  	  	if(this.state.failed) 
+  	  	match("canvas"); 
+  	  	if(state.failed) 
   	  	  return ;
+
+
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -690,25 +457,183 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "T__92"
 
+  // $ANTLR start "T__93"
+  void mT__93() {
+    try {
+  	  int _type = T__93;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   24:7: ( 'line' )*/
+  	  /* grammar/MapCSS.g:
+  	   24:9: 'line'*/
+  	  {
+  	  	match("line"); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__93"
+
+  // $ANTLR start "T__94"
+  void mT__94() {
+    try {
+  	  int _type = T__94;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   25:7: ( 'node' )*/
+  	  /* grammar/MapCSS.g:
+  	   25:9: 'node'*/
+  	  {
+  	  	match("node"); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__94"
+
+  // $ANTLR start "T__95"
+  void mT__95() {
+    try {
+  	  int _type = T__95;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   26:7: ( 'relation' )*/
+  	  /* grammar/MapCSS.g:
+  	   26:9: 'relation'*/
+  	  {
+  	  	match("relation"); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__95"
+
+  // $ANTLR start "T__96"
+  void mT__96() {
+    try {
+  	  int _type = T__96;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   27:7: ( 'way' )*/
+  	  /* grammar/MapCSS.g:
+  	   27:9: 'way'*/
+  	  {
+  	  	match("way"); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__96"
+
+  // $ANTLR start "T__97"
+  void mT__97() {
+    try {
+  	  int _type = T__97;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   28:7: ( '{' )*/
+  	  /* grammar/MapCSS.g:
+  	   28:9: '{'*/
+  	  {
+  	  	match(123 /*'{'*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__97"
+
+  // $ANTLR start "T__98"
+  void mT__98() {
+    try {
+  	  int _type = T__98;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   29:7: ( '}' )*/
+  	  /* grammar/MapCSS.g:
+  	   29:9: '}'*/
+  	  {
+  	  	match(125 /*'}'*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__98"
+
   // $ANTLR start "DIGIT"
   void mDIGIT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   58:15: ( '0' .. '9' )*/
+  	   87:15: ( '0' .. '9' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -727,22 +652,22 @@ class MapCSSLexer extends Lexer {
   void mCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   59:14: ( 'a' .. 'z' | 'A' .. 'Z' )*/
+  	   88:14: ( 'a' .. 'z' | 'A' .. 'Z' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if((this.input.LA(1) >= 65 /*'A'*/ && this.input.LA(1) <= 90 /*'Z'*/)
-  	  	  || (this.input.LA(1) >= 97 /*'a'*/ && this.input.LA(1) <= 122 /*'z'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if((input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
+  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -761,25 +686,25 @@ class MapCSSLexer extends Lexer {
   void mIDCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   60:16: ( CHAR | '_' | '-' | DIGIT )*/
+  	   89:16: ( CHAR | '_' | '-' | DIGIT )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if(this.input.LA(1) == 45 /*'-'*/
-  	  	  || (this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)
-  	  	  || (this.input.LA(1) >= 65 /*'A'*/ && this.input.LA(1) <= 90 /*'Z'*/)
-  	  	  || this.input.LA(1) == 95 /*'_'*/
-  	  	  || (this.input.LA(1) >= 97 /*'a'*/ && this.input.LA(1) <= 122 /*'z'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 45 /*'-'*/
+  	  	  || (input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)
+  	  	  || (input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
+  	  	  || input.LA(1) == 95 /*'_'*/
+  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -798,23 +723,23 @@ class MapCSSLexer extends Lexer {
   void mSIDCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   61:17: ( CHAR | '-' )*/
+  	   90:17: ( CHAR | '-' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if(this.input.LA(1) == 45 /*'-'*/
-  	  	  || (this.input.LA(1) >= 65 /*'A'*/ && this.input.LA(1) <= 90 /*'Z'*/)
-  	  	  || (this.input.LA(1) >= 97 /*'a'*/ && this.input.LA(1) <= 122 /*'z'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 45 /*'-'*/
+  	  	  || (input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
+  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -833,12 +758,12 @@ class MapCSSLexer extends Lexer {
   void mEDQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   62:17: ( '\\\\\"' )*/
+  	   91:17: ( '\\\\\"' )*/
   	  /* grammar/MapCSS.g:
-  	   62:19: '\\\\\"'*/
+  	   91:19: '\\\\\"'*/
   	  {
-  	  	this.match("\\\""); 
-  	  	if(this.state.failed) 
+  	  	match("\\\""); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
@@ -857,12 +782,12 @@ class MapCSSLexer extends Lexer {
   void mESQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   63:17: ( '\\\\\\'' )*/
+  	   92:17: ( '\\\\\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   63:19: '\\\\\\''*/
+  	   92:19: '\\\\\\''*/
   	  {
-  	  	this.match("\\'"); 
-  	  	if(this.state.failed) 
+  	  	match("\\'"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
@@ -881,12 +806,12 @@ class MapCSSLexer extends Lexer {
   void mEBACKSLASH() {
     try {
   	  /* grammar/MapCSS.g:
-  	   64:20: ( '\\\\\\\\' )*/
+  	   93:20: ( '\\\\\\\\' )*/
   	  /* grammar/MapCSS.g:
-  	   64:22: '\\\\\\\\'*/
+  	   93:22: '\\\\\\\\'*/
   	  {
-  	  	this.match("\\\\"); 
-  	  	if(this.state.failed) 
+  	  	match("\\\\"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
@@ -905,21 +830,21 @@ class MapCSSLexer extends Lexer {
   void mUNICODE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   65:17: ( '\\u0080' .. '\\uFFFF' )*/
+  	   94:17: ( '\\u0080' .. '\\uFFFF' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if((this.input.LA(1) >= 128 /*'\u0080'*/ && this.input.LA(1) <= 65535 /*'\uFFFF'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if((input.LA(1) >= 128 /*'\u0080'*/ && input.LA(1) <= 65535 /*'\uFFFF'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -938,23 +863,23 @@ class MapCSSLexer extends Lexer {
   void mHEXDIGIT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   66:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
+  	   95:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)
-  	  	  || (this.input.LA(1) >= 65 /*'A'*/ && this.input.LA(1) <= 70 /*'F'*/)
-  	  	  || (this.input.LA(1) >= 97 /*'a'*/ && this.input.LA(1) <= 102 /*'f'*/)) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)
+  	  	  || (input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 70 /*'F'*/)
+  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 102 /*'f'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -973,38 +898,38 @@ class MapCSSLexer extends Lexer {
   void mPT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   67:12: ( ( 'p' | 'P' ) ( 't' | 'T' ) )*/
+  	   96:12: ( ( 'p' | 'P' ) ( 't' | 'T' ) )*/
   	  /* grammar/MapCSS.g:
-  	   67:14: ( 'p' | 'P' ) ( 't' | 'T' )*/
+  	   96:14: ( 'p' | 'P' ) ( 't' | 'T' )*/
   	  {
-  	  	if(this.input.LA(1) == 80 /*'P'*/
-  	  	  || this.input.LA(1) == 112 /*'p'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 80 /*'P'*/
+  	  	  || input.LA(1) == 112 /*'p'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
 
-  	  	if(this.input.LA(1) == 84 /*'T'*/
-  	  	  || this.input.LA(1) == 116 /*'t'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 84 /*'T'*/
+  	  	  || input.LA(1) == 116 /*'t'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -1023,38 +948,38 @@ class MapCSSLexer extends Lexer {
   void mPX() {
     try {
   	  /* grammar/MapCSS.g:
-  	   68:12: ( ( 'p' | 'P' ) ( 'x' | 'X' ) )*/
+  	   97:12: ( ( 'p' | 'P' ) ( 'x' | 'X' ) )*/
   	  /* grammar/MapCSS.g:
-  	   68:14: ( 'p' | 'P' ) ( 'x' | 'X' )*/
+  	   97:14: ( 'p' | 'P' ) ( 'x' | 'X' )*/
   	  {
-  	  	if(this.input.LA(1) == 80 /*'P'*/
-  	  	  || this.input.LA(1) == 112 /*'p'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 80 /*'P'*/
+  	  	  || input.LA(1) == 112 /*'p'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
 
-  	  	if(this.input.LA(1) == 88 /*'X'*/
-  	  	  || this.input.LA(1) == 120 /*'x'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 88 /*'X'*/
+  	  	  || input.LA(1) == 120 /*'x'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -1069,27 +994,250 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "PX"
 
+  // $ANTLR start "URL"
+  void mURL() {
+    try {
+  	  int _type = URL;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   100:4: ( ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' ) )*/
+  	  /* grammar/MapCSS.g:
+  	   100:6: ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' )*/
+  	  {
+  	  	if(input.LA(1) == 85 /*'U'*/
+  	  	  || input.LA(1) == 117 /*'u'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 82 /*'R'*/
+  	  	  || input.LA(1) == 114 /*'r'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 76 /*'L'*/
+  	  	  || input.LA(1) == 108 /*'l'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "URL"
+
+  // $ANTLR start "RGBA"
+  void mRGBA() {
+    try {
+  	  int _type = RGBA;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   101:5: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' ) )*/
+  	  /* grammar/MapCSS.g:
+  	   101:7: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' )*/
+  	  {
+  	  	if(input.LA(1) == 82 /*'R'*/
+  	  	  || input.LA(1) == 114 /*'r'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 71 /*'G'*/
+  	  	  || input.LA(1) == 103 /*'g'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 66 /*'B'*/
+  	  	  || input.LA(1) == 98 /*'b'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 65 /*'A'*/
+  	  	  || input.LA(1) == 97 /*'a'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "RGBA"
+
+  // $ANTLR start "RGB"
+  void mRGB() {
+    try {
+  	  int _type = RGB;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   102:4: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) )*/
+  	  /* grammar/MapCSS.g:
+  	   102:6: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' )*/
+  	  {
+  	  	if(input.LA(1) == 82 /*'R'*/
+  	  	  || input.LA(1) == 114 /*'r'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 71 /*'G'*/
+  	  	  || input.LA(1) == 103 /*'g'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  	if(input.LA(1) == 66 /*'B'*/
+  	  	  || input.LA(1) == 98 /*'b'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "RGB"
+
   // $ANTLR start "IDENT"
   void mIDENT() {
     try {
   	  int _type = IDENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   71:6: ( SIDCHAR ( IDCHAR )* )*/
+  	   103:6: ( SIDCHAR ( IDCHAR )* )*/
   	  /* grammar/MapCSS.g:
-  	   71:8: SIDCHAR ( IDCHAR )**/
+  	   103:8: SIDCHAR ( IDCHAR )**/
   	  {
-  	  	this.mSIDCHAR(); 
-  	  	if(this.state.failed) 
+  	  	mSIDCHAR(); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 71:16: ( IDCHAR )**/
+  	  	 103:16: ( IDCHAR )**/
   	  	loop1:
   	  	do {
   	  	  int alt1 = 2;
-  	  	  int LA1_0 = this.input.LA(1);
+  	  	  int LA1_0 = input.LA(1);
 
   	  	  if((LA1_0 == 45/*45 /*'-'*/*/
   	  	    || (LA1_0 >= 48 /*'0'*/ && LA1_0 <= 57 /*'9'*/)
@@ -1105,21 +1253,21 @@ class MapCSSLexer extends Lexer {
   	  			  /* grammar/MapCSS.g:
   	  			  */
   	  			  {
-  	  			  	if(this.input.LA(1) == 45 /*'-'*/
-  	  			  	  || (this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)
-  	  			  	  || (this.input.LA(1) >= 65 /*'A'*/ && this.input.LA(1) <= 90 /*'Z'*/)
-  	  			  	  || this.input.LA(1) == 95 /*'_'*/
-  	  			  	  || (this.input.LA(1) >= 97 /*'a'*/ && this.input.LA(1) <= 122 /*'z'*/)) {
-  	  			  	  this.input.consume();
-  	  			  	  this.state.failed = false;
+  	  			  	if(input.LA(1) == 45 /*'-'*/
+  	  			  	  || (input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)
+  	  			  	  || (input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
+  	  			  	  || input.LA(1) == 95 /*'_'*/
+  	  			  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
+  	  			  	  input.consume();
+  	  			  	  state.failed = false;
   	  			  	}
   	  			  	else {
-  	  			  	  if(this.state.backtracking > 0) {
-  	  			  	    this.state.failed = true; 
+  	  			  	  if(state.backtracking > 0) {
+  	  			  	    state.failed = true; 
   	  			  	    return ;
   	  			  	  }
-  	  			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  			  	  this.recover(mse);
+  	  			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  			  	  recover(mse);
   	  			  	  throw mse;
   	  			  	}
 
@@ -1135,8 +1283,8 @@ class MapCSSLexer extends Lexer {
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1150,22 +1298,23 @@ class MapCSSLexer extends Lexer {
   	  int _type = DQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   73:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   105:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"' )*/
   	  /* grammar/MapCSS.g:
-  	   73:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   105:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"'*/
   	  {
-  	  	this.match(34 /*'\"'*/); 
-  	  	if(this.state.failed) 
+  	  	match(34 /*'\"'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 73:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | EBACKSLASH )**/
+  	  	 105:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | 
+  	  	 EBACKSLASH )**/
   	  	loop2:
   	  	do {
   	  	  int alt2 = 8;
-  	  	  int LA2_0 = this.input.LA(1);
+  	  	  int LA2_0 = input.LA(1);
 
   	  	  if((LA2_0 == 32/*32 /*' '*/*/)) {
   	  	    alt2 = 1;
@@ -1183,7 +1332,7 @@ class MapCSSLexer extends Lexer {
   	  	    alt2 = 5;
   	  	  }
   	  	  else if((LA2_0 == 92/*92 /*'\\'*/*/)) {
-  	  	    int LA2_7 = this.input.LA(2);
+  	  	    int LA2_7 = input.LA(2);
 
   	  	    if((LA2_7 == 34/*34 /*'\"'*/*/)) {
   	  	      alt2 = 6;
@@ -1199,50 +1348,50 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt2) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:22: ' '*/
+  	  			   105:22: ' '*/
   	  			  {
-  	  			  	this.match(32 /*' '*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	match(32 /*' '*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:28: '!'*/
+  	  			   105:28: '!'*/
   	  			  {
-  	  			  	this.match(33 /*'!'*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	match(33 /*'!'*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:34: '#' .. '['*/
+  	  			   105:34: '#' .. '['*/
   	  			  {
-  	  			  	this.matchRange(35 /*'#'*/, 91 /*'['*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchRange(35 /*'#'*/, 91 /*'['*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:45: ']' .. '~'*/
+  	  			   105:45: ']' .. '~'*/
   	  			  {
-  	  			  	this.matchRange(93 /*']'*/, 126 /*'~'*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:56: UNICODE*/
+  	  			   105:56: UNICODE*/
   	  			  {
-  	  			  	this.mUNICODE(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mUNICODE(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1250,10 +1399,10 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:66: EDQUOTE*/
+  	  			   105:66: EDQUOTE*/
   	  			  {
-  	  			  	this.mEDQUOTE(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mEDQUOTE(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1261,10 +1410,10 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 7 :
   	  			  /* grammar/MapCSS.g:
-  	  			   73:76: EBACKSLASH*/
+  	  			   105:76: EBACKSLASH*/
   	  			  {
-  	  			  	this.mEBACKSLASH(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mEBACKSLASH(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1277,14 +1426,14 @@ class MapCSSLexer extends Lexer {
   	  	} while(true);
 
 
-  	  	this.match(34 /*'\"'*/); 
-  	  	if(this.state.failed) 
+  	  	match(34 /*'\"'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1298,23 +1447,23 @@ class MapCSSLexer extends Lexer {
   	  int _type = SQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   74:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   106:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   74:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   106:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\''*/
   	  {
-  	  	this.match(39 /*'\''*/); 
-  	  	if(this.state.failed) 
+  	  	match(39 /*'\''*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 74:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
+  	  	 106:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
   	  	 EBACKSLASH )**/
   	  	loop3:
   	  	do {
   	  	  int alt3 = 7;
-  	  	  int LA3_0 = this.input.LA(1);
+  	  	  int LA3_0 = input.LA(1);
 
   	  	  if(((LA3_0 >= 32 /*' '*/ && LA3_0 <= 38 /*'&'*/))) {
   	  	    alt3 = 1;
@@ -1329,7 +1478,7 @@ class MapCSSLexer extends Lexer {
   	  	    alt3 = 4;
   	  	  }
   	  	  else if((LA3_0 == 92/*92 /*'\\'*/*/)) {
-  	  	    int LA3_6 = this.input.LA(2);
+  	  	    int LA3_6 = input.LA(2);
 
   	  	    if((LA3_6 == 39/*39 /*'\''*/*/)) {
   	  	      alt3 = 5;
@@ -1345,40 +1494,40 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt3) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:23: ' ' .. '&'*/
+  	  			   106:23: ' ' .. '&'*/
   	  			  {
-  	  			  	this.matchRange(32 /*' '*/, 38 /*'&'*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchRange(32 /*' '*/, 38 /*'&'*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:34: '(' .. '['*/
+  	  			   106:34: '(' .. '['*/
   	  			  {
-  	  			  	this.matchRange(40 /*'('*/, 91 /*'['*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchRange(40 /*'('*/, 91 /*'['*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:45: ']' .. '~'*/
+  	  			   106:45: ']' .. '~'*/
   	  			  {
-  	  			  	this.matchRange(93 /*']'*/, 126 /*'~'*/); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:56: UNICODE*/
+  	  			   106:56: UNICODE*/
   	  			  {
-  	  			  	this.mUNICODE(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mUNICODE(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1386,10 +1535,10 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:66: ESQUOTE*/
+  	  			   106:66: ESQUOTE*/
   	  			  {
-  	  			  	this.mESQUOTE(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mESQUOTE(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1397,10 +1546,10 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   74:76: EBACKSLASH*/
+  	  			   106:76: EBACKSLASH*/
   	  			  {
-  	  			  	this.mEBACKSLASH(); 
-  	  			  	if(this.state.failed) 
+  	  			  	mEBACKSLASH(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
 
@@ -1413,14 +1562,14 @@ class MapCSSLexer extends Lexer {
   	  	} while(true);
 
 
-  	  	this.match(39 /*'\''*/); 
-  	  	if(this.state.failed) 
+  	  	match(39 /*'\''*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1434,36 +1583,36 @@ class MapCSSLexer extends Lexer {
   	  int _type = HEXCOLOR;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   76:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   108:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) ) )*/
   	  /* grammar/MapCSS.g:
-  	   76:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   108:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  {
-  	  	this.match(35 /*'#'*/); 
-  	  	if(this.state.failed) 
+  	  	match(35 /*'#'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 76:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	  	 108:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	  	 ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  	int alt4 = 2;
-  	  	int LA4_0 = this.input.LA(1);
+  	  	int LA4_0 = input.LA(1);
 
   	  	if(((LA4_0 >= 48 /*'0'*/ && LA4_0 <= 57 /*'9'*/)
   	  	  || (LA4_0 >= 65 /*'A'*/ && LA4_0 <= 70 /*'F'*/)
   	  	  || (LA4_0 >= 97 /*'a'*/ && LA4_0 <= 102 /*'f'*/))) {
-  	  	  int LA4_1 = this.input.LA(2);
+  	  	  int LA4_1 = input.LA(2);
 
   	  	  if(((LA4_1 >= 48 /*'0'*/ && LA4_1 <= 57 /*'9'*/)
   	  	    || (LA4_1 >= 65 /*'A'*/ && LA4_1 <= 70 /*'F'*/)
   	  	    || (LA4_1 >= 97 /*'a'*/ && LA4_1 <= 102 /*'f'*/))) {
-  	  	    int LA4_2 = this.input.LA(3);
+  	  	    int LA4_2 = input.LA(3);
 
   	  	    if(((LA4_2 >= 48 /*'0'*/ && LA4_2 <= 57 /*'9'*/)
   	  	      || (LA4_2 >= 65 /*'A'*/ && LA4_2 <= 70 /*'F'*/)
   	  	      || (LA4_2 >= 97 /*'a'*/ && LA4_2 <= 102 /*'f'*/))) {
-  	  	      int LA4_3 = this.input.LA(4);
+  	  	      int LA4_3 = input.LA(4);
 
   	  	      if(((LA4_3 >= 48 /*'0'*/ && LA4_3 <= 57 /*'9'*/)
   	  	        || (LA4_3 >= 65 /*'A'*/ && LA4_3 <= 70 /*'F'*/)
@@ -1475,36 +1624,36 @@ class MapCSSLexer extends Lexer {
   	  	      }
   	  	    }
   	  	    else {
-  	  	      if(this.state.backtracking > 0) {
-  	  	        this.state.failed = true; 
+  	  	      if(state.backtracking > 0) {
+  	  	        state.failed = true; 
   	  	        return ;
   	  	      }
   	  	      NoViableAltException nvae =
-  	  	          new NoViableAltException("", 4, 2, this.input);
+  	  	          new NoViableAltException("", 4, 2, input);
 
   	  	      throw nvae;
 
   	  	    }
   	  	  }
   	  	  else {
-  	  	    if(this.state.backtracking > 0) {
-  	  	      this.state.failed = true; 
+  	  	    if(state.backtracking > 0) {
+  	  	      state.failed = true; 
   	  	      return ;
   	  	    }
   	  	    NoViableAltException nvae =
-  	  	        new NoViableAltException("", 4, 1, this.input);
+  	  	        new NoViableAltException("", 4, 1, input);
 
   	  	    throw nvae;
 
   	  	  }
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
   	  	  NoViableAltException nvae =
-  	  	      new NoViableAltException("", 4, 0, this.input);
+  	  	      new NoViableAltException("", 4, 0, input);
 
   	  	  throw nvae;
 
@@ -1512,40 +1661,40 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt4) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     76:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     108:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 76:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 108:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 76:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 108:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
@@ -1556,25 +1705,25 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     76:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     108:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 76:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 108:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 76:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 108:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
-  	  	    		this.mHEXDIGIT(); 
-  	  	    		if(this.state.failed) 
+  	  	    		mHEXDIGIT(); 
+  	  	    		if(state.failed) 
   	  	    		  return ;
 
 
@@ -1589,8 +1738,8 @@ class MapCSSLexer extends Lexer {
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1604,20 +1753,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = GE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   78:3: ( '>=' )*/
+  	   110:3: ( '>=' )*/
   	  /* grammar/MapCSS.g:
-  	   78:7: '>='*/
+  	   110:7: '>='*/
   	  {
-  	  	this.match(">="); 
-  	  	if(this.state.failed) 
+  	  	match(">="); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1631,20 +1780,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = LE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   79:3: ( '<=' )*/
+  	   111:3: ( '<=' )*/
   	  /* grammar/MapCSS.g:
-  	   79:7: '<='*/
+  	   111:7: '<='*/
   	  {
-  	  	this.match("<="); 
-  	  	if(this.state.failed) 
+  	  	match("<="); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1658,18 +1807,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = GT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   80:3: ( '>' )*/
+  	   112:3: ( '>' )*/
   	  /* grammar/MapCSS.g:
-  	   80:8: '>'*/
+  	   112:8: '>'*/
   	  {
-  	  	this.match(62 /*'>'*/); 
-  	  	if(this.state.failed) 
+  	  	match(62 /*'>'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1683,18 +1832,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = LT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   81:3: ( '<' )*/
+  	   113:3: ( '<' )*/
   	  /* grammar/MapCSS.g:
-  	   81:8: '<'*/
+  	   113:8: '<'*/
   	  {
-  	  	this.match(60 /*'<'*/); 
-  	  	if(this.state.failed) 
+  	  	match(60 /*'<'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1708,20 +1857,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = NEQ;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   82:4: ( '!=' )*/
+  	   114:4: ( '!=' )*/
   	  /* grammar/MapCSS.g:
-  	   82:13: '!='*/
+  	   114:13: '!='*/
   	  {
-  	  	this.match("!="); 
-  	  	if(this.state.failed) 
+  	  	match("!="); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1735,18 +1884,18 @@ class MapCSSLexer extends Lexer {
   	  int _type = EQ;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   83:3: ( '=' )*/
+  	   115:3: ( '=' )*/
   	  /* grammar/MapCSS.g:
-  	   83:8: '='*/
+  	   115:8: '='*/
   	  {
-  	  	this.match(61 /*'='*/); 
-  	  	if(this.state.failed) 
+  	  	match(61 /*'='*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1760,20 +1909,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = MATCH;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   84:6: ( '=~' )*/
+  	   116:6: ( '=~' )*/
   	  /* grammar/MapCSS.g:
-  	   84:13: '=~'*/
+  	   116:13: '=~'*/
   	  {
-  	  	this.match("=~"); 
-  	  	if(this.state.failed) 
+  	  	match("=~"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1787,20 +1936,20 @@ class MapCSSLexer extends Lexer {
   	  int _type = IMPORT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   85:7: ( '@import' )*/
+  	   117:7: ( '@import' )*/
   	  /* grammar/MapCSS.g:
-  	   85:13: '@import'*/
+  	   117:13: '@import'*/
   	  {
-  	  	this.match("@import"); 
-  	  	if(this.state.failed) 
+  	  	match("@import"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1808,42 +1957,560 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "IMPORT"
 
+  // $ANTLR start "REGEX_CHAR"
+  void mREGEX_CHAR() {
+    try {
+  	  /* grammar/MapCSS.g:
+  	   119:20: ( ' ' .. '.' | '0' .. '[' | ']' .. '~' | UNICODE )*/
+  	  /* grammar/MapCSS.g:
+  	  */
+  	  {
+  	  	if((input.LA(1) >= 32 /*' '*/ && input.LA(1) <= 46 /*'.'*/)
+  	  	  || (input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 91 /*'['*/)
+  	  	  || (input.LA(1) >= 93 /*']'*/ && input.LA(1) <= 126 /*'~'*/)
+  	  	  || (input.LA(1) >= 128 /*'\u0080'*/ && input.LA(1) <= 65535 /*'\uFFFF'*/)) {
+  	  	  input.consume();
+  	  	  state.failed = false;
+  	  	}
+  	  	else {
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
+  	  	    return ;
+  	  	  }
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
+  	  	  throw mse;
+  	  	}
+
+
+  	  }
+
+
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "REGEX_CHAR"
+
+  // $ANTLR start "REGEX_ESCAPE"
+  void mREGEX_ESCAPE() {
+    try {
+  	  /* grammar/MapCSS.g: 
+  	   120:22: ( '\\\\\\\\' | '\\\\/' | '\\\\(' | '\\\\)' | '\\\\|' | 
+  	   '\\\\$' | '\\\\*' | '\\\\.' | '\\\\^' | '\\\\?' | '\\\\+' | '\\\\-' | 
+  	   '\\\\n' | '\\\\r' | '\\\\t' | '\\\\s' | '\\\\S' | '\\\\d' | '\\\\D' | 
+  	   '\\\\w' | '\\\\W' )*/
+  	  int alt5 = 21;
+  	  int LA5_0 = input.LA(1);
+
+  	  if((LA5_0 == 92/*92 /*'\\'*/*/)) {
+  	    switch(input.LA(2)) {
+  	    case 92 /*'\\'*/:
+  	      {
+  	      alt5 = 1;
+  	      }
+  	      break;
+  	    case 47 /*'/'*/:
+  	      {
+  	      alt5 = 2;
+  	      }
+  	      break;
+  	    case 40 /*'('*/:
+  	      {
+  	      alt5 = 3;
+  	      }
+  	      break;
+  	    case 41 /*')'*/:
+  	      {
+  	      alt5 = 4;
+  	      }
+  	      break;
+  	    case 124 /*'|'*/:
+  	      {
+  	      alt5 = 5;
+  	      }
+  	      break;
+  	    case 36 /*'$'*/:
+  	      {
+  	      alt5 = 6;
+  	      }
+  	      break;
+  	    case 42 /*'*'*/:
+  	      {
+  	      alt5 = 7;
+  	      }
+  	      break;
+  	    case 46 /*'.'*/:
+  	      {
+  	      alt5 = 8;
+  	      }
+  	      break;
+  	    case 94 /*'^'*/:
+  	      {
+  	      alt5 = 9;
+  	      }
+  	      break;
+  	    case 63 /*'?'*/:
+  	      {
+  	      alt5 = 10;
+  	      }
+  	      break;
+  	    case 43 /*'+'*/:
+  	      {
+  	      alt5 = 11;
+  	      }
+  	      break;
+  	    case 45 /*'-'*/:
+  	      {
+  	      alt5 = 12;
+  	      }
+  	      break;
+  	    case 110 /*'n'*/:
+  	      {
+  	      alt5 = 13;
+  	      }
+  	      break;
+  	    case 114 /*'r'*/:
+  	      {
+  	      alt5 = 14;
+  	      }
+  	      break;
+  	    case 116 /*'t'*/:
+  	      {
+  	      alt5 = 15;
+  	      }
+  	      break;
+  	    case 115 /*'s'*/:
+  	      {
+  	      alt5 = 16;
+  	      }
+  	      break;
+  	    case 83 /*'S'*/:
+  	      {
+  	      alt5 = 17;
+  	      }
+  	      break;
+  	    case 100 /*'d'*/:
+  	      {
+  	      alt5 = 18;
+  	      }
+  	      break;
+  	    case 68 /*'D'*/:
+  	      {
+  	      alt5 = 19;
+  	      }
+  	      break;
+  	    case 119 /*'w'*/:
+  	      {
+  	      alt5 = 20;
+  	      }
+  	      break;
+  	    case 87 /*'W'*/:
+  	      {
+  	      alt5 = 21;
+  	      }
+  	      break;
+  	    default:
+  	      if(state.backtracking > 0) {
+  	        state.failed = true; 
+  	        return ;
+  	      }
+  	      NoViableAltException nvae =
+  	          new NoViableAltException("", 5, 1, input);
+
+  	      throw nvae;
+
+  	    }
+
+  	  }
+  	  else {
+  	    if(state.backtracking > 0) {
+  	      state.failed = true; 
+  	      return ;
+  	    }
+  	    NoViableAltException nvae =
+  	        new NoViableAltException("", 5, 0, input);
+
+  	    throw nvae;
+
+  	  }
+  	  switch (alt5) {
+  	    case 1 :
+  	      /* grammar/MapCSS.g:
+  	       120:26: '\\\\\\\\'*/
+  	      {
+  	      	match("\\\\"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 2 :
+  	      /* grammar/MapCSS.g:
+  	       120:35: '\\\\/'*/
+  	      {
+  	      	match("\\/"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 3 :
+  	      /* grammar/MapCSS.g:
+  	       120:43: '\\\\('*/
+  	      {
+  	      	match("\\("); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 4 :
+  	      /* grammar/MapCSS.g:
+  	       120:51: '\\\\)'*/
+  	      {
+  	      	match("\\)"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 5 :
+  	      /* grammar/MapCSS.g:
+  	       121:26: '\\\\|'*/
+  	      {
+  	      	match("\\|"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 6 :
+  	      /* grammar/MapCSS.g:
+  	       121:34: '\\\\$'*/
+  	      {
+  	      	match("\\\$"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 7 :
+  	      /* grammar/MapCSS.g:
+  	       121:42: '\\\\*'*/
+  	      {
+  	      	match("\\*"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 8 :
+  	      /* grammar/MapCSS.g:
+  	       121:50: '\\\\.'*/
+  	      {
+  	      	match("\\."); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 9 :
+  	      /* grammar/MapCSS.g:
+  	       121:58: '\\\\^'*/
+  	      {
+  	      	match("\\^"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 10 :
+  	      /* grammar/MapCSS.g:
+  	       121:66: '\\\\?'*/
+  	      {
+  	      	match("\\?"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 11 :
+  	      /* grammar/MapCSS.g:
+  	       121:74: '\\\\+'*/
+  	      {
+  	      	match("\\+"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 12 :
+  	      /* grammar/MapCSS.g:
+  	       121:82: '\\\\-'*/
+  	      {
+  	      	match("\\-"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 13 :
+  	      /* grammar/MapCSS.g:
+  	       122:26: '\\\\n'*/
+  	      {
+  	      	match("\\n"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 14 :
+  	      /* grammar/MapCSS.g:
+  	       122:34: '\\\\r'*/
+  	      {
+  	      	match("\\r"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 15 :
+  	      /* grammar/MapCSS.g:
+  	       122:42: '\\\\t'*/
+  	      {
+  	      	match("\\t"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 16 :
+  	      /* grammar/MapCSS.g:
+  	       123:26: '\\\\s'*/
+  	      {
+  	      	match("\\s"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 17 :
+  	      /* grammar/MapCSS.g:
+  	       123:34: '\\\\S'*/
+  	      {
+  	      	match("\\S"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 18 :
+  	      /* grammar/MapCSS.g:
+  	       124:26: '\\\\d'*/
+  	      {
+  	      	match("\\d"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 19 :
+  	      /* grammar/MapCSS.g:
+  	       124:34: '\\\\D'*/
+  	      {
+  	      	match("\\D"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 20 :
+  	      /* grammar/MapCSS.g:
+  	       125:26: '\\\\w'*/
+  	      {
+  	      	match("\\w"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+  	    case 21 :
+  	      /* grammar/MapCSS.g:
+  	       125:34: '\\\\W'*/
+  	      {
+  	      	match("\\W"); 
+  	      	if(state.failed) 
+  	      	  return ;
+
+
+
+  	      }
+  	      break;
+
+  	  }
+
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "REGEX_ESCAPE"
+
+  // $ANTLR start "REGEXP"
+  void mREGEXP() {
+    try {
+  	  int _type = REGEXP;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   126:7: ( '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/' )*/
+  	  /* grammar/MapCSS.g:
+  	   126:10: '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/'*/
+  	  {
+  	  	match(47 /*'/'*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  	/* grammar/MapCSS.g:
+  	  	 126:14: ( REGEX_CHAR | REGEX_ESCAPE )**/
+  	  	loop6:
+  	  	do {
+  	  	  int alt6 = 3;
+  	  	  int LA6_0 = input.LA(1);
+
+  	  	  if(((LA6_0 >= 32 /*' '*/ && LA6_0 <= 46 /*'.'*/)
+  	  	    || (LA6_0 >= 48 /*'0'*/ && LA6_0 <= 91 /*'['*/)
+  	  	    || (LA6_0 >= 93 /*']'*/ && LA6_0 <= 126 /*'~'*/)
+  	  	    || (LA6_0 >= 128 /*'\u0080'*/ && LA6_0 <= 65535 /*'\uFFFF'*/))) {
+  	  	    alt6 = 1;
+  	  	  }
+  	  	  else if((LA6_0 == 92/*92 /*'\\'*/*/)) {
+  	  	    alt6 = 2;
+  	  	  }
+
+
+  	  	  switch (alt6) {
+  	  			case 1 :
+  	  			  /* grammar/MapCSS.g:
+  	  			   126:15: REGEX_CHAR*/
+  	  			  {
+  	  			  	mREGEX_CHAR(); 
+  	  			  	if(state.failed) 
+  	  			  	  return ;
+
+
+  	  			  }
+  	  			  break;
+  	  			case 2 :
+  	  			  /* grammar/MapCSS.g:
+  	  			   126:28: REGEX_ESCAPE*/
+  	  			  {
+  	  			  	mREGEX_ESCAPE(); 
+  	  			  	if(state.failed) 
+  	  			  	  return ;
+
+
+  	  			  }
+  	  			  break;
+
+  	  			default :
+  	  		    break loop6;
+  	  	  }
+  	  	} while(true);
+
+
+  	  	match(47 /*'/'*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "REGEXP"
+
   // $ANTLR start "WS"
   void mWS() {
     try {
   	  int _type = WS;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   87:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
+  	   129:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
   	  /* grammar/MapCSS.g:
-  	   87:9: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
+  	   129:9: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
   	  {
-  	  	if((this.input.LA(1) >= 9 /*'\t'*/ && this.input.LA(1) <= 10 /*'\n'*/)
-  	  	  || (this.input.LA(1) >= 12 /*'\f'*/ && this.input.LA(1) <= 13 /*'\r'*/)
-  	  	  || this.input.LA(1) == 32 /*' '*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if((input.LA(1) >= 9 /*'\t'*/ && input.LA(1) <= 10 /*'\n'*/)
+  	  	  || (input.LA(1) >= 12 /*'\f'*/ && input.LA(1) <= 13 /*'\r'*/)
+  	  	  || input.LA(1) == 32 /*' '*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
 
-  	  	if(this.state.backtracking == 0) {
+  	  	if(state.backtracking == 0) {
   	  	  _channel=HIDDEN;;
   	  	}
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1857,69 +2524,69 @@ class MapCSSLexer extends Lexer {
   	  int _type = SL_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   88:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
+  	   130:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
   	  /* grammar/MapCSS.g:
-  	   88:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
+  	   130:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
   	  {
-  	  	this.match("//"); 
-  	  	if(this.state.failed) 
+  	  	match("//"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 88:20: ( options {greedy=false; } : . )**/
-  	  	loop5:
+  	  	 130:20: ( options {greedy=false; } : . )**/
+  	  	loop7:
   	  	do {
-  	  	  int alt5 = 2;
-  	  	  int LA5_0 = this.input.LA(1);
+  	  	  int alt7 = 2;
+  	  	  int LA7_0 = input.LA(1);
 
-  	  	  if((LA5_0 == 13/*13 /*'\r'*/*/)) {
-  	  	    alt5 = 2;
+  	  	  if((LA7_0 == 13/*13 /*'\r'*/*/)) {
+  	  	    alt7 = 2;
   	  	  }
-  	  	  else if((LA5_0 == 10/*10 /*'\n'*/*/)) {
-  	  	    alt5 = 2;
+  	  	  else if((LA7_0 == 10/*10 /*'\n'*/*/)) {
+  	  	    alt7 = 2;
   	  	  }
-  	  	  else if(((LA5_0 >= 0 /*'\u0000'*/ && LA5_0 <= 9 /*'\t'*/)
-  	  	    || (LA5_0 >= 11 /*'\u000B'*/ && LA5_0 <= 12 /*'\f'*/)
-  	  	    || (LA5_0 >= 14 /*'\u000E'*/ && LA5_0 <= 65535 /*'\uFFFF'*/))) {
-  	  	    alt5 = 1;
+  	  	  else if(((LA7_0 >= 0 /*'\u0000'*/ && LA7_0 <= 9 /*'\t'*/)
+  	  	    || (LA7_0 >= 11 /*'\u000B'*/ && LA7_0 <= 12 /*'\f'*/)
+  	  	    || (LA7_0 >= 14 /*'\u000E'*/ && LA7_0 <= 65535 /*'\uFFFF'*/))) {
+  	  	    alt7 = 1;
   	  	  }
 
 
-  	  	  switch (alt5) {
+  	  	  switch (alt7) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   88:46: .*/
+  	  			   130:46: .*/
   	  			  {
-  	  			  	this.matchAny(); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchAny(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
 
   	  			default :
-  	  		    break loop5;
+  	  		    break loop7;
   	  	  }
   	  	} while(true);
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 88:50: ( '\\r' )?*/
-  	  	int alt6 = 2;
-  	  	int LA6_0 = this.input.LA(1);
+  	  	 130:50: ( '\\r' )?*/
+  	  	int alt8 = 2;
+  	  	int LA8_0 = input.LA(1);
 
-  	  	if((LA6_0 == 13/*13 /*'\r'*/*/)) {
-  	  	  alt6 = 1;
+  	  	if((LA8_0 == 13/*13 /*'\r'*/*/)) {
+  	  	  alt8 = 1;
   	  	}
-  	  	switch (alt6) {
+  	  	switch (alt8) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     88:50: '\\r'*/
+  	  	     130:50: '\\r'*/
   	  	    {
-  	  	    	this.match(13 /*'\r'*/); 
-  	  	    	if(this.state.failed) 
+  	  	    	match(13 /*'\r'*/); 
+  	  	    	if(state.failed) 
   	  	    	  return ;
 
   	  	    }
@@ -1928,19 +2595,19 @@ class MapCSSLexer extends Lexer {
   	  	}
 
 
-  	  	this.match(10 /*'\n'*/); 
-  	  	if(this.state.failed) 
+  	  	match(10 /*'\n'*/); 
+  	  	if(state.failed) 
   	  	  return ;
 
-  	  	if(this.state.backtracking == 0) {
+  	  	if(state.backtracking == 0) {
   	  	  _channel=HIDDEN;;
   	  	}
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -1954,75 +2621,75 @@ class MapCSSLexer extends Lexer {
   	  int _type = ML_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   89:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
+  	   131:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
   	  /* grammar/MapCSS.g:
-  	   89:15: '/*' ( options {greedy=false; } : . )* '*/'*/
+  	   131:15: '/*' ( options {greedy=false; } : . )* '*/'*/
   	  {
-  	  	this.match("/*"); 
-  	  	if(this.state.failed) 
+  	  	match("/*"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 89:20: ( options {greedy=false; } : . )**/
-  	  	loop7:
+  	  	 131:20: ( options {greedy=false; } : . )**/
+  	  	loop9:
   	  	do {
-  	  	  int alt7 = 2;
-  	  	  int LA7_0 = this.input.LA(1);
+  	  	  int alt9 = 2;
+  	  	  int LA9_0 = input.LA(1);
 
-  	  	  if((LA7_0 == 42/*42 /*'*'*/*/)) {
-  	  	    int LA7_1 = this.input.LA(2);
+  	  	  if((LA9_0 == 42/*42 /*'*'*/*/)) {
+  	  	    int LA9_1 = input.LA(2);
 
-  	  	    if((LA7_1 == 47/*47 /*'/'*/*/)) {
-  	  	      alt7 = 2;
+  	  	    if((LA9_1 == 47/*47 /*'/'*/*/)) {
+  	  	      alt9 = 2;
   	  	    }
-  	  	    else if(((LA7_1 >= 0 /*'\u0000'*/ && LA7_1 <= 46 /*'.'*/)
-  	  	      || (LA7_1 >= 48 /*'0'*/ && LA7_1 <= 65535 /*'\uFFFF'*/))) {
-  	  	      alt7 = 1;
+  	  	    else if(((LA9_1 >= 0 /*'\u0000'*/ && LA9_1 <= 46 /*'.'*/)
+  	  	      || (LA9_1 >= 48 /*'0'*/ && LA9_1 <= 65535 /*'\uFFFF'*/))) {
+  	  	      alt9 = 1;
   	  	    }
 
 
   	  	  }
-  	  	  else if(((LA7_0 >= 0 /*'\u0000'*/ && LA7_0 <= 41 /*')'*/)
-  	  	    || (LA7_0 >= 43 /*'+'*/ && LA7_0 <= 65535 /*'\uFFFF'*/))) {
-  	  	    alt7 = 1;
+  	  	  else if(((LA9_0 >= 0 /*'\u0000'*/ && LA9_0 <= 41 /*')'*/)
+  	  	    || (LA9_0 >= 43 /*'+'*/ && LA9_0 <= 65535 /*'\uFFFF'*/))) {
+  	  	    alt9 = 1;
   	  	  }
 
 
-  	  	  switch (alt7) {
+  	  	  switch (alt9) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   89:47: .*/
+  	  			   131:47: .*/
   	  			  {
-  	  			  	this.matchAny(); 
-  	  			  	if(this.state.failed) 
+  	  			  	matchAny(); 
+  	  			  	if(state.failed) 
   	  			  	  return ;
 
   	  			  }
   	  			  break;
 
   	  			default :
-  	  		    break loop7;
+  	  		    break loop9;
   	  	  }
   	  	} while(true);
 
 
-  	  	this.match("*/"); 
-  	  	if(this.state.failed) 
+  	  	match("*/"); 
+  	  	if(state.failed) 
   	  	  return ;
 
 
 
-  	  	if(this.state.backtracking == 0) {
+  	  	if(state.backtracking == 0) {
   	  	  _channel=HIDDEN;;
   	  	}
 
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -2030,254 +2697,344 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "ML_COMMENT"
 
+  // $ANTLR start "PIPE_Z"
+  void mPIPE_Z() {
+    try {
+  	  int _type = PIPE_Z;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   169:7: ( '|z' )*/
+  	  /* grammar/MapCSS.g:
+  	   169:9: '|z'*/
+  	  {
+  	  	match("|z"); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "PIPE_Z"
+
   // $ANTLR start "RANGE"
   void mRANGE() {
     try {
   	  int _type = RANGE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g: 
-  	   128:2: ( '|z-' ( DIGIT )+ | '|z' ( DIGIT )+ ( '-' ( DIGIT )* )? )*/
-  	  int alt12 = 2;
-  	  int LA12_0 = this.input.LA(1);
+  	  /* grammar/MapCSS.g:
+  	   172:2: ( PIPE_Z ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   ( DIGIT )+ '-' ( DIGIT )+ ) )*/
+  	  /* grammar/MapCSS.g:
+  	   172:4: PIPE_Z ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   ( DIGIT )+ '-' ( DIGIT )+ )*/
+  	  {
+  	  	mPIPE_Z(); 
+  	  	if(state.failed) 
+  	  	  return ;
 
-  	  if((LA12_0 == 124/*124 /*'|'*/*/)) {
-  	    int LA12_1 = this.input.LA(2);
 
-  	    if((LA12_1 == 122/*122 /*'z'*/*/)) {
-  	      int LA12_2 = this.input.LA(3);
+  	  	/* grammar/MapCSS.g:
+  	  	 172:11: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) */
+  	  	int alt15 = 4;
+  	  	alt15 = dfas["dfa15"].predict(input);
+  	  	switch (alt15) {
+  	  	  case 1 :
+  	  	    /* grammar/MapCSS.g:
+  	  	     173:5: '-' ( DIGIT )+*/
+  	  	    {
+  	  	    	match(45 /*'-'*/); 
+  	  	    	if(state.failed) 
+  	  	    	  return ;
 
-  	      if((LA12_2 == 45/*45 /*'-'*/*/)) {
-  	        alt12 = 1;
-  	      }
-  	      else if(((LA12_2 >= 48 /*'0'*/ && LA12_2 <= 57 /*'9'*/))) {
-  	        alt12 = 2;
-  	      }
-  	      else {
-  	        if(this.state.backtracking > 0) {
-  	          this.state.failed = true; 
-  	          return ;
-  	        }
-  	        NoViableAltException nvae =
-  	            new NoViableAltException("", 12, 2, this.input);
+  	  	    	/* grammar/MapCSS.g:
+  	  	    	 173:9: ( DIGIT )+*/
+  	  	    	int cnt10 = 0;
+  	  	    	loop10:
+  	  	    	do {
+  	  	    	  int alt10 = 2;
+  	  	    	  int LA10_0 = input.LA(1);
 
-  	        throw nvae;
+  	  	    	  if(((LA10_0 >= 48 /*'0'*/ && LA10_0 <= 57 /*'9'*/))) {
+  	  	    	    alt10 = 1;
+  	  	    	  }
 
-  	      }
-  	    }
-  	    else {
-  	      if(this.state.backtracking > 0) {
-  	        this.state.failed = true; 
-  	        return ;
-  	      }
-  	      NoViableAltException nvae =
-  	          new NoViableAltException("", 12, 1, this.input);
 
-  	      throw nvae;
+  	  	    	  switch (alt10) {
+  	  	    			case 1 :
+  	  	    			  /* grammar/MapCSS.g:
+  	  	    			  */
+  	  	    			  {
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
+  	  	    			  	}
+  	  	    			  	else {
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
+  	  	    			  	    return ;
+  	  	    			  	  }
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
+  	  	    			  	  throw mse;
+  	  	    			  	}
 
-  	    }
+
+  	  	    			  }
+  	  	    			  break;
+
+  	  	    			default :
+  	  	    		    if(cnt10 >= 1) break loop10;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
+  	  	    		        return ;
+  	  	    		      }
+  	  	    	        EarlyExitException eee = new EarlyExitException(10, input);
+  	  	    	        throw eee;
+  	  	    	  }
+  	  	    	  cnt10++;
+  	  	    	} while(true);
+
+
+  	  	    }
+  	  	    break;
+  	  	  case 2 :
+  	  	    /* grammar/MapCSS.g:
+  	  	     174:5: ( DIGIT )+*/
+  	  	    {
+  	  	    	/* grammar/MapCSS.g:
+  	  	    	 174:5: ( DIGIT )+*/
+  	  	    	int cnt11 = 0;
+  	  	    	loop11:
+  	  	    	do {
+  	  	    	  int alt11 = 2;
+  	  	    	  int LA11_0 = input.LA(1);
+
+  	  	    	  if(((LA11_0 >= 48 /*'0'*/ && LA11_0 <= 57 /*'9'*/))) {
+  	  	    	    alt11 = 1;
+  	  	    	  }
+
+
+  	  	    	  switch (alt11) {
+  	  	    			case 1 :
+  	  	    			  /* grammar/MapCSS.g:
+  	  	    			  */
+  	  	    			  {
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
+  	  	    			  	}
+  	  	    			  	else {
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
+  	  	    			  	    return ;
+  	  	    			  	  }
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
+  	  	    			  	  throw mse;
+  	  	    			  	}
+
+
+  	  	    			  }
+  	  	    			  break;
+
+  	  	    			default :
+  	  	    		    if(cnt11 >= 1) break loop11;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
+  	  	    		        return ;
+  	  	    		      }
+  	  	    	        EarlyExitException eee = new EarlyExitException(11, input);
+  	  	    	        throw eee;
+  	  	    	  }
+  	  	    	  cnt11++;
+  	  	    	} while(true);
+
+
+  	  	    }
+  	  	    break;
+  	  	  case 3 :
+  	  	    /* grammar/MapCSS.g:
+  	  	     175:5: ( DIGIT )+ '-'*/
+  	  	    {
+  	  	    	/* grammar/MapCSS.g:
+  	  	    	 175:5: ( DIGIT )+*/
+  	  	    	int cnt12 = 0;
+  	  	    	loop12:
+  	  	    	do {
+  	  	    	  int alt12 = 2;
+  	  	    	  int LA12_0 = input.LA(1);
+
+  	  	    	  if(((LA12_0 >= 48 /*'0'*/ && LA12_0 <= 57 /*'9'*/))) {
+  	  	    	    alt12 = 1;
+  	  	    	  }
+
+
+  	  	    	  switch (alt12) {
+  	  	    			case 1 :
+  	  	    			  /* grammar/MapCSS.g:
+  	  	    			  */
+  	  	    			  {
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
+  	  	    			  	}
+  	  	    			  	else {
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
+  	  	    			  	    return ;
+  	  	    			  	  }
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
+  	  	    			  	  throw mse;
+  	  	    			  	}
+
+
+  	  	    			  }
+  	  	    			  break;
+
+  	  	    			default :
+  	  	    		    if(cnt12 >= 1) break loop12;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
+  	  	    		        return ;
+  	  	    		      }
+  	  	    	        EarlyExitException eee = new EarlyExitException(12, input);
+  	  	    	        throw eee;
+  	  	    	  }
+  	  	    	  cnt12++;
+  	  	    	} while(true);
+
+
+  	  	    	match(45 /*'-'*/); 
+  	  	    	if(state.failed) 
+  	  	    	  return ;
+
+  	  	    }
+  	  	    break;
+  	  	  case 4 :
+  	  	    /* grammar/MapCSS.g:
+  	  	     176:5: ( DIGIT )+ '-' ( DIGIT )+*/
+  	  	    {
+  	  	    	/* grammar/MapCSS.g:
+  	  	    	 176:5: ( DIGIT )+*/
+  	  	    	int cnt13 = 0;
+  	  	    	loop13:
+  	  	    	do {
+  	  	    	  int alt13 = 2;
+  	  	    	  int LA13_0 = input.LA(1);
+
+  	  	    	  if(((LA13_0 >= 48 /*'0'*/ && LA13_0 <= 57 /*'9'*/))) {
+  	  	    	    alt13 = 1;
+  	  	    	  }
+
+
+  	  	    	  switch (alt13) {
+  	  	    			case 1 :
+  	  	    			  /* grammar/MapCSS.g:
+  	  	    			  */
+  	  	    			  {
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
+  	  	    			  	}
+  	  	    			  	else {
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
+  	  	    			  	    return ;
+  	  	    			  	  }
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
+  	  	    			  	  throw mse;
+  	  	    			  	}
+
+
+  	  	    			  }
+  	  	    			  break;
+
+  	  	    			default :
+  	  	    		    if(cnt13 >= 1) break loop13;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
+  	  	    		        return ;
+  	  	    		      }
+  	  	    	        EarlyExitException eee = new EarlyExitException(13, input);
+  	  	    	        throw eee;
+  	  	    	  }
+  	  	    	  cnt13++;
+  	  	    	} while(true);
+
+
+  	  	    	match(45 /*'-'*/); 
+  	  	    	if(state.failed) 
+  	  	    	  return ;
+
+  	  	    	/* grammar/MapCSS.g:
+  	  	    	 176:16: ( DIGIT )+*/
+  	  	    	int cnt14 = 0;
+  	  	    	loop14:
+  	  	    	do {
+  	  	    	  int alt14 = 2;
+  	  	    	  int LA14_0 = input.LA(1);
+
+  	  	    	  if(((LA14_0 >= 48 /*'0'*/ && LA14_0 <= 57 /*'9'*/))) {
+  	  	    	    alt14 = 1;
+  	  	    	  }
+
+
+  	  	    	  switch (alt14) {
+  	  	    			case 1 :
+  	  	    			  /* grammar/MapCSS.g:
+  	  	    			  */
+  	  	    			  {
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
+  	  	    			  	}
+  	  	    			  	else {
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
+  	  	    			  	    return ;
+  	  	    			  	  }
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
+  	  	    			  	  throw mse;
+  	  	    			  	}
+
+
+  	  	    			  }
+  	  	    			  break;
+
+  	  	    			default :
+  	  	    		    if(cnt14 >= 1) break loop14;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
+  	  	    		        return ;
+  	  	    		      }
+  	  	    	        EarlyExitException eee = new EarlyExitException(14, input);
+  	  	    	        throw eee;
+  	  	    	  }
+  	  	    	  cnt14++;
+  	  	    	} while(true);
+
+
+  	  	    }
+  	  	    break;
+
+  	  	}
+
+
   	  }
-  	  else {
-  	    if(this.state.backtracking > 0) {
-  	      this.state.failed = true; 
-  	      return ;
-  	    }
-  	    NoViableAltException nvae =
-  	        new NoViableAltException("", 12, 0, this.input);
 
-  	    throw nvae;
-
-  	  }
-  	  switch (alt12) {
-  	    case 1 :
-  	      /* grammar/MapCSS.g:
-  	       128:5: '|z-' ( DIGIT )+*/
-  	      {
-  	      	this.match("|z-"); 
-  	      	if(this.state.failed) 
-  	      	  return ;
-
-
-
-  	      	/* grammar/MapCSS.g:
-  	      	 128:11: ( DIGIT )+*/
-  	      	int cnt8 = 0;
-  	      	loop8:
-  	      	do {
-  	      	  int alt8 = 2;
-  	      	  int LA8_0 = this.input.LA(1);
-
-  	      	  if(((LA8_0 >= 48 /*'0'*/ && LA8_0 <= 57 /*'9'*/))) {
-  	      	    alt8 = 1;
-  	      	  }
-
-
-  	      	  switch (alt8) {
-  	      			case 1 :
-  	      			  /* grammar/MapCSS.g:
-  	      			  */
-  	      			  {
-  	      			  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	      			  	  this.input.consume();
-  	      			  	  this.state.failed = false;
-  	      			  	}
-  	      			  	else {
-  	      			  	  if(this.state.backtracking > 0) {
-  	      			  	    this.state.failed = true; 
-  	      			  	    return ;
-  	      			  	  }
-  	      			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	      			  	  this.recover(mse);
-  	      			  	  throw mse;
-  	      			  	}
-
-
-  	      			  }
-  	      			  break;
-
-  	      			default :
-  	      		    if(cnt8 >= 1) break loop8;
-  	      		      if(this.state.backtracking > 0) {
-  	      		        this.state.failed = true; 
-  	      		        return ;
-  	      		      }
-  	      	        EarlyExitException eee = new EarlyExitException(8, this.input);
-  	      	        throw eee;
-  	      	  }
-  	      	  cnt8++;
-  	      	} while(true);
-
-
-  	      }
-  	      break;
-  	    case 2 :
-  	      /* grammar/MapCSS.g:
-  	       129:5: '|z' ( DIGIT )+ ( '-' ( DIGIT )* )?*/
-  	      {
-  	      	this.match("|z"); 
-  	      	if(this.state.failed) 
-  	      	  return ;
-
-
-
-  	      	/* grammar/MapCSS.g:
-  	      	 129:10: ( DIGIT )+*/
-  	      	int cnt9 = 0;
-  	      	loop9:
-  	      	do {
-  	      	  int alt9 = 2;
-  	      	  int LA9_0 = this.input.LA(1);
-
-  	      	  if(((LA9_0 >= 48 /*'0'*/ && LA9_0 <= 57 /*'9'*/))) {
-  	      	    alt9 = 1;
-  	      	  }
-
-
-  	      	  switch (alt9) {
-  	      			case 1 :
-  	      			  /* grammar/MapCSS.g:
-  	      			  */
-  	      			  {
-  	      			  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	      			  	  this.input.consume();
-  	      			  	  this.state.failed = false;
-  	      			  	}
-  	      			  	else {
-  	      			  	  if(this.state.backtracking > 0) {
-  	      			  	    this.state.failed = true; 
-  	      			  	    return ;
-  	      			  	  }
-  	      			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	      			  	  this.recover(mse);
-  	      			  	  throw mse;
-  	      			  	}
-
-
-  	      			  }
-  	      			  break;
-
-  	      			default :
-  	      		    if(cnt9 >= 1) break loop9;
-  	      		      if(this.state.backtracking > 0) {
-  	      		        this.state.failed = true; 
-  	      		        return ;
-  	      		      }
-  	      	        EarlyExitException eee = new EarlyExitException(9, this.input);
-  	      	        throw eee;
-  	      	  }
-  	      	  cnt9++;
-  	      	} while(true);
-
-
-  	      	/* grammar/MapCSS.g:
-  	      	 129:17: ( '-' ( DIGIT )* )?*/
-  	      	int alt11 = 2;
-  	      	int LA11_0 = this.input.LA(1);
-
-  	      	if((LA11_0 == 45/*45 /*'-'*/*/)) {
-  	      	  alt11 = 1;
-  	      	}
-  	      	switch (alt11) {
-  	      	  case 1 :
-  	      	    /* grammar/MapCSS.g:
-  	      	     129:18: '-' ( DIGIT )**/
-  	      	    {
-  	      	    	this.match(45 /*'-'*/); 
-  	      	    	if(this.state.failed) 
-  	      	    	  return ;
-
-  	      	    	/* grammar/MapCSS.g:
-  	      	    	 129:22: ( DIGIT )**/
-  	      	    	loop10:
-  	      	    	do {
-  	      	    	  int alt10 = 2;
-  	      	    	  int LA10_0 = this.input.LA(1);
-
-  	      	    	  if(((LA10_0 >= 48 /*'0'*/ && LA10_0 <= 57 /*'9'*/))) {
-  	      	    	    alt10 = 1;
-  	      	    	  }
-
-
-  	      	    	  switch (alt10) {
-  	      	    			case 1 :
-  	      	    			  /* grammar/MapCSS.g:
-  	      	    			  */
-  	      	    			  {
-  	      	    			  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	      	    			  	  this.input.consume();
-  	      	    			  	  this.state.failed = false;
-  	      	    			  	}
-  	      	    			  	else {
-  	      	    			  	  if(this.state.backtracking > 0) {
-  	      	    			  	    this.state.failed = true; 
-  	      	    			  	    return ;
-  	      	    			  	  }
-  	      	    			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	      	    			  	  this.recover(mse);
-  	      	    			  	  throw mse;
-  	      	    			  	}
-
-
-  	      	    			  }
-  	      	    			  break;
-
-  	      	    			default :
-  	      	    		    break loop10;
-  	      	    	  }
-  	      	    	} while(true);
-
-
-  	      	    }
-  	      	    break;
-
-  	      	}
-
-
-  	      }
-  	      break;
-
-  	  }
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -2289,9 +3046,9 @@ class MapCSSLexer extends Lexer {
   void mPERCENTAGE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   209:20: ()*/
+  	   265:20: ()*/
   	  /* grammar/MapCSS.g:
-  	   209:21: */
+  	   265:21: */
   	  {
   	  }
 
@@ -2307,9 +3064,9 @@ class MapCSSLexer extends Lexer {
   void mPIXELS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   210:16: ()*/
+  	   266:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   210:17: */
+  	   266:17: */
   	  {
   	  }
 
@@ -2325,9 +3082,9 @@ class MapCSSLexer extends Lexer {
   void mPOINTS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   211:16: ()*/
+  	   267:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   211:17: */
+  	   267:17: */
   	  {
   	  }
 
@@ -2343,9 +3100,9 @@ class MapCSSLexer extends Lexer {
   void mINT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   212:13: ()*/
+  	   268:13: ()*/
   	  /* grammar/MapCSS.g:
-  	   212:14: */
+  	   268:14: */
   	  {
   	  }
 
@@ -2361,9 +3118,9 @@ class MapCSSLexer extends Lexer {
   void mFLOAT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   213:15: ()*/
+  	   269:15: ()*/
   	  /* grammar/MapCSS.g:
-  	   213:16: */
+  	   269:16: */
   	  {
   	  }
 
@@ -2379,22 +3136,22 @@ class MapCSSLexer extends Lexer {
   void mP() {
     try {
   	  /* grammar/MapCSS.g:
-  	   214:11: ( ( 'p' | 'P' ) )*/
+  	   270:11: ( ( 'p' | 'P' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if(this.input.LA(1) == 80 /*'P'*/
-  	  	  || this.input.LA(1) == 112 /*'p'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 80 /*'P'*/
+  	  	  || input.LA(1) == 112 /*'p'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -2413,22 +3170,22 @@ class MapCSSLexer extends Lexer {
   void mT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   215:11: ( ( 't' | 'T' ) )*/
+  	   271:11: ( ( 't' | 'T' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if(this.input.LA(1) == 84 /*'T'*/
-  	  	  || this.input.LA(1) == 116 /*'t'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 84 /*'T'*/
+  	  	  || input.LA(1) == 116 /*'t'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -2447,22 +3204,22 @@ class MapCSSLexer extends Lexer {
   void mX() {
     try {
   	  /* grammar/MapCSS.g:
-  	   216:11: ( ( 'x' | 'X' ) )*/
+  	   272:11: ( ( 'x' | 'X' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
-  	  	if(this.input.LA(1) == 88 /*'X'*/
-  	  	  || this.input.LA(1) == 120 /*'x'*/) {
-  	  	  this.input.consume();
-  	  	  this.state.failed = false;
+  	  	if(input.LA(1) == 88 /*'X'*/
+  	  	  || input.LA(1) == 120 /*'x'*/) {
+  	  	  input.consume();
+  	  	  state.failed = false;
   	  	}
   	  	else {
-  	  	  if(this.state.backtracking > 0) {
-  	  	    this.state.failed = true; 
+  	  	  if(state.backtracking > 0) {
+  	  	    state.failed = true; 
   	  	    return ;
   	  	  }
-  	  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	  this.recover(mse);
+  	  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	  recover(mse);
   	  	  throw mse;
   	  	}
 
@@ -2483,41 +3240,41 @@ class MapCSSLexer extends Lexer {
   	  int _type = NUMBER;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   220:2: ( ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
+  	   276:2: ( ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
   	   ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |) |) ) */
   	  /* grammar/MapCSS.g:
-  	   220:4: ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
+  	   276:4: ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
   	   ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |) |) */
   	  {
   	  	/* grammar/MapCSS.g:
-  	  	 220:4: ( DIGIT )+*/
-  	  	int cnt13 = 0;
-  	  	loop13:
+  	  	 276:4: ( DIGIT )+*/
+  	  	int cnt16 = 0;
+  	  	loop16:
   	  	do {
-  	  	  int alt13 = 2;
-  	  	  int LA13_0 = this.input.LA(1);
+  	  	  int alt16 = 2;
+  	  	  int LA16_0 = input.LA(1);
 
-  	  	  if(((LA13_0 >= 48 /*'0'*/ && LA13_0 <= 57 /*'9'*/))) {
-  	  	    alt13 = 1;
+  	  	  if(((LA16_0 >= 48 /*'0'*/ && LA16_0 <= 57 /*'9'*/))) {
+  	  	    alt16 = 1;
   	  	  }
 
 
-  	  	  switch (alt13) {
+  	  	  switch (alt16) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
   	  			  */
   	  			  {
-  	  			  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	  			  	  this.input.consume();
-  	  			  	  this.state.failed = false;
+  	  			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  			  	  input.consume();
+  	  			  	  state.failed = false;
   	  			  	}
   	  			  	else {
-  	  			  	  if(this.state.backtracking > 0) {
-  	  			  	    this.state.failed = true; 
+  	  			  	  if(state.backtracking > 0) {
+  	  			  	    state.failed = true; 
   	  			  	    return ;
   	  			  	  }
-  	  			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  			  	  this.recover(mse);
+  	  			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  			  	  recover(mse);
   	  			  	  throw mse;
   	  			  	}
 
@@ -2526,82 +3283,82 @@ class MapCSSLexer extends Lexer {
   	  			  break;
 
   	  			default :
-  	  		    if(cnt13 >= 1) break loop13;
-  	  		      if(this.state.backtracking > 0) {
-  	  		        this.state.failed = true; 
+  	  		    if(cnt16 >= 1) break loop16;
+  	  		      if(state.backtracking > 0) {
+  	  		        state.failed = true; 
   	  		        return ;
   	  		      }
-  	  	        EarlyExitException eee = new EarlyExitException(13, this.input);
+  	  	        EarlyExitException eee = new EarlyExitException(16, input);
   	  	        throw eee;
   	  	  }
-  	  	  cnt13++;
+  	  	  cnt16++;
   	  	} while(true);
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 221:4: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | 
+  	  	 277:4: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | 
   	  	 X ) )=> P ( T | X ) | ( '%' )=> '%' |) |)*/
-  	  	int alt18 = 4;
-  	  	int LA18_0 = this.input.LA(1);
+  	  	int alt21 = 4;
+  	  	int LA21_0 = input.LA(1);
 
-  	  	if((LA18_0 == 80/*80 /*'P'*/*/
-  	  	  || LA18_0 == 112/*112 /*'p'*/*/) && (synpred1_MapCSS())) {
-  	  	  alt18 = 1;
+  	  	if((LA21_0 == 80/*80 /*'P'*/*/
+  	  	  || LA21_0 == 112/*112 /*'p'*/*/) && (synpred1_MapCSS())) {
+  	  	  alt21 = 1;
   	  	}
-  	  	else if((LA18_0 == 37/*37 /*'%'*/*/) && (synpred2_MapCSS())) {
-  	  	  alt18 = 2;
+  	  	else if((LA21_0 == 37/*37 /*'%'*/*/) && (synpred2_MapCSS())) {
+  	  	  alt21 = 2;
   	  	}
-  	  	else if((LA18_0 == 46/*46 /*'.'*/*/) && (synpred3_MapCSS())) {
-  	  	  alt18 = 3;
+  	  	else if((LA21_0 == 46/*46 /*'.'*/*/) && (synpred3_MapCSS())) {
+  	  	  alt21 = 3;
   	  	}
   	  	else {
-  	  	  alt18 = 4;
+  	  	  alt21 = 4;
   	  	}
-  	  	switch (alt18) {
+  	  	switch (alt21) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     222:3: ( P ( T | X ) )=> P ( T | X )*/
+  	  	     278:3: ( P ( T | X ) )=> P ( T | X )*/
   	  	    {
-  	  	    	this.mP(); 
-  	  	    	if(this.state.failed) 
+  	  	    	mP(); 
+  	  	    	if(state.failed) 
   	  	    	  return ;
 
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 224:4: ( T | X )*/
-  	  	    	int alt14 = 2;
-  	  	    	int LA14_0 = this.input.LA(1);
+  	  	    	 280:4: ( T | X )*/
+  	  	    	int alt17 = 2;
+  	  	    	int LA17_0 = input.LA(1);
 
-  	  	    	if((LA14_0 == 84/*84 /*'T'*/*/
-  	  	    	  || LA14_0 == 116/*116 /*'t'*/*/)) {
-  	  	    	  alt14 = 1;
+  	  	    	if((LA17_0 == 84/*84 /*'T'*/*/
+  	  	    	  || LA17_0 == 116/*116 /*'t'*/*/)) {
+  	  	    	  alt17 = 1;
   	  	    	}
-  	  	    	else if((LA14_0 == 88/*88 /*'X'*/*/
-  	  	    	  || LA14_0 == 120/*120 /*'x'*/*/)) {
-  	  	    	  alt14 = 2;
+  	  	    	else if((LA17_0 == 88/*88 /*'X'*/*/
+  	  	    	  || LA17_0 == 120/*120 /*'x'*/*/)) {
+  	  	    	  alt17 = 2;
   	  	    	}
   	  	    	else {
-  	  	    	  if(this.state.backtracking > 0) {
-  	  	    	    this.state.failed = true; 
+  	  	    	  if(state.backtracking > 0) {
+  	  	    	    state.failed = true; 
   	  	    	    return ;
   	  	    	  }
   	  	    	  NoViableAltException nvae =
-  	  	    	      new NoViableAltException("", 14, 0, this.input);
+  	  	    	      new NoViableAltException("", 17, 0, input);
 
   	  	    	  throw nvae;
 
   	  	    	}
-  	  	    	switch (alt14) {
+  	  	    	switch (alt17) {
   	  	    	  case 1 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     225:6: T*/
+  	  	    	     281:6: T*/
   	  	    	    {
-  	  	    	    	this.mT(); 
-  	  	    	    	if(this.state.failed) 
+  	  	    	    	mT(); 
+  	  	    	    	if(state.failed) 
   	  	    	    	  return ;
 
 
-  	  	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type = POINTS;;
   	  	    	    	}
 
@@ -2610,14 +3367,14 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 2 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     226:9: X*/
+  	  	    	     282:9: X*/
   	  	    	    {
-  	  	    	    	this.mX(); 
-  	  	    	    	if(this.state.failed) 
+  	  	    	    	mX(); 
+  	  	    	    	if(state.failed) 
   	  	    	    	  return ;
 
 
-  	  	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type = PIXELS;;
   	  	    	    	}
 
@@ -2632,13 +3389,13 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     228:8: ( '%' )=> '%'*/
+  	  	     284:8: ( '%' )=> '%'*/
   	  	    {
-  	  	    	this.match(37 /*'%'*/); 
-  	  	    	if(this.state.failed) 
+  	  	    	match(37 /*'%'*/); 
+  	  	    	if(state.failed) 
   	  	    	  return ;
 
-  	  	    	if(this.state.backtracking == 0) {
+  	  	    	if(state.backtracking == 0) {
   	  	    	  _type = PERCENTAGE;;
   	  	    	}
 
@@ -2647,42 +3404,42 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 3 :
   	  	    /* grammar/MapCSS.g:
-  	  	     229:8: ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | 
+  	  	     285:8: ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | 
   	  	     ( '%' )=> '%' |)*/
   	  	    {
-  	  	    	this.match(46 /*'.'*/); 
-  	  	    	if(this.state.failed) 
+  	  	    	match(46 /*'.'*/); 
+  	  	    	if(state.failed) 
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 230:9: ( DIGIT )+*/
-  	  	    	int cnt15 = 0;
-  	  	    	loop15:
+  	  	    	 286:9: ( DIGIT )+*/
+  	  	    	int cnt18 = 0;
+  	  	    	loop18:
   	  	    	do {
-  	  	    	  int alt15 = 2;
-  	  	    	  int LA15_0 = this.input.LA(1);
+  	  	    	  int alt18 = 2;
+  	  	    	  int LA18_0 = input.LA(1);
 
-  	  	    	  if(((LA15_0 >= 48 /*'0'*/ && LA15_0 <= 57 /*'9'*/))) {
-  	  	    	    alt15 = 1;
+  	  	    	  if(((LA18_0 >= 48 /*'0'*/ && LA18_0 <= 57 /*'9'*/))) {
+  	  	    	    alt18 = 1;
   	  	    	  }
 
 
-  	  	    	  switch (alt15) {
+  	  	    	  switch (alt18) {
   	  	    			case 1 :
   	  	    			  /* grammar/MapCSS.g:
   	  	    			  */
   	  	    			  {
-  	  	    			  	if((this.input.LA(1) >= 48 /*'0'*/ && this.input.LA(1) <= 57 /*'9'*/)) {
-  	  	    			  	  this.input.consume();
-  	  	    			  	  this.state.failed = false;
+  	  	    			  	if((input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)) {
+  	  	    			  	  input.consume();
+  	  	    			  	  state.failed = false;
   	  	    			  	}
   	  	    			  	else {
-  	  	    			  	  if(this.state.backtracking > 0) {
-  	  	    			  	    this.state.failed = true; 
+  	  	    			  	  if(state.backtracking > 0) {
+  	  	    			  	    state.failed = true; 
   	  	    			  	    return ;
   	  	    			  	  }
-  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-  	  	    			  	  this.recover(mse);
+  	  	    			  	  MismatchedSetException mse = new MismatchedSetException(null,input);
+  	  	    			  	  recover(mse);
   	  	    			  	  throw mse;
   	  	    			  	}
 
@@ -2691,78 +3448,78 @@ class MapCSSLexer extends Lexer {
   	  	    			  break;
 
   	  	    			default :
-  	  	    		    if(cnt15 >= 1) break loop15;
-  	  	    		      if(this.state.backtracking > 0) {
-  	  	    		        this.state.failed = true; 
+  	  	    		    if(cnt18 >= 1) break loop18;
+  	  	    		      if(state.backtracking > 0) {
+  	  	    		        state.failed = true; 
   	  	    		        return ;
   	  	    		      }
-  	  	    	        EarlyExitException eee = new EarlyExitException(15, this.input);
+  	  	    	        EarlyExitException eee = new EarlyExitException(18, input);
   	  	    	        throw eee;
   	  	    	  }
-  	  	    	  cnt15++;
+  	  	    	  cnt18++;
   	  	    	} while(true);
 
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 231:9: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
-  	  	    	int alt17 = 3;
-  	  	    	int LA17_0 = this.input.LA(1);
+  	  	    	 287:9: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
+  	  	    	int alt20 = 3;
+  	  	    	int LA20_0 = input.LA(1);
 
-  	  	    	if((LA17_0 == 80/*80 /*'P'*/*/
-  	  	    	  || LA17_0 == 112/*112 /*'p'*/*/) && (synpred4_MapCSS())) {
-  	  	    	  alt17 = 1;
+  	  	    	if((LA20_0 == 80/*80 /*'P'*/*/
+  	  	    	  || LA20_0 == 112/*112 /*'p'*/*/) && (synpred4_MapCSS())) {
+  	  	    	  alt20 = 1;
   	  	    	}
-  	  	    	else if((LA17_0 == 37/*37 /*'%'*/*/) && (synpred5_MapCSS())) {
-  	  	    	  alt17 = 2;
+  	  	    	else if((LA20_0 == 37/*37 /*'%'*/*/) && (synpred5_MapCSS())) {
+  	  	    	  alt20 = 2;
   	  	    	}
   	  	    	else {
-  	  	    	  alt17 = 3;
+  	  	    	  alt20 = 3;
   	  	    	}
-  	  	    	switch (alt17) {
+  	  	    	switch (alt20) {
   	  	    	  case 1 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     232:11: ( P ( T | X ) )=> P ( T | X )*/
+  	  	    	     288:11: ( P ( T | X ) )=> P ( T | X )*/
   	  	    	    {
-  	  	    	    	this.mP(); 
-  	  	    	    	if(this.state.failed) 
+  	  	    	    	mP(); 
+  	  	    	    	if(state.failed) 
   	  	    	    	  return ;
 
 
   	  	    	    	/* grammar/MapCSS.g:
-  	  	    	    	 234:5: ( T | X )*/
-  	  	    	    	int alt16 = 2;
-  	  	    	    	int LA16_0 = this.input.LA(1);
+  	  	    	    	 290:5: ( T | X )*/
+  	  	    	    	int alt19 = 2;
+  	  	    	    	int LA19_0 = input.LA(1);
 
-  	  	    	    	if((LA16_0 == 84/*84 /*'T'*/*/
-  	  	    	    	  || LA16_0 == 116/*116 /*'t'*/*/)) {
-  	  	    	    	  alt16 = 1;
+  	  	    	    	if((LA19_0 == 84/*84 /*'T'*/*/
+  	  	    	    	  || LA19_0 == 116/*116 /*'t'*/*/)) {
+  	  	    	    	  alt19 = 1;
   	  	    	    	}
-  	  	    	    	else if((LA16_0 == 88/*88 /*'X'*/*/
-  	  	    	    	  || LA16_0 == 120/*120 /*'x'*/*/)) {
-  	  	    	    	  alt16 = 2;
+  	  	    	    	else if((LA19_0 == 88/*88 /*'X'*/*/
+  	  	    	    	  || LA19_0 == 120/*120 /*'x'*/*/)) {
+  	  	    	    	  alt19 = 2;
   	  	    	    	}
   	  	    	    	else {
-  	  	    	    	  if(this.state.backtracking > 0) {
-  	  	    	    	    this.state.failed = true; 
+  	  	    	    	  if(state.backtracking > 0) {
+  	  	    	    	    state.failed = true; 
   	  	    	    	    return ;
   	  	    	    	  }
   	  	    	    	  NoViableAltException nvae =
-  	  	    	    	      new NoViableAltException("", 16, 0, this.input);
+  	  	    	    	      new NoViableAltException("", 19, 0, input);
 
   	  	    	    	  throw nvae;
 
   	  	    	    	}
-  	  	    	    	switch (alt16) {
+  	  	    	    	switch (alt19) {
   	  	    	    	  case 1 :
   	  	    	    	    /* grammar/MapCSS.g:
-  	  	    	    	     235:7: T*/
+  	  	    	    	     291:7: T*/
   	  	    	    	    {
-  	  	    	    	    	this.mT(); 
-  	  	    	    	    	if(this.state.failed) 
+  	  	    	    	    	mT(); 
+  	  	    	    	    	if(state.failed) 
   	  	    	    	    	  return ;
 
 
-  	  	    	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	    	if(state.backtracking == 0) {
   	  	    	    	    	  _type = POINTS;;
   	  	    	    	    	}
 
@@ -2771,14 +3528,14 @@ class MapCSSLexer extends Lexer {
   	  	    	    	    break;
   	  	    	    	  case 2 :
   	  	    	    	    /* grammar/MapCSS.g:
-  	  	    	    	     236:10: X*/
+  	  	    	    	     292:10: X*/
   	  	    	    	    {
-  	  	    	    	    	this.mX(); 
-  	  	    	    	    	if(this.state.failed) 
+  	  	    	    	    	mX(); 
+  	  	    	    	    	if(state.failed) 
   	  	    	    	    	  return ;
 
 
-  	  	    	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	    	if(state.backtracking == 0) {
   	  	    	    	    	  _type = PIXELS;;
   	  	    	    	    	}
 
@@ -2793,13 +3550,13 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 2 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     238:10: ( '%' )=> '%'*/
+  	  	    	     294:10: ( '%' )=> '%'*/
   	  	    	    {
-  	  	    	    	this.match(37 /*'%'*/); 
-  	  	    	    	if(this.state.failed) 
+  	  	    	    	match(37 /*'%'*/); 
+  	  	    	    	if(state.failed) 
   	  	    	    	  return ;
 
-  	  	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type = PERCENTAGE;;
   	  	    	    	}
 
@@ -2808,9 +3565,9 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 3 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     239:13: */
+  	  	    	     295:13: */
   	  	    	    {
-  	  	    	    	if(this.state.backtracking == 0) {
+  	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type = FLOAT;;
   	  	    	    	}
 
@@ -2825,9 +3582,9 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 4 :
   	  	    /* grammar/MapCSS.g:
-  	  	     241:8: */
+  	  	     297:8: */
   	  	    {
-  	  	    	if(this.state.backtracking == 0) {
+  	  	    	if(state.backtracking == 0) {
   	  	    	  _type=INT;;
   	  	    	}
 
@@ -2840,8 +3597,8 @@ class MapCSSLexer extends Lexer {
 
   	  }
 
-  	  this.state.type = _type;
-  	  this.state.channel = _channel;
+  	  state.type = _type;
+  	  state.channel = _channel;
     }
     finally {
   	  // do for sure before leaving
@@ -2851,21 +3608,21 @@ class MapCSSLexer extends Lexer {
 
   void mTokens() {
     /* grammar/MapCSS.g: 
-     1:8: ( T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | 
-     T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | 
-     T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | IDENT | 
-     DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | GE | LE | GT | LT | 
-     NEQ | EQ | MATCH | IMPORT | WS | SL_COMMENT | ML_COMMENT | RANGE | 
+     1:8: ( T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | 
+     T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | 
+     T__95 | T__96 | T__97 | T__98 | URL | RGBA | RGB | IDENT | DQUOTED_STRING | 
+     SQUOTED_STRING | HEXCOLOR | GE | LE | GT | LT | NEQ | EQ | MATCH | 
+     IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | PIPE_Z | RANGE | 
      NUMBER )*/
-    int alt19 = 39;
-    alt19 = this.dfas["dfa19"].predict(this.input);
-    switch (alt19) {
+    int alt22 = 41;
+    alt22 = dfas["dfa22"].predict(input);
+    switch (alt22) {
       case 1 :
         /* grammar/MapCSS.g:
-         1:10: T__71*/
+         1:10: T__80*/
         {
-        	this.mT__71(); 
-        	if(this.state.failed) 
+        	mT__80(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2873,10 +3630,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 2 :
         /* grammar/MapCSS.g:
-         1:16: T__72*/
+         1:16: T__81*/
         {
-        	this.mT__72(); 
-        	if(this.state.failed) 
+        	mT__81(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2884,10 +3641,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 3 :
         /* grammar/MapCSS.g:
-         1:22: T__73*/
+         1:22: T__82*/
         {
-        	this.mT__73(); 
-        	if(this.state.failed) 
+        	mT__82(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2895,10 +3652,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 4 :
         /* grammar/MapCSS.g:
-         1:28: T__74*/
+         1:28: T__83*/
         {
-        	this.mT__74(); 
-        	if(this.state.failed) 
+        	mT__83(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2906,10 +3663,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 5 :
         /* grammar/MapCSS.g:
-         1:34: T__75*/
+         1:34: T__84*/
         {
-        	this.mT__75(); 
-        	if(this.state.failed) 
+        	mT__84(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2917,10 +3674,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 6 :
         /* grammar/MapCSS.g:
-         1:40: T__76*/
+         1:40: T__85*/
         {
-        	this.mT__76(); 
-        	if(this.state.failed) 
+        	mT__85(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2928,10 +3685,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 7 :
         /* grammar/MapCSS.g:
-         1:46: T__77*/
+         1:46: T__86*/
         {
-        	this.mT__77(); 
-        	if(this.state.failed) 
+        	mT__86(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2939,10 +3696,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 8 :
         /* grammar/MapCSS.g:
-         1:52: T__78*/
+         1:52: T__87*/
         {
-        	this.mT__78(); 
-        	if(this.state.failed) 
+        	mT__87(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2950,10 +3707,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 9 :
         /* grammar/MapCSS.g:
-         1:58: T__79*/
+         1:58: T__88*/
         {
-        	this.mT__79(); 
-        	if(this.state.failed) 
+        	mT__88(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2961,10 +3718,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 10 :
         /* grammar/MapCSS.g:
-         1:64: T__80*/
+         1:64: T__89*/
         {
-        	this.mT__80(); 
-        	if(this.state.failed) 
+        	mT__89(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2972,10 +3729,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 11 :
         /* grammar/MapCSS.g:
-         1:70: T__81*/
+         1:70: T__90*/
         {
-        	this.mT__81(); 
-        	if(this.state.failed) 
+        	mT__90(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2983,10 +3740,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 12 :
         /* grammar/MapCSS.g:
-         1:76: T__82*/
+         1:76: T__91*/
         {
-        	this.mT__82(); 
-        	if(this.state.failed) 
+        	mT__91(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -2994,10 +3751,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 13 :
         /* grammar/MapCSS.g:
-         1:82: T__83*/
+         1:82: T__92*/
         {
-        	this.mT__83(); 
-        	if(this.state.failed) 
+        	mT__92(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3005,10 +3762,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 14 :
         /* grammar/MapCSS.g:
-         1:88: T__84*/
+         1:88: T__93*/
         {
-        	this.mT__84(); 
-        	if(this.state.failed) 
+        	mT__93(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3016,10 +3773,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 15 :
         /* grammar/MapCSS.g:
-         1:94: T__85*/
+         1:94: T__94*/
         {
-        	this.mT__85(); 
-        	if(this.state.failed) 
+        	mT__94(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3027,10 +3784,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 16 :
         /* grammar/MapCSS.g:
-         1:100: T__86*/
+         1:100: T__95*/
         {
-        	this.mT__86(); 
-        	if(this.state.failed) 
+        	mT__95(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3038,10 +3795,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 17 :
         /* grammar/MapCSS.g:
-         1:106: T__87*/
+         1:106: T__96*/
         {
-        	this.mT__87(); 
-        	if(this.state.failed) 
+        	mT__96(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3049,10 +3806,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 18 :
         /* grammar/MapCSS.g:
-         1:112: T__88*/
+         1:112: T__97*/
         {
-        	this.mT__88(); 
-        	if(this.state.failed) 
+        	mT__97(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3060,10 +3817,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 19 :
         /* grammar/MapCSS.g:
-         1:118: T__89*/
+         1:118: T__98*/
         {
-        	this.mT__89(); 
-        	if(this.state.failed) 
+        	mT__98(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3071,10 +3828,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 20 :
         /* grammar/MapCSS.g:
-         1:124: T__90*/
+         1:124: URL*/
         {
-        	this.mT__90(); 
-        	if(this.state.failed) 
+        	mURL(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3082,10 +3839,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 21 :
         /* grammar/MapCSS.g:
-         1:130: T__91*/
+         1:128: RGBA*/
         {
-        	this.mT__91(); 
-        	if(this.state.failed) 
+        	mRGBA(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3093,10 +3850,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 22 :
         /* grammar/MapCSS.g:
-         1:136: T__92*/
+         1:133: RGB*/
         {
-        	this.mT__92(); 
-        	if(this.state.failed) 
+        	mRGB(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3104,10 +3861,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 23 :
         /* grammar/MapCSS.g:
-         1:142: IDENT*/
+         1:137: IDENT*/
         {
-        	this.mIDENT(); 
-        	if(this.state.failed) 
+        	mIDENT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3115,10 +3872,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 24 :
         /* grammar/MapCSS.g:
-         1:148: DQUOTED_STRING*/
+         1:143: DQUOTED_STRING*/
         {
-        	this.mDQUOTED_STRING(); 
-        	if(this.state.failed) 
+        	mDQUOTED_STRING(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3126,10 +3883,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 25 :
         /* grammar/MapCSS.g:
-         1:163: SQUOTED_STRING*/
+         1:158: SQUOTED_STRING*/
         {
-        	this.mSQUOTED_STRING(); 
-        	if(this.state.failed) 
+        	mSQUOTED_STRING(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3137,10 +3894,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 26 :
         /* grammar/MapCSS.g:
-         1:178: HEXCOLOR*/
+         1:173: HEXCOLOR*/
         {
-        	this.mHEXCOLOR(); 
-        	if(this.state.failed) 
+        	mHEXCOLOR(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3148,10 +3905,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 27 :
         /* grammar/MapCSS.g:
-         1:187: GE*/
+         1:182: GE*/
         {
-        	this.mGE(); 
-        	if(this.state.failed) 
+        	mGE(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3159,10 +3916,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 28 :
         /* grammar/MapCSS.g:
-         1:190: LE*/
+         1:185: LE*/
         {
-        	this.mLE(); 
-        	if(this.state.failed) 
+        	mLE(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3170,10 +3927,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 29 :
         /* grammar/MapCSS.g:
-         1:193: GT*/
+         1:188: GT*/
         {
-        	this.mGT(); 
-        	if(this.state.failed) 
+        	mGT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3181,10 +3938,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 30 :
         /* grammar/MapCSS.g:
-         1:196: LT*/
+         1:191: LT*/
         {
-        	this.mLT(); 
-        	if(this.state.failed) 
+        	mLT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3192,10 +3949,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 31 :
         /* grammar/MapCSS.g:
-         1:199: NEQ*/
+         1:194: NEQ*/
         {
-        	this.mNEQ(); 
-        	if(this.state.failed) 
+        	mNEQ(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3203,10 +3960,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 32 :
         /* grammar/MapCSS.g:
-         1:203: EQ*/
+         1:198: EQ*/
         {
-        	this.mEQ(); 
-        	if(this.state.failed) 
+        	mEQ(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3214,10 +3971,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 33 :
         /* grammar/MapCSS.g:
-         1:206: MATCH*/
+         1:201: MATCH*/
         {
-        	this.mMATCH(); 
-        	if(this.state.failed) 
+        	mMATCH(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3225,10 +3982,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 34 :
         /* grammar/MapCSS.g:
-         1:212: IMPORT*/
+         1:207: IMPORT*/
         {
-        	this.mIMPORT(); 
-        	if(this.state.failed) 
+        	mIMPORT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3236,10 +3993,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 35 :
         /* grammar/MapCSS.g:
-         1:219: WS*/
+         1:214: REGEXP*/
         {
-        	this.mWS(); 
-        	if(this.state.failed) 
+        	mREGEXP(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3247,10 +4004,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 36 :
         /* grammar/MapCSS.g:
-         1:222: SL_COMMENT*/
+         1:221: WS*/
         {
-        	this.mSL_COMMENT(); 
-        	if(this.state.failed) 
+        	mWS(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3258,10 +4015,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 37 :
         /* grammar/MapCSS.g:
-         1:233: ML_COMMENT*/
+         1:224: SL_COMMENT*/
         {
-        	this.mML_COMMENT(); 
-        	if(this.state.failed) 
+        	mSL_COMMENT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3269,10 +4026,10 @@ class MapCSSLexer extends Lexer {
         break;
       case 38 :
         /* grammar/MapCSS.g:
-         1:244: RANGE*/
+         1:235: ML_COMMENT*/
         {
-        	this.mRANGE(); 
-        	if(this.state.failed) 
+        	mML_COMMENT(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3280,10 +4037,32 @@ class MapCSSLexer extends Lexer {
         break;
       case 39 :
         /* grammar/MapCSS.g:
-         1:250: NUMBER*/
+         1:246: PIPE_Z*/
         {
-        	this.mNUMBER(); 
-        	if(this.state.failed) 
+        	mPIPE_Z(); 
+        	if(state.failed) 
+        	  return ;
+
+
+        }
+        break;
+      case 40 :
+        /* grammar/MapCSS.g:
+         1:253: RANGE*/
+        {
+        	mRANGE(); 
+        	if(state.failed) 
+        	  return ;
+
+
+        }
+        break;
+      case 41 :
+        /* grammar/MapCSS.g:
+         1:259: NUMBER*/
+        {
+        	mNUMBER(); 
+        	if(state.failed) 
         	  return ;
 
 
@@ -3297,29 +4076,29 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred1_MapCSS
   void synpred1_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     222:3: ( P ( T | X ) )*/
+     278:3: ( P ( T | X ) )*/
     /* grammar/MapCSS.g:
-     222:4: P ( T | X )*/
+     278:4: P ( T | X )*/
     {
-    	this.mP(); 
-    	if(this.state.failed) 
+    	mP(); 
+    	if(state.failed) 
     	  return ;
 
 
-    	if(this.input.LA(1) == 84 /*'T'*/
-    	  || this.input.LA(1) == 88 /*'X'*/
-    	  || this.input.LA(1) == 116 /*'t'*/
-    	  || this.input.LA(1) == 120 /*'x'*/) {
-    	  this.input.consume();
-    	  this.state.failed = false;
+    	if(input.LA(1) == 84 /*'T'*/
+    	  || input.LA(1) == 88 /*'X'*/
+    	  || input.LA(1) == 116 /*'t'*/
+    	  || input.LA(1) == 120 /*'x'*/) {
+    	  input.consume();
+    	  state.failed = false;
     	}
     	else {
-    	  if(this.state.backtracking > 0) {
-    	    this.state.failed = true; 
+    	  if(state.backtracking > 0) {
+    	    state.failed = true; 
     	    return ;
     	  }
-    	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-    	  this.recover(mse);
+    	  MismatchedSetException mse = new MismatchedSetException(null,input);
+    	  recover(mse);
     	  throw mse;
     	}
 
@@ -3332,12 +4111,12 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred2_MapCSS
   void synpred2_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     228:8: ( '%' )*/
+     284:8: ( '%' )*/
     /* grammar/MapCSS.g:
-     228:9: '%'*/
+     284:9: '%'*/
     {
-    	this.match(37 /*'%'*/); 
-    	if(this.state.failed) 
+    	match(37 /*'%'*/); 
+    	if(state.failed) 
     	  return ;
 
     }
@@ -3348,12 +4127,12 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred3_MapCSS
   void synpred3_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     229:8: ( '.' )*/
+     285:8: ( '.' )*/
     /* grammar/MapCSS.g:
-     229:9: '.'*/
+     285:9: '.'*/
     {
-    	this.match(46 /*'.'*/); 
-    	if(this.state.failed) 
+    	match(46 /*'.'*/); 
+    	if(state.failed) 
     	  return ;
 
     }
@@ -3364,29 +4143,29 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred4_MapCSS
   void synpred4_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     232:11: ( P ( T | X ) )*/
+     288:11: ( P ( T | X ) )*/
     /* grammar/MapCSS.g:
-     232:12: P ( T | X )*/
+     288:12: P ( T | X )*/
     {
-    	this.mP(); 
-    	if(this.state.failed) 
+    	mP(); 
+    	if(state.failed) 
     	  return ;
 
 
-    	if(this.input.LA(1) == 84 /*'T'*/
-    	  || this.input.LA(1) == 88 /*'X'*/
-    	  || this.input.LA(1) == 116 /*'t'*/
-    	  || this.input.LA(1) == 120 /*'x'*/) {
-    	  this.input.consume();
-    	  this.state.failed = false;
+    	if(input.LA(1) == 84 /*'T'*/
+    	  || input.LA(1) == 88 /*'X'*/
+    	  || input.LA(1) == 116 /*'t'*/
+    	  || input.LA(1) == 120 /*'x'*/) {
+    	  input.consume();
+    	  state.failed = false;
     	}
     	else {
-    	  if(this.state.backtracking > 0) {
-    	    this.state.failed = true; 
+    	  if(state.backtracking > 0) {
+    	    state.failed = true; 
     	    return ;
     	  }
-    	  MismatchedSetException mse = new MismatchedSetException(null,this.input);
-    	  this.recover(mse);
+    	  MismatchedSetException mse = new MismatchedSetException(null,input);
+    	  recover(mse);
     	  throw mse;
     	}
 
@@ -3399,12 +4178,12 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred5_MapCSS
   void synpred5_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     238:10: ( '%' )*/
+     294:10: ( '%' )*/
     /* grammar/MapCSS.g:
-     238:11: '%'*/
+     294:11: '%'*/
     {
-    	this.match(37 /*'%'*/); 
-    	if(this.state.failed) 
+    	match(37 /*'%'*/); 
+    	if(state.failed) 
     	  return ;
 
     }
@@ -3412,303 +4191,1289 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end synpred5_MapCSS  
   bool synpred2_MapCSS() {
-    this.state.backtracking++;
-    int start = this.input.mark();
+    state.backtracking++;
+    int start = input.mark();
     try {
-      this.synpred2_MapCSS_fragment(); // can never throw exception
+      synpred2_MapCSS_fragment(); // can never throw exception
     } on RecognitionException catch(re) {
       print("impossible: $re");
     }
-    bool success = !this.state.failed;
-    this.input.rewind(start);
-    this.state.backtracking--;
-    this.state.failed=false;
+    bool success = !state.failed;
+    input.rewind(start);
+    state.backtracking--;
+    state.failed=false;
     return success;
   }
   bool synpred5_MapCSS() {
-    this.state.backtracking++;
-    int start = this.input.mark();
+    state.backtracking++;
+    int start = input.mark();
     try {
-      this.synpred5_MapCSS_fragment(); // can never throw exception
+      synpred5_MapCSS_fragment(); // can never throw exception
     } on RecognitionException catch(re) {
       print("impossible: $re");
     }
-    bool success = !this.state.failed;
-    this.input.rewind(start);
-    this.state.backtracking--;
-    this.state.failed=false;
+    bool success = !state.failed;
+    input.rewind(start);
+    state.backtracking--;
+    state.failed=false;
     return success;
   }
   bool synpred4_MapCSS() {
-    this.state.backtracking++;
-    int start = this.input.mark();
+    state.backtracking++;
+    int start = input.mark();
     try {
-      this.synpred4_MapCSS_fragment(); // can never throw exception
+      synpred4_MapCSS_fragment(); // can never throw exception
     } on RecognitionException catch(re) {
       print("impossible: $re");
     }
-    bool success = !this.state.failed;
-    this.input.rewind(start);
-    this.state.backtracking--;
-    this.state.failed=false;
+    bool success = !state.failed;
+    input.rewind(start);
+    state.backtracking--;
+    state.failed=false;
     return success;
   }
   bool synpred3_MapCSS() {
-    this.state.backtracking++;
-    int start = this.input.mark();
+    state.backtracking++;
+    int start = input.mark();
     try {
-      this.synpred3_MapCSS_fragment(); // can never throw exception
+      synpred3_MapCSS_fragment(); // can never throw exception
     } on RecognitionException catch(re) {
       print("impossible: $re");
     }
-    bool success = !this.state.failed;
-    this.input.rewind(start);
-    this.state.backtracking--;
-    this.state.failed=false;
+    bool success = !state.failed;
+    input.rewind(start);
+    state.backtracking--;
+    state.failed=false;
     return success;
   }
   bool synpred1_MapCSS() {
-    this.state.backtracking++;
-    int start = this.input.mark();
+    state.backtracking++;
+    int start = input.mark();
     try {
-      this.synpred1_MapCSS_fragment(); // can never throw exception
+      synpred1_MapCSS_fragment(); // can never throw exception
     } on RecognitionException catch(re) {
       print("impossible: $re");
     }
-    bool success = !this.state.failed;
-    this.input.rewind(start);
-    this.state.backtracking--;
-    this.state.failed=false;
+    bool success = !state.failed;
+    input.rewind(start);
+    state.backtracking--;
+    state.failed=false;
     return success;
   }
 
 
-  static final String DFA19_eotS =
-      "\u0001\uffff\u0001\u0022\u0004\uffff\u0001\u0023\u0005\uffff\u0007"
-      "\u0015\u0006\uffff\u0001\u002d\u0001\u002f\u0001\u0031\u0008\uffff"
-      "\u0008\u0015\u0008\uffff\u0005\u0015\u0001\u0042\u0001\u0043\u0001"
-      "\u0044\u0001\u0045\u0001\u0015\u0001\u0047\u0001\u0048\u0001\u0015"
-      "\u0001\u004a\u0004\uffff\u0001\u0015\u0002\uffff\u0001\u0015\u0001"
-      "\uffff\u0001\u004d\u0001\u0015\u0001\uffff\u0001\u0015\u0001\u0050"
-      "\u0001\uffff";
-  static final String DFA19_eofS =
-      "\u0051\uffff";
-  static final String DFA19_minS =
+  static const String DFA_MapCSSLexer_15_eotS =
+      "\u0002\uffff\u0001\u0003\u0001\uffff\u0001\u0005\u0002\uffff";
+  static const String DFA_MapCSSLexer_15_eofS =
+      "\u0007\uffff";
+  static const String DFA_MapCSSLexer_15_minS =
+      "\u0001\u002d\u0001\uffff\u0001\u002d\u0001\uffff\u0001\u0030\u0002"
+      "\uffff";
+  static const String DFA_MapCSSLexer_15_maxS =
+      "\u0001\u0039\u0001\uffff\u0001\u0039\u0001\uffff\u0001\u0039\u0002"
+      "\uffff";
+  static const String DFA_MapCSSLexer_15_acceptS =
+      "\u0001\uffff\u0001\u0001\u0001\uffff\u0001\u0002\u0001\uffff\u0001"
+      "\u0003\u0001\u0004";
+  static const String DFA_MapCSSLexer_15_specialS =
+      "\u0007\uffff";
+  static const List<String> DFA_MapCSSLexer_15_transitionS = const [
+      "\u0001\u0001\u0002\uffff\u000a\u0002",
+      "",
+      "\u0001\u0004\u0002\uffff\u000a\u0002",
+      "",
+      "\u000a\u0006",
+      "",
+      ""
+  ];
+
+  static List<int> DFA_MapCSSLexer_15_eot = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_15_eotS);
+
+  static List<int> DFA_MapCSSLexer_15_eof = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_15_eofS);
+
+  static List<int> DFA_MapCSSLexer_15_min = 
+  	DFA.unpackEncodedStringToUnsignedChars(DFA_MapCSSLexer_15_minS);
+
+  static List<int> DFA_MapCSSLexer_15_max = 
+  	DFA.unpackEncodedStringToUnsignedChars(DFA_MapCSSLexer_15_maxS);
+
+  static List<int> DFA_MapCSSLexer_15_accept = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_15_acceptS);
+
+  static List<int> DFA_MapCSSLexer_15_special = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_15_specialS);
+
+  static List<List<int>> DFA_MapCSSLexer_15_transition = () {
+  	int numStates = DFA_MapCSSLexer_15_transitionS.length;
+  	List<List<int>> _DFA15_transition = new List<List<int>>(numStates);
+  	for (int i = 0; i < numStates; i++)
+  	  _DFA15_transition[i] = 
+  	    DFA.unpackEncodedString(DFA_MapCSSLexer_15_transitionS[i]);
+  	return _DFA15_transition;
+  }();
+  static const String DFA_MapCSSLexer_22_eotS =
+      "\u0001\uffff\u0001\u0023\u0004\uffff\u0001\u0024\u0005\uffff\u0006"
+      "\u0016\u0002\uffff\u0002\u0016\u0004\uffff\u0001\u002e\u0001\u0030"
+      "\u0001\u0032\u0008\uffff\u0008\u0016\u0006\uffff\u0001\u0035\u0002"
+      "\uffff\u0001\u0045\u0005\u0016\u0001\u004d\u0001\u004e\u0001\u004f"
+      "\u0002\uffff\u0001\u0035\u0005\uffff\u0001\u0066\u0001\u0016\u0001"
+      "\u0068\u0001\u0069\u0001\u0016\u0001\u006b\u0003\uffff\u0001\u0035"
+      "\u0016\uffff\u0001\u0016\u0002\uffff\u0001\u0016\u0001\uffff\u0001"
+      "\u006e\u0001\u0016\u0001\uffff\u0001\u0016\u0001\u0071\u0001\uffff";
+  static const String DFA_MapCSSLexer_22_eofS =
+      "\u0072\uffff";
+  static const String DFA_MapCSSLexer_22_minS =
       "\u0001\u0009\u0001\u003d\u0004\uffff\u0001\u002d\u0005\uffff\u0001"
-      "\u0072\u0001\u0061\u0001\u0069\u0001\u006f\u0001\u0065\u0001\u0072"
-      "\u0001\u0061\u0006\uffff\u0002\u003d\u0001\u007e\u0002\uffff\u0001"
-      "\u002a\u0005\uffff\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c"
-      "\u0001\u0062\u0001\u006c\u0001\u0079\u0008\uffff\u0001\u0061\u0001"
-      "\u0076\u0002\u0065\u0001\u0061\u0004\u002d\u0001\u0061\u0002\u002d"
-      "\u0001\u0074\u0001\u002d\u0004\uffff\u0001\u0073\u0002\uffff\u0001"
-      "\u0069\u0001\uffff\u0001\u002d\u0001\u006f\u0001\uffff\u0001\u006e"
-      "\u0001\u002d\u0001\uffff";
-  static final String DFA19_maxS =
+      "\u0072\u0001\u0061\u0001\u0069\u0001\u006f\u0001\u0047\u0001\u0061"
+      "\u0002\uffff\u0001\u0052\u0001\u0047\u0004\uffff\u0002\u003d\u0001"
+      "\u007e\u0001\uffff\u0001\u0020\u0001\uffff\u0001\u007a\u0004\uffff"
+      "\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c\u0001\u0042\u0001"
+      "\u0079\u0001\u004c\u0006\uffff\u0002\u0000\u0001\uffff\u0001\u002d"
+      "\u0001\u0061\u0001\u0076\u0002\u0065\u0001\u0061\u0003\u002d\u0001"
+      "\uffff\u0004\u0000\u0003\uffff\u0001\u002d\u0001\u0061\u0002\u002d"
+      "\u0001\u0074\u0001\u002d\u0003\uffff\u0016\u0000\u0001\uffff\u0001"
+      "\u0073\u0002\uffff\u0001\u0069\u0001\uffff\u0001\u002d\u0001\u006f"
+      "\u0001\uffff\u0001\u006e\u0001\u002d\u0001\uffff";
+  static const String DFA_MapCSSLexer_22_maxS =
       "\u0001\u007d\u0001\u003d\u0004\uffff\u0001\u007a\u0005\uffff\u0001"
-      "\u0072\u0001\u0061\u0001\u0069\u0001\u006f\u0001\u0067\u0001\u0072"
-      "\u0001\u0061\u0006\uffff\u0002\u003d\u0001\u007e\u0002\uffff\u0001"
-      "\u002f\u0005\uffff\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c"
-      "\u0001\u0062\u0001\u006c\u0001\u0079\u0008\uffff\u0001\u0061\u0001"
-      "\u0076\u0002\u0065\u0001\u0061\u0004\u007a\u0001\u0061\u0002\u007a"
-      "\u0001\u0074\u0001\u007a\u0004\uffff\u0001\u0073\u0002\uffff\u0001"
-      "\u0069\u0001\uffff\u0001\u007a\u0001\u006f\u0001\uffff\u0001\u006e"
-      "\u0001\u007a\u0001\uffff";
-  static final String DFA19_acceptS =
+      "\u0072\u0001\u0061\u0001\u0069\u0001\u006f\u0001\u0067\u0001\u0061"
+      "\u0002\uffff\u0001\u0072\u0001\u0067\u0004\uffff\u0002\u003d\u0001"
+      "\u007e\u0001\uffff\u0001\uffff\u0001\uffff\u0001\u007a\u0004\uffff"
+      "\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c\u0001\u0062\u0001"
+      "\u0079\u0001\u006c\u0006\uffff\u0002\uffff\u0001\uffff\u0001\u0039"
+      "\u0001\u0061\u0001\u0076\u0002\u0065\u0001\u0061\u0003\u007a\u0001"
+      "\uffff\u0004\uffff\u0003\uffff\u0001\u007a\u0001\u0061\u0002\u007a"
+      "\u0001\u0074\u0001\u007a\u0003\uffff\u0016\uffff\u0001\uffff\u0001"
+      "\u0073\u0002\uffff\u0001\u0069\u0001\uffff\u0001\u007a\u0001\u006f"
+      "\u0001\uffff\u0001\u006e\u0001\u007a\u0001\uffff";
+  static const String DFA_MapCSSLexer_22_acceptS =
       "\u0002\uffff\u0001\u0002\u0001\u0003\u0001\u0004\u0001\u0005\u0001"
       "\uffff\u0001\u0007\u0001\u0008\u0001\u0009\u0001\u000a\u0001\u000b"
-      "\u0007\uffff\u0001\u0015\u0001\u0016\u0001\u0017\u0001\u0018\u0001"
-      "\u0019\u0001\u001a\u0003\uffff\u0001\u0022\u0001\u0023\u0001\uffff"
-      "\u0001\u0026\u0001\u0027\u0001\u001f\u0001\u0001\u0001\u0006\u0008"
-      "\uffff\u0001\u001b\u0001\u001d\u0001\u001c\u0001\u001e\u0001\u0021"
-      "\u0001\u0020\u0001\u0024\u0001\u0025\u000e\uffff\u0001\u0011\u0001"
-      "\u0013\u0001\u0014\u0001\u000c\u0001\uffff\u0001\u000e\u0001\u000f"
-      "\u0001\uffff\u0001\u0012\u0002\uffff\u0001\u000d\u0002\uffff\u0001"
-      "\u0010";
-  static final String DFA19_specialS =
-      "\u0051\uffff";
-  static final List<String> DFA19_transitionS = const [
-      "\u0002\u001d\u0001\uffff\u0002\u001d\u0012\uffff\u0001\u001d\u0001"
-      "\u0001\u0001\u0016\u0001\u0018\u0003\uffff\u0001\u0017\u0001\u0002"
+      "\u0006\uffff\u0001\u0012\u0001\u0013\u0002\uffff\u0001\u0017\u0001"
+      "\u0018\u0001\u0019\u0001\u001a\u0003\uffff\u0001\u0022\u0001\uffff"
+      "\u0001\u0024\u0001\uffff\u0001\u0029\u0001\u001f\u0001\u0001\u0001"
+      "\u0006\u0008\uffff\u0001\u001b\u0001\u001d\u0001\u001c\u0001\u001e"
+      "\u0001\u0021\u0001\u0020\u0002\uffff\u0001\u0023\u0009\uffff\u0001"
+      "\u0025\u0004\uffff\u0001\u0026\u0001\u0027\u0001\u0028\u0006\uffff"
+      "\u0001\u0016\u0001\u0011\u0001\u0014\u0016\uffff\u0001\u000c\u0001"
+      "\uffff\u0001\u000e\u0001\u000f\u0001\uffff\u0001\u0015\u0002\uffff"
+      "\u0001\u000d\u0002\uffff\u0001\u0010";
+  static const String DFA_MapCSSLexer_22_specialS =
+      "\u0033\uffff\u0001\u0017\u0001\u0001\u000b\uffff\u0001\u0002\u0001"
+      "\u0014\u0001\u0009\u0001\u0015\u000c\uffff\u0001\u0006\u0001\u0016"
+      "\u0001\u0018\u0001\u001a\u0001\u0019\u0001\u001b\u0001\u0013\u0001"
+      "\u0000\u0001\u0012\u0001\u0011\u0001\u0010\u0001\u000e\u0001\u000f"
+      "\u0001\u000d\u0001\u000c\u0001\u000a\u0001\u000b\u0001\u0008\u0001"
+      "\u0007\u0001\u0005\u0001\u0004\u0001\u0003\u000c\uffff";
+  static const List<String> DFA_MapCSSLexer_22_transitionS = const [
+      "\u0002\u001f\u0001\uffff\u0002\u001f\u0012\uffff\u0001\u001f\u0001"
+      "\u0001\u0001\u0017\u0001\u0019\u0003\uffff\u0001\u0018\u0001\u0002"
       "\u0001\u0003\u0001\u0004\u0001\uffff\u0001\u0005\u0001\u0006\u0001"
-      "\u0007\u0001\u001e\u000a\u0020\u0001\u0008\u0001\u0009\u0001\u001a"
-      "\u0001\u001b\u0001\u0019\u0001\uffff\u0001\u001c\u001a\u0015\u0001"
-      "\u000a\u0001\uffff\u0001\u000b\u0003\uffff\u0001\u000c\u0001\u0015"
-      "\u0001\u000d\u0008\u0015\u0001\u000e\u0001\u0015\u0001\u000f\u0003"
-      "\u0015\u0001\u0010\u0002\u0015\u0001\u0011\u0001\u0015\u0001\u0012"
-      "\u0003\u0015\u0001\u0013\u0001\u001f\u0001\u0014",
-      "\u0001\u0021",
+      "\u0007\u0001\u001e\u000a\u0021\u0001\u0008\u0001\u0009\u0001\u001b"
+      "\u0001\u001c\u0001\u001a\u0001\uffff\u0001\u001d\u0011\u0016\u0001"
+      "\u0015\u0002\u0016\u0001\u0014\u0005\u0016\u0001\u000a\u0001\uffff"
+      "\u0001\u000b\u0003\uffff\u0001\u000c\u0001\u0016\u0001\u000d\u0008"
+      "\u0016\u0001\u000e\u0001\u0016\u0001\u000f\u0003\u0016\u0001\u0010"
+      "\u0002\u0016\u0001\u0014\u0001\u0016\u0001\u0011\u0003\u0016\u0001"
+      "\u0012\u0001\u0020\u0001\u0013",
+      "\u0001\u0022",
       "",
       "",
       "",
       "",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
       "",
       "",
       "",
       "",
       "",
-      "\u0001\u0024",
       "\u0001\u0025",
       "\u0001\u0026",
       "\u0001\u0027",
-      "\u0001\u0028\u0001\uffff\u0001\u0029",
-      "\u0001\u002a",
+      "\u0001\u0028",
+      "\u0001\u002a\u001d\uffff\u0001\u0029\u0001\uffff\u0001\u002a",
       "\u0001\u002b",
       "",
       "",
+      "\u0001\u002c\u001f\uffff\u0001\u002c",
+      "\u0001\u002a\u001f\uffff\u0001\u002a",
       "",
       "",
       "",
       "",
-      "\u0001\u002c",
-      "\u0001\u002e",
-      "\u0001\u0030",
+      "\u0001\u002d",
+      "\u0001\u002f",
+      "\u0001\u0031",
       "",
+      "\u000a\u0035\u0001\u0034\u0004\u0035\u0001\u0033\u004f\u0035\u0001"
+      "\uffff\uff80\u0035",
       "",
-      "\u0001\u0033\u0004\uffff\u0001\u0032",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "\u0001\u0034",
-      "\u0001\u0035",
       "\u0001\u0036",
+      "",
+      "",
+      "",
+      "",
       "\u0001\u0037",
       "\u0001\u0038",
       "\u0001\u0039",
       "\u0001\u003a",
       "\u0001\u003b",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "\u0001\u003c",
+      "\u0001\u003c\u001f\uffff\u0001\u003c",
       "\u0001\u003d",
-      "\u0001\u003e",
-      "\u0001\u003f",
-      "\u0001\u0040",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u0001\u0041\u0019\u0015",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "\u0001\u0046",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
+      "\u0001\u003e\u001f\uffff\u0001\u003e",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "\u0000\u003f",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "",
+      "\u0001\u0046\u0002\uffff\u000a\u0046",
+      "\u0001\u0047",
+      "\u0001\u0048",
       "\u0001\u0049",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "",
-      "",
-      "",
-      "",
+      "\u0001\u004a",
       "\u0001\u004b",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u0001\u004c\u0019"
+      "\u0016\u0004\uffff\u0001\u0016\u0001\uffff\u0001\u004c\u0019\u0016",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0050\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0000\u0044",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0024\u0044\u0001\u0056\u0003\u0044\u0001\u0053\u0001\u0054\u0001"
+      "\u0057\u0001\u005b\u0001\u0044\u0001\u005c\u0001\u0058\u0001\u0052"
+      "\u000f\u0044\u0001\u005a\u0004\u0044\u0001\u0063\u000e\u0044\u0001"
+      "\u0061\u0003\u0044\u0001\u0065\u0004\u0044\u0001\u0051\u0001\u0044"
+      "\u0001\u0059\u0005\u0044\u0001\u0062\u0009\u0044\u0001\u005d\u0003"
+      "\u0044\u0001\u005e\u0001\u0060\u0001\u005f\u0002\u0044\u0001\u0064"
+      "\u0004\u0044\u0001\u0055\uff83\u0044",
       "",
       "",
-      "\u0001\u004c",
       "",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
-      "\u0001\u004e",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "\u0001\u0067",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "\u0001\u006a",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
       "",
-      "\u0001\u004f",
-      "\u0001\u0015\u0002\uffff\u000a\u0015\u0007\uffff\u001a\u0015\u0004"
-      "\uffff\u0001\u0015\u0001\uffff\u001a\u0015",
+      "",
+      "",
+      "\u0000\u0044",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0050\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "\u0020\u0044\u000a\u0042\u0001\u0040\u0004\u0042\u0001\u0041\u002c"
+      "\u0042\u0001\u0043\u0022\u0042\u0001\u0044\uff80\u0042",
+      "",
+      "\u0001\u006c",
+      "",
+      "",
+      "\u0001\u006d",
+      "",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
+      "\u0001\u006f",
+      "",
+      "\u0001\u0070",
+      "\u0001\u0016\u0002\uffff\u000a\u0016\u0007\uffff\u001a\u0016\u0004"
+      "\uffff\u0001\u0016\u0001\uffff\u001a\u0016",
       ""
   ];
 
-  static List<int> _DFA19_eot = null; 
-  static List<int> get DFA19_eot {
-    if(_DFA19_eot == null)
-      _DFA19_eot = 
-        DFA.unpackEncodedString(DFA19_eotS);
-    return _DFA19_eot;
-  }
+  static List<int> DFA_MapCSSLexer_22_eot = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_22_eotS);
 
-  static List<int> _DFA19_eof = null;
-  static List<int> get DFA19_eof {
-    if(_DFA19_eof == null)
-      _DFA19_eof = 
-        DFA.unpackEncodedString(DFA19_eofS);
-    return _DFA19_eof;
-  }
+  static List<int> DFA_MapCSSLexer_22_eof = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_22_eofS);
 
-  static List<int> _DFA19_min = null;
-  static List<int> get DFA19_min {
-    if(_DFA19_min == null)
-      _DFA19_min = 
-        DFA.unpackEncodedStringToUnsignedChars(DFA19_minS);
-    return _DFA19_min;
-  }
+  static List<int> DFA_MapCSSLexer_22_min = 
+  	DFA.unpackEncodedStringToUnsignedChars(DFA_MapCSSLexer_22_minS);
 
-  static List<int> _DFA19_max = null;
-  static List<int> get DFA19_max {
-    if(_DFA19_max == null)
-      _DFA19_max = 
-        DFA.unpackEncodedStringToUnsignedChars(DFA19_maxS);
-    return _DFA19_max;
-  }
+  static List<int> DFA_MapCSSLexer_22_max = 
+  	DFA.unpackEncodedStringToUnsignedChars(DFA_MapCSSLexer_22_maxS);
 
-  static List<int> _DFA19_accept = null;
-  static List<int> get DFA19_accept {
-    if(_DFA19_accept == null)
-      _DFA19_accept = 
-        DFA.unpackEncodedString(DFA19_acceptS);
-    return _DFA19_accept;
-  }
+  static List<int> DFA_MapCSSLexer_22_accept = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_22_acceptS);
 
-  static List<int> _DFA19_special = null;
-  static List<int> get DFA19_special {
-    if(_DFA19_special == null)
-      _DFA19_special = 
-        DFA.unpackEncodedString(DFA19_specialS);
-    return _DFA19_special;
-  }
+  static List<int> DFA_MapCSSLexer_22_special = 
+  	DFA.unpackEncodedString(DFA_MapCSSLexer_22_specialS);
 
-  static List<List<int>> _DFA19_transition = null;
-  static List<List<int>> get DFA19_transition {
-    if(_DFA19_transition == null) {
-      int numStates = DFA19_transitionS.length;
-      _DFA19_transition = new List<List<int>>(numStates);
-      for (int i = 0; i < numStates; i++)
-          _DFA19_transition[i] = 
-            DFA.unpackEncodedString(DFA19_transitionS[i]);
-    }
-    return _DFA19_transition;
-  }  
+  static List<List<int>> DFA_MapCSSLexer_22_transition = () {
+  	int numStates = DFA_MapCSSLexer_22_transitionS.length;
+  	List<List<int>> _DFA22_transition = new List<List<int>>(numStates);
+  	for (int i = 0; i < numStates; i++)
+  	  _DFA22_transition[i] = 
+  	    DFA.unpackEncodedString(DFA_MapCSSLexer_22_transitionS[i]);
+  	return _DFA22_transition;
+  }();
+  
 }
 
 
-class DFA19 extends DFA {
+class DFA_MapCSSLexer_15 extends DFA {
 
-  DFA19(BaseRecognizer recognizer) : super(recognizer) {        
-    this.decisionNumber = 19;
-    this.eot = MapCSSLexer.DFA19_eot;
-    this.eof = MapCSSLexer.DFA19_eof;
-    this.min = MapCSSLexer.DFA19_min;
-    this.max = MapCSSLexer.DFA19_max;
-    this.accept = MapCSSLexer.DFA19_accept;
-    this.special = MapCSSLexer.DFA19_special;
-    this.transition = MapCSSLexer.DFA19_transition;
+  DFA_MapCSSLexer_15(BaseRecognizer recognizer) : super(recognizer) {        
+    decisionNumber = 15;
+    eot = MapCSSLexer.DFA_MapCSSLexer_15_eot;
+    eof = MapCSSLexer.DFA_MapCSSLexer_15_eof;
+    min_ = MapCSSLexer.DFA_MapCSSLexer_15_min;
+    max_ = MapCSSLexer.DFA_MapCSSLexer_15_max;
+    accept = MapCSSLexer.DFA_MapCSSLexer_15_accept;
+    special = MapCSSLexer.DFA_MapCSSLexer_15_special;
+    transition = MapCSSLexer.DFA_MapCSSLexer_15_transition;
   }
 
   String get description => 
-        """1:1: Tokens : ( T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | 
-T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | 
-T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | 
-IDENT | DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | GE | LE | 
-GT | LT | NEQ | EQ | MATCH | IMPORT | WS | SL_COMMENT | ML_COMMENT | 
-RANGE | NUMBER );""";
+        """172:11: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) """;
+
+}
+class DFA_MapCSSLexer_22 extends DFA {
+
+  DFA_MapCSSLexer_22(BaseRecognizer recognizer) : super(recognizer) {        
+    decisionNumber = 22;
+    eot = MapCSSLexer.DFA_MapCSSLexer_22_eot;
+    eof = MapCSSLexer.DFA_MapCSSLexer_22_eof;
+    min_ = MapCSSLexer.DFA_MapCSSLexer_22_min;
+    max_ = MapCSSLexer.DFA_MapCSSLexer_22_max;
+    accept = MapCSSLexer.DFA_MapCSSLexer_22_accept;
+    special = MapCSSLexer.DFA_MapCSSLexer_22_special;
+    transition = MapCSSLexer.DFA_MapCSSLexer_22_transition;
+  }
+
+  String get description => 
+        """1:1: Tokens : ( T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | 
+T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | 
+T__94 | T__95 | T__96 | T__97 | T__98 | URL | RGBA | RGB | IDENT | 
+DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | GE | LE | GT | LT | 
+NEQ | EQ | MATCH | IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | 
+PIPE_Z | RANGE | NUMBER );""";
+
+  int specialStateTransition(int s, IntStream _input){
+    IntStream input = _input;
+    int _s = s;
+    switch(s) {
+      case 0 :int LA22_87 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_87 == 47/*47 /*'/'*/*/) {
+        s = 80;
+      }
+
+      else if(LA22_87 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_87 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_87 >= 32 /*' '*/ && LA22_87 <= 41 /*')'*/)
+        || (LA22_87 >= 43 /*'+'*/ && LA22_87 <= 46 /*'.'*/)
+        || (LA22_87 >= 48 /*'0'*/ && LA22_87 <= 91 /*'['*/)
+        || (LA22_87 >= 93 /*']'*/ && LA22_87 <= 126 /*'~'*/)
+        || (LA22_87 >= 128 /*'\u0080'*/ && LA22_87 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_87 >= 0 /*'\u0000'*/ && LA22_87 <= 31 /*'\u001F'*/)
+        || LA22_87 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 1 :int LA22_52 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_52 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_52 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if((LA22_52 >= 32 /*' '*/ && LA22_52 <= 41 /*')'*/)
+        || (LA22_52 >= 43 /*'+'*/ && LA22_52 <= 46 /*'.'*/)
+        || (LA22_52 >= 48 /*'0'*/ && LA22_52 <= 91 /*'['*/)
+        || (LA22_52 >= 93 /*']'*/ && LA22_52 <= 126 /*'~'*/)
+        || (LA22_52 >= 128 /*'\u0080'*/ && LA22_52 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if(LA22_52 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_52 >= 0 /*'\u0000'*/ && LA22_52 <= 31 /*'\u001F'*/)
+        || LA22_52 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 2 :int LA22_64 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_64 == 47/*47 /*'/'*/*/) {
+        s = 80;
+      }
+
+      else if(LA22_64 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if((LA22_64 >= 32 /*' '*/ && LA22_64 <= 41 /*')'*/)
+        || (LA22_64 >= 43 /*'+'*/ && LA22_64 <= 46 /*'.'*/)
+        || (LA22_64 >= 48 /*'0'*/ && LA22_64 <= 91 /*'['*/)
+        || (LA22_64 >= 93 /*']'*/ && LA22_64 <= 126 /*'~'*/)
+        || (LA22_64 >= 128 /*'\u0080'*/ && LA22_64 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if(LA22_64 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_64 >= 0 /*'\u0000'*/ && LA22_64 <= 31 /*'\u001F'*/)
+        || LA22_64 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 3 :int LA22_101 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_101 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_101 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_101 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_101 >= 32 /*' '*/ && LA22_101 <= 41 /*')'*/)
+        || (LA22_101 >= 43 /*'+'*/ && LA22_101 <= 46 /*'.'*/)
+        || (LA22_101 >= 48 /*'0'*/ && LA22_101 <= 91 /*'['*/)
+        || (LA22_101 >= 93 /*']'*/ && LA22_101 <= 126 /*'~'*/)
+        || (LA22_101 >= 128 /*'\u0080'*/ && LA22_101 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_101 >= 0 /*'\u0000'*/ && LA22_101 <= 31 /*'\u001F'*/)
+        || LA22_101 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 4 :int LA22_100 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_100 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_100 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_100 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_100 >= 32 /*' '*/ && LA22_100 <= 41 /*')'*/)
+        || (LA22_100 >= 43 /*'+'*/ && LA22_100 <= 46 /*'.'*/)
+        || (LA22_100 >= 48 /*'0'*/ && LA22_100 <= 91 /*'['*/)
+        || (LA22_100 >= 93 /*']'*/ && LA22_100 <= 126 /*'~'*/)
+        || (LA22_100 >= 128 /*'\u0080'*/ && LA22_100 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_100 >= 0 /*'\u0000'*/ && LA22_100 <= 31 /*'\u001F'*/)
+        || LA22_100 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 5 :int LA22_99 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_99 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_99 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_99 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_99 >= 32 /*' '*/ && LA22_99 <= 41 /*')'*/)
+        || (LA22_99 >= 43 /*'+'*/ && LA22_99 <= 46 /*'.'*/)
+        || (LA22_99 >= 48 /*'0'*/ && LA22_99 <= 91 /*'['*/)
+        || (LA22_99 >= 93 /*']'*/ && LA22_99 <= 126 /*'~'*/)
+        || (LA22_99 >= 128 /*'\u0080'*/ && LA22_99 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_99 >= 0 /*'\u0000'*/ && LA22_99 <= 31 /*'\u001F'*/)
+        || LA22_99 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 6 :int LA22_80 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_80 >= 0 /*'\u0000'*/ && LA22_80 <= 65535 /*'\uFFFF'*/)) {
+        s = 68;
+      }
+
+      else s = 53;
+
+      if(s>=0) return s;
+      break;
+      case 7 :int LA22_98 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_98 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_98 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_98 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_98 >= 32 /*' '*/ && LA22_98 <= 41 /*')'*/)
+        || (LA22_98 >= 43 /*'+'*/ && LA22_98 <= 46 /*'.'*/)
+        || (LA22_98 >= 48 /*'0'*/ && LA22_98 <= 91 /*'['*/)
+        || (LA22_98 >= 93 /*']'*/ && LA22_98 <= 126 /*'~'*/)
+        || (LA22_98 >= 128 /*'\u0080'*/ && LA22_98 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_98 >= 0 /*'\u0000'*/ && LA22_98 <= 31 /*'\u001F'*/)
+        || LA22_98 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 8 :int LA22_97 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_97 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_97 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_97 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_97 >= 32 /*' '*/ && LA22_97 <= 41 /*')'*/)
+        || (LA22_97 >= 43 /*'+'*/ && LA22_97 <= 46 /*'.'*/)
+        || (LA22_97 >= 48 /*'0'*/ && LA22_97 <= 91 /*'['*/)
+        || (LA22_97 >= 93 /*']'*/ && LA22_97 <= 126 /*'~'*/)
+        || (LA22_97 >= 128 /*'\u0080'*/ && LA22_97 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_97 >= 0 /*'\u0000'*/ && LA22_97 <= 31 /*'\u001F'*/)
+        || LA22_97 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 9 :int LA22_66 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_66 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_66 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if((LA22_66 >= 32 /*' '*/ && LA22_66 <= 41 /*')'*/)
+        || (LA22_66 >= 43 /*'+'*/ && LA22_66 <= 46 /*'.'*/)
+        || (LA22_66 >= 48 /*'0'*/ && LA22_66 <= 91 /*'['*/)
+        || (LA22_66 >= 93 /*']'*/ && LA22_66 <= 126 /*'~'*/)
+        || (LA22_66 >= 128 /*'\u0080'*/ && LA22_66 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if(LA22_66 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_66 >= 0 /*'\u0000'*/ && LA22_66 <= 31 /*'\u001F'*/)
+        || LA22_66 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 10 :int LA22_95 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_95 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_95 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_95 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_95 >= 32 /*' '*/ && LA22_95 <= 41 /*')'*/)
+        || (LA22_95 >= 43 /*'+'*/ && LA22_95 <= 46 /*'.'*/)
+        || (LA22_95 >= 48 /*'0'*/ && LA22_95 <= 91 /*'['*/)
+        || (LA22_95 >= 93 /*']'*/ && LA22_95 <= 126 /*'~'*/)
+        || (LA22_95 >= 128 /*'\u0080'*/ && LA22_95 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_95 >= 0 /*'\u0000'*/ && LA22_95 <= 31 /*'\u001F'*/)
+        || LA22_95 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 11 :int LA22_96 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_96 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_96 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_96 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_96 >= 32 /*' '*/ && LA22_96 <= 41 /*')'*/)
+        || (LA22_96 >= 43 /*'+'*/ && LA22_96 <= 46 /*'.'*/)
+        || (LA22_96 >= 48 /*'0'*/ && LA22_96 <= 91 /*'['*/)
+        || (LA22_96 >= 93 /*']'*/ && LA22_96 <= 126 /*'~'*/)
+        || (LA22_96 >= 128 /*'\u0080'*/ && LA22_96 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_96 >= 0 /*'\u0000'*/ && LA22_96 <= 31 /*'\u001F'*/)
+        || LA22_96 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 12 :int LA22_94 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_94 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_94 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_94 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_94 >= 32 /*' '*/ && LA22_94 <= 41 /*')'*/)
+        || (LA22_94 >= 43 /*'+'*/ && LA22_94 <= 46 /*'.'*/)
+        || (LA22_94 >= 48 /*'0'*/ && LA22_94 <= 91 /*'['*/)
+        || (LA22_94 >= 93 /*']'*/ && LA22_94 <= 126 /*'~'*/)
+        || (LA22_94 >= 128 /*'\u0080'*/ && LA22_94 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_94 >= 0 /*'\u0000'*/ && LA22_94 <= 31 /*'\u001F'*/)
+        || LA22_94 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 13 :int LA22_93 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_93 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_93 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_93 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_93 >= 32 /*' '*/ && LA22_93 <= 41 /*')'*/)
+        || (LA22_93 >= 43 /*'+'*/ && LA22_93 <= 46 /*'.'*/)
+        || (LA22_93 >= 48 /*'0'*/ && LA22_93 <= 91 /*'['*/)
+        || (LA22_93 >= 93 /*']'*/ && LA22_93 <= 126 /*'~'*/)
+        || (LA22_93 >= 128 /*'\u0080'*/ && LA22_93 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_93 >= 0 /*'\u0000'*/ && LA22_93 <= 31 /*'\u001F'*/)
+        || LA22_93 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 14 :int LA22_91 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_91 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_91 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_91 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_91 >= 32 /*' '*/ && LA22_91 <= 41 /*')'*/)
+        || (LA22_91 >= 43 /*'+'*/ && LA22_91 <= 46 /*'.'*/)
+        || (LA22_91 >= 48 /*'0'*/ && LA22_91 <= 91 /*'['*/)
+        || (LA22_91 >= 93 /*']'*/ && LA22_91 <= 126 /*'~'*/)
+        || (LA22_91 >= 128 /*'\u0080'*/ && LA22_91 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_91 >= 0 /*'\u0000'*/ && LA22_91 <= 31 /*'\u001F'*/)
+        || LA22_91 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 15 :int LA22_92 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_92 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_92 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_92 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_92 >= 32 /*' '*/ && LA22_92 <= 41 /*')'*/)
+        || (LA22_92 >= 43 /*'+'*/ && LA22_92 <= 46 /*'.'*/)
+        || (LA22_92 >= 48 /*'0'*/ && LA22_92 <= 91 /*'['*/)
+        || (LA22_92 >= 93 /*']'*/ && LA22_92 <= 126 /*'~'*/)
+        || (LA22_92 >= 128 /*'\u0080'*/ && LA22_92 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_92 >= 0 /*'\u0000'*/ && LA22_92 <= 31 /*'\u001F'*/)
+        || LA22_92 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 16 :int LA22_90 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_90 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_90 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_90 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_90 >= 32 /*' '*/ && LA22_90 <= 41 /*')'*/)
+        || (LA22_90 >= 43 /*'+'*/ && LA22_90 <= 46 /*'.'*/)
+        || (LA22_90 >= 48 /*'0'*/ && LA22_90 <= 91 /*'['*/)
+        || (LA22_90 >= 93 /*']'*/ && LA22_90 <= 126 /*'~'*/)
+        || (LA22_90 >= 128 /*'\u0080'*/ && LA22_90 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_90 >= 0 /*'\u0000'*/ && LA22_90 <= 31 /*'\u001F'*/)
+        || LA22_90 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 17 :int LA22_89 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_89 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_89 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_89 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_89 >= 32 /*' '*/ && LA22_89 <= 41 /*')'*/)
+        || (LA22_89 >= 43 /*'+'*/ && LA22_89 <= 46 /*'.'*/)
+        || (LA22_89 >= 48 /*'0'*/ && LA22_89 <= 91 /*'['*/)
+        || (LA22_89 >= 93 /*']'*/ && LA22_89 <= 126 /*'~'*/)
+        || (LA22_89 >= 128 /*'\u0080'*/ && LA22_89 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_89 >= 0 /*'\u0000'*/ && LA22_89 <= 31 /*'\u001F'*/)
+        || LA22_89 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 18 :int LA22_88 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_88 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_88 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_88 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_88 >= 32 /*' '*/ && LA22_88 <= 41 /*')'*/)
+        || (LA22_88 >= 43 /*'+'*/ && LA22_88 <= 46 /*'.'*/)
+        || (LA22_88 >= 48 /*'0'*/ && LA22_88 <= 91 /*'['*/)
+        || (LA22_88 >= 93 /*']'*/ && LA22_88 <= 126 /*'~'*/)
+        || (LA22_88 >= 128 /*'\u0080'*/ && LA22_88 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_88 >= 0 /*'\u0000'*/ && LA22_88 <= 31 /*'\u001F'*/)
+        || LA22_88 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 19 :int LA22_86 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_86 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_86 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_86 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_86 >= 32 /*' '*/ && LA22_86 <= 41 /*')'*/)
+        || (LA22_86 >= 43 /*'+'*/ && LA22_86 <= 46 /*'.'*/)
+        || (LA22_86 >= 48 /*'0'*/ && LA22_86 <= 91 /*'['*/)
+        || (LA22_86 >= 93 /*']'*/ && LA22_86 <= 126 /*'~'*/)
+        || (LA22_86 >= 128 /*'\u0080'*/ && LA22_86 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_86 >= 0 /*'\u0000'*/ && LA22_86 <= 31 /*'\u001F'*/)
+        || LA22_86 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 20 :int LA22_65 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_65 >= 0 /*'\u0000'*/ && LA22_65 <= 65535 /*'\uFFFF'*/)) {
+        s = 68;
+      }
+
+      else s = 53;
+
+      if(s>=0) return s;
+      break;
+      case 21 :int LA22_67 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_67 == 92/*92 /*'\\'*/*/) {
+        s = 81;
+      }
+
+      else if(LA22_67 == 47/*47 /*'/'*/*/) {
+        s = 82;
+      }
+
+      else if(LA22_67 == 40/*40 /*'('*/*/) {
+        s = 83;
+      }
+
+      else if(LA22_67 == 41/*41 /*')'*/*/) {
+        s = 84;
+      }
+
+      else if(LA22_67 == 124/*124 /*'|'*/*/) {
+        s = 85;
+      }
+
+      else if(LA22_67 == 36/*36 /*'$'*/*/) {
+        s = 86;
+      }
+
+      else if(LA22_67 == 42/*42 /*'*'*/*/) {
+        s = 87;
+      }
+
+      else if(LA22_67 == 46/*46 /*'.'*/*/) {
+        s = 88;
+      }
+
+      else if(LA22_67 == 94/*94 /*'^'*/*/) {
+        s = 89;
+      }
+
+      else if(LA22_67 == 63/*63 /*'?'*/*/) {
+        s = 90;
+      }
+
+      else if(LA22_67 == 43/*43 /*'+'*/*/) {
+        s = 91;
+      }
+
+      else if(LA22_67 == 45/*45 /*'-'*/*/) {
+        s = 92;
+      }
+
+      else if(LA22_67 == 110/*110 /*'n'*/*/) {
+        s = 93;
+      }
+
+      else if(LA22_67 == 114/*114 /*'r'*/*/) {
+        s = 94;
+      }
+
+      else if(LA22_67 == 116/*116 /*'t'*/*/) {
+        s = 95;
+      }
+
+      else if(LA22_67 == 115/*115 /*'s'*/*/) {
+        s = 96;
+      }
+
+      else if(LA22_67 == 83/*83 /*'S'*/*/) {
+        s = 97;
+      }
+
+      else if(LA22_67 == 100/*100 /*'d'*/*/) {
+        s = 98;
+      }
+
+      else if(LA22_67 == 68/*68 /*'D'*/*/) {
+        s = 99;
+      }
+
+      else if(LA22_67 == 119/*119 /*'w'*/*/) {
+        s = 100;
+      }
+
+      else if(LA22_67 == 87/*87 /*'W'*/*/) {
+        s = 101;
+      }
+
+      else if((LA22_67 >= 0 /*'\u0000'*/ && LA22_67 <= 35 /*'#'*/)
+        || (LA22_67 >= 37 /*'%'*/ && LA22_67 <= 39 /*'\''*/)
+        || LA22_67 == 44/*44 /*','*/*/
+        || (LA22_67 >= 48 /*'0'*/ && LA22_67 <= 62 /*'>'*/)
+        || (LA22_67 >= 64 /*'@'*/ && LA22_67 <= 67 /*'C'*/)
+        || (LA22_67 >= 69 /*'E'*/ && LA22_67 <= 82 /*'R'*/)
+        || (LA22_67 >= 84 /*'T'*/ && LA22_67 <= 86 /*'V'*/)
+        || (LA22_67 >= 88 /*'X'*/ && LA22_67 <= 91 /*'['*/)
+        || LA22_67 == 93/*93 /*']'*/*/
+        || (LA22_67 >= 95 /*'_'*/ && LA22_67 <= 99 /*'c'*/)
+        || (LA22_67 >= 101 /*'e'*/ && LA22_67 <= 109 /*'m'*/)
+        || (LA22_67 >= 111 /*'o'*/ && LA22_67 <= 113 /*'q'*/)
+        || (LA22_67 >= 117 /*'u'*/ && LA22_67 <= 118 /*'v'*/)
+        || (LA22_67 >= 120 /*'x'*/ && LA22_67 <= 123 /*'{'*/)
+        || (LA22_67 >= 125 /*'}'*/ && LA22_67 <= 65535 /*'\uFFFF'*/)) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 22 :int LA22_81 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_81 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_81 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_81 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_81 >= 32 /*' '*/ && LA22_81 <= 41 /*')'*/)
+        || (LA22_81 >= 43 /*'+'*/ && LA22_81 <= 46 /*'.'*/)
+        || (LA22_81 >= 48 /*'0'*/ && LA22_81 <= 91 /*'['*/)
+        || (LA22_81 >= 93 /*']'*/ && LA22_81 <= 126 /*'~'*/)
+        || (LA22_81 >= 128 /*'\u0080'*/ && LA22_81 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_81 >= 0 /*'\u0000'*/ && LA22_81 <= 31 /*'\u001F'*/)
+        || LA22_81 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 23 :int LA22_51 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_51 >= 0 /*'\u0000'*/ && LA22_51 <= 65535 /*'\uFFFF'*/)) {
+        s = 63;
+      }
+
+      else s = 53;
+
+      if(s>=0) return s;
+      break;
+      case 24 :int LA22_82 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_82 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_82 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_82 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_82 >= 32 /*' '*/ && LA22_82 <= 41 /*')'*/)
+        || (LA22_82 >= 43 /*'+'*/ && LA22_82 <= 46 /*'.'*/)
+        || (LA22_82 >= 48 /*'0'*/ && LA22_82 <= 91 /*'['*/)
+        || (LA22_82 >= 93 /*']'*/ && LA22_82 <= 126 /*'~'*/)
+        || (LA22_82 >= 128 /*'\u0080'*/ && LA22_82 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_82 >= 0 /*'\u0000'*/ && LA22_82 <= 31 /*'\u001F'*/)
+        || LA22_82 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 25 :int LA22_84 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_84 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_84 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_84 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_84 >= 32 /*' '*/ && LA22_84 <= 41 /*')'*/)
+        || (LA22_84 >= 43 /*'+'*/ && LA22_84 <= 46 /*'.'*/)
+        || (LA22_84 >= 48 /*'0'*/ && LA22_84 <= 91 /*'['*/)
+        || (LA22_84 >= 93 /*']'*/ && LA22_84 <= 126 /*'~'*/)
+        || (LA22_84 >= 128 /*'\u0080'*/ && LA22_84 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_84 >= 0 /*'\u0000'*/ && LA22_84 <= 31 /*'\u001F'*/)
+        || LA22_84 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 26 :int LA22_83 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_83 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_83 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_83 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_83 >= 32 /*' '*/ && LA22_83 <= 41 /*')'*/)
+        || (LA22_83 >= 43 /*'+'*/ && LA22_83 <= 46 /*'.'*/)
+        || (LA22_83 >= 48 /*'0'*/ && LA22_83 <= 91 /*'['*/)
+        || (LA22_83 >= 93 /*']'*/ && LA22_83 <= 126 /*'~'*/)
+        || (LA22_83 >= 128 /*'\u0080'*/ && LA22_83 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_83 >= 0 /*'\u0000'*/ && LA22_83 <= 31 /*'\u001F'*/)
+        || LA22_83 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 27 :int LA22_85 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_85 == 47/*47 /*'/'*/*/) {
+        s = 65;
+      }
+
+      else if(LA22_85 == 42/*42 /*'*'*/*/) {
+        s = 64;
+      }
+
+      else if(LA22_85 == 92/*92 /*'\\'*/*/) {
+        s = 67;
+      }
+
+      else if((LA22_85 >= 32 /*' '*/ && LA22_85 <= 41 /*')'*/)
+        || (LA22_85 >= 43 /*'+'*/ && LA22_85 <= 46 /*'.'*/)
+        || (LA22_85 >= 48 /*'0'*/ && LA22_85 <= 91 /*'['*/)
+        || (LA22_85 >= 93 /*']'*/ && LA22_85 <= 126 /*'~'*/)
+        || (LA22_85 >= 128 /*'\u0080'*/ && LA22_85 <= 65535 /*'\uFFFF'*/)) {
+        s = 66;
+      }
+
+      else if((LA22_85 >= 0 /*'\u0000'*/ && LA22_85 <= 31 /*'\u001F'*/)
+        || LA22_85 == 127/*127 /*'\u007F'*/*/) {
+        s = 68;
+      }
+
+      if(s>=0) return s;
+      break;
+    }
+    if(recognizer.state.backtracking > 0) {
+      recognizer.state.failed = true; 
+      return -1;
+    }
+    NoViableAltException nvae = new NoViableAltException(description, 22, _s, recognizer.input);
+    recognizer.reportError(nvae);
+    throw nvae;
+  }
 
 }
