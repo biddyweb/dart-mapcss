@@ -144,7 +144,7 @@ rule
 	;
   
 selector
-	: simple_selector                  -> ^(SIMPLE_SELECTOR simple_selector)
+	: simple_selector                  -> simple_selector
 	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+);
 	
 import_statement
@@ -153,8 +153,8 @@ import_statement
 
 simple_selector
 	: type_selector class_selector? zoom_selector? attribute_selectors  
-	     -> TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selectors?
-	| 'canvas'         -> TYPE_SELECTOR['canvas']
+	     -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selectors?)
+	| 'canvas'         -> ^(SIMPLE_SELECTOR TYPE_SELECTOR['canvas'])
 	;
 
 zoom_selector
@@ -191,14 +191,14 @@ lhs
 	;
 	
 condition
-	: lhs                         -> ^(OP_EXIST lhs)
-	| lhs binary_operator rhs     -> ^(binary_operator lhs rhs)
-	| lhs MATCH rhs_match         -> ^(OP_MATCH lhs rhs_match) 
-	| unary_operator lhs          -> ^(unary_operator lhs)
+	: lhs                         -> OP_EXIST lhs
+	| lhs binary_operator rhs     -> binary_operator lhs rhs
+	| lhs MATCH rhs_match         -> OP_MATCH lhs rhs_match
+	| unary_operator lhs          -> unary_operator lhs
 	;
 
 rhs
-	: v=IDENT  -> $v 
+	: v=IDENT  -> VALUE_KEYWORD[$v] 
 	| n=num    -> $n
 	| quoted   -> quoted
 	;

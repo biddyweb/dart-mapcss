@@ -1,5 +1,5 @@
 name: mapcss
-version: 0.0.2
+version: 0.0.3
 description: >
   mapcss provides an antlr based parser and a Dart framework for parsing
   and manipulating MapCSS stylesheets.
@@ -19,6 +19,6 @@ dependencies:
       
   dartlr:
     git: 
-      url: git://github.com/tiagomazzutti/dartlr.git
+      url: git://github.com/tiagomazzutti/dartlr.git      
       
     

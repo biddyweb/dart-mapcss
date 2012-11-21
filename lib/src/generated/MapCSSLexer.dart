@@ -1,4 +1,4 @@
-// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-20 18:24:04
+// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-21 13:31:00
 
 
   part of mapcss;
