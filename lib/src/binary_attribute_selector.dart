@@ -17,7 +17,7 @@ class BinaryAttributeSelector extends AttributeSelector {
     assert(_attribute != null);
     assert(_attribute is Ident || attribute is Quoted);    
     assert(_value != null);
-    assert(value is num || value is Ident || value is Quoted);
+    assert(value is num || value is Ident || value is Quoted || value is RegExpValue);
     assert(_op != null);
   }
   

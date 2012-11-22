@@ -46,6 +46,14 @@ main() {
     ss = new Stylesheet.fromString(styles);
   });
   
+  
+  test("simple - match operator with regexp", (){
+    var styles, ss;
+    
+    styles = """node[highway =~ /^res/]{}""";
+    ss = new Stylesheet.fromString(styles);
+  });
+  
   test("simple - attribute selector - unary", () {
     var styles = """node[highway]{}""";
     var ss = new Stylesheet.fromString(styles);

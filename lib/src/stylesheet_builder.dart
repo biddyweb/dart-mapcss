@@ -261,6 +261,14 @@ class StylesheetBuilder {
       case MapCSSParser.VALUE_KEYWORD: rhs = new Ident(node_rhs.text); break;
       case MapCSSParser.VALUE_INT: rhs = int.parse(node_rhs.text); break;
       case MapCSSParser.VALUE_FLOAT: rhs = double.parse(node_rhs.text); break;
+      case MapCSSParser.VALUE_REGEXP:
+        // regexp value only allowed in lhs for match operator 
+        assert(node_op.token.type == MapCSSParser.OP_MATCH);
+        var re = node_rhs.token.text;
+        re = re.replaceFirst(new RegExp(r"^/"), "").replaceFirst(new RegExp(r"/$"), "");
+        rhs = new RegExpValue(re);
+        break;
+        
       default:
           throw new StateError("unexpected type of value on rhs, got ${node_rhs.token.type}");
     }

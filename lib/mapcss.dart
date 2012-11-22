@@ -23,4 +23,5 @@ part "src/class_selector.dart";
 part "src/descendant_combinator.dart";
 part "src/color.dart";
 part "src/unit.dart";
+part "src/regexp_value.dart";
 
