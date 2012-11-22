@@ -59,5 +59,6 @@ class SimpleSelector {
     if (_zoomSelector != null) sb.add(_zoomSelector.toSource());
     _attributeSelectors.forEach((s) => sb.add(s.toSource()));
     return sb.toString();
-  }
+  }  
+
 }

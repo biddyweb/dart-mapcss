@@ -32,10 +32,7 @@ class BinaryAttributeSelector extends AttributeSelector {
     return _attribute == other._attribute && _value == other._value && _op == other._op;         
   }     
   
-  _valueAsString() {
-    if (_value is num) return _value.toString();
-    return _value.toSource();
-  }
+  _valueAsString() => value is num ? _value.toString() : _value.toSource();
   
   String toSource() => "[${_attribute.toSource()} ${_op.toSource()} ${_valueAsString()}]";
 }
