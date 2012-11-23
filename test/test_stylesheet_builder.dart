@@ -220,4 +220,21 @@ way:closed|z12-[highway='residential'] node {
     });
     
   });
+  
+  
+  /* ---------------------------- parent combinator --------------------------- */
+  group("parent combinator", () {
+    
+    test("parent combinator", () {
+      var ss, styles;
+      styles = """node < way {}""";
+      ss = new Stylesheet.fromString(styles);
+      print(ss.rules[0].selectors[0].runtimeType);      
+      var pc = ss.rules[0].selectors[0];
+      expect(pc is ParentCombinator, true);
+      expect(pc.child.typeSelector.type, "node");
+      expect(pc.parent.typeSelector.type, "way");      
+    });
+    
+  });
 }

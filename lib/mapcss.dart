@@ -21,6 +21,7 @@ part "src/zoom_selector.dart";
 part "src/class_selector.dart";
 part "src/descendant_combinator.dart";
 part "src/child_combinator.dart";
+part "src/parent_combinator.dart";
 part "src/builder.dart";
 
 part "src/values/ident_value.dart";

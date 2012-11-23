@@ -38,6 +38,10 @@ class StylesheetBuilder {
           case MapCSSParser.CHILD_COMBINATOR:
             selectors.add(_buildChildCombinator(child));
             break;
+          case MapCSSParser.PARENT_COMBINATOR:
+            selectors.add(_buildParentCombinator(child));
+            break;
+
           default:
              throw new StateError("unexpected: ${child.token.text}");
         }
@@ -106,10 +110,19 @@ class StylesheetBuilder {
     assert(node.childCount >= 2);
     var parent = _buildSimpleSelector(node.children[0]);
     var child = _buildSimpleSelector(node.children[1]);
-    var cc = new ChildCombinator(parent, child);
+    var cc = new ChildCombinator(child,parent);
     if (node.childCount > 2) {
       cc.linkSelectors = node.children.getRange(2, node.children.length -2).map((child) => _buildLinkSelector(child));
     }
+    return cc;
+  }
+  
+  _buildParentCombinator(CommonTree node) {
+    assert(node.token.type == MapCSSParser.PARENT_COMBINATOR);
+    assert(node.childCount >= 2);
+    var child = _buildSimpleSelector(node.children[0]);
+    var parent = _buildSimpleSelector(node.children[1]);
+    return new ParentCombinator(child,parent);
     return cc;
   }
   

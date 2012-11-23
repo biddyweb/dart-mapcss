@@ -31,7 +31,6 @@ main() {
   });
   
   test("zoom selectors", () {
-    expectParseOK("node|z1{}");
     expectParseOK("node|z10-{}");
     expectParseOK("node|z10-15{}");
     expectParseOK("node|z-20{}");
@@ -63,11 +62,17 @@ main() {
     expectParseOK("relation[a=b] > way[a=n]{}");
   });
   
-  solo_test("link attributes", () {
+  test("link attributes", () {
     expectParseOK("way >[role = 'test'] node {}");
     expectParseOK("relation[a=b] >[index > 2] way[a=n]{}");
     expectParseOK(r"relation[a=b] >[role $= 'b'] [index > 2] way[a=n]{}");
   });
+  
+  test("parent combinator", () {
+    expectParseOK("node < way {}");
+    expectParseOK("way[a=n] < relation[a=b]{}");
+  });
+
   
   test("attribute selectors - truthy", () {
     expectParseOK("node[a?]{}");

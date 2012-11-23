@@ -8,7 +8,7 @@ class ChildCombinator implements Selector {
   final SimpleSelector child;
   List<LinkSelector> _ls = [];
   
-  ChildCombinator(this.parent,this.child) {
+  ChildCombinator(this.child, this.parent) {
     assert(parent != null);
     assert(child != null);
   }

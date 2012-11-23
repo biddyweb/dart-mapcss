@@ -41,6 +41,7 @@ tokens {
    SIMPLE_SELECTOR;
    DESCENDANT_COMBINATOR;
    CHILD_COMBINATOR;
+   PARENT_COMBINATOR;
    TYPE_SELECTOR;              // .text is the type
    ZOOM_SELECTOR;              
    ATTRIBUTE_SELECTOR;
@@ -159,6 +160,7 @@ selector
 	: simple_selector                  -> simple_selector
 	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+)
 	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
+	| simple_selector '<' simple_selector -> ^(PARENT_COMBINATOR simple_selector+)
 	;
 
 link_selector
