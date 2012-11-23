@@ -53,6 +53,14 @@ main() {
     expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.TRUTHY);
   });
   
+  test("child combinator", () {
+    var ss, styles;
+    styles = """way > node {}""";
+    ss = new Stylesheet.fromString(styles);
+    print(ss.rules[0].selectors[0].runtimeType);
+    expect(ss.rules[0].selectors[0] is ChildCombinator, true);
+  });
+  
   test("binary operators", () {
     var ss, styles;
     styles = """node[a=b]{}""";

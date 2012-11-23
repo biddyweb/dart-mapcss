@@ -58,6 +58,11 @@ main() {
     expectParseOK(r"node[a^=b]{}");
   });
   
+  test("child combinator", () {
+    expectParseOK("way > node {}");
+    expectParseOK("relation[a=b] > way[a=n]{}");
+  });
+  
   test("attribute selectors - truthy", () {
     expectParseOK("node[a?]{}");
     expectParseOK("node['a' ?]{}");

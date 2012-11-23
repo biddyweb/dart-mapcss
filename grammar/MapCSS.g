@@ -40,6 +40,7 @@ tokens {
    RULE;
    SIMPLE_SELECTOR;
    DESCENDANT_COMBINATOR;
+   CHILD_COMBINATOR;
    TYPE_SELECTOR;              // .text is the type
    ZOOM_SELECTOR;              
    ATTRIBUTE_SELECTOR;
@@ -151,7 +152,9 @@ rule
   
 selector
 	: simple_selector                  -> simple_selector
-	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+);
+	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+)
+	| simple_selector '>' simple_selector -> ^(CHILD_COMBINATOR simple_selector+)
+	;
 	
 import_statement
 	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])

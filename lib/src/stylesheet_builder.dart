@@ -35,6 +35,10 @@ class StylesheetBuilder {
           case MapCSSParser.DESCENDANT_COMBINATOR:
             selectors.add(_buildDescendantCombinator(child));
             break;
+          case MapCSSParser.CHILD_COMBINATOR:
+            selectors.add(_buildChildCombinator(child));
+            break;
+
 
           default:
              print("unexpected: ${child.token.text}");
@@ -97,6 +101,14 @@ class StylesheetBuilder {
     var parent = _buildSimpleSelector(node.children[0]);
     var child = _buildSimpleSelector(node.children[1]);
     return new DescendantCombinator(parent, child);
+  }
+  
+  _buildChildCombinator(CommonTree node) {
+    assert(node.token.type == MapCSSParser.CHILD_COMBINATOR);
+    assert(node.childCount == 2);
+    var parent = _buildSimpleSelector(node.children[0]);
+    var child = _buildSimpleSelector(node.children[1]);
+    return new ChildCombinator(parent, child);
   }
   
   _buildSimpleSelector(CommonTree node) {

@@ -15,7 +15,8 @@ class Rule {
     assert(_selectors != null);
     assert(_selectors is List);
     assert(_selectors.length > 0);
-    assert(_selectors.every((s) => s != null && (s is SimpleSelector || s is DescendantCombinator)));
+    assert(_selectors.every((s) => s != null 
+        && (s is SimpleSelector || s is DescendantCombinator || s is ChildCombinator)));
   }
   
   /// an unmodifiable list of selectors 
