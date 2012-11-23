@@ -190,6 +190,7 @@ class StylesheetBuilder {
         
       case MapCSSParser.OP_EXIST:
       case MapCSSParser.OP_NOT_EXIST:
+      case MapCSSParser.OP_TRUTHY:
         return _buildUnaryAttributeSelector(node);
         
       default:
@@ -209,6 +210,7 @@ class StylesheetBuilder {
     switch(node_op.token.type) {
       case MapCSSParser.OP_EXIST: op = Operator.EXIST; break;
       case MapCSSParser.OP_NOT_EXIST: op = Operator.NOT_EXIST; break;
+      case MapCSSParser.OP_TRUTHY: op = Operator.TRUTHY; break;
       default:
         throw new StateError("unexpected operator, got ${node_op.token.type}");
     }

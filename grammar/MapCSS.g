@@ -75,6 +75,7 @@ tokens {
    OP_ENDS_WITH;
    OP_SUBSTRING;
    OP_CONTAINS;
+   OP_TRUTHY;
 }
 
 //NOTE: @parser::header and @lexer::header are specific for the target language Dart
@@ -174,6 +175,10 @@ quoted
 	: v=DQUOTED_STRING   -> VALUE_QUOTED[$v]
 	| v=SQUOTED_STRING   -> VALUE_QUOTED[$v]
 	; 
+	
+ident
+	: v=IDENT   -> VALUE_KEYWORD[$v]
+	;	
 
 PIPE_Z: '|z';
 
@@ -196,7 +201,7 @@ attribute_selector
 
 lhs
 	: quoted 
-	| k=IDENT -> VALUE_KEYWORD[$k]
+	| ident
 	;
 	
 condition
@@ -204,19 +209,19 @@ condition
 	| lhs binary_operator rhs     -> binary_operator lhs rhs
 	| lhs MATCH rhs_match         -> OP_MATCH lhs rhs_match
 	| unary_operator lhs          -> unary_operator lhs
+	| lhs '?'                     -> OP_TRUTHY lhs
 	;
-
+	
 rhs
-	: v=IDENT  -> VALUE_KEYWORD[$v] 
-	| n=num    -> $n
-	| quoted   -> quoted
+	: ident
+	| num
+	| quoted
 	;
 
 rhs_match
 	: r=REGEXP                     -> VALUE_REGEXP[$r]
-	| r=DQUOTED_STRING             -> VALUE_QUOTED[$r]
-	| r=SQUOTED_STRING             -> VALUE_QUOTED[$r]
-	; 
+	| quoted
+	;
 	
 binary_operator
 	: EQ          -> OP_EQ

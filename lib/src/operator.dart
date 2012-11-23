@@ -24,10 +24,11 @@ class Operator {
    // no text representation in the MapCSS grammar
    static const EXIST = const Operator._instance("", false);
    static const NOT_EXIST = const Operator._instance("!", false);
+   static const TRUTHY  = const Operator._instance("?", false);
    
    static final List _ops = [EQ, NEQ, LT, LE, GT, GE, MATCH,STARTS_WITH,
                              ENDS_WITH, SUBSTRING, CONTAINS,
-                             EXIST, NOT_EXIST];
+                             EXIST, NOT_EXIST, TRUTHY];
    final String _text;
    final bool _isBinary;
    const Operator._instance(this._text, [bool this._isBinary=true]);

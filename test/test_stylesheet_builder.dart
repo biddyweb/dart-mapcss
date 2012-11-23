@@ -46,6 +46,13 @@ main() {
     ss = new Stylesheet.fromString(styles);
   });
   
+  test("truthy", () {
+    var ss, styles;
+    styles = """node[a?]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.TRUTHY);
+  });
+  
   test("binary operators", () {
     var ss, styles;
     styles = """node[a=b]{}""";

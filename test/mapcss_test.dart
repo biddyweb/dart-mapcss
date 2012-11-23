@@ -58,6 +58,11 @@ main() {
     expectParseOK(r"node[a^=b]{}");
   });
   
+  test("attribute selectors - truthy", () {
+    expectParseOK("node[a?]{}");
+    expectParseOK("node['a' ?]{}");
+  });
+  
   test("attribute selectors - right hand side", () {
     expectParseOK("node[keyword = 'value']{}");
     expectParseOK("node['a string' = 'value']{}");
