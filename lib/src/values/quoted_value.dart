@@ -3,11 +3,11 @@ part of mapcss;
 /**
  * Represents a quoted string in a MapCSS stylesheet
  */
-class Quoted {
+class QuotedValue {
   final String value;
-  const Quoted(this.value);
+  const QuotedValue(this.value);
   bool operator ==(other) {
-    if (other is! Quoted) return false;
+    if (other is! QuotedValue) return false;
     return value == other.value;
   }
   String toSource() {

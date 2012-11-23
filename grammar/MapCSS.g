@@ -71,6 +71,10 @@ tokens {
    OP_GT;
    OP_MATCH;
    OP_NEGATE;
+   OP_STARTS_WITH;
+   OP_ENDS_WITH;
+   OP_SUBSTRING;
+   OP_CONTAINS;
 }
 
 //NOTE: @parser::header and @lexer::header are specific for the target language Dart
@@ -107,13 +111,18 @@ SQUOTED_STRING: '\'' (' '..'&' | '('..'[' | ']'..'~' | UNICODE | ESQUOTE | EBACK
 
 HEXCOLOR: '#' ((HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT) | (HEXDIGIT HEXDIGIT HEXDIGIT));
 
-GE: 		'>=';
-LE: 		'<=';
-GT:  		'>';
-LT:  		'<';
-NEQ:        '!=';
-EQ:  		'=';
-MATCH:      '=~';
+GE: 		  '>=';
+LE: 		  '<=';
+GT:  		  '>';
+LT:  		  '<';
+NEQ:          '!=';
+EQ:  		  '=';
+MATCH:        '=~';
+STARTS_WITH:  '^=';
+ENDS_WITH:    '$=';
+SUBSTRING:    '*=';
+CONTAINS:     '~=';
+
 IMPORT:     '@import';
 
 fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE;
@@ -210,12 +219,16 @@ rhs_match
 	; 
 	
 binary_operator
-	: EQ        -> OP_EQ
-	| NEQ 		-> OP_NEQ
-	| LT        -> OP_LT
-	| GT        -> OP_GT
-	| LE        -> OP_LE
-	| GE        -> OP_GE
+	: EQ          -> OP_EQ
+	| NEQ 		  -> OP_NEQ
+	| LT          -> OP_LT
+	| GT          -> OP_GT
+	| LE          -> OP_LE
+	| GE          -> OP_GE
+	| STARTS_WITH -> OP_STARTS_WITH
+    | ENDS_WITH   -> OP_ENDS_WITH
+    | SUBSTRING   -> OP_SUBSTRING
+    | CONTAINS    -> OP_CONTAINS
 	;        
 
 unary_operator

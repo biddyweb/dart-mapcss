@@ -14,6 +14,10 @@ class Operator {
    static const GT = const Operator._instance(">");
    static const GE = const Operator._instance(">=");
    static const MATCH = const Operator._instance("=~");
+   static const STARTS_WITH = const Operator._instance("^=");
+   static const ENDS_WITH = const Operator._instance(r"$=");
+   static const SUBSTRING = const Operator._instance("*=");
+   static const CONTAINS = const Operator._instance("~=");
    
    // unary operators
    
@@ -21,7 +25,9 @@ class Operator {
    static const EXIST = const Operator._instance("", false);
    static const NOT_EXIST = const Operator._instance("!", false);
    
-   static final List _ops = [EQ, NEQ, LT, LE, GT, GE, MATCH];
+   static final List _ops = [EQ, NEQ, LT, LE, GT, GE, MATCH,STARTS_WITH,
+                             ENDS_WITH, SUBSTRING, CONTAINS,
+                             EXIST, NOT_EXIST];
    final String _text;
    final bool _isBinary;
    const Operator._instance(this._text, [bool this._isBinary=true]);

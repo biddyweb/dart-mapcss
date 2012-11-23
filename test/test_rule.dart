@@ -56,8 +56,8 @@ main() {
     db = new DeclarationBlock();
     s1 = new SimpleSelector("node");
     s1.attributeSelectors = [
-      new BinaryAttributeSelector(new Ident("a"), new Ident("b"), Operator.EQ),
-      new BinaryAttributeSelector(new Ident("c"), new Ident("d"), Operator.EQ)
+      new BinaryAttributeSelector(new IdentValue("a"), new IdentValue("b"), Operator.EQ),
+      new BinaryAttributeSelector(new IdentValue("c"), new IdentValue("d"), Operator.EQ)
     ];
     s2 = new SimpleSelector("way");
     s2.classSelector = new ClassSelector("my-class");

@@ -61,17 +61,17 @@ class StylesheetBuilder {
     switch(node.token.type) {
       case MapCSSParser.VALUE_INT: return int.parse(node.token.text);
       case MapCSSParser.VALUE_FLOAT: return double.parse(node.token.text);
-      case MapCSSParser.VALUE_KEYWORD: return new Ident(node.token.text);
-      case MapCSSParser.VALUE_QUOTED: return new Quoted(_unquote(node.token.text));
-      case MapCSSParser.VALUE_HEXCOLOR: return new Color.hex(node.token.text);
+      case MapCSSParser.VALUE_KEYWORD: return new IdentValue(node.token.text);
+      case MapCSSParser.VALUE_QUOTED: return new QuotedValue(_unquote(node.token.text));
+      case MapCSSParser.VALUE_HEXCOLOR: return new ColorValue.hex(node.token.text);
       case MapCSSParser.VALUE_RGB: 
-        return new Color.rgb(
+        return new ColorValue.rgb(
             node.children[0].text,
             node.children[1].text,
             node.children[2].text
         );
       case MapCSSParser.VALUE_RGBA: 
-        return new Color.rgba(
+        return new ColorValue.rgba(
             node.children[0].text,
             node.children[1].text,
             node.children[2].text,
@@ -82,13 +82,13 @@ class StylesheetBuilder {
         return node.children.map((child) => _buildValue(child));
       
       case MapCSSParser.VALUE_POINTS:
-        return new Unit.pt(int.parse(node.token.text));
+        return new UnitValue.pt(int.parse(node.token.text));
        
       case MapCSSParser.VALUE_PIXELS:
-        return new Unit.px(int.parse(node.token.text));
+        return new UnitValue.px(int.parse(node.token.text));
         
       case MapCSSParser.VALUE_PERCENTAGE:
-        return new Unit.prozent(int.parse(node.token.text));
+        return new UnitValue.prozent(int.parse(node.token.text));
     }
   }
   
@@ -182,6 +182,10 @@ class StylesheetBuilder {
       case MapCSSParser.OP_LE:
       case MapCSSParser.OP_LT:
       case MapCSSParser.OP_MATCH:
+      case MapCSSParser.OP_STARTS_WITH:
+      case MapCSSParser.OP_ENDS_WITH:
+      case MapCSSParser.OP_SUBSTRING:
+      case MapCSSParser.OP_CONTAINS:
         return _buildBinaryAttributeSelector(node);
         
       case MapCSSParser.OP_EXIST:
@@ -211,9 +215,9 @@ class StylesheetBuilder {
     
     switch(node_value.token.type) {
       case MapCSSParser.VALUE_KEYWORD: 
-        value = new Ident(node_value.token.text); break;
+        value = new IdentValue(node_value.token.text); break;
       case MapCSSParser.VALUE_QUOTED: 
-        value = new Quoted(_unquote(node_value.token.text)); break;
+        value = new QuotedValue(_unquote(node_value.token.text)); break;
       default:
         throw new StateError("unexpected type of value, got ${node_value.token.type}");
     }
@@ -239,6 +243,10 @@ class StylesheetBuilder {
       case MapCSSParser.OP_LE: op = Operator.LE; break;
       case MapCSSParser.OP_LT: op = Operator.LT; break;
       case MapCSSParser.OP_MATCH: op = Operator.MATCH; break;
+      case MapCSSParser.OP_STARTS_WITH: op = Operator.STARTS_WITH; break;
+      case MapCSSParser.OP_ENDS_WITH: op = Operator.ENDS_WITH; break;
+      case MapCSSParser.OP_SUBSTRING: op = Operator.SUBSTRING; break;
+      case MapCSSParser.OP_CONTAINS: op = Operator.CONTAINS; break;
       default:
           throw new StateError("unexpected binary operator: ${node_op.token.type}");
     }
@@ -246,10 +254,10 @@ class StylesheetBuilder {
     var lhs;
     switch(node_lhs.token.type) {
       case MapCSSParser.VALUE_QUOTED:
-        lhs = new Quoted(_unquote(node_lhs.text));
+        lhs = new QuotedValue(_unquote(node_lhs.text));
         break;
       case MapCSSParser.VALUE_KEYWORD:
-        lhs = new Ident(node_lhs.text);
+        lhs = new IdentValue(node_lhs.text);
         break;
       default:
         throw new StateError("unexpected type of lhs, got ${node_lhs.token.type}");
@@ -257,8 +265,8 @@ class StylesheetBuilder {
     
     var rhs;
     switch(node_rhs.token.type) {
-      case MapCSSParser.VALUE_QUOTED: rhs = new Quoted(_unquote(node_rhs.text)); break;
-      case MapCSSParser.VALUE_KEYWORD: rhs = new Ident(node_rhs.text); break;
+      case MapCSSParser.VALUE_QUOTED: rhs = new QuotedValue(_unquote(node_rhs.text)); break;
+      case MapCSSParser.VALUE_KEYWORD: rhs = new IdentValue(node_rhs.text); break;
       case MapCSSParser.VALUE_INT: rhs = int.parse(node_rhs.text); break;
       case MapCSSParser.VALUE_FLOAT: rhs = double.parse(node_rhs.text); break;
       case MapCSSParser.VALUE_REGEXP:

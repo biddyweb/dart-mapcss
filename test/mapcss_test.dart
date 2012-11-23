@@ -44,6 +44,20 @@ main() {
     expectParseOK("node!:myclass{}");
   });
   
+  test("attribute selectors - binary operators", () {
+    expectParseOK("node[a=b]{}");
+    expectParseOK("node[a!=b]{}");
+    expectParseOK("node[a>b]{}");
+    expectParseOK("node[a<b]{}");
+    expectParseOK("node[a>=b]{}");
+    expectParseOK("node[a<=b]{}");
+    expectParseOK("node[a=~/b/]{}");
+    expectParseOK("node[a~=b]{}");
+    expectParseOK(r"node[a$=b]{}");
+    expectParseOK(r"node[a*=b]{}");
+    expectParseOK(r"node[a^=b]{}");
+  });
+  
   test("attribute selectors - right hand side", () {
     expectParseOK("node[keyword = 'value']{}");
     expectParseOK("node['a string' = 'value']{}");

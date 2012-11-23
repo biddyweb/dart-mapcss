@@ -11,23 +11,23 @@ part of mapcss;
  *    yellow
  *    etc.
  */ 
-class Color {
-  static final black = new Color.hex("#000000");
-  static final silver = new Color.hex("#C0C0C0");
-  static final gray = new Color.hex("#808080");
-  static final white = new Color.hex("#FFFFFF");
-  static final maroon = new Color.hex("#800000");
-  static final red = new Color.hex("#FF0000");
-  static final purple = new Color.hex("#800080");
-  static final fuchsia = new Color.hex("#FF00FF");
-  static final green = new Color.hex("#008000");
-  static final lime = new Color.hex("#00FF00");
-  static final olive = new Color.hex("#808000");
-  static final yellow = new Color.hex("#FFFF00");
-  static final navy = new Color.hex("#000080");
-  static final blue = new Color.hex("#0000FF");
-  static final teal = new Color.hex("#008080");
-  static final aqua = new Color.hex("#00FFFF");
+class ColorValue {
+  static final black = new ColorValue.hex("#000000");
+  static final silver = new ColorValue.hex("#C0C0C0");
+  static final gray = new ColorValue.hex("#808080");
+  static final white = new ColorValue.hex("#FFFFFF");
+  static final maroon = new ColorValue.hex("#800000");
+  static final red = new ColorValue.hex("#FF0000");
+  static final purple = new ColorValue.hex("#800080");
+  static final fuchsia = new ColorValue.hex("#FF00FF");
+  static final green = new ColorValue.hex("#008000");
+  static final lime = new ColorValue.hex("#00FF00");
+  static final olive = new ColorValue.hex("#808000");
+  static final yellow = new ColorValue.hex("#FFFF00");
+  static final navy = new ColorValue.hex("#000080");
+  static final blue = new ColorValue.hex("#0000FF");
+  static final teal = new ColorValue.hex("#008080");
+  static final aqua = new ColorValue.hex("#00FFFF");
   
   static final _colors = {
      "black"   : black,
@@ -56,7 +56,7 @@ class Color {
   /// [r], [g], and [b] are a [num] or a [String], equivalent to an [int] 0..255.
   /// [alpha] is a [num] or a [String], equivalent to a [double] in the range [0.0..1.0]
   /// 
-  Color(r, g, b, [alpha=1.0]) {
+  ColorValue(r, g, b, [alpha=1.0]) {
     if (r is String) r = int.parse(r);  
     if (r < 0 || r > 255) throw new ArgumentError("illegal color component for red, got $r");
     _r = r;
@@ -73,14 +73,14 @@ class Color {
   }
  
   /// create an rgb color
-  Color.rgb(r,g,b) : this(r,g,b);
+  ColorValue.rgb(r,g,b) : this(r,g,b);
       
   /// create an rgba color 
-  Color.rgba(r,g,b,alpha): this(r,g,b,alpha);
+  ColorValue.rgba(r,g,b,alpha): this(r,g,b,alpha);
   
   /// create a color from a [hex] color code, either a short #ABC or a long #ABC123
   /// code 
-  Color.hex(String hex) {
+  ColorValue.hex(String hex) {
     if (hex == null) throw new NullPointerException("hex must not be null");
     hex = hex.trim().toLowerCase();
     var short = new RegExp(r"^#[0-9a-f]{3}$");
@@ -106,7 +106,7 @@ class Color {
   /// Throws [ArgumentError] if [name] is null or if no color for the
   /// given name exists. 
   /// 
-  factory Color.keyword(String name) {
+  factory ColorValue.keyword(String name) {
      assert(name != null);
      name = name.trim().toLowerCase();
      var ret = _colors[name];
@@ -120,7 +120,7 @@ class Color {
   double get alpha => _alpha;
   
   bool operator ==(other) {
-    if (other is! Color) return false;
+    if (other is! ColorValue) return false;
     return _r == other._r && _g == other._g && _b == other._b && _alpha == other._alpha;
   }
   

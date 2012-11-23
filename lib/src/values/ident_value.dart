@@ -3,11 +3,11 @@ part of mapcss;
 /**
  * Represents an identifier in a MapCSS stylesheet
  */
-class Ident {
+class IdentValue {
   final String value;
-  const Ident(this.value);
+  const IdentValue(this.value);
   bool operator ==(other) {
-    if (other is! Ident) return false;
+    if (other is! IdentValue) return false;
     return value == other.value;
   }
   String toSource() => value;

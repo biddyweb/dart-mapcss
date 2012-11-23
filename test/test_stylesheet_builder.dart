@@ -46,6 +46,49 @@ main() {
     ss = new Stylesheet.fromString(styles);
   });
   
+  test("binary operators", () {
+    var ss, styles;
+    styles = """node[a=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.EQ);
+
+    styles = """node[a!=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.NEQ);    
+
+    styles = """node[a<b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.LT);    
+
+    styles = """node[a<=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.LE);    
+
+    styles = """node[a>b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.GT);
+    
+    styles = """node[a>=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.GE);    
+
+    styles = """node[a^=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.STARTS_WITH);
+    
+    styles = r"""node[a$=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.ENDS_WITH);    
+
+    styles = r"""node[a*=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.SUBSTRING);    
+
+    styles = r"""node[a~=b]{}""";
+    ss = new Stylesheet.fromString(styles);
+    expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.CONTAINS);        
+  });
+  
   
   test("simple - match operator with regexp", (){
     var styles, ss;

@@ -10,7 +10,7 @@ class UnaryAttributeSelector extends AttributeSelector {
   
   UnaryAttributeSelector(this._value, [op=Operator.EXIST]) : super(op) {
     assert(_value != null);
-    assert(value is Ident || value is Quoted);
+    assert(value is IdentValue || value is QuotedValue);
     assert(_op != null);
     assert(! _op.isBinary);
   }

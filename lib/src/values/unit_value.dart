@@ -1,21 +1,21 @@
 part of mapcss;
 
-class Unit {
+class UnitValue {
   static const PT = 0;
   static const PX = 1;
   static const PROZENT = 2;
   
   num _value;
   int _unit;
-  Unit(this._value, this._unit) {
+  UnitValue(this._value, this._unit) {
     assert([PT, PX, PROZENT].contains(_unit));
   }
   
-  Unit.pt(num value): this(value, PT);
-  Unit.px(num value): this(value, PX);
-  Unit.prozent(num value) : this(value, PROZENT);
+  UnitValue.pt(num value): this(value, PT);
+  UnitValue.px(num value): this(value, PX);
+  UnitValue.prozent(num value) : this(value, PROZENT);
   
-  Unit.fromString(String value) {
+  UnitValue.fromString(String value) {
     assert(value != null);
     value = value.trim().toLowerCase();
     if (value.endsWith("%")) {
@@ -39,7 +39,7 @@ class Unit {
   int get unit => _unit;
   
   bool operator ==(other) {
-    if(other is! Unit) return false;
+    if(other is! UnitValue) return false;
     return _value == other._value && _unit == other._unit; 
   }  
   

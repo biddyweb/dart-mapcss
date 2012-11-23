@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * A declaration has a name (its *property*) and a value. In addition to scalar
  * values like Strings or nums, a declaration can have typed values like
- * [Unit], [Color], or [Ident].
+ * [UnitValue], [ColorValue], or [IdentValue].
  * 
  * A declaration accepts any property and any value. [isStandardProperty] is true,
  * if the declaration has a standard property defined by the MapCSS standard.
@@ -80,10 +80,10 @@ class Declaration {
    String toSource() {
       source(v) {
         if (v is num) return v.toString();
-        else if (v is Ident) return v.toSource();
-        else if (v is Quoted) return v.toSource();
-        else if (v is Color) return v.toSource();
-        else if (v is Unit)return v.toSource();
+        else if (v is IdentValue) return v.toSource();
+        else if (v is QuotedValue) return v.toSource();
+        else if (v is ColorValue) return v.toSource();
+        else if (v is UnitValue)return v.toSource();
         throw new StateError("unexpected type: ${v}");
       }
       
@@ -115,8 +115,8 @@ class _EnumCheck {
   _EnumCheck(this._values);
   call(v){
     if (v == null) return null;
-    if (v is! Ident) return null;
-    String s = (v as Ident).value.trim().toLowerCase();
+    if (v is! IdentValue) return null;
+    String s = (v as IdentValue).value.trim().toLowerCase();
     if (_values.contains(s)) return v;
     return null;
   }
@@ -125,11 +125,11 @@ class _EnumCheck {
 _identity(v) => v;
 
 _normalizeColor(value) {
-  if (value is Color) {
+  if (value is ColorValue) {
     return value;
-  } else if (value is Ident) {
-    var s = (value as Ident).value.toLowerCase();
-    var c = new Color.keyword((value as Ident).value);
+  } else if (value is IdentValue) {
+    var s = (value as IdentValue).value.toLowerCase();
+    var c = new ColorValue.keyword((value as IdentValue).value);
     if (c == null){
       return null;
     } else {

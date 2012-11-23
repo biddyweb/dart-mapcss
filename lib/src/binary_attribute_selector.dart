@@ -1,38 +1,40 @@
 part of mapcss;
+
+
 /**
  * Represents an binary attribute selector, e.g.
  *    [highway="residential"]
  */
 class BinaryAttributeSelector extends AttributeSelector {
   
-  var _attribute;
-  var _value;
+  var _lhs;
+  var _rhs;
   
   /// [_attribute] is either a [Ident] or a [Quoted], otherwise an [AssertionError]
   /// is thrown.
   /// [_value] is either a [num], an [Ident] or a [Quoted], otherwise an 
   /// [AssertionError] is thrown
   
-  BinaryAttributeSelector(this._attribute, this._value, [op=Operator.EQ]) : super(op){
-    assert(_attribute != null);
-    assert(_attribute is Ident || attribute is Quoted);    
-    assert(_value != null);
-    assert(value is num || value is Ident || value is Quoted || value is RegExpValue);
+  BinaryAttributeSelector(this._lhs, this._rhs, [op=Operator.EQ]) : super(op){
+    assert(_lhs != null);
+    assert(_lhs is IdentValue || attribute is QuotedValue);    
+    assert(_rhs != null);
+    assert(value is num || value is IdentValue || value is QuotedValue || value is RegExpValue);
     assert(_op != null);
   }
   
   /// the left hand side of the selector. Either an [Ident] or a [Quoted]
-  get attribute => _attribute;
+  get attribute => _lhs;
   
   /// the right hand side. Either a [int], [double], [Ident], or [Quoted]
-  get value => _value;
+  get value => _rhs;
   
   bool operator ==(other) {
     if (other is! BinaryAttributeSelector) return false;
-    return _attribute == other._attribute && _value == other._value && _op == other._op;         
+    return _lhs == other._lhs && _rhs == other._rhs && _op == other._op;         
   }     
   
-  _valueAsString() => value is num ? _value.toString() : _value.toSource();
+  _valueAsString() => value is num ? _rhs.toString() : _rhs.toSource();
   
-  String toSource() => "[${_attribute.toSource()} ${_op.toSource()} ${_valueAsString()}]";
+  String toSource() => "[${_lhs.toSource()} ${_op.toSource()} ${_valueAsString()}]";
 }

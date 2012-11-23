@@ -10,8 +10,6 @@ part "src/declaration.dart";
 part "src/declaration_block.dart";
 part "src/stylesheet_builder.dart";
 part "src/stylesheet.dart";
-part "src/ident.dart";
-part "src/quoted.dart";
 part "src/operator.dart";
 part "src/binary_attribute_selector.dart";
 part "src/unary_attribute_selector.dart";
@@ -21,7 +19,12 @@ part "src/type_selector.dart";
 part "src/zoom_selector.dart";
 part "src/class_selector.dart";
 part "src/descendant_combinator.dart";
-part "src/color.dart";
-part "src/unit.dart";
-part "src/regexp_value.dart";
+part "src/builder.dart";
+
+part "src/values/ident_value.dart";
+part "src/values/quoted_value.dart";
+part "src/values/color_value.dart";
+part "src/values/unit_value.dart";
+part "src/values/regexp_value.dart";
+
 
