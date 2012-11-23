@@ -5,7 +5,7 @@ part of mapcss;
  * Represents an binary attribute selector, e.g.
  *    [highway="residential"]
  */
-class BinaryAttributeSelector extends AttributeSelector {
+class BinaryAttributeSelector extends AttributeSelector  implements SubSelector{
   
   var _lhs;
   var _rhs;

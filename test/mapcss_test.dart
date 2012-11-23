@@ -63,6 +63,12 @@ main() {
     expectParseOK("relation[a=b] > way[a=n]{}");
   });
   
+  solo_test("link attributes", () {
+    expectParseOK("way >[role = 'test'] node {}");
+    expectParseOK("relation[a=b] >[index > 2] way[a=n]{}");
+    expectParseOK(r"relation[a=b] >[role $= 'b'] [index > 2] way[a=n]{}");
+  });
+  
   test("attribute selectors - truthy", () {
     expectParseOK("node[a?]{}");
     expectParseOK("node['a' ?]{}");

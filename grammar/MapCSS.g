@@ -45,6 +45,8 @@ tokens {
    ZOOM_SELECTOR;              
    ATTRIBUTE_SELECTOR;
    CLASS_SELECTOR;
+   ROLE_SELECTOR;
+   INDEX_SELECTOR;
    DECLARATION_BLOCK;
    DECLARATION;
    
@@ -102,6 +104,9 @@ fragment PX: ('p' | 'P') ('x' | 'X');
 URL: ('u' | 'U') ('r' | 'R') ('l' | 'L');
 RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
 RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
+ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
+INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
+
 IDENT: SIDCHAR IDCHAR*;
 
 DQUOTED_STRING: '"' (' ' | '!' | '#'..'[' | ']'..'~' | UNICODE | EDQUOTE | EBACKSLASH )* '"';
@@ -153,9 +158,23 @@ rule
 selector
 	: simple_selector                  -> simple_selector
 	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+)
-	| simple_selector '>' simple_selector -> ^(CHILD_COMBINATOR simple_selector+)
+	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
+	;
+
+link_selector
+	: '[' ROLE binary_operator rhs ']'  -> ^(ROLE_SELECTOR binary_operator rhs)
+	| '[' INDEX  int_operator num ']'   -> ^(INDEX_SELECTOR int_operator num)
 	;
 	
+int_operator
+	: EQ   -> OP_EQ 
+	| NEQ  -> OP_NEQ 
+	| LT   -> OP_LT
+	| LE   -> OP_LE
+	| GT   -> OP_GT
+	| GE   -> OP_GE
+	;
+		
 import_statement
 	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
 	;

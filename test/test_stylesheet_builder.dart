@@ -53,13 +53,7 @@ main() {
     expect(ss.rules[0].selectors[0].attributeSelectors[0].op, Operator.TRUTHY);
   });
   
-  test("child combinator", () {
-    var ss, styles;
-    styles = """way > node {}""";
-    ss = new Stylesheet.fromString(styles);
-    print(ss.rules[0].selectors[0].runtimeType);
-    expect(ss.rules[0].selectors[0] is ChildCombinator, true);
-  });
+  
   
   test("binary operators", () {
     var ss, styles;
@@ -185,5 +179,45 @@ way:closed|z12-[highway='residential'] node {
 }
 """;
     var ss = new Stylesheet.fromString(styles);
+  });
+  
+  
+  /* ---------------------------- child combinator --------------------------- */
+  group("child combinator", () {
+    
+    test("child combinator", () {
+      var ss, styles;
+      styles = """way > node {}""";
+      ss = new Stylesheet.fromString(styles);
+      print(ss.rules[0].selectors[0].runtimeType);
+      expect(ss.rules[0].selectors[0] is ChildCombinator, true);
+    });
+    
+    test("link combinator - role seelctor", () {
+      var ss, styles;
+      styles = """way >[role = "arole"] node {}""";
+      ss = new Stylesheet.fromString(styles);
+      print(ss.rules[0].selectors[0].runtimeType);
+      expect(ss.rules[0].selectors[0] is ChildCombinator, true);
+      var rs = ss.rules[0].selectors[0].linkSelectors[0];
+      expect(rs  is RoleSelector, true);
+      expect(rs.op, Operator.EQ);
+      expect(rs.rhs is QuotedValue, true);
+      expect(rs.rhs.value, "arole");
+    });
+    
+    test("link combinator - index seelctor", () {
+      var ss, styles;
+      styles = """way >[index <= 5] node {}""";
+      ss = new Stylesheet.fromString(styles);
+      print(ss.rules[0].selectors[0].runtimeType);
+      expect(ss.rules[0].selectors[0] is ChildCombinator, true);
+      var rs = ss.rules[0].selectors[0].linkSelectors[0];
+      expect(rs  is IndexSelector, true);
+      expect(rs.op, Operator.LE);
+      expect(rs.rhs is num, true);
+      expect(rs.rhs, 5);
+    });
+    
   });
 }

@@ -8,57 +8,85 @@ part of mapcss;
  * Typical example:
  *      way|z1-5[higway=residential]
  */
-class SimpleSelector {
-  TypeSelector _typeSelector;
-  ClassSelector _classSelector;
-  ZoomSelector _zoomSelector;
-  List _attributeSelectors = [];
+class SimpleSelector implements Selector {
+  List<SubSelector> _selectors = [];
   
-  SimpleSelector(typeSelector, {ZoomSelector zoomSelector: null, ClassSelector classSelector: null, List attributeSelectors: null}) {
-    assert(typeSelector != null);
-    if (typeSelector is String) {
-      _typeSelector = new TypeSelector(typeSelector);
-    } else if (typeSelector is TypeSelector) {
-      _typeSelector = typeSelector;
-    } else {
-      throw new ArgumentError("unsupported type for typeSelector, got ${typeSelector.dynamicType}");
-    }
+  static final _typeFilter = (s) => s is TypeSelector;
+  static final  _classFilter = (s) => s is ClassSelector;
+  static final  _zoomFilter = (s) => s is ZoomSelector;
+  static final _attrFilter = (s) => s is AttributeSelector;
+  
+  static _one(list, filter) {
+    var ret = list.filter(filter);
+    return ret.length == 0 ? null : ret[0];
+  }
+
+  _remove(s) => _selectors.removeAt(_selectors.indexOf(s));
+  
+  SimpleSelector.forType(String type) {
+    assert(type != null);
+    _selectors.add(new TypeSelector(type));
   }
   
-  TypeSelector get typeSelector => _typeSelector;
-  set typeSelector(type) {
-      if (type is String) {
-        _typeSelector = new TypeSelector(type);
-      } else if (type is TypeSelector) {
-        _typeSelector = type;
-      } else {
-        throw new ArgumentError("unsupported type for typeSelector, got ${type.dynamicType}");
-      }
-    }
+  SimpleSelector(this._selectors) {
+    assert(this._selectors != null);
+    expect(_selectors.every((s) => s != null), true, reason: "selectors must not be null, got at least one null selector");
+    expect(_selectors.every((s) => s is SubSelector), true, reason: "expects list of SubSelectors");
+    expect(_selectors.filter(_typeFilter).length, lessThanOrEqualTo(1), reason: "expects at most one TypeSelector");
+    expect(_selectors.filter(_classFilter).length, lessThanOrEqualTo(1), reason: "expects at most one ClassSelector");
+    expect(_selectors.filter(_zoomFilter).length, lessThanOrEqualTo(1), reason: "expects at most one ZoomSelector");
+  }
   
-  ClassSelector get classSelector => _classSelector;
-  set classSelector(ClassSelector clazz) => _classSelector = clazz;
+  /// the [TypeSelector] or null, if this selector has no [TypeSelector] as
+  /// subselector 
+  TypeSelector get typeSelector => _one(_selectors, _typeFilter);
+  
+  /// [type] is either a [String] or a [TypeSelector]  
+  set typeSelector(type) {
+    var old = typeSelector;
+    if (old != null) _remove(old);
+    if (type is String) type = new TypeSelector(type);
+    else if (type is TypeSelector) {}
+    else throw new ArgumentError("expected a String or a TypeSelector, got $type");
+    if (type != null) _selectors.add(type);
+  }
+  
+ 
+  ClassSelector get classSelector => _one(_selectors, _classFilter);
+  set classSelector(ClassSelector clazz) {
+    var old = classSelector;
+    if (old != null) _remove(old);
+    if (classSelector != null) _selectors.add(classSelector);    
+  }
     
-  ZoomSelector get zoomSelector => _zoomSelector;
-  set zoomSelector(ZoomSelector s) => _zoomSelector = s;
+  ZoomSelector get zoomSelector =>  _one(_selectors, _zoomFilter); 
+  set zoomSelector(ZoomSelector s) {
+    var old = zoomSelector;
+    if (old != null) _remove(old);
+    if (s != null) _selectors.add(s);  
+  }
   
   /// an unmodifiable list of the attribute selectors
-  List get attributeSelectors => new SequenceList(_attributeSelectors);
+  List get attributeSelectors => new SequenceList(_selectors.filter(_attrFilter));
   
-  set attributeSelectors(List sels) {
-    if (sels == null) sels = [];
-    assert(sels.every((s) => s != null && s is AttributeSelector));
-    this._attributeSelectors = [];
-    this._attributeSelectors.addAll(sels);
+  set attributeSelectors(List<AttributeSelector> sels) {
+    if (sels == null) return;
+    expect(sels.every((s) => s != null), true, reason: "selectors must not be null");
+    var old = attributeSelectors;
+    old.forEach((s) => _remove(s));
+    _selectors.addAll(sels);
   }
   
   String toSource() {
     StringBuffer sb = new StringBuffer();
-    sb.add(_typeSelector.toSource());
-    if (_classSelector != null) sb.add(_classSelector.toSource());
-    if (_zoomSelector != null) sb.add(_zoomSelector.toSource());
-    _attributeSelectors.forEach((s) => sb.add(s.toSource()));
+    var s;
+    s = typeSelector;    
+    if (s != null) sb.add(s.toSource());
+    s = classSelector;
+    if (s!= null) sb.add(s.toSource());
+    s = zoomSelector;
+    if (s != null) sb.add(s.toSource());
+    attributeSelectors.forEach((s) => sb.add(s.toSource()));
     return sb.toString();
   }  
-
 }

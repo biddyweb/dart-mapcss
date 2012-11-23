@@ -38,10 +38,8 @@ class StylesheetBuilder {
           case MapCSSParser.CHILD_COMBINATOR:
             selectors.add(_buildChildCombinator(child));
             break;
-
-
           default:
-             print("unexpected: ${child.token.text}");
+             throw new StateError("unexpected: ${child.token.text}");
         }
       });
       return new Rule(selectors, db);
@@ -105,54 +103,76 @@ class StylesheetBuilder {
   
   _buildChildCombinator(CommonTree node) {
     assert(node.token.type == MapCSSParser.CHILD_COMBINATOR);
-    assert(node.childCount == 2);
+    assert(node.childCount >= 2);
     var parent = _buildSimpleSelector(node.children[0]);
     var child = _buildSimpleSelector(node.children[1]);
-    return new ChildCombinator(parent, child);
+    var cc = new ChildCombinator(parent, child);
+    if (node.childCount > 2) {
+      cc.linkSelectors = node.children.getRange(2, node.children.length -2).map((child) => _buildLinkSelector(child));
+    }
+    return cc;
+  }
+  
+  _buildLinkSelector(CommonTree node) {
+     switch(node.token.type) {
+       case MapCSSParser.INDEX_SELECTOR:
+         return _buildIndexSelector(node);
+       case MapCSSParser.ROLE_SELECTOR:
+         return _buildRoleSelector(node);
+       default:
+        throw new StateError("unexpected token, got ${node.token.type}");   
+     }     
+  }
+  
+  _buildRoleSelector(CommonTree node) {
+     assert(node.children.length == 2);
+     var op = _buildBinaryOperator(node.children[0]);
+     var rhs = _buildRhs(node.children[1]);
+     return new RoleSelector(op, rhs);
+  }
+  
+  _buildIndexSelector(CommonTree node) {
+    assert(node.children.length == 2);
+    var op = _buildBinaryOperator(node.children[0]);
+    var rhs = _buildRhs(node.children[1]);
+    return new IndexSelector(op, rhs);
   }
   
   _buildSimpleSelector(CommonTree node) {
     assert(node.token.type == MapCSSParser.SIMPLE_SELECTOR);
-    var ts;
-    var zs;
-    var cs;
-    var atts = [];
+    var subsels = [];
     node.children.forEach((child) {
       switch(child.token.type) {
         case MapCSSParser.TYPE_SELECTOR:
-          ts = new TypeSelector(child.text);
+          subsels.add(new TypeSelector(child.text));
           break;
         case MapCSSParser.ZOOM_SELECTOR:
-          zs = _buildZoomSelector(child);
+          subsels.add(_buildZoomSelector(child));
           break;
         case MapCSSParser.CLASS_SELECTOR:
-          cs = _buildClassSelector(child);
+          subsels.add(_buildClassSelector(child));
           break;
         case MapCSSParser.ATTRIBUTE_SELECTOR:
-          atts.add(_buildAttributeSelector(child));
+          subsels.add(_buildAttributeSelector(child));
           break;
         default:
           throw new StateError("unexpected child node of type ${child.token.type}");
       }      
     });
-    assert(ts != null);
-    SimpleSelector ss = new SimpleSelector(ts);
-    if (zs != null) ss.zoomSelector = zs;
-    if (cs != null) ss.classSelector = cs;
-    ss.attributeSelectors = atts;
-    return ss;
+    return new SimpleSelector(subsels);
   }
   
   _buildClassSelector(CommonTree node) {
     assert(node.token.type == MapCSSParser.CLASS_SELECTOR);
     assert(node.childCount == 2);
-    var op = node.getChild(0).type;
     var cls = node.getChild(1).text;
-    switch(op) {
+    switch(node.getChild(0).type) {
       case MapCSSParser.OP_EXIST:
         return new ClassSelector.exists(cls);
       case MapCSSParser.OP_NOT_EXIST:
         return new ClassSelector.notExists(cls);
+      default:
+         assert(false);
     }
   }
   
@@ -161,6 +181,7 @@ class StylesheetBuilder {
     assert(node.childCount == 2);
     int lower = int.parse(node.children[0].text);
     int upper = int.parse(node.children[1].text);
+    return new ZoomSelector(lower, upper);
   }  
   
   _buildAttributeSelector(CommonTree node) {
@@ -218,6 +239,35 @@ class StylesheetBuilder {
     return new UnaryAttributeSelector(value, op);
   }
   
+  _buildBinaryOperator(CommonTree node)  {
+    switch(node.token.type) {
+      case MapCSSParser.OP_EQ: return Operator.EQ; 
+      case MapCSSParser.OP_NEQ: return Operator.NEQ; 
+      case MapCSSParser.OP_GE: return Operator.GE; 
+      case MapCSSParser.OP_GT: return Operator.GT; 
+      case MapCSSParser.OP_LE: return Operator.LE; 
+      case MapCSSParser.OP_LT: return Operator.LT; 
+      case MapCSSParser.OP_MATCH: return Operator.MATCH; 
+      case MapCSSParser.OP_STARTS_WITH: return Operator.STARTS_WITH; 
+      case MapCSSParser.OP_ENDS_WITH: return Operator.ENDS_WITH; 
+      case MapCSSParser.OP_SUBSTRING: return Operator.SUBSTRING; 
+      case MapCSSParser.OP_CONTAINS: return Operator.CONTAINS; 
+      default:
+          throw new StateError("unexpected binary operator: ${node.token.type}");
+    }
+  }
+  
+  _buildRhs(CommonTree node) {
+    switch(node.token.type) {
+      case MapCSSParser.VALUE_QUOTED: return  new QuotedValue(node.token.text); 
+      case MapCSSParser.VALUE_KEYWORD:  return new IdentValue(node.token.text); 
+      case MapCSSParser.VALUE_INT:  return int.parse(node.token.text); 
+      case MapCSSParser.VALUE_FLOAT:  return double.parse(node.token.text); 
+      case MapCSSParser.VALUE_REGEXP: return new RegExpValue(node.token.text);
+      default:
+        throw new StateError("unexpected type of value on rhs, got ${node.token.type}");
+    }
+  }
   
   _buildBinaryAttributeSelector(CommonTree node) {
     assert(node.token.type == MapCSSParser.ATTRIBUTE_SELECTOR);
@@ -225,22 +275,7 @@ class StylesheetBuilder {
     var node_op = node.children[0];
     var node_lhs = node.children[1];
     var node_rhs = node.children[2];
-    Operator op;
-    switch(node_op.token.type) {
-      case MapCSSParser.OP_EQ: op = Operator.EQ; break;
-      case MapCSSParser.OP_NEQ: op = Operator.NEQ; break;
-      case MapCSSParser.OP_GE: op = Operator.GE; break;
-      case MapCSSParser.OP_GT: op = Operator.GT; break;
-      case MapCSSParser.OP_LE: op = Operator.LE; break;
-      case MapCSSParser.OP_LT: op = Operator.LT; break;
-      case MapCSSParser.OP_MATCH: op = Operator.MATCH; break;
-      case MapCSSParser.OP_STARTS_WITH: op = Operator.STARTS_WITH; break;
-      case MapCSSParser.OP_ENDS_WITH: op = Operator.ENDS_WITH; break;
-      case MapCSSParser.OP_SUBSTRING: op = Operator.SUBSTRING; break;
-      case MapCSSParser.OP_CONTAINS: op = Operator.CONTAINS; break;
-      default:
-          throw new StateError("unexpected binary operator: ${node_op.token.type}");
-    }
+    Operator op = _buildBinaryOperator(node_op);
     
     var lhs;
     switch(node_lhs.token.type) {
@@ -254,23 +289,7 @@ class StylesheetBuilder {
         throw new StateError("unexpected type of lhs, got ${node_lhs.token.type}");
     }
     
-    var rhs;
-    switch(node_rhs.token.type) {
-      case MapCSSParser.VALUE_QUOTED: rhs = new QuotedValue(node_rhs.text); break;
-      case MapCSSParser.VALUE_KEYWORD: rhs = new IdentValue(node_rhs.text); break;
-      case MapCSSParser.VALUE_INT: rhs = int.parse(node_rhs.text); break;
-      case MapCSSParser.VALUE_FLOAT: rhs = double.parse(node_rhs.text); break;
-      case MapCSSParser.VALUE_REGEXP:
-        // regexp value only allowed in lhs for match operator 
-        assert(node_op.token.type == MapCSSParser.OP_MATCH);
-        var re = node_rhs.token.text;
-        re = re.replaceFirst(new RegExp(r"^/"), "").replaceFirst(new RegExp(r"/$"), "");
-        rhs = new RegExpValue(re);
-        break;
-        
-      default:
-          throw new StateError("unexpected type of value on rhs, got ${node_rhs.token.type}");
-    }
+    var rhs = _buildRhs(node_rhs);
     
     return new BinaryAttributeSelector(lhs, rhs, op);
   }

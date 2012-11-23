@@ -4,7 +4,7 @@ part of  mapcss;
  * TypeSelector matches for a specific object type.
  * See [types] for the list of supported types.
  */
-class TypeSelector{
+class TypeSelector implements SubSelector{
    static const List<String> types = const[
       "node", "way", "relation", "line", "area", "canvas", "*"
    ];

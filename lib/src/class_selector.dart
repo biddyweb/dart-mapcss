@@ -9,7 +9,7 @@ part of mapcss;
  *    way:closed
  *    way!:closed 
  */
-class ClassSelector{
+class ClassSelector implements SubSelector{
   
   String _class;
   Operator    _op;

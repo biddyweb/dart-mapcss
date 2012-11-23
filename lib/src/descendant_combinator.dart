@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * Represents a descendant combinator in MapCSS
  */
-class DescendantCombinator {
+class DescendantCombinator implements Selector {
   final SimpleSelector parent;
   final SimpleSelector child;
   DescendantCombinator(this.parent,this.child) {

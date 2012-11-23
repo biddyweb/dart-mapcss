@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * Represents a selector for a range of zoom levels.
  */
-class ZoomSelector {
+class ZoomSelector implements SubSelector{
   int _lower;
   int _upper;
   

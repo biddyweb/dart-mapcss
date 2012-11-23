@@ -2,7 +2,7 @@ part of mapcss;
 /**
  * Represents an unary attribute selector 
  */
-class UnaryAttributeSelector extends AttributeSelector {
+class UnaryAttributeSelector extends AttributeSelector implements SubSelector{
     var _value;
   
   /// [_value] is either a [num], an [Ident] or a [Quoted], otherwise an 
