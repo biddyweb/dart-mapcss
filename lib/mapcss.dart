@@ -1,6 +1,7 @@
 library mapcss;
 import "package:dartlr/dartlr.dart";
 export "package:dartlr/dartlr.dart";
+import "package:unittest/unittest.dart";
 
 part "src/generated/MapCSSParser.dart";
 part "src/generated/MapCSSLexer.dart";
@@ -26,5 +27,9 @@ part "src/values/quoted_value.dart";
 part "src/values/color_value.dart";
 part "src/values/unit_value.dart";
 part "src/values/regexp_value.dart";
+part "src/parsing_util.dart";
+
+
+part "src/test/test_private.dart";
 
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-23 11:58:13
+// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-23 14:39:29
 
 
   part of mapcss;
@@ -7,6 +7,8 @@
 class MapCSSLexer extends Lexer {
 
   static const int EOF = -1;
+  static const int T__87 = 87;
+  static const int T__88 = 88;
   static const int T__89 = 89;
   static const int T__90 = 90;
   static const int T__91 = 91;
@@ -25,8 +27,6 @@ class MapCSSLexer extends Lexer {
   static const int T__104 = 104;
   static const int T__105 = 105;
   static const int T__106 = 106;
-  static const int T__107 = 107;
-  static const int T__108 = 108;
   static const int ATTRIBUTE_SELECTOR = 4;
   static const int CHAR = 5;
   static const int CLASS_SELECTOR = 6;
@@ -73,45 +73,43 @@ class MapCSSLexer extends Lexer {
   static const int OP_TRUTHY = 47;
   static const int P = 48;
   static const int PERCENTAGE = 49;
-  static const int PIPE_Z = 50;
-  static const int PIXELS = 51;
-  static const int POINTS = 52;
-  static const int PT = 53;
-  static const int PX = 54;
-  static const int RANGE = 55;
-  static const int REGEXP = 56;
-  static const int REGEX_CHAR = 57;
-  static const int REGEX_ESCAPE = 58;
-  static const int RGB = 59;
-  static const int RGBA = 60;
-  static const int RULE = 61;
-  static const int SIDCHAR = 62;
-  static const int SIMPLE_SELECTOR = 63;
-  static const int SL_COMMENT = 64;
-  static const int SQUOTED_STRING = 65;
-  static const int STARTS_WITH = 66;
-  static const int STYLESHEET = 67;
-  static const int SUBSTRING = 68;
-  static const int T = 69;
-  static const int TYPE_SELECTOR = 70;
-  static const int UNICODE = 71;
-  static const int URL = 72;
-  static const int VALUE_FLOAT = 73;
-  static const int VALUE_HEXCOLOR = 74;
-  static const int VALUE_INT = 75;
-  static const int VALUE_KEYWORD = 76;
-  static const int VALUE_LIST = 77;
-  static const int VALUE_PERCENTAGE = 78;
-  static const int VALUE_PIXELS = 79;
-  static const int VALUE_POINTS = 80;
-  static const int VALUE_QUOTED = 81;
-  static const int VALUE_REGEXP = 82;
-  static const int VALUE_RGB = 83;
-  static const int VALUE_RGBA = 84;
-  static const int VALUE_URL = 85;
-  static const int WS = 86;
-  static const int X = 87;
-  static const int ZOOM_SELECTOR = 88;  
+  static const int PIXELS = 50;
+  static const int POINTS = 51;
+  static const int PT = 52;
+  static const int PX = 53;
+  static const int RANGE = 54;
+  static const int REGEXP = 55;
+  static const int REGEX_CHAR = 56;
+  static const int REGEX_ESCAPE = 57;
+  static const int RGB = 58;
+  static const int RGBA = 59;
+  static const int RULE = 60;
+  static const int SIDCHAR = 61;
+  static const int SIMPLE_SELECTOR = 62;
+  static const int SL_COMMENT = 63;
+  static const int SQUOTED_STRING = 64;
+  static const int STARTS_WITH = 65;
+  static const int STYLESHEET = 66;
+  static const int SUBSTRING = 67;
+  static const int T = 68;
+  static const int TYPE_SELECTOR = 69;
+  static const int UNICODE = 70;
+  static const int URL = 71;
+  static const int VALUE_FLOAT = 72;
+  static const int VALUE_INT = 73;
+  static const int VALUE_KEYWORD = 74;
+  static const int VALUE_LIST = 75;
+  static const int VALUE_PERCENTAGE = 76;
+  static const int VALUE_PIXELS = 77;
+  static const int VALUE_POINTS = 78;
+  static const int VALUE_QUOTED = 79;
+  static const int VALUE_REGEXP = 80;
+  static const int VALUE_RGB = 81;
+  static const int VALUE_RGBA = 82;
+  static const int VALUE_URL = 83;
+  static const int WS = 84;
+  static const int X = 85;
+  static const int ZOOM_SELECTOR = 86;  
   
 
   Map<String, DFA> dfas;
@@ -138,17 +136,67 @@ class MapCSSLexer extends Lexer {
 
   String get recognizerClassName => "MapCSSLexer";
   
+  // $ANTLR start "T__87"
+  void mT__87() {
+    try {
+  	  int _type = T__87;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   7:7: ( '!' )*/
+  	  /* grammar/MapCSS.g:
+  	   7:9: '!'*/
+  	  {
+  	  	match(33 /*'!'*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__87"
+
+  // $ANTLR start "T__88"
+  void mT__88() {
+    try {
+  	  int _type = T__88;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   8:7: ( '(' )*/
+  	  /* grammar/MapCSS.g:
+  	   8:9: '('*/
+  	  {
+  	  	match(40 /*'('*/); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
+  // $ANTLR end "T__88"
+
   // $ANTLR start "T__89"
   void mT__89() {
     try {
   	  int _type = T__89;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   11:7: ( '!' )*/
+  	   9:7: ( ')' )*/
   	  /* grammar/MapCSS.g:
-  	   11:9: '!'*/
+  	   9:9: ')'*/
   	  {
-  	  	match(33 /*'!'*/); 
+  	  	match(41 /*')'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -169,11 +217,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__90;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   12:7: ( '(' )*/
+  	   10:7: ( '*' )*/
   	  /* grammar/MapCSS.g:
-  	   12:9: '('*/
+  	   10:9: '*'*/
   	  {
-  	  	match(40 /*'('*/); 
+  	  	match(42 /*'*'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -194,11 +242,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__91;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   13:7: ( ')' )*/
+  	   11:7: ( ',' )*/
   	  /* grammar/MapCSS.g:
-  	   13:9: ')'*/
+  	   11:9: ','*/
   	  {
-  	  	match(41 /*')'*/); 
+  	  	match(44 /*','*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -219,11 +267,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__92;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   14:7: ( '*' )*/
+  	   12:7: ( '-' )*/
   	  /* grammar/MapCSS.g:
-  	   14:9: '*'*/
+  	   12:9: '-'*/
   	  {
-  	  	match(42 /*'*'*/); 
+  	  	match(45 /*'-'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -244,11 +292,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__93;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   15:7: ( ',' )*/
+  	   13:7: ( '.' )*/
   	  /* grammar/MapCSS.g:
-  	   15:9: ','*/
+  	   13:9: '.'*/
   	  {
-  	  	match(44 /*','*/); 
+  	  	match(46 /*'.'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -269,11 +317,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__94;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   16:7: ( '-' )*/
+  	   14:7: ( ':' )*/
   	  /* grammar/MapCSS.g:
-  	   16:9: '-'*/
+  	   14:9: ':'*/
   	  {
-  	  	match(45 /*'-'*/); 
+  	  	match(58 /*':'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -294,11 +342,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__95;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   17:7: ( '.' )*/
+  	   15:7: ( ';' )*/
   	  /* grammar/MapCSS.g:
-  	   17:9: '.'*/
+  	   15:9: ';'*/
   	  {
-  	  	match(46 /*'.'*/); 
+  	  	match(59 /*';'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -319,11 +367,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__96;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   18:7: ( ':' )*/
+  	   16:7: ( '?' )*/
   	  /* grammar/MapCSS.g:
-  	   18:9: ':'*/
+  	   16:9: '?'*/
   	  {
-  	  	match(58 /*':'*/); 
+  	  	match(63 /*'?'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -344,11 +392,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__97;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   19:7: ( ';' )*/
+  	   17:7: ( '[' )*/
   	  /* grammar/MapCSS.g:
-  	   19:9: ';'*/
+  	   17:9: '['*/
   	  {
-  	  	match(59 /*';'*/); 
+  	  	match(91 /*'['*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -369,11 +417,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__98;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   20:7: ( '?' )*/
+  	   18:7: ( ']' )*/
   	  /* grammar/MapCSS.g:
-  	   20:9: '?'*/
+  	   18:9: ']'*/
   	  {
-  	  	match(63 /*'?'*/); 
+  	  	match(93 /*']'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -394,13 +442,15 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__99;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   21:7: ( '[' )*/
+  	   19:7: ( 'area' )*/
   	  /* grammar/MapCSS.g:
-  	   21:9: '['*/
+  	   19:9: 'area'*/
   	  {
-  	  	match(91 /*'['*/); 
+  	  	match("area"); 
   	  	if(state.failed) 
   	  	  return ;
+
+
 
   	  }
 
@@ -419,13 +469,15 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__100;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   22:8: ( ']' )*/
+  	   20:8: ( 'canvas' )*/
   	  /* grammar/MapCSS.g:
-  	   22:10: ']'*/
+  	   20:10: 'canvas'*/
   	  {
-  	  	match(93 /*']'*/); 
+  	  	match("canvas"); 
   	  	if(state.failed) 
   	  	  return ;
+
+
 
   	  }
 
@@ -444,11 +496,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__101;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   23:8: ( 'area' )*/
+  	   21:8: ( 'line' )*/
   	  /* grammar/MapCSS.g:
-  	   23:10: 'area'*/
+  	   21:10: 'line'*/
   	  {
-  	  	match("area"); 
+  	  	match("line"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -471,11 +523,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__102;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   24:8: ( 'canvas' )*/
+  	   22:8: ( 'node' )*/
   	  /* grammar/MapCSS.g:
-  	   24:10: 'canvas'*/
+  	   22:10: 'node'*/
   	  {
-  	  	match("canvas"); 
+  	  	match("node"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -498,11 +550,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__103;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   25:8: ( 'line' )*/
+  	   23:8: ( 'relation' )*/
   	  /* grammar/MapCSS.g:
-  	   25:10: 'line'*/
+  	   23:10: 'relation'*/
   	  {
-  	  	match("line"); 
+  	  	match("relation"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -525,11 +577,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__104;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   26:8: ( 'node' )*/
+  	   24:8: ( 'way' )*/
   	  /* grammar/MapCSS.g:
-  	   26:10: 'node'*/
+  	   24:10: 'way'*/
   	  {
-  	  	match("node"); 
+  	  	match("way"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -552,15 +604,13 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__105;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   27:8: ( 'relation' )*/
+  	   25:8: ( '{' )*/
   	  /* grammar/MapCSS.g:
-  	   27:10: 'relation'*/
+  	   25:10: '{'*/
   	  {
-  	  	match("relation"); 
+  	  	match(123 /*'{'*/); 
   	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
@@ -579,61 +629,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__106;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   28:8: ( 'way' )*/
+  	   26:8: ( '}' )*/
   	  /* grammar/MapCSS.g:
-  	   28:10: 'way'*/
-  	  {
-  	  	match("way"); 
-  	  	if(state.failed) 
-  	  	  return ;
-
-
-
-  	  }
-
-  	  state.type = _type;
-  	  state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__106"
-
-  // $ANTLR start "T__107"
-  void mT__107() {
-    try {
-  	  int _type = T__107;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   29:8: ( '{' )*/
-  	  /* grammar/MapCSS.g:
-  	   29:10: '{'*/
-  	  {
-  	  	match(123 /*'{'*/); 
-  	  	if(state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  state.type = _type;
-  	  state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__107"
-
-  // $ANTLR start "T__108"
-  void mT__108() {
-    try {
-  	  int _type = T__108;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   30:8: ( '}' )*/
-  	  /* grammar/MapCSS.g:
-  	   30:10: '}'*/
+  	   26:10: '}'*/
   	  {
   	  	match(125 /*'}'*/); 
   	  	if(state.failed) 
@@ -648,13 +646,13 @@ class MapCSSLexer extends Lexer {
   	  // do for sure before leaving
     }
   }
-  // $ANTLR end "T__108"
+  // $ANTLR end "T__106"
 
   // $ANTLR start "DIGIT"
   void mDIGIT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   92:15: ( '0' .. '9' )*/
+  	   88:15: ( '0' .. '9' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -687,7 +685,7 @@ class MapCSSLexer extends Lexer {
   void mCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   93:14: ( 'a' .. 'z' | 'A' .. 'Z' )*/
+  	   89:14: ( 'a' .. 'z' | 'A' .. 'Z' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -721,7 +719,7 @@ class MapCSSLexer extends Lexer {
   void mIDCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   94:16: ( CHAR | '_' | '-' | DIGIT )*/
+  	   90:16: ( CHAR | '_' | '-' | DIGIT )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -758,7 +756,7 @@ class MapCSSLexer extends Lexer {
   void mSIDCHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   95:17: ( CHAR | '-' )*/
+  	   91:17: ( CHAR | '-' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -793,9 +791,9 @@ class MapCSSLexer extends Lexer {
   void mEDQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   96:17: ( '\\\\\"' )*/
+  	   92:17: ( '\\\\\"' )*/
   	  /* grammar/MapCSS.g:
-  	   96:19: '\\\\\"'*/
+  	   92:19: '\\\\\"'*/
   	  {
   	  	match("\\\""); 
   	  	if(state.failed) 
@@ -817,9 +815,9 @@ class MapCSSLexer extends Lexer {
   void mESQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   97:17: ( '\\\\\\'' )*/
+  	   93:17: ( '\\\\\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   97:19: '\\\\\\''*/
+  	   93:19: '\\\\\\''*/
   	  {
   	  	match("\\'"); 
   	  	if(state.failed) 
@@ -841,9 +839,9 @@ class MapCSSLexer extends Lexer {
   void mEBACKSLASH() {
     try {
   	  /* grammar/MapCSS.g:
-  	   98:20: ( '\\\\\\\\' )*/
+  	   94:20: ( '\\\\\\\\' )*/
   	  /* grammar/MapCSS.g:
-  	   98:22: '\\\\\\\\'*/
+  	   94:22: '\\\\\\\\'*/
   	  {
   	  	match("\\\\"); 
   	  	if(state.failed) 
@@ -865,7 +863,7 @@ class MapCSSLexer extends Lexer {
   void mUNICODE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   99:17: ( '\\u0080' .. '\\uFFFF' )*/
+  	   95:17: ( '\\u0080' .. '\\uFFFF' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -898,7 +896,7 @@ class MapCSSLexer extends Lexer {
   void mHEXDIGIT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   100:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
+  	   96:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -933,9 +931,9 @@ class MapCSSLexer extends Lexer {
   void mPT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   101:12: ( ( 'p' | 'P' ) ( 't' | 'T' ) )*/
+  	   97:12: ( ( 'p' | 'P' ) ( 't' | 'T' ) )*/
   	  /* grammar/MapCSS.g:
-  	   101:14: ( 'p' | 'P' ) ( 't' | 'T' )*/
+  	   97:14: ( 'p' | 'P' ) ( 't' | 'T' )*/
   	  {
   	  	if(input.LA(1) == 80 /*'P'*/
   	  	  || input.LA(1) == 112 /*'p'*/) {
@@ -983,9 +981,9 @@ class MapCSSLexer extends Lexer {
   void mPX() {
     try {
   	  /* grammar/MapCSS.g:
-  	   102:12: ( ( 'p' | 'P' ) ( 'x' | 'X' ) )*/
+  	   98:12: ( ( 'p' | 'P' ) ( 'x' | 'X' ) )*/
   	  /* grammar/MapCSS.g:
-  	   102:14: ( 'p' | 'P' ) ( 'x' | 'X' )*/
+  	   98:14: ( 'p' | 'P' ) ( 'x' | 'X' )*/
   	  {
   	  	if(input.LA(1) == 80 /*'P'*/
   	  	  || input.LA(1) == 112 /*'p'*/) {
@@ -1035,9 +1033,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = URL;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   105:4: ( ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' ) )*/
+  	   101:4: ( ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' ) )*/
   	  /* grammar/MapCSS.g:
-  	   105:6: ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' )*/
+  	   101:6: ( 'u' | 'U' ) ( 'r' | 'R' ) ( 'l' | 'L' )*/
   	  {
   	  	if(input.LA(1) == 85 /*'U'*/
   	  	  || input.LA(1) == 117 /*'u'*/) {
@@ -1104,9 +1102,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = RGBA;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   106:5: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' ) )*/
+  	   102:5: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' ) )*/
   	  /* grammar/MapCSS.g:
-  	   106:7: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' )*/
+  	   102:7: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) ( 'a' | 'A' )*/
   	  {
   	  	if(input.LA(1) == 82 /*'R'*/
   	  	  || input.LA(1) == 114 /*'r'*/) {
@@ -1189,9 +1187,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = RGB;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   107:4: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) )*/
+  	   103:4: ( ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' ) )*/
   	  /* grammar/MapCSS.g:
-  	   107:6: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' )*/
+  	   103:6: ( 'r' | 'R' ) ( 'g' | 'G' ) ( 'b' | 'B' )*/
   	  {
   	  	if(input.LA(1) == 82 /*'R'*/
   	  	  || input.LA(1) == 114 /*'r'*/) {
@@ -1258,9 +1256,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = IDENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   108:6: ( SIDCHAR ( IDCHAR )* )*/
+  	   104:6: ( SIDCHAR ( IDCHAR )* )*/
   	  /* grammar/MapCSS.g:
-  	   108:8: SIDCHAR ( IDCHAR )**/
+  	   104:8: SIDCHAR ( IDCHAR )**/
   	  {
   	  	mSIDCHAR(); 
   	  	if(state.failed) 
@@ -1268,7 +1266,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 108:16: ( IDCHAR )**/
+  	  	 104:16: ( IDCHAR )**/
   	  	loop1:
   	  	do {
   	  	  int alt1 = 2;
@@ -1333,10 +1331,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = DQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   110:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   106:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"' )*/
   	  /* grammar/MapCSS.g:
-  	   110:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   106:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"'*/
   	  {
   	  	match(34 /*'\"'*/); 
@@ -1344,7 +1342,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 110:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | 
+  	  	 106:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | 
   	  	 EBACKSLASH )**/
   	  	loop2:
   	  	do {
@@ -1383,7 +1381,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt2) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:22: ' '*/
+  	  			   106:22: ' '*/
   	  			  {
   	  			  	match(32 /*' '*/); 
   	  			  	if(state.failed) 
@@ -1393,7 +1391,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:28: '!'*/
+  	  			   106:28: '!'*/
   	  			  {
   	  			  	match(33 /*'!'*/); 
   	  			  	if(state.failed) 
@@ -1403,7 +1401,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:34: '#' .. '['*/
+  	  			   106:34: '#' .. '['*/
   	  			  {
   	  			  	matchRange(35 /*'#'*/, 91 /*'['*/); 
   	  			  	if(state.failed) 
@@ -1413,7 +1411,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:45: ']' .. '~'*/
+  	  			   106:45: ']' .. '~'*/
   	  			  {
   	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	  			  	if(state.failed) 
@@ -1423,7 +1421,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:56: UNICODE*/
+  	  			   106:56: UNICODE*/
   	  			  {
   	  			  	mUNICODE(); 
   	  			  	if(state.failed) 
@@ -1434,7 +1432,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:66: EDQUOTE*/
+  	  			   106:66: EDQUOTE*/
   	  			  {
   	  			  	mEDQUOTE(); 
   	  			  	if(state.failed) 
@@ -1445,7 +1443,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 7 :
   	  			  /* grammar/MapCSS.g:
-  	  			   110:76: EBACKSLASH*/
+  	  			   106:76: EBACKSLASH*/
   	  			  {
   	  			  	mEBACKSLASH(); 
   	  			  	if(state.failed) 
@@ -1482,10 +1480,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = SQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   111:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   107:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   111:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   107:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\''*/
   	  {
   	  	match(39 /*'\''*/); 
@@ -1493,7 +1491,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 111:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
+  	  	 107:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
   	  	 EBACKSLASH )**/
   	  	loop3:
   	  	do {
@@ -1529,7 +1527,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt3) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:23: ' ' .. '&'*/
+  	  			   107:23: ' ' .. '&'*/
   	  			  {
   	  			  	matchRange(32 /*' '*/, 38 /*'&'*/); 
   	  			  	if(state.failed) 
@@ -1539,7 +1537,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:34: '(' .. '['*/
+  	  			   107:34: '(' .. '['*/
   	  			  {
   	  			  	matchRange(40 /*'('*/, 91 /*'['*/); 
   	  			  	if(state.failed) 
@@ -1549,7 +1547,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:45: ']' .. '~'*/
+  	  			   107:45: ']' .. '~'*/
   	  			  {
   	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	  			  	if(state.failed) 
@@ -1559,7 +1557,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:56: UNICODE*/
+  	  			   107:56: UNICODE*/
   	  			  {
   	  			  	mUNICODE(); 
   	  			  	if(state.failed) 
@@ -1570,7 +1568,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:66: ESQUOTE*/
+  	  			   107:66: ESQUOTE*/
   	  			  {
   	  			  	mESQUOTE(); 
   	  			  	if(state.failed) 
@@ -1581,7 +1579,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   111:76: EBACKSLASH*/
+  	  			   107:76: EBACKSLASH*/
   	  			  {
   	  			  	mEBACKSLASH(); 
   	  			  	if(state.failed) 
@@ -1618,10 +1616,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = HEXCOLOR;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   113:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   109:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) ) )*/
   	  /* grammar/MapCSS.g:
-  	   113:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   109:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  {
   	  	match(35 /*'#'*/); 
@@ -1629,7 +1627,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 113:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	  	 109:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	  	 ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  	int alt4 = 2;
   	  	int LA4_0 = input.LA(1);
@@ -1696,12 +1694,12 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt4) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     113:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     109:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 113:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 109:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 113:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 109:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
   	  	    		mHEXDIGIT(); 
   	  	    		if(state.failed) 
@@ -1740,12 +1738,12 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     113:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     109:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 113:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 109:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 113:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 109:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
   	  	    		mHEXDIGIT(); 
   	  	    		if(state.failed) 
@@ -1788,9 +1786,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = GE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   115:3: ( '>=' )*/
+  	   111:3: ( '>=' )*/
   	  /* grammar/MapCSS.g:
-  	   115:9: '>='*/
+  	   111:9: '>='*/
   	  {
   	  	match(">="); 
   	  	if(state.failed) 
@@ -1815,9 +1813,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = LE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   116:3: ( '<=' )*/
+  	   112:3: ( '<=' )*/
   	  /* grammar/MapCSS.g:
-  	   116:9: '<='*/
+  	   112:9: '<='*/
   	  {
   	  	match("<="); 
   	  	if(state.failed) 
@@ -1842,9 +1840,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = GT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   117:3: ( '>' )*/
+  	   113:3: ( '>' )*/
   	  /* grammar/MapCSS.g:
-  	   117:10: '>'*/
+  	   113:10: '>'*/
   	  {
   	  	match(62 /*'>'*/); 
   	  	if(state.failed) 
@@ -1867,9 +1865,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = LT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   118:3: ( '<' )*/
+  	   114:3: ( '<' )*/
   	  /* grammar/MapCSS.g:
-  	   118:10: '<'*/
+  	   114:10: '<'*/
   	  {
   	  	match(60 /*'<'*/); 
   	  	if(state.failed) 
@@ -1892,9 +1890,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = NEQ;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   119:4: ( '!=' )*/
+  	   115:4: ( '!=' )*/
   	  /* grammar/MapCSS.g:
-  	   119:15: '!='*/
+  	   115:15: '!='*/
   	  {
   	  	match("!="); 
   	  	if(state.failed) 
@@ -1919,9 +1917,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = EQ;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   120:3: ( '=' )*/
+  	   116:3: ( '=' )*/
   	  /* grammar/MapCSS.g:
-  	   120:10: '='*/
+  	   116:10: '='*/
   	  {
   	  	match(61 /*'='*/); 
   	  	if(state.failed) 
@@ -1944,9 +1942,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = MATCH;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   121:6: ( '=~' )*/
+  	   117:6: ( '=~' )*/
   	  /* grammar/MapCSS.g:
-  	   121:15: '=~'*/
+  	   117:15: '=~'*/
   	  {
   	  	match("=~"); 
   	  	if(state.failed) 
@@ -1971,9 +1969,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = STARTS_WITH;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   122:12: ( '^=' )*/
+  	   118:12: ( '^=' )*/
   	  /* grammar/MapCSS.g:
-  	   122:15: '^='*/
+  	   118:15: '^='*/
   	  {
   	  	match("^="); 
   	  	if(state.failed) 
@@ -1998,9 +1996,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = ENDS_WITH;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   123:10: ( '$=' )*/
+  	   119:10: ( '$=' )*/
   	  /* grammar/MapCSS.g:
-  	   123:15: '$='*/
+  	   119:15: '$='*/
   	  {
   	  	match("\$="); 
   	  	if(state.failed) 
@@ -2025,9 +2023,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = SUBSTRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   124:10: ( '*=' )*/
+  	   120:10: ( '*=' )*/
   	  /* grammar/MapCSS.g:
-  	   124:15: '*='*/
+  	   120:15: '*='*/
   	  {
   	  	match("*="); 
   	  	if(state.failed) 
@@ -2052,9 +2050,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = CONTAINS;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   125:9: ( '~=' )*/
+  	   121:9: ( '~=' )*/
   	  /* grammar/MapCSS.g:
-  	   125:15: '~='*/
+  	   121:15: '~='*/
   	  {
   	  	match("~="); 
   	  	if(state.failed) 
@@ -2079,9 +2077,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = IMPORT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   127:7: ( '@import' )*/
+  	   123:7: ( '@import' )*/
   	  /* grammar/MapCSS.g:
-  	   127:13: '@import'*/
+  	   123:13: '@import'*/
   	  {
   	  	match("@import"); 
   	  	if(state.failed) 
@@ -2104,7 +2102,7 @@ class MapCSSLexer extends Lexer {
   void mREGEX_CHAR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   129:20: ( ' ' .. '.' | '0' .. '[' | ']' .. '~' | UNICODE )*/
+  	   125:20: ( ' ' .. '.' | '0' .. '[' | ']' .. '~' | UNICODE )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -2140,7 +2138,7 @@ class MapCSSLexer extends Lexer {
   void mREGEX_ESCAPE() {
     try {
   	  /* grammar/MapCSS.g: 
-  	   130:22: ( '\\\\\\\\' | '\\\\/' | '\\\\(' | '\\\\)' | '\\\\|' | 
+  	   126:22: ( '\\\\\\\\' | '\\\\/' | '\\\\(' | '\\\\)' | '\\\\|' | 
   	   '\\\\$' | '\\\\*' | '\\\\.' | '\\\\^' | '\\\\?' | '\\\\+' | '\\\\-' | 
   	   '\\\\n' | '\\\\r' | '\\\\t' | '\\\\s' | '\\\\S' | '\\\\d' | '\\\\D' | 
   	   '\\\\w' | '\\\\W' )*/
@@ -2281,7 +2279,7 @@ class MapCSSLexer extends Lexer {
   	  switch (alt5) {
   	    case 1 :
   	      /* grammar/MapCSS.g:
-  	       130:26: '\\\\\\\\'*/
+  	       126:26: '\\\\\\\\'*/
   	      {
   	      	match("\\\\"); 
   	      	if(state.failed) 
@@ -2293,7 +2291,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 2 :
   	      /* grammar/MapCSS.g:
-  	       130:35: '\\\\/'*/
+  	       126:35: '\\\\/'*/
   	      {
   	      	match("\\/"); 
   	      	if(state.failed) 
@@ -2305,7 +2303,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 3 :
   	      /* grammar/MapCSS.g:
-  	       130:43: '\\\\('*/
+  	       126:43: '\\\\('*/
   	      {
   	      	match("\\("); 
   	      	if(state.failed) 
@@ -2317,7 +2315,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 4 :
   	      /* grammar/MapCSS.g:
-  	       130:51: '\\\\)'*/
+  	       126:51: '\\\\)'*/
   	      {
   	      	match("\\)"); 
   	      	if(state.failed) 
@@ -2329,7 +2327,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 5 :
   	      /* grammar/MapCSS.g:
-  	       131:26: '\\\\|'*/
+  	       127:26: '\\\\|'*/
   	      {
   	      	match("\\|"); 
   	      	if(state.failed) 
@@ -2341,7 +2339,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 6 :
   	      /* grammar/MapCSS.g:
-  	       131:34: '\\\\$'*/
+  	       127:34: '\\\\$'*/
   	      {
   	      	match("\\\$"); 
   	      	if(state.failed) 
@@ -2353,7 +2351,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 7 :
   	      /* grammar/MapCSS.g:
-  	       131:42: '\\\\*'*/
+  	       127:42: '\\\\*'*/
   	      {
   	      	match("\\*"); 
   	      	if(state.failed) 
@@ -2365,7 +2363,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 8 :
   	      /* grammar/MapCSS.g:
-  	       131:50: '\\\\.'*/
+  	       127:50: '\\\\.'*/
   	      {
   	      	match("\\."); 
   	      	if(state.failed) 
@@ -2377,7 +2375,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 9 :
   	      /* grammar/MapCSS.g:
-  	       131:58: '\\\\^'*/
+  	       127:58: '\\\\^'*/
   	      {
   	      	match("\\^"); 
   	      	if(state.failed) 
@@ -2389,7 +2387,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 10 :
   	      /* grammar/MapCSS.g:
-  	       131:66: '\\\\?'*/
+  	       127:66: '\\\\?'*/
   	      {
   	      	match("\\?"); 
   	      	if(state.failed) 
@@ -2401,7 +2399,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 11 :
   	      /* grammar/MapCSS.g:
-  	       131:74: '\\\\+'*/
+  	       127:74: '\\\\+'*/
   	      {
   	      	match("\\+"); 
   	      	if(state.failed) 
@@ -2413,7 +2411,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 12 :
   	      /* grammar/MapCSS.g:
-  	       131:82: '\\\\-'*/
+  	       127:82: '\\\\-'*/
   	      {
   	      	match("\\-"); 
   	      	if(state.failed) 
@@ -2425,7 +2423,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 13 :
   	      /* grammar/MapCSS.g:
-  	       132:26: '\\\\n'*/
+  	       128:26: '\\\\n'*/
   	      {
   	      	match("\\n"); 
   	      	if(state.failed) 
@@ -2437,7 +2435,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 14 :
   	      /* grammar/MapCSS.g:
-  	       132:34: '\\\\r'*/
+  	       128:34: '\\\\r'*/
   	      {
   	      	match("\\r"); 
   	      	if(state.failed) 
@@ -2449,7 +2447,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 15 :
   	      /* grammar/MapCSS.g:
-  	       132:42: '\\\\t'*/
+  	       128:42: '\\\\t'*/
   	      {
   	      	match("\\t"); 
   	      	if(state.failed) 
@@ -2461,7 +2459,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 16 :
   	      /* grammar/MapCSS.g:
-  	       133:26: '\\\\s'*/
+  	       129:26: '\\\\s'*/
   	      {
   	      	match("\\s"); 
   	      	if(state.failed) 
@@ -2473,7 +2471,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 17 :
   	      /* grammar/MapCSS.g:
-  	       133:34: '\\\\S'*/
+  	       129:34: '\\\\S'*/
   	      {
   	      	match("\\S"); 
   	      	if(state.failed) 
@@ -2485,7 +2483,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 18 :
   	      /* grammar/MapCSS.g:
-  	       134:26: '\\\\d'*/
+  	       130:26: '\\\\d'*/
   	      {
   	      	match("\\d"); 
   	      	if(state.failed) 
@@ -2497,7 +2495,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 19 :
   	      /* grammar/MapCSS.g:
-  	       134:34: '\\\\D'*/
+  	       130:34: '\\\\D'*/
   	      {
   	      	match("\\D"); 
   	      	if(state.failed) 
@@ -2509,7 +2507,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 20 :
   	      /* grammar/MapCSS.g:
-  	       135:26: '\\\\w'*/
+  	       131:26: '\\\\w'*/
   	      {
   	      	match("\\w"); 
   	      	if(state.failed) 
@@ -2521,7 +2519,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 21 :
   	      /* grammar/MapCSS.g:
-  	       135:34: '\\\\W'*/
+  	       131:34: '\\\\W'*/
   	      {
   	      	match("\\W"); 
   	      	if(state.failed) 
@@ -2547,16 +2545,16 @@ class MapCSSLexer extends Lexer {
   	  int _type = REGEXP;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   136:7: ( '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/' )*/
+  	   132:7: ( '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/' )*/
   	  /* grammar/MapCSS.g:
-  	   136:10: '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/'*/
+  	   132:10: '/' ( REGEX_CHAR | REGEX_ESCAPE )* '/'*/
   	  {
   	  	match(47 /*'/'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 136:14: ( REGEX_CHAR | REGEX_ESCAPE )**/
+  	  	 132:14: ( REGEX_CHAR | REGEX_ESCAPE )**/
   	  	loop6:
   	  	do {
   	  	  int alt6 = 3;
@@ -2576,7 +2574,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt6) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   136:15: REGEX_CHAR*/
+  	  			   132:15: REGEX_CHAR*/
   	  			  {
   	  			  	mREGEX_CHAR(); 
   	  			  	if(state.failed) 
@@ -2587,7 +2585,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   136:28: REGEX_ESCAPE*/
+  	  			   132:28: REGEX_ESCAPE*/
   	  			  {
   	  			  	mREGEX_ESCAPE(); 
   	  			  	if(state.failed) 
@@ -2624,9 +2622,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = WS;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   139:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
+  	   135:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
   	  /* grammar/MapCSS.g:
-  	   139:9: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
+  	   135:9: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
   	  {
   	  	if((input.LA(1) >= 9 /*'\t'*/ && input.LA(1) <= 10 /*'\n'*/)
   	  	  || (input.LA(1) >= 12 /*'\f'*/ && input.LA(1) <= 13 /*'\r'*/)
@@ -2667,9 +2665,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = SL_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   140:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
+  	   136:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
   	  /* grammar/MapCSS.g:
-  	   140:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
+  	   136:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
   	  {
   	  	match("//"); 
   	  	if(state.failed) 
@@ -2678,7 +2676,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 140:20: ( options {greedy=false; } : . )**/
+  	  	 136:20: ( options {greedy=false; } : . )**/
   	  	loop7:
   	  	do {
   	  	  int alt7 = 2;
@@ -2700,7 +2698,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt7) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   140:46: .*/
+  	  			   136:46: .*/
   	  			  {
   	  			  	matchAny(); 
   	  			  	if(state.failed) 
@@ -2716,7 +2714,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 140:50: ( '\\r' )?*/
+  	  	 136:50: ( '\\r' )?*/
   	  	int alt8 = 2;
   	  	int LA8_0 = input.LA(1);
 
@@ -2726,7 +2724,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt8) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     140:50: '\\r'*/
+  	  	     136:50: '\\r'*/
   	  	    {
   	  	    	match(13 /*'\r'*/); 
   	  	    	if(state.failed) 
@@ -2764,9 +2762,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = ML_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   141:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
+  	   137:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
   	  /* grammar/MapCSS.g:
-  	   141:15: '/*' ( options {greedy=false; } : . )* '*/'*/
+  	   137:15: '/*' ( options {greedy=false; } : . )* '*/'*/
   	  {
   	  	match("/*"); 
   	  	if(state.failed) 
@@ -2775,7 +2773,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 141:20: ( options {greedy=false; } : . )**/
+  	  	 137:20: ( options {greedy=false; } : . )**/
   	  	loop9:
   	  	do {
   	  	  int alt9 = 2;
@@ -2803,7 +2801,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt9) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   141:47: .*/
+  	  			   137:47: .*/
   	  			  {
   	  			  	matchAny(); 
   	  			  	if(state.failed) 
@@ -2840,15 +2838,17 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "ML_COMMENT"
 
-  // $ANTLR start "PIPE_Z"
-  void mPIPE_Z() {
+  // $ANTLR start "RANGE"
+  void mRANGE() {
     try {
-  	  int _type = PIPE_Z;
+  	  int _type = RANGE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   183:7: ( '|z' )*/
+  	   180:2: ( '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   ( DIGIT )+ '-' ( DIGIT )+ ) )*/
   	  /* grammar/MapCSS.g:
-  	   183:9: '|z'*/
+  	   180:4: '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   ( DIGIT )+ '-' ( DIGIT )+ )*/
   	  {
   	  	match("|z"); 
   	  	if(state.failed) 
@@ -2856,49 +2856,21 @@ class MapCSSLexer extends Lexer {
 
 
 
-  	  }
-
-  	  state.type = _type;
-  	  state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "PIPE_Z"
-
-  // $ANTLR start "RANGE"
-  void mRANGE() {
-    try {
-  	  int _type = RANGE;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   186:2: ( PIPE_Z ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
-  	   ( DIGIT )+ '-' ( DIGIT )+ ) )*/
-  	  /* grammar/MapCSS.g:
-  	   186:4: PIPE_Z ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
-  	   ( DIGIT )+ '-' ( DIGIT )+ )*/
-  	  {
-  	  	mPIPE_Z(); 
-  	  	if(state.failed) 
-  	  	  return ;
-
-
   	  	/* grammar/MapCSS.g:
-  	  	 186:11: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) */
+  	  	 180:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) */
   	  	int alt15 = 4;
   	  	alt15 = dfas["dfa15"].predict(input);
   	  	switch (alt15) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     187:5: '-' ( DIGIT )+*/
+  	  	     181:5: '-' ( DIGIT )+*/
   	  	    {
   	  	    	match(45 /*'-'*/); 
   	  	    	if(state.failed) 
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 187:9: ( DIGIT )+*/
+  	  	    	 181:9: ( DIGIT )+*/
   	  	    	int cnt10 = 0;
   	  	    	loop10:
   	  	    	do {
@@ -2950,10 +2922,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     188:5: ( DIGIT )+*/
+  	  	     182:5: ( DIGIT )+*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 188:5: ( DIGIT )+*/
+  	  	    	 182:5: ( DIGIT )+*/
   	  	    	int cnt11 = 0;
   	  	    	loop11:
   	  	    	do {
@@ -3005,10 +2977,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 3 :
   	  	    /* grammar/MapCSS.g:
-  	  	     189:5: ( DIGIT )+ '-'*/
+  	  	     183:5: ( DIGIT )+ '-'*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 189:5: ( DIGIT )+*/
+  	  	    	 183:5: ( DIGIT )+*/
   	  	    	int cnt12 = 0;
   	  	    	loop12:
   	  	    	do {
@@ -3064,10 +3036,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 4 :
   	  	    /* grammar/MapCSS.g:
-  	  	     190:5: ( DIGIT )+ '-' ( DIGIT )+*/
+  	  	     184:5: ( DIGIT )+ '-' ( DIGIT )+*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 190:5: ( DIGIT )+*/
+  	  	    	 184:5: ( DIGIT )+*/
   	  	    	int cnt13 = 0;
   	  	    	loop13:
   	  	    	do {
@@ -3120,7 +3092,7 @@ class MapCSSLexer extends Lexer {
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 190:16: ( DIGIT )+*/
+  	  	    	 184:16: ( DIGIT )+*/
   	  	    	int cnt14 = 0;
   	  	    	loop14:
   	  	    	do {
@@ -3189,9 +3161,9 @@ class MapCSSLexer extends Lexer {
   void mPERCENTAGE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   283:20: ()*/
+  	   277:20: ()*/
   	  /* grammar/MapCSS.g:
-  	   283:21: */
+  	   277:21: */
   	  {
   	  }
 
@@ -3207,9 +3179,9 @@ class MapCSSLexer extends Lexer {
   void mPIXELS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   284:16: ()*/
+  	   278:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   284:17: */
+  	   278:17: */
   	  {
   	  }
 
@@ -3225,9 +3197,9 @@ class MapCSSLexer extends Lexer {
   void mPOINTS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   285:16: ()*/
+  	   279:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   285:17: */
+  	   279:17: */
   	  {
   	  }
 
@@ -3243,9 +3215,9 @@ class MapCSSLexer extends Lexer {
   void mINT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   286:13: ()*/
+  	   280:13: ()*/
   	  /* grammar/MapCSS.g:
-  	   286:14: */
+  	   280:14: */
   	  {
   	  }
 
@@ -3261,9 +3233,9 @@ class MapCSSLexer extends Lexer {
   void mFLOAT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   287:15: ()*/
+  	   281:15: ()*/
   	  /* grammar/MapCSS.g:
-  	   287:16: */
+  	   281:16: */
   	  {
   	  }
 
@@ -3279,7 +3251,7 @@ class MapCSSLexer extends Lexer {
   void mP() {
     try {
   	  /* grammar/MapCSS.g:
-  	   288:11: ( ( 'p' | 'P' ) )*/
+  	   282:11: ( ( 'p' | 'P' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3313,7 +3285,7 @@ class MapCSSLexer extends Lexer {
   void mT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   289:11: ( ( 't' | 'T' ) )*/
+  	   283:11: ( ( 't' | 'T' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3347,7 +3319,7 @@ class MapCSSLexer extends Lexer {
   void mX() {
     try {
   	  /* grammar/MapCSS.g:
-  	   290:11: ( ( 'x' | 'X' ) )*/
+  	   284:11: ( ( 'x' | 'X' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3383,14 +3355,14 @@ class MapCSSLexer extends Lexer {
   	  int _type = NUMBER;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   294:2: ( ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
+  	   288:2: ( ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
   	   ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |) |) ) */
   	  /* grammar/MapCSS.g:
-  	   294:4: ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
+  	   288:4: ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | 
   	   ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |) |) */
   	  {
   	  	/* grammar/MapCSS.g:
-  	  	 294:4: ( DIGIT )+*/
+  	  	 288:4: ( DIGIT )+*/
   	  	int cnt16 = 0;
   	  	loop16:
   	  	do {
@@ -3439,7 +3411,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 295:4: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | 
+  	  	 289:4: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' | ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | 
   	  	 X ) )=> P ( T | X ) | ( '%' )=> '%' |) |)*/
   	  	int alt21 = 4;
   	  	int LA21_0 = input.LA(1);
@@ -3460,7 +3432,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt21) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     296:3: ( P ( T | X ) )=> P ( T | X )*/
+  	  	     290:3: ( P ( T | X ) )=> P ( T | X )*/
   	  	    {
   	  	    	mP(); 
   	  	    	if(state.failed) 
@@ -3468,7 +3440,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 298:4: ( T | X )*/
+  	  	    	 292:4: ( T | X )*/
   	  	    	int alt17 = 2;
   	  	    	int LA17_0 = input.LA(1);
 
@@ -3494,7 +3466,7 @@ class MapCSSLexer extends Lexer {
   	  	    	switch (alt17) {
   	  	    	  case 1 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     299:6: T*/
+  	  	    	     293:6: T*/
   	  	    	    {
   	  	    	    	mT(); 
   	  	    	    	if(state.failed) 
@@ -3510,7 +3482,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 2 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     300:9: X*/
+  	  	    	     294:9: X*/
   	  	    	    {
   	  	    	    	mX(); 
   	  	    	    	if(state.failed) 
@@ -3532,7 +3504,7 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     302:8: ( '%' )=> '%'*/
+  	  	     296:8: ( '%' )=> '%'*/
   	  	    {
   	  	    	match(37 /*'%'*/); 
   	  	    	if(state.failed) 
@@ -3547,7 +3519,7 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 3 :
   	  	    /* grammar/MapCSS.g:
-  	  	     303:8: ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | 
+  	  	     297:8: ( '.' )=> '.' ( DIGIT )+ ( ( P ( T | X ) )=> P ( T | X ) | 
   	  	     ( '%' )=> '%' |)*/
   	  	    {
   	  	    	match(46 /*'.'*/); 
@@ -3555,7 +3527,7 @@ class MapCSSLexer extends Lexer {
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 304:9: ( DIGIT )+*/
+  	  	    	 298:9: ( DIGIT )+*/
   	  	    	int cnt18 = 0;
   	  	    	loop18:
   	  	    	do {
@@ -3604,7 +3576,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 305:9: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
+  	  	    	 299:9: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
   	  	    	int alt20 = 3;
   	  	    	int LA20_0 = input.LA(1);
 
@@ -3621,7 +3593,7 @@ class MapCSSLexer extends Lexer {
   	  	    	switch (alt20) {
   	  	    	  case 1 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     306:11: ( P ( T | X ) )=> P ( T | X )*/
+  	  	    	     300:11: ( P ( T | X ) )=> P ( T | X )*/
   	  	    	    {
   	  	    	    	mP(); 
   	  	    	    	if(state.failed) 
@@ -3629,7 +3601,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	    	    	/* grammar/MapCSS.g:
-  	  	    	    	 308:5: ( T | X )*/
+  	  	    	    	 302:5: ( T | X )*/
   	  	    	    	int alt19 = 2;
   	  	    	    	int LA19_0 = input.LA(1);
 
@@ -3655,7 +3627,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    	switch (alt19) {
   	  	    	    	  case 1 :
   	  	    	    	    /* grammar/MapCSS.g:
-  	  	    	    	     309:7: T*/
+  	  	    	    	     303:7: T*/
   	  	    	    	    {
   	  	    	    	    	mT(); 
   	  	    	    	    	if(state.failed) 
@@ -3671,7 +3643,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    	    break;
   	  	    	    	  case 2 :
   	  	    	    	    /* grammar/MapCSS.g:
-  	  	    	    	     310:10: X*/
+  	  	    	    	     304:10: X*/
   	  	    	    	    {
   	  	    	    	    	mX(); 
   	  	    	    	    	if(state.failed) 
@@ -3693,7 +3665,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 2 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     312:10: ( '%' )=> '%'*/
+  	  	    	     306:10: ( '%' )=> '%'*/
   	  	    	    {
   	  	    	    	match(37 /*'%'*/); 
   	  	    	    	if(state.failed) 
@@ -3708,7 +3680,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 3 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     313:13: */
+  	  	    	     307:13: */
   	  	    	    {
   	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type = FLOAT;;
@@ -3725,7 +3697,7 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 4 :
   	  	    /* grammar/MapCSS.g:
-  	  	     315:8: */
+  	  	     309:8: */
   	  	    {
   	  	    	if(state.backtracking == 0) {
   	  	    	  _type=INT;;
@@ -3751,21 +3723,21 @@ class MapCSSLexer extends Lexer {
 
   void mTokens() {
     /* grammar/MapCSS.g: 
-     1:8: ( T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | 
-     T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | 
-     T__104 | T__105 | T__106 | T__107 | T__108 | URL | RGBA | RGB | 
+     1:8: ( T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | 
+     T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | 
+     T__102 | T__103 | T__104 | T__105 | T__106 | URL | RGBA | RGB | 
      IDENT | DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | GE | LE | 
      GT | LT | NEQ | EQ | MATCH | STARTS_WITH | ENDS_WITH | SUBSTRING | 
-     CONTAINS | IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | PIPE_Z | 
-     RANGE | NUMBER )*/
-    int alt22 = 46;
+     CONTAINS | IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | RANGE | 
+     NUMBER )*/
+    int alt22 = 45;
     alt22 = dfas["dfa22"].predict(input);
     switch (alt22) {
       case 1 :
         /* grammar/MapCSS.g:
-         1:10: T__89*/
+         1:10: T__87*/
         {
-        	mT__89(); 
+        	mT__87(); 
         	if(state.failed) 
         	  return ;
 
@@ -3774,9 +3746,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 2 :
         /* grammar/MapCSS.g:
-         1:16: T__90*/
+         1:16: T__88*/
         {
-        	mT__90(); 
+        	mT__88(); 
         	if(state.failed) 
         	  return ;
 
@@ -3785,9 +3757,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 3 :
         /* grammar/MapCSS.g:
-         1:22: T__91*/
+         1:22: T__89*/
         {
-        	mT__91(); 
+        	mT__89(); 
         	if(state.failed) 
         	  return ;
 
@@ -3796,9 +3768,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 4 :
         /* grammar/MapCSS.g:
-         1:28: T__92*/
+         1:28: T__90*/
         {
-        	mT__92(); 
+        	mT__90(); 
         	if(state.failed) 
         	  return ;
 
@@ -3807,9 +3779,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 5 :
         /* grammar/MapCSS.g:
-         1:34: T__93*/
+         1:34: T__91*/
         {
-        	mT__93(); 
+        	mT__91(); 
         	if(state.failed) 
         	  return ;
 
@@ -3818,9 +3790,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 6 :
         /* grammar/MapCSS.g:
-         1:40: T__94*/
+         1:40: T__92*/
         {
-        	mT__94(); 
+        	mT__92(); 
         	if(state.failed) 
         	  return ;
 
@@ -3829,9 +3801,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 7 :
         /* grammar/MapCSS.g:
-         1:46: T__95*/
+         1:46: T__93*/
         {
-        	mT__95(); 
+        	mT__93(); 
         	if(state.failed) 
         	  return ;
 
@@ -3840,9 +3812,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 8 :
         /* grammar/MapCSS.g:
-         1:52: T__96*/
+         1:52: T__94*/
         {
-        	mT__96(); 
+        	mT__94(); 
         	if(state.failed) 
         	  return ;
 
@@ -3851,9 +3823,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 9 :
         /* grammar/MapCSS.g:
-         1:58: T__97*/
+         1:58: T__95*/
         {
-        	mT__97(); 
+        	mT__95(); 
         	if(state.failed) 
         	  return ;
 
@@ -3862,9 +3834,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 10 :
         /* grammar/MapCSS.g:
-         1:64: T__98*/
+         1:64: T__96*/
         {
-        	mT__98(); 
+        	mT__96(); 
         	if(state.failed) 
         	  return ;
 
@@ -3873,9 +3845,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 11 :
         /* grammar/MapCSS.g:
-         1:70: T__99*/
+         1:70: T__97*/
         {
-        	mT__99(); 
+        	mT__97(); 
         	if(state.failed) 
         	  return ;
 
@@ -3884,9 +3856,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 12 :
         /* grammar/MapCSS.g:
-         1:76: T__100*/
+         1:76: T__98*/
         {
-        	mT__100(); 
+        	mT__98(); 
         	if(state.failed) 
         	  return ;
 
@@ -3895,9 +3867,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 13 :
         /* grammar/MapCSS.g:
-         1:83: T__101*/
+         1:82: T__99*/
         {
-        	mT__101(); 
+        	mT__99(); 
         	if(state.failed) 
         	  return ;
 
@@ -3906,9 +3878,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 14 :
         /* grammar/MapCSS.g:
-         1:90: T__102*/
+         1:88: T__100*/
         {
-        	mT__102(); 
+        	mT__100(); 
         	if(state.failed) 
         	  return ;
 
@@ -3917,9 +3889,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 15 :
         /* grammar/MapCSS.g:
-         1:97: T__103*/
+         1:95: T__101*/
         {
-        	mT__103(); 
+        	mT__101(); 
         	if(state.failed) 
         	  return ;
 
@@ -3928,9 +3900,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 16 :
         /* grammar/MapCSS.g:
-         1:104: T__104*/
+         1:102: T__102*/
         {
-        	mT__104(); 
+        	mT__102(); 
         	if(state.failed) 
         	  return ;
 
@@ -3939,9 +3911,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 17 :
         /* grammar/MapCSS.g:
-         1:111: T__105*/
+         1:109: T__103*/
         {
-        	mT__105(); 
+        	mT__103(); 
         	if(state.failed) 
         	  return ;
 
@@ -3950,9 +3922,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 18 :
         /* grammar/MapCSS.g:
-         1:118: T__106*/
+         1:116: T__104*/
         {
-        	mT__106(); 
+        	mT__104(); 
         	if(state.failed) 
         	  return ;
 
@@ -3961,9 +3933,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 19 :
         /* grammar/MapCSS.g:
-         1:125: T__107*/
+         1:123: T__105*/
         {
-        	mT__107(); 
+        	mT__105(); 
         	if(state.failed) 
         	  return ;
 
@@ -3972,9 +3944,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 20 :
         /* grammar/MapCSS.g:
-         1:132: T__108*/
+         1:130: T__106*/
         {
-        	mT__108(); 
+        	mT__106(); 
         	if(state.failed) 
         	  return ;
 
@@ -3983,7 +3955,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 21 :
         /* grammar/MapCSS.g:
-         1:139: URL*/
+         1:137: URL*/
         {
         	mURL(); 
         	if(state.failed) 
@@ -3994,7 +3966,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 22 :
         /* grammar/MapCSS.g:
-         1:143: RGBA*/
+         1:141: RGBA*/
         {
         	mRGBA(); 
         	if(state.failed) 
@@ -4005,7 +3977,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 23 :
         /* grammar/MapCSS.g:
-         1:148: RGB*/
+         1:146: RGB*/
         {
         	mRGB(); 
         	if(state.failed) 
@@ -4016,7 +3988,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 24 :
         /* grammar/MapCSS.g:
-         1:152: IDENT*/
+         1:150: IDENT*/
         {
         	mIDENT(); 
         	if(state.failed) 
@@ -4027,7 +3999,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 25 :
         /* grammar/MapCSS.g:
-         1:158: DQUOTED_STRING*/
+         1:156: DQUOTED_STRING*/
         {
         	mDQUOTED_STRING(); 
         	if(state.failed) 
@@ -4038,7 +4010,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 26 :
         /* grammar/MapCSS.g:
-         1:173: SQUOTED_STRING*/
+         1:171: SQUOTED_STRING*/
         {
         	mSQUOTED_STRING(); 
         	if(state.failed) 
@@ -4049,7 +4021,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 27 :
         /* grammar/MapCSS.g:
-         1:188: HEXCOLOR*/
+         1:186: HEXCOLOR*/
         {
         	mHEXCOLOR(); 
         	if(state.failed) 
@@ -4060,7 +4032,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 28 :
         /* grammar/MapCSS.g:
-         1:197: GE*/
+         1:195: GE*/
         {
         	mGE(); 
         	if(state.failed) 
@@ -4071,7 +4043,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 29 :
         /* grammar/MapCSS.g:
-         1:200: LE*/
+         1:198: LE*/
         {
         	mLE(); 
         	if(state.failed) 
@@ -4082,7 +4054,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 30 :
         /* grammar/MapCSS.g:
-         1:203: GT*/
+         1:201: GT*/
         {
         	mGT(); 
         	if(state.failed) 
@@ -4093,7 +4065,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 31 :
         /* grammar/MapCSS.g:
-         1:206: LT*/
+         1:204: LT*/
         {
         	mLT(); 
         	if(state.failed) 
@@ -4104,7 +4076,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 32 :
         /* grammar/MapCSS.g:
-         1:209: NEQ*/
+         1:207: NEQ*/
         {
         	mNEQ(); 
         	if(state.failed) 
@@ -4115,7 +4087,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 33 :
         /* grammar/MapCSS.g:
-         1:213: EQ*/
+         1:211: EQ*/
         {
         	mEQ(); 
         	if(state.failed) 
@@ -4126,7 +4098,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 34 :
         /* grammar/MapCSS.g:
-         1:216: MATCH*/
+         1:214: MATCH*/
         {
         	mMATCH(); 
         	if(state.failed) 
@@ -4137,7 +4109,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 35 :
         /* grammar/MapCSS.g:
-         1:222: STARTS_WITH*/
+         1:220: STARTS_WITH*/
         {
         	mSTARTS_WITH(); 
         	if(state.failed) 
@@ -4148,7 +4120,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 36 :
         /* grammar/MapCSS.g:
-         1:234: ENDS_WITH*/
+         1:232: ENDS_WITH*/
         {
         	mENDS_WITH(); 
         	if(state.failed) 
@@ -4159,7 +4131,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 37 :
         /* grammar/MapCSS.g:
-         1:244: SUBSTRING*/
+         1:242: SUBSTRING*/
         {
         	mSUBSTRING(); 
         	if(state.failed) 
@@ -4170,7 +4142,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 38 :
         /* grammar/MapCSS.g:
-         1:254: CONTAINS*/
+         1:252: CONTAINS*/
         {
         	mCONTAINS(); 
         	if(state.failed) 
@@ -4181,7 +4153,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 39 :
         /* grammar/MapCSS.g:
-         1:263: IMPORT*/
+         1:261: IMPORT*/
         {
         	mIMPORT(); 
         	if(state.failed) 
@@ -4192,7 +4164,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 40 :
         /* grammar/MapCSS.g:
-         1:270: REGEXP*/
+         1:268: REGEXP*/
         {
         	mREGEXP(); 
         	if(state.failed) 
@@ -4203,7 +4175,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 41 :
         /* grammar/MapCSS.g:
-         1:277: WS*/
+         1:275: WS*/
         {
         	mWS(); 
         	if(state.failed) 
@@ -4214,7 +4186,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 42 :
         /* grammar/MapCSS.g:
-         1:280: SL_COMMENT*/
+         1:278: SL_COMMENT*/
         {
         	mSL_COMMENT(); 
         	if(state.failed) 
@@ -4225,7 +4197,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 43 :
         /* grammar/MapCSS.g:
-         1:291: ML_COMMENT*/
+         1:289: ML_COMMENT*/
         {
         	mML_COMMENT(); 
         	if(state.failed) 
@@ -4236,18 +4208,7 @@ class MapCSSLexer extends Lexer {
         break;
       case 44 :
         /* grammar/MapCSS.g:
-         1:302: PIPE_Z*/
-        {
-        	mPIPE_Z(); 
-        	if(state.failed) 
-        	  return ;
-
-
-        }
-        break;
-      case 45 :
-        /* grammar/MapCSS.g:
-         1:309: RANGE*/
+         1:300: RANGE*/
         {
         	mRANGE(); 
         	if(state.failed) 
@@ -4256,9 +4217,9 @@ class MapCSSLexer extends Lexer {
 
         }
         break;
-      case 46 :
+      case 45 :
         /* grammar/MapCSS.g:
-         1:315: NUMBER*/
+         1:306: NUMBER*/
         {
         	mNUMBER(); 
         	if(state.failed) 
@@ -4275,9 +4236,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred1_MapCSS
   void synpred1_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     296:3: ( P ( T | X ) )*/
+     290:3: ( P ( T | X ) )*/
     /* grammar/MapCSS.g:
-     296:4: P ( T | X )*/
+     290:4: P ( T | X )*/
     {
     	mP(); 
     	if(state.failed) 
@@ -4310,9 +4271,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred2_MapCSS
   void synpred2_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     302:8: ( '%' )*/
+     296:8: ( '%' )*/
     /* grammar/MapCSS.g:
-     302:9: '%'*/
+     296:9: '%'*/
     {
     	match(37 /*'%'*/); 
     	if(state.failed) 
@@ -4326,9 +4287,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred3_MapCSS
   void synpred3_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     303:8: ( '.' )*/
+     297:8: ( '.' )*/
     /* grammar/MapCSS.g:
-     303:9: '.'*/
+     297:9: '.'*/
     {
     	match(46 /*'.'*/); 
     	if(state.failed) 
@@ -4342,9 +4303,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred4_MapCSS
   void synpred4_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     306:11: ( P ( T | X ) )*/
+     300:11: ( P ( T | X ) )*/
     /* grammar/MapCSS.g:
-     306:12: P ( T | X )*/
+     300:12: P ( T | X )*/
     {
     	mP(); 
     	if(state.failed) 
@@ -4377,9 +4338,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred5_MapCSS
   void synpred5_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     312:10: ( '%' )*/
+     306:10: ( '%' )*/
     /* grammar/MapCSS.g:
-     312:11: '%'*/
+     306:11: '%'*/
     {
     	match(37 /*'%'*/); 
     	if(state.failed) 
@@ -4516,60 +4477,58 @@ class MapCSSLexer extends Lexer {
       "\u0001\uffff\u0001\u0027\u0002\uffff\u0001\u0029\u0001\uffff\u0001"
       "\u002a\u0006\uffff\u0006\u0017\u0002\uffff\u0002\u0017\u0004\uffff"
       "\u0001\u0034\u0001\u0036\u0001\u0038\u000d\uffff\u0008\u0017\u0006"
-      "\uffff\u0001\u003b\u0002\uffff\u0001\u004b\u0005\u0017\u0001\u0053"
-      "\u0001\u0054\u0001\u0055\u0002\uffff\u0001\u003b\u0005\uffff\u0001"
-      "\u006c\u0001\u0017\u0001\u006e\u0001\u006f\u0001\u0017\u0001\u0071"
-      "\u0003\uffff\u0001\u003b\u0016\uffff\u0001\u0017\u0002\uffff\u0001"
-      "\u0017\u0001\uffff\u0001\u0074\u0001\u0017\u0001\uffff\u0001\u0017"
-      "\u0001\u0077\u0001\uffff";
+      "\uffff\u0001\u003b\u0002\uffff\u0005\u0017\u0001\u0050\u0001\u0051"
+      "\u0001\u0052\u0002\uffff\u0001\u003b\u0003\uffff\u0001\u0069\u0001"
+      "\u0017\u0001\u006b\u0001\u006c\u0001\u0017\u0001\u006e\u0003\uffff"
+      "\u0001\u003b\u0016\uffff\u0001\u0017\u0002\uffff\u0001\u0017\u0001"
+      "\uffff\u0001\u0071\u0001\u0017\u0001\uffff\u0001\u0017\u0001\u0074"
+      "\u0001\uffff";
   static const String DFA_MapCSSLexer_22_eofS =
-      "\u0078\uffff";
+      "\u0075\uffff";
   static const String DFA_MapCSSLexer_22_minS =
       "\u0001\u0009\u0001\u003d\u0002\uffff\u0001\u003d\u0001\uffff\u0001"
       "\u002d\u0006\uffff\u0001\u0072\u0001\u0061\u0001\u0069\u0001\u006f"
       "\u0001\u0047\u0001\u0061\u0002\uffff\u0001\u0052\u0001\u0047\u0004"
-      "\uffff\u0002\u003d\u0001\u007e\u0004\uffff\u0001\u0020\u0001\uffff"
-      "\u0001\u007a\u0006\uffff\u0001\u0065\u0002\u006e\u0001\u0064\u0001"
-      "\u006c\u0001\u0042\u0001\u0079\u0001\u004c\u0006\uffff\u0002\u0000"
-      "\u0001\uffff\u0001\u002d\u0001\u0061\u0001\u0076\u0002\u0065\u0001"
-      "\u0061\u0003\u002d\u0001\uffff\u0004\u0000\u0003\uffff\u0001\u002d"
-      "\u0001\u0061\u0002\u002d\u0001\u0074\u0001\u002d\u0003\uffff\u0016"
-      "\u0000\u0001\uffff\u0001\u0073\u0002\uffff\u0001\u0069\u0001\uffff"
-      "\u0001\u002d\u0001\u006f\u0001\uffff\u0001\u006e\u0001\u002d\u0001"
-      "\uffff";
+      "\uffff\u0002\u003d\u0001\u007e\u0004\uffff\u0001\u0020\u0008\uffff"
+      "\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c\u0001\u0042\u0001"
+      "\u0079\u0001\u004c\u0006\uffff\u0002\u0000\u0001\uffff\u0001\u0061"
+      "\u0001\u0076\u0002\u0065\u0001\u0061\u0003\u002d\u0001\uffff\u0004"
+      "\u0000\u0001\uffff\u0001\u002d\u0001\u0061\u0002\u002d\u0001\u0074"
+      "\u0001\u002d\u0003\uffff\u0016\u0000\u0001\uffff\u0001\u0073\u0002"
+      "\uffff\u0001\u0069\u0001\uffff\u0001\u002d\u0001\u006f\u0001\uffff"
+      "\u0001\u006e\u0001\u002d\u0001\uffff";
   static const String DFA_MapCSSLexer_22_maxS =
       "\u0001\u007e\u0001\u003d\u0002\uffff\u0001\u003d\u0001\uffff\u0001"
       "\u007a\u0006\uffff\u0001\u0072\u0001\u0061\u0001\u0069\u0001\u006f"
       "\u0001\u0067\u0001\u0061\u0002\uffff\u0001\u0072\u0001\u0067\u0004"
-      "\uffff\u0002\u003d\u0001\u007e\u0004\uffff\u0001\uffff\u0001\uffff"
-      "\u0001\u007a\u0006\uffff\u0001\u0065\u0002\u006e\u0001\u0064\u0001"
-      "\u006c\u0001\u0062\u0001\u0079\u0001\u006c\u0006\uffff\u0002\uffff"
-      "\u0001\uffff\u0001\u0039\u0001\u0061\u0001\u0076\u0002\u0065\u0001"
-      "\u0061\u0003\u007a\u0001\uffff\u0004\uffff\u0003\uffff\u0001\u007a"
-      "\u0001\u0061\u0002\u007a\u0001\u0074\u0001\u007a\u0003\uffff\u0016"
-      "\uffff\u0001\uffff\u0001\u0073\u0002\uffff\u0001\u0069\u0001\uffff"
-      "\u0001\u007a\u0001\u006f\u0001\uffff\u0001\u006e\u0001\u007a\u0001"
-      "\uffff";
+      "\uffff\u0002\u003d\u0001\u007e\u0004\uffff\u0001\uffff\u0008\uffff"
+      "\u0001\u0065\u0002\u006e\u0001\u0064\u0001\u006c\u0001\u0062\u0001"
+      "\u0079\u0001\u006c\u0006\uffff\u0002\uffff\u0001\uffff\u0001\u0061"
+      "\u0001\u0076\u0002\u0065\u0001\u0061\u0003\u007a\u0001\uffff\u0004"
+      "\uffff\u0001\uffff\u0001\u007a\u0001\u0061\u0002\u007a\u0001\u0074"
+      "\u0001\u007a\u0003\uffff\u0016\uffff\u0001\uffff\u0001\u0073\u0002"
+      "\uffff\u0001\u0069\u0001\uffff\u0001\u007a\u0001\u006f\u0001\uffff"
+      "\u0001\u006e\u0001\u007a\u0001\uffff";
   static const String DFA_MapCSSLexer_22_acceptS =
       "\u0002\uffff\u0001\u0002\u0001\u0003\u0001\uffff\u0001\u0005\u0001"
       "\uffff\u0001\u0007\u0001\u0008\u0001\u0009\u0001\u000a\u0001\u000b"
       "\u0001\u000c\u0006\uffff\u0001\u0013\u0001\u0014\u0002\uffff\u0001"
       "\u0018\u0001\u0019\u0001\u001a\u0001\u001b\u0003\uffff\u0001\u0023"
       "\u0001\u0024\u0001\u0026\u0001\u0027\u0001\uffff\u0001\u0029\u0001"
-      "\uffff\u0001\u002e\u0001\u0020\u0001\u0001\u0001\u0025\u0001\u0004"
+      "\u002c\u0001\u002d\u0001\u0020\u0001\u0001\u0001\u0025\u0001\u0004"
       "\u0001\u0006\u0008\uffff\u0001\u001c\u0001\u001e\u0001\u001d\u0001"
-      "\u001f\u0001\u0022\u0001\u0021\u0002\uffff\u0001\u0028\u0009\uffff"
-      "\u0001\u002a\u0004\uffff\u0001\u002b\u0001\u002c\u0001\u002d\u0006"
-      "\uffff\u0001\u0017\u0001\u0012\u0001\u0015\u0016\uffff\u0001\u000d"
-      "\u0001\uffff\u0001\u000f\u0001\u0010\u0001\uffff\u0001\u0016\u0002"
-      "\uffff\u0001\u000e\u0002\uffff\u0001\u0011";
+      "\u001f\u0001\u0022\u0001\u0021\u0002\uffff\u0001\u0028\u0008\uffff"
+      "\u0001\u002a\u0004\uffff\u0001\u002b\u0006\uffff\u0001\u0017\u0001"
+      "\u0012\u0001\u0015\u0016\uffff\u0001\u000d\u0001\uffff\u0001\u000f"
+      "\u0001\u0010\u0001\uffff\u0001\u0016\u0002\uffff\u0001\u000e\u0002"
+      "\uffff\u0001\u0011";
   static const String DFA_MapCSSLexer_22_specialS =
-      "\u0039\uffff\u0001\u0017\u0001\u001a\u000b\uffff\u0001\u0005\u0001"
-      "\u0018\u0001\u0019\u0001\u0016\u000c\uffff\u0001\u0006\u0001\u0013"
-      "\u0001\u0012\u0001\u0011\u0001\u0015\u0001\u0014\u0001\u0007\u0001"
-      "\u001b\u0001\u0008\u0001\u0009\u0001\u000a\u0001\u000b\u0001\u000c"
-      "\u0001\u000d\u0001\u000e\u0001\u000f\u0001\u0010\u0001\u0000\u0001"
-      "\u0002\u0001\u0001\u0001\u0003\u0001\u0004\u000c\uffff";
+      "\u0039\uffff\u0001\u0002\u0001\u0000\u000a\uffff\u0001\u0003\u0001"
+      "\u000e\u0001\u0001\u0001\u0018\u000a\uffff\u0001\u0004\u0001\u001b"
+      "\u0001\u0019\u0001\u001a\u0001\u0016\u0001\u0015\u0001\u0017\u0001"
+      "\u0005\u0001\u0014\u0001\u0013\u0001\u0011\u0001\u0012\u0001\u000d"
+      "\u0001\u000f\u0001\u0010\u0001\u000a\u0001\u000b\u0001\u000c\u0001"
+      "\u0008\u0001\u0009\u0001\u0006\u0001\u0007\u000c\uffff";
   static const List<String> DFA_MapCSSLexer_22_transitionS = const [
       "\u0002\u0023\u0001\uffff\u0002\u0023\u0012\uffff\u0001\u0023\u0001"
       "\u0001\u0001\u0018\u0001\u001a\u0001\u001f\u0002\uffff\u0001\u0019"
@@ -4618,126 +4577,123 @@ class MapCSSLexer extends Lexer {
       "\u000a\u003b\u0001\u003a\u0004\u003b\u0001\u0039\u004f\u003b\u0001"
       "\uffff\uff80\u003b",
       "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
       "\u0001\u003c",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
       "\u0001\u003d",
       "\u0001\u003e",
       "\u0001\u003f",
       "\u0001\u0040",
-      "\u0001\u0041",
-      "\u0001\u0042\u001f\uffff\u0001\u0042",
-      "\u0001\u0043",
-      "\u0001\u0044\u001f\uffff\u0001\u0044",
+      "\u0001\u0041\u001f\uffff\u0001\u0041",
+      "\u0001\u0042",
+      "\u0001\u0043\u001f\uffff\u0001\u0043",
       "",
       "",
       "",
       "",
       "",
       "",
-      "\u0000\u0045",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
+      "\u0000\u0044",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
       "",
-      "\u0001\u004c\u0002\uffff\u000a\u004c",
+      "\u0001\u004a",
+      "\u0001\u004b",
+      "\u0001\u004c",
       "\u0001\u004d",
       "\u0001\u004e",
-      "\u0001\u004f",
-      "\u0001\u0050",
-      "\u0001\u0051",
-      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u0001\u0052\u0019"
-      "\u0017\u0004\uffff\u0001\u0017\u0001\uffff\u0001\u0052\u0019\u0017",
+      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u0001\u004f\u0019"
+      "\u0017\u0004\uffff\u0001\u0017\u0001\uffff\u0001\u004f\u0019\u0017",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
       "",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0056\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0000\u004a",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0024\u004a\u0001\u005c\u0003\u004a\u0001\u0059\u0001\u005a\u0001"
-      "\u005d\u0001\u0061\u0001\u004a\u0001\u0062\u0001\u005e\u0001\u0058"
-      "\u000f\u004a\u0001\u0060\u0004\u004a\u0001\u0069\u000e\u004a\u0001"
-      "\u0067\u0003\u004a\u0001\u006b\u0004\u004a\u0001\u0057\u0001\u004a"
-      "\u0001\u005f\u0005\u004a\u0001\u0068\u0009\u004a\u0001\u0063\u0003"
-      "\u004a\u0001\u0064\u0001\u0066\u0001\u0065\u0002\u004a\u0001\u006a"
-      "\u0004\u004a\u0001\u005b\uff83\u004a",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0053\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0000\u0049",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0024\u0049\u0001\u0059\u0003\u0049\u0001\u0056\u0001\u0057\u0001"
+      "\u005a\u0001\u005e\u0001\u0049\u0001\u005f\u0001\u005b\u0001\u0055"
+      "\u000f\u0049\u0001\u005d\u0004\u0049\u0001\u0066\u000e\u0049\u0001"
+      "\u0064\u0003\u0049\u0001\u0068\u0004\u0049\u0001\u0054\u0001\u0049"
+      "\u0001\u005c\u0005\u0049\u0001\u0065\u0009\u0049\u0001\u0060\u0003"
+      "\u0049\u0001\u0061\u0001\u0063\u0001\u0062\u0002\u0049\u0001\u0067"
+      "\u0004\u0049\u0001\u0058\uff83\u0049",
       "",
-      "",
-      "",
+      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
+      "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
+      "\u0001\u006a",
+      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
+      "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
       "\u0001\u006d",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
-      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
-      "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
+      "",
+      "",
+      "",
+      "\u0000\u0049",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0053\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "\u0020\u0049\u000a\u0047\u0001\u0045\u0004\u0047\u0001\u0046\u002c"
+      "\u0047\u0001\u0048\u0022\u0047\u0001\u0049\uff80\u0047",
+      "",
+      "\u0001\u006f",
+      "",
+      "",
       "\u0001\u0070",
+      "",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
-      "",
-      "",
-      "",
-      "\u0000\u004a",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0056\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "\u0020\u004a\u000a\u0048\u0001\u0046\u0004\u0048\u0001\u0047\u002c"
-      "\u0048\u0001\u0049\u0022\u0048\u0001\u004a\uff80\u0048",
-      "",
       "\u0001\u0072",
       "",
-      "",
       "\u0001\u0073",
-      "",
-      "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
-      "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
-      "\u0001\u0075",
-      "",
-      "\u0001\u0076",
       "\u0001\u0017\u0002\uffff\u000a\u0017\u0007\uffff\u001a\u0017\u0004"
       "\uffff\u0001\u0017\u0001\uffff\u001a\u0017",
       ""
@@ -4787,7 +4743,7 @@ class DFA_MapCSSLexer_15 extends DFA {
   }
 
   String get description => 
-        """186:11: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) """;
+        """180:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) """;
 
 }
 class DFA_MapCSSLexer_22 extends DFA {
@@ -4804,31 +4760,173 @@ class DFA_MapCSSLexer_22 extends DFA {
   }
 
   String get description => 
-        """1:1: Tokens : ( T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | 
-T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | 
-T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | URL | RGBA | 
+        """1:1: Tokens : ( T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | 
+T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | 
+T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | URL | RGBA | 
 RGB | IDENT | DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | GE | 
 LE | GT | LT | NEQ | EQ | MATCH | STARTS_WITH | ENDS_WITH | SUBSTRING | 
-CONTAINS | IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | PIPE_Z | 
-RANGE | NUMBER );""";
+CONTAINS | IMPORT | REGEXP | WS | SL_COMMENT | ML_COMMENT | RANGE | 
+NUMBER );""";
 
   int specialStateTransition(int s, IntStream _input){
     IntStream input = _input;
     int _s = s;
     switch(s) {
-      case 0 :int LA22_103 = recognizer.input.LA(1);
+      case 0 :int LA22_58 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_103 == 47/*47 /*'/'*/*/) {
-        s = 71;
+      if(LA22_58 == 42/*42 /*'*'*/*/) {
+        s = 69;
       }
 
-      else if(LA22_103 == 42/*42 /*'*'*/*/) {
+      else if(LA22_58 == 47/*47 /*'/'*/*/) {
         s = 70;
       }
 
-      else if(LA22_103 == 92/*92 /*'\\'*/*/) {
+      else if((LA22_58 >= 32 /*' '*/ && LA22_58 <= 41 /*')'*/)
+        || (LA22_58 >= 43 /*'+'*/ && LA22_58 <= 46 /*'.'*/)
+        || (LA22_58 >= 48 /*'0'*/ && LA22_58 <= 91 /*'['*/)
+        || (LA22_58 >= 93 /*']'*/ && LA22_58 <= 126 /*'~'*/)
+        || (LA22_58 >= 128 /*'\u0080'*/ && LA22_58 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if(LA22_58 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_58 >= 0 /*'\u0000'*/ && LA22_58 <= 31 /*'\u001F'*/)
+        || LA22_58 == 127/*127 /*'\u007F'*/*/) {
         s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 1 :int LA22_71 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_71 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_71 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if((LA22_71 >= 32 /*' '*/ && LA22_71 <= 41 /*')'*/)
+        || (LA22_71 >= 43 /*'+'*/ && LA22_71 <= 46 /*'.'*/)
+        || (LA22_71 >= 48 /*'0'*/ && LA22_71 <= 91 /*'['*/)
+        || (LA22_71 >= 93 /*']'*/ && LA22_71 <= 126 /*'~'*/)
+        || (LA22_71 >= 128 /*'\u0080'*/ && LA22_71 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if(LA22_71 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_71 >= 0 /*'\u0000'*/ && LA22_71 <= 31 /*'\u001F'*/)
+        || LA22_71 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 2 :int LA22_57 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_57 >= 0 /*'\u0000'*/ && LA22_57 <= 65535 /*'\uFFFF'*/)) {
+        s = 68;
+      }
+
+      else s = 59;
+
+      if(s>=0) return s;
+      break;
+      case 3 :int LA22_69 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_69 == 47/*47 /*'/'*/*/) {
+        s = 83;
+      }
+
+      else if(LA22_69 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if((LA22_69 >= 32 /*' '*/ && LA22_69 <= 41 /*')'*/)
+        || (LA22_69 >= 43 /*'+'*/ && LA22_69 <= 46 /*'.'*/)
+        || (LA22_69 >= 48 /*'0'*/ && LA22_69 <= 91 /*'['*/)
+        || (LA22_69 >= 93 /*']'*/ && LA22_69 <= 126 /*'~'*/)
+        || (LA22_69 >= 128 /*'\u0080'*/ && LA22_69 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if(LA22_69 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_69 >= 0 /*'\u0000'*/ && LA22_69 <= 31 /*'\u001F'*/)
+        || LA22_69 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 4 :int LA22_83 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_83 >= 0 /*'\u0000'*/ && LA22_83 <= 65535 /*'\uFFFF'*/)) {
+        s = 73;
+      }
+
+      else s = 59;
+
+      if(s>=0) return s;
+      break;
+      case 5 :int LA22_90 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_90 == 47/*47 /*'/'*/*/) {
+        s = 83;
+      }
+
+      else if(LA22_90 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_90 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_90 >= 32 /*' '*/ && LA22_90 <= 41 /*')'*/)
+        || (LA22_90 >= 43 /*'+'*/ && LA22_90 <= 46 /*'.'*/)
+        || (LA22_90 >= 48 /*'0'*/ && LA22_90 <= 91 /*'['*/)
+        || (LA22_90 >= 93 /*']'*/ && LA22_90 <= 126 /*'~'*/)
+        || (LA22_90 >= 128 /*'\u0080'*/ && LA22_90 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_90 >= 0 /*'\u0000'*/ && LA22_90 <= 31 /*'\u001F'*/)
+        || LA22_90 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 6 :int LA22_103 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_103 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_103 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_103 == 92/*92 /*'\\'*/*/) {
+        s = 72;
       }
 
       else if((LA22_103 >= 32 /*' '*/ && LA22_103 <= 41 /*')'*/)
@@ -4836,59 +4934,29 @@ RANGE | NUMBER );""";
         || (LA22_103 >= 48 /*'0'*/ && LA22_103 <= 91 /*'['*/)
         || (LA22_103 >= 93 /*']'*/ && LA22_103 <= 126 /*'~'*/)
         || (LA22_103 >= 128 /*'\u0080'*/ && LA22_103 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
+        s = 71;
       }
 
       else if((LA22_103 >= 0 /*'\u0000'*/ && LA22_103 <= 31 /*'\u001F'*/)
         || LA22_103 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 1 :int LA22_105 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_105 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_105 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_105 == 92/*92 /*'\\'*/*/) {
         s = 73;
       }
 
-      else if((LA22_105 >= 32 /*' '*/ && LA22_105 <= 41 /*')'*/)
-        || (LA22_105 >= 43 /*'+'*/ && LA22_105 <= 46 /*'.'*/)
-        || (LA22_105 >= 48 /*'0'*/ && LA22_105 <= 91 /*'['*/)
-        || (LA22_105 >= 93 /*']'*/ && LA22_105 <= 126 /*'~'*/)
-        || (LA22_105 >= 128 /*'\u0080'*/ && LA22_105 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_105 >= 0 /*'\u0000'*/ && LA22_105 <= 31 /*'\u001F'*/)
-        || LA22_105 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
       if(s>=0) return s;
       break;
-      case 2 :int LA22_104 = recognizer.input.LA(1);
+      case 7 :int LA22_104 = recognizer.input.LA(1);
 
       s = -1;
       if(LA22_104 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_104 == 42/*42 /*'*'*/*/) {
         s = 70;
       }
 
+      else if(LA22_104 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
       else if(LA22_104 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+        s = 72;
       }
 
       else if((LA22_104 >= 32 /*' '*/ && LA22_104 <= 41 /*')'*/)
@@ -4896,370 +4964,29 @@ RANGE | NUMBER );""";
         || (LA22_104 >= 48 /*'0'*/ && LA22_104 <= 91 /*'['*/)
         || (LA22_104 >= 93 /*']'*/ && LA22_104 <= 126 /*'~'*/)
         || (LA22_104 >= 128 /*'\u0080'*/ && LA22_104 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
+        s = 71;
       }
 
       else if((LA22_104 >= 0 /*'\u0000'*/ && LA22_104 <= 31 /*'\u001F'*/)
         || LA22_104 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 3 :int LA22_106 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_106 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_106 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_106 == 92/*92 /*'\\'*/*/) {
         s = 73;
       }
 
-      else if((LA22_106 >= 32 /*' '*/ && LA22_106 <= 41 /*')'*/)
-        || (LA22_106 >= 43 /*'+'*/ && LA22_106 <= 46 /*'.'*/)
-        || (LA22_106 >= 48 /*'0'*/ && LA22_106 <= 91 /*'['*/)
-        || (LA22_106 >= 93 /*']'*/ && LA22_106 <= 126 /*'~'*/)
-        || (LA22_106 >= 128 /*'\u0080'*/ && LA22_106 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_106 >= 0 /*'\u0000'*/ && LA22_106 <= 31 /*'\u001F'*/)
-        || LA22_106 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
       if(s>=0) return s;
       break;
-      case 4 :int LA22_107 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_107 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_107 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_107 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_107 >= 32 /*' '*/ && LA22_107 <= 41 /*')'*/)
-        || (LA22_107 >= 43 /*'+'*/ && LA22_107 <= 46 /*'.'*/)
-        || (LA22_107 >= 48 /*'0'*/ && LA22_107 <= 91 /*'['*/)
-        || (LA22_107 >= 93 /*']'*/ && LA22_107 <= 126 /*'~'*/)
-        || (LA22_107 >= 128 /*'\u0080'*/ && LA22_107 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_107 >= 0 /*'\u0000'*/ && LA22_107 <= 31 /*'\u001F'*/)
-        || LA22_107 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 5 :int LA22_70 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_70 == 47/*47 /*'/'*/*/) {
-        s = 86;
-      }
-
-      else if(LA22_70 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if((LA22_70 >= 32 /*' '*/ && LA22_70 <= 41 /*')'*/)
-        || (LA22_70 >= 43 /*'+'*/ && LA22_70 <= 46 /*'.'*/)
-        || (LA22_70 >= 48 /*'0'*/ && LA22_70 <= 91 /*'['*/)
-        || (LA22_70 >= 93 /*']'*/ && LA22_70 <= 126 /*'~'*/)
-        || (LA22_70 >= 128 /*'\u0080'*/ && LA22_70 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if(LA22_70 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_70 >= 0 /*'\u0000'*/ && LA22_70 <= 31 /*'\u001F'*/)
-        || LA22_70 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 6 :int LA22_86 = recognizer.input.LA(1);
-
-      s = -1;
-      if((LA22_86 >= 0 /*'\u0000'*/ && LA22_86 <= 65535 /*'\uFFFF'*/)) {
-        s = 74;
-      }
-
-      else s = 59;
-
-      if(s>=0) return s;
-      break;
-      case 7 :int LA22_92 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_92 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_92 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_92 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_92 >= 32 /*' '*/ && LA22_92 <= 41 /*')'*/)
-        || (LA22_92 >= 43 /*'+'*/ && LA22_92 <= 46 /*'.'*/)
-        || (LA22_92 >= 48 /*'0'*/ && LA22_92 <= 91 /*'['*/)
-        || (LA22_92 >= 93 /*']'*/ && LA22_92 <= 126 /*'~'*/)
-        || (LA22_92 >= 128 /*'\u0080'*/ && LA22_92 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_92 >= 0 /*'\u0000'*/ && LA22_92 <= 31 /*'\u001F'*/)
-        || LA22_92 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 8 :int LA22_94 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_94 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_94 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_94 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_94 >= 32 /*' '*/ && LA22_94 <= 41 /*')'*/)
-        || (LA22_94 >= 43 /*'+'*/ && LA22_94 <= 46 /*'.'*/)
-        || (LA22_94 >= 48 /*'0'*/ && LA22_94 <= 91 /*'['*/)
-        || (LA22_94 >= 93 /*']'*/ && LA22_94 <= 126 /*'~'*/)
-        || (LA22_94 >= 128 /*'\u0080'*/ && LA22_94 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_94 >= 0 /*'\u0000'*/ && LA22_94 <= 31 /*'\u001F'*/)
-        || LA22_94 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 9 :int LA22_95 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_95 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_95 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_95 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_95 >= 32 /*' '*/ && LA22_95 <= 41 /*')'*/)
-        || (LA22_95 >= 43 /*'+'*/ && LA22_95 <= 46 /*'.'*/)
-        || (LA22_95 >= 48 /*'0'*/ && LA22_95 <= 91 /*'['*/)
-        || (LA22_95 >= 93 /*']'*/ && LA22_95 <= 126 /*'~'*/)
-        || (LA22_95 >= 128 /*'\u0080'*/ && LA22_95 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_95 >= 0 /*'\u0000'*/ && LA22_95 <= 31 /*'\u001F'*/)
-        || LA22_95 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 10 :int LA22_96 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_96 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_96 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_96 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_96 >= 32 /*' '*/ && LA22_96 <= 41 /*')'*/)
-        || (LA22_96 >= 43 /*'+'*/ && LA22_96 <= 46 /*'.'*/)
-        || (LA22_96 >= 48 /*'0'*/ && LA22_96 <= 91 /*'['*/)
-        || (LA22_96 >= 93 /*']'*/ && LA22_96 <= 126 /*'~'*/)
-        || (LA22_96 >= 128 /*'\u0080'*/ && LA22_96 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_96 >= 0 /*'\u0000'*/ && LA22_96 <= 31 /*'\u001F'*/)
-        || LA22_96 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 11 :int LA22_97 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_97 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_97 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_97 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_97 >= 32 /*' '*/ && LA22_97 <= 41 /*')'*/)
-        || (LA22_97 >= 43 /*'+'*/ && LA22_97 <= 46 /*'.'*/)
-        || (LA22_97 >= 48 /*'0'*/ && LA22_97 <= 91 /*'['*/)
-        || (LA22_97 >= 93 /*']'*/ && LA22_97 <= 126 /*'~'*/)
-        || (LA22_97 >= 128 /*'\u0080'*/ && LA22_97 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_97 >= 0 /*'\u0000'*/ && LA22_97 <= 31 /*'\u001F'*/)
-        || LA22_97 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 12 :int LA22_98 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_98 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_98 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_98 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_98 >= 32 /*' '*/ && LA22_98 <= 41 /*')'*/)
-        || (LA22_98 >= 43 /*'+'*/ && LA22_98 <= 46 /*'.'*/)
-        || (LA22_98 >= 48 /*'0'*/ && LA22_98 <= 91 /*'['*/)
-        || (LA22_98 >= 93 /*']'*/ && LA22_98 <= 126 /*'~'*/)
-        || (LA22_98 >= 128 /*'\u0080'*/ && LA22_98 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_98 >= 0 /*'\u0000'*/ && LA22_98 <= 31 /*'\u001F'*/)
-        || LA22_98 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 13 :int LA22_99 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_99 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_99 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_99 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_99 >= 32 /*' '*/ && LA22_99 <= 41 /*')'*/)
-        || (LA22_99 >= 43 /*'+'*/ && LA22_99 <= 46 /*'.'*/)
-        || (LA22_99 >= 48 /*'0'*/ && LA22_99 <= 91 /*'['*/)
-        || (LA22_99 >= 93 /*']'*/ && LA22_99 <= 126 /*'~'*/)
-        || (LA22_99 >= 128 /*'\u0080'*/ && LA22_99 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_99 >= 0 /*'\u0000'*/ && LA22_99 <= 31 /*'\u001F'*/)
-        || LA22_99 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 14 :int LA22_100 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_100 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_100 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_100 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_100 >= 32 /*' '*/ && LA22_100 <= 41 /*')'*/)
-        || (LA22_100 >= 43 /*'+'*/ && LA22_100 <= 46 /*'.'*/)
-        || (LA22_100 >= 48 /*'0'*/ && LA22_100 <= 91 /*'['*/)
-        || (LA22_100 >= 93 /*']'*/ && LA22_100 <= 126 /*'~'*/)
-        || (LA22_100 >= 128 /*'\u0080'*/ && LA22_100 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_100 >= 0 /*'\u0000'*/ && LA22_100 <= 31 /*'\u001F'*/)
-        || LA22_100 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 15 :int LA22_101 = recognizer.input.LA(1);
+      case 8 :int LA22_101 = recognizer.input.LA(1);
 
       s = -1;
       if(LA22_101 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_101 == 42/*42 /*'*'*/*/) {
         s = 70;
       }
 
+      else if(LA22_101 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
       else if(LA22_101 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+        s = 72;
       }
 
       else if((LA22_101 >= 32 /*' '*/ && LA22_101 <= 41 /*')'*/)
@@ -5267,29 +4994,29 @@ RANGE | NUMBER );""";
         || (LA22_101 >= 48 /*'0'*/ && LA22_101 <= 91 /*'['*/)
         || (LA22_101 >= 93 /*']'*/ && LA22_101 <= 126 /*'~'*/)
         || (LA22_101 >= 128 /*'\u0080'*/ && LA22_101 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
+        s = 71;
       }
 
       else if((LA22_101 >= 0 /*'\u0000'*/ && LA22_101 <= 31 /*'\u001F'*/)
         || LA22_101 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+        s = 73;
       }
 
       if(s>=0) return s;
       break;
-      case 16 :int LA22_102 = recognizer.input.LA(1);
+      case 9 :int LA22_102 = recognizer.input.LA(1);
 
       s = -1;
       if(LA22_102 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_102 == 42/*42 /*'*'*/*/) {
         s = 70;
       }
 
+      else if(LA22_102 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
       else if(LA22_102 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+        s = 72;
       }
 
       else if((LA22_102 >= 32 /*' '*/ && LA22_102 <= 41 /*')'*/)
@@ -5297,102 +5024,293 @@ RANGE | NUMBER );""";
         || (LA22_102 >= 48 /*'0'*/ && LA22_102 <= 91 /*'['*/)
         || (LA22_102 >= 93 /*']'*/ && LA22_102 <= 126 /*'~'*/)
         || (LA22_102 >= 128 /*'\u0080'*/ && LA22_102 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
+        s = 71;
       }
 
       else if((LA22_102 >= 0 /*'\u0000'*/ && LA22_102 <= 31 /*'\u001F'*/)
         || LA22_102 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+        s = 73;
       }
 
       if(s>=0) return s;
       break;
-      case 17 :int LA22_89 = recognizer.input.LA(1);
+      case 10 :int LA22_98 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_89 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_89 == 42/*42 /*'*'*/*/) {
+      if(LA22_98 == 47/*47 /*'/'*/*/) {
         s = 70;
       }
 
-      else if(LA22_89 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+      else if(LA22_98 == 42/*42 /*'*'*/*/) {
+        s = 69;
       }
 
-      else if((LA22_89 >= 32 /*' '*/ && LA22_89 <= 41 /*')'*/)
-        || (LA22_89 >= 43 /*'+'*/ && LA22_89 <= 46 /*'.'*/)
-        || (LA22_89 >= 48 /*'0'*/ && LA22_89 <= 91 /*'['*/)
-        || (LA22_89 >= 93 /*']'*/ && LA22_89 <= 126 /*'~'*/)
-        || (LA22_89 >= 128 /*'\u0080'*/ && LA22_89 <= 65535 /*'\uFFFF'*/)) {
+      else if(LA22_98 == 92/*92 /*'\\'*/*/) {
         s = 72;
       }
 
-      else if((LA22_89 >= 0 /*'\u0000'*/ && LA22_89 <= 31 /*'\u001F'*/)
-        || LA22_89 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+      else if((LA22_98 >= 32 /*' '*/ && LA22_98 <= 41 /*')'*/)
+        || (LA22_98 >= 43 /*'+'*/ && LA22_98 <= 46 /*'.'*/)
+        || (LA22_98 >= 48 /*'0'*/ && LA22_98 <= 91 /*'['*/)
+        || (LA22_98 >= 93 /*']'*/ && LA22_98 <= 126 /*'~'*/)
+        || (LA22_98 >= 128 /*'\u0080'*/ && LA22_98 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_98 >= 0 /*'\u0000'*/ && LA22_98 <= 31 /*'\u001F'*/)
+        || LA22_98 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
       }
 
       if(s>=0) return s;
       break;
-      case 18 :int LA22_88 = recognizer.input.LA(1);
+      case 11 :int LA22_99 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_88 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_88 == 42/*42 /*'*'*/*/) {
+      if(LA22_99 == 47/*47 /*'/'*/*/) {
         s = 70;
       }
 
-      else if(LA22_88 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+      else if(LA22_99 == 42/*42 /*'*'*/*/) {
+        s = 69;
       }
 
-      else if((LA22_88 >= 32 /*' '*/ && LA22_88 <= 41 /*')'*/)
-        || (LA22_88 >= 43 /*'+'*/ && LA22_88 <= 46 /*'.'*/)
-        || (LA22_88 >= 48 /*'0'*/ && LA22_88 <= 91 /*'['*/)
-        || (LA22_88 >= 93 /*']'*/ && LA22_88 <= 126 /*'~'*/)
-        || (LA22_88 >= 128 /*'\u0080'*/ && LA22_88 <= 65535 /*'\uFFFF'*/)) {
+      else if(LA22_99 == 92/*92 /*'\\'*/*/) {
         s = 72;
       }
 
-      else if((LA22_88 >= 0 /*'\u0000'*/ && LA22_88 <= 31 /*'\u001F'*/)
-        || LA22_88 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+      else if((LA22_99 >= 32 /*' '*/ && LA22_99 <= 41 /*')'*/)
+        || (LA22_99 >= 43 /*'+'*/ && LA22_99 <= 46 /*'.'*/)
+        || (LA22_99 >= 48 /*'0'*/ && LA22_99 <= 91 /*'['*/)
+        || (LA22_99 >= 93 /*']'*/ && LA22_99 <= 126 /*'~'*/)
+        || (LA22_99 >= 128 /*'\u0080'*/ && LA22_99 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_99 >= 0 /*'\u0000'*/ && LA22_99 <= 31 /*'\u001F'*/)
+        || LA22_99 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
       }
 
       if(s>=0) return s;
       break;
-      case 19 :int LA22_87 = recognizer.input.LA(1);
+      case 12 :int LA22_100 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_87 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_87 == 42/*42 /*'*'*/*/) {
+      if(LA22_100 == 47/*47 /*'/'*/*/) {
         s = 70;
       }
 
-      else if(LA22_87 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+      else if(LA22_100 == 42/*42 /*'*'*/*/) {
+        s = 69;
       }
 
-      else if((LA22_87 >= 32 /*' '*/ && LA22_87 <= 41 /*')'*/)
-        || (LA22_87 >= 43 /*'+'*/ && LA22_87 <= 46 /*'.'*/)
-        || (LA22_87 >= 48 /*'0'*/ && LA22_87 <= 91 /*'['*/)
-        || (LA22_87 >= 93 /*']'*/ && LA22_87 <= 126 /*'~'*/)
-        || (LA22_87 >= 128 /*'\u0080'*/ && LA22_87 <= 65535 /*'\uFFFF'*/)) {
+      else if(LA22_100 == 92/*92 /*'\\'*/*/) {
         s = 72;
       }
 
-      else if((LA22_87 >= 0 /*'\u0000'*/ && LA22_87 <= 31 /*'\u001F'*/)
-        || LA22_87 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+      else if((LA22_100 >= 32 /*' '*/ && LA22_100 <= 41 /*')'*/)
+        || (LA22_100 >= 43 /*'+'*/ && LA22_100 <= 46 /*'.'*/)
+        || (LA22_100 >= 48 /*'0'*/ && LA22_100 <= 91 /*'['*/)
+        || (LA22_100 >= 93 /*']'*/ && LA22_100 <= 126 /*'~'*/)
+        || (LA22_100 >= 128 /*'\u0080'*/ && LA22_100 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_100 >= 0 /*'\u0000'*/ && LA22_100 <= 31 /*'\u001F'*/)
+        || LA22_100 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 13 :int LA22_95 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_95 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_95 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_95 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_95 >= 32 /*' '*/ && LA22_95 <= 41 /*')'*/)
+        || (LA22_95 >= 43 /*'+'*/ && LA22_95 <= 46 /*'.'*/)
+        || (LA22_95 >= 48 /*'0'*/ && LA22_95 <= 91 /*'['*/)
+        || (LA22_95 >= 93 /*']'*/ && LA22_95 <= 126 /*'~'*/)
+        || (LA22_95 >= 128 /*'\u0080'*/ && LA22_95 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_95 >= 0 /*'\u0000'*/ && LA22_95 <= 31 /*'\u001F'*/)
+        || LA22_95 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 14 :int LA22_70 = recognizer.input.LA(1);
+
+      s = -1;
+      if((LA22_70 >= 0 /*'\u0000'*/ && LA22_70 <= 65535 /*'\uFFFF'*/)) {
+        s = 73;
+      }
+
+      else s = 59;
+
+      if(s>=0) return s;
+      break;
+      case 15 :int LA22_96 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_96 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_96 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_96 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_96 >= 32 /*' '*/ && LA22_96 <= 41 /*')'*/)
+        || (LA22_96 >= 43 /*'+'*/ && LA22_96 <= 46 /*'.'*/)
+        || (LA22_96 >= 48 /*'0'*/ && LA22_96 <= 91 /*'['*/)
+        || (LA22_96 >= 93 /*']'*/ && LA22_96 <= 126 /*'~'*/)
+        || (LA22_96 >= 128 /*'\u0080'*/ && LA22_96 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_96 >= 0 /*'\u0000'*/ && LA22_96 <= 31 /*'\u001F'*/)
+        || LA22_96 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 16 :int LA22_97 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_97 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_97 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_97 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_97 >= 32 /*' '*/ && LA22_97 <= 41 /*')'*/)
+        || (LA22_97 >= 43 /*'+'*/ && LA22_97 <= 46 /*'.'*/)
+        || (LA22_97 >= 48 /*'0'*/ && LA22_97 <= 91 /*'['*/)
+        || (LA22_97 >= 93 /*']'*/ && LA22_97 <= 126 /*'~'*/)
+        || (LA22_97 >= 128 /*'\u0080'*/ && LA22_97 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_97 >= 0 /*'\u0000'*/ && LA22_97 <= 31 /*'\u001F'*/)
+        || LA22_97 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 17 :int LA22_93 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_93 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_93 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_93 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_93 >= 32 /*' '*/ && LA22_93 <= 41 /*')'*/)
+        || (LA22_93 >= 43 /*'+'*/ && LA22_93 <= 46 /*'.'*/)
+        || (LA22_93 >= 48 /*'0'*/ && LA22_93 <= 91 /*'['*/)
+        || (LA22_93 >= 93 /*']'*/ && LA22_93 <= 126 /*'~'*/)
+        || (LA22_93 >= 128 /*'\u0080'*/ && LA22_93 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_93 >= 0 /*'\u0000'*/ && LA22_93 <= 31 /*'\u001F'*/)
+        || LA22_93 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 18 :int LA22_94 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_94 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_94 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_94 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_94 >= 32 /*' '*/ && LA22_94 <= 41 /*')'*/)
+        || (LA22_94 >= 43 /*'+'*/ && LA22_94 <= 46 /*'.'*/)
+        || (LA22_94 >= 48 /*'0'*/ && LA22_94 <= 91 /*'['*/)
+        || (LA22_94 >= 93 /*']'*/ && LA22_94 <= 126 /*'~'*/)
+        || (LA22_94 >= 128 /*'\u0080'*/ && LA22_94 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_94 >= 0 /*'\u0000'*/ && LA22_94 <= 31 /*'\u001F'*/)
+        || LA22_94 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 19 :int LA22_92 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_92 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_92 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_92 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_92 >= 32 /*' '*/ && LA22_92 <= 41 /*')'*/)
+        || (LA22_92 >= 43 /*'+'*/ && LA22_92 <= 46 /*'.'*/)
+        || (LA22_92 >= 48 /*'0'*/ && LA22_92 <= 91 /*'['*/)
+        || (LA22_92 >= 93 /*']'*/ && LA22_92 <= 126 /*'~'*/)
+        || (LA22_92 >= 128 /*'\u0080'*/ && LA22_92 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_92 >= 0 /*'\u0000'*/ && LA22_92 <= 31 /*'\u001F'*/)
+        || LA22_92 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
       }
 
       if(s>=0) return s;
@@ -5401,15 +5319,15 @@ RANGE | NUMBER );""";
 
       s = -1;
       if(LA22_91 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_91 == 42/*42 /*'*'*/*/) {
         s = 70;
       }
 
+      else if(LA22_91 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
       else if(LA22_91 == 92/*92 /*'\\'*/*/) {
-        s = 73;
+        s = 72;
       }
 
       else if((LA22_91 >= 32 /*' '*/ && LA22_91 <= 41 /*')'*/)
@@ -5417,261 +5335,299 @@ RANGE | NUMBER );""";
         || (LA22_91 >= 48 /*'0'*/ && LA22_91 <= 91 /*'['*/)
         || (LA22_91 >= 93 /*']'*/ && LA22_91 <= 126 /*'~'*/)
         || (LA22_91 >= 128 /*'\u0080'*/ && LA22_91 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
+        s = 71;
       }
 
       else if((LA22_91 >= 0 /*'\u0000'*/ && LA22_91 <= 31 /*'\u001F'*/)
         || LA22_91 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 21 :int LA22_90 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_90 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if(LA22_90 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_90 == 92/*92 /*'\\'*/*/) {
         s = 73;
       }
 
-      else if((LA22_90 >= 32 /*' '*/ && LA22_90 <= 41 /*')'*/)
-        || (LA22_90 >= 43 /*'+'*/ && LA22_90 <= 46 /*'.'*/)
-        || (LA22_90 >= 48 /*'0'*/ && LA22_90 <= 91 /*'['*/)
-        || (LA22_90 >= 93 /*']'*/ && LA22_90 <= 126 /*'~'*/)
-        || (LA22_90 >= 128 /*'\u0080'*/ && LA22_90 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if((LA22_90 >= 0 /*'\u0000'*/ && LA22_90 <= 31 /*'\u001F'*/)
-        || LA22_90 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
       if(s>=0) return s;
       break;
-      case 22 :int LA22_73 = recognizer.input.LA(1);
+      case 21 :int LA22_88 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_73 == 92/*92 /*'\\'*/*/) {
-        s = 87;
+      if(LA22_88 == 47/*47 /*'/'*/*/) {
+        s = 70;
       }
 
-      else if(LA22_73 == 47/*47 /*'/'*/*/) {
-        s = 88;
-      }
-
-      else if(LA22_73 == 40/*40 /*'('*/*/) {
-        s = 89;
-      }
-
-      else if(LA22_73 == 41/*41 /*')'*/*/) {
-        s = 90;
-      }
-
-      else if(LA22_73 == 124/*124 /*'|'*/*/) {
-        s = 91;
-      }
-
-      else if(LA22_73 == 36/*36 /*'$'*/*/) {
-        s = 92;
-      }
-
-      else if(LA22_73 == 42/*42 /*'*'*/*/) {
-        s = 93;
-      }
-
-      else if(LA22_73 == 46/*46 /*'.'*/*/) {
-        s = 94;
-      }
-
-      else if(LA22_73 == 94/*94 /*'^'*/*/) {
-        s = 95;
-      }
-
-      else if(LA22_73 == 63/*63 /*'?'*/*/) {
-        s = 96;
-      }
-
-      else if(LA22_73 == 43/*43 /*'+'*/*/) {
-        s = 97;
-      }
-
-      else if(LA22_73 == 45/*45 /*'-'*/*/) {
-        s = 98;
-      }
-
-      else if(LA22_73 == 110/*110 /*'n'*/*/) {
-        s = 99;
-      }
-
-      else if(LA22_73 == 114/*114 /*'r'*/*/) {
-        s = 100;
-      }
-
-      else if(LA22_73 == 116/*116 /*'t'*/*/) {
-        s = 101;
-      }
-
-      else if(LA22_73 == 115/*115 /*'s'*/*/) {
-        s = 102;
-      }
-
-      else if(LA22_73 == 83/*83 /*'S'*/*/) {
-        s = 103;
-      }
-
-      else if(LA22_73 == 100/*100 /*'d'*/*/) {
-        s = 104;
-      }
-
-      else if(LA22_73 == 68/*68 /*'D'*/*/) {
-        s = 105;
-      }
-
-      else if(LA22_73 == 119/*119 /*'w'*/*/) {
-        s = 106;
-      }
-
-      else if(LA22_73 == 87/*87 /*'W'*/*/) {
-        s = 107;
-      }
-
-      else if((LA22_73 >= 0 /*'\u0000'*/ && LA22_73 <= 35 /*'#'*/)
-        || (LA22_73 >= 37 /*'%'*/ && LA22_73 <= 39 /*'\''*/)
-        || LA22_73 == 44/*44 /*','*/*/
-        || (LA22_73 >= 48 /*'0'*/ && LA22_73 <= 62 /*'>'*/)
-        || (LA22_73 >= 64 /*'@'*/ && LA22_73 <= 67 /*'C'*/)
-        || (LA22_73 >= 69 /*'E'*/ && LA22_73 <= 82 /*'R'*/)
-        || (LA22_73 >= 84 /*'T'*/ && LA22_73 <= 86 /*'V'*/)
-        || (LA22_73 >= 88 /*'X'*/ && LA22_73 <= 91 /*'['*/)
-        || LA22_73 == 93/*93 /*']'*/*/
-        || (LA22_73 >= 95 /*'_'*/ && LA22_73 <= 99 /*'c'*/)
-        || (LA22_73 >= 101 /*'e'*/ && LA22_73 <= 109 /*'m'*/)
-        || (LA22_73 >= 111 /*'o'*/ && LA22_73 <= 113 /*'q'*/)
-        || (LA22_73 >= 117 /*'u'*/ && LA22_73 <= 118 /*'v'*/)
-        || (LA22_73 >= 120 /*'x'*/ && LA22_73 <= 123 /*'{'*/)
-        || (LA22_73 >= 125 /*'}'*/ && LA22_73 <= 65535 /*'\uFFFF'*/)) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 23 :int LA22_57 = recognizer.input.LA(1);
-
-      s = -1;
-      if((LA22_57 >= 0 /*'\u0000'*/ && LA22_57 <= 65535 /*'\uFFFF'*/)) {
+      else if(LA22_88 == 42/*42 /*'*'*/*/) {
         s = 69;
       }
 
-      else s = 59;
-
-      if(s>=0) return s;
-      break;
-      case 24 :int LA22_71 = recognizer.input.LA(1);
-
-      s = -1;
-      if((LA22_71 >= 0 /*'\u0000'*/ && LA22_71 <= 65535 /*'\uFFFF'*/)) {
-        s = 74;
+      else if(LA22_88 == 92/*92 /*'\\'*/*/) {
+        s = 72;
       }
 
-      else s = 59;
+      else if((LA22_88 >= 32 /*' '*/ && LA22_88 <= 41 /*')'*/)
+        || (LA22_88 >= 43 /*'+'*/ && LA22_88 <= 46 /*'.'*/)
+        || (LA22_88 >= 48 /*'0'*/ && LA22_88 <= 91 /*'['*/)
+        || (LA22_88 >= 93 /*']'*/ && LA22_88 <= 126 /*'~'*/)
+        || (LA22_88 >= 128 /*'\u0080'*/ && LA22_88 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_88 >= 0 /*'\u0000'*/ && LA22_88 <= 31 /*'\u001F'*/)
+        || LA22_88 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
 
       if(s>=0) return s;
       break;
-      case 25 :int LA22_72 = recognizer.input.LA(1);
+      case 22 :int LA22_87 = recognizer.input.LA(1);
 
       s = -1;
-      if(LA22_72 == 42/*42 /*'*'*/*/) {
+      if(LA22_87 == 47/*47 /*'/'*/*/) {
         s = 70;
+      }
+
+      else if(LA22_87 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_87 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_87 >= 32 /*' '*/ && LA22_87 <= 41 /*')'*/)
+        || (LA22_87 >= 43 /*'+'*/ && LA22_87 <= 46 /*'.'*/)
+        || (LA22_87 >= 48 /*'0'*/ && LA22_87 <= 91 /*'['*/)
+        || (LA22_87 >= 93 /*']'*/ && LA22_87 <= 126 /*'~'*/)
+        || (LA22_87 >= 128 /*'\u0080'*/ && LA22_87 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_87 >= 0 /*'\u0000'*/ && LA22_87 <= 31 /*'\u001F'*/)
+        || LA22_87 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 23 :int LA22_89 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_89 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_89 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_89 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_89 >= 32 /*' '*/ && LA22_89 <= 41 /*')'*/)
+        || (LA22_89 >= 43 /*'+'*/ && LA22_89 <= 46 /*'.'*/)
+        || (LA22_89 >= 48 /*'0'*/ && LA22_89 <= 91 /*'['*/)
+        || (LA22_89 >= 93 /*']'*/ && LA22_89 <= 126 /*'~'*/)
+        || (LA22_89 >= 128 /*'\u0080'*/ && LA22_89 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_89 >= 0 /*'\u0000'*/ && LA22_89 <= 31 /*'\u001F'*/)
+        || LA22_89 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 24 :int LA22_72 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_72 == 92/*92 /*'\\'*/*/) {
+        s = 84;
       }
 
       else if(LA22_72 == 47/*47 /*'/'*/*/) {
-        s = 71;
+        s = 85;
       }
 
-      else if((LA22_72 >= 32 /*' '*/ && LA22_72 <= 41 /*')'*/)
-        || (LA22_72 >= 43 /*'+'*/ && LA22_72 <= 46 /*'.'*/)
-        || (LA22_72 >= 48 /*'0'*/ && LA22_72 <= 91 /*'['*/)
-        || (LA22_72 >= 93 /*']'*/ && LA22_72 <= 126 /*'~'*/)
-        || (LA22_72 >= 128 /*'\u0080'*/ && LA22_72 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if(LA22_72 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_72 >= 0 /*'\u0000'*/ && LA22_72 <= 31 /*'\u001F'*/)
-        || LA22_72 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 26 :int LA22_58 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_58 == 42/*42 /*'*'*/*/) {
-        s = 70;
-      }
-
-      else if(LA22_58 == 47/*47 /*'/'*/*/) {
-        s = 71;
-      }
-
-      else if((LA22_58 >= 32 /*' '*/ && LA22_58 <= 41 /*')'*/)
-        || (LA22_58 >= 43 /*'+'*/ && LA22_58 <= 46 /*'.'*/)
-        || (LA22_58 >= 48 /*'0'*/ && LA22_58 <= 91 /*'['*/)
-        || (LA22_58 >= 93 /*']'*/ && LA22_58 <= 126 /*'~'*/)
-        || (LA22_58 >= 128 /*'\u0080'*/ && LA22_58 <= 65535 /*'\uFFFF'*/)) {
-        s = 72;
-      }
-
-      else if(LA22_58 == 92/*92 /*'\\'*/*/) {
-        s = 73;
-      }
-
-      else if((LA22_58 >= 0 /*'\u0000'*/ && LA22_58 <= 31 /*'\u001F'*/)
-        || LA22_58 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
-      }
-
-      if(s>=0) return s;
-      break;
-      case 27 :int LA22_93 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA22_93 == 47/*47 /*'/'*/*/) {
+      else if(LA22_72 == 40/*40 /*'('*/*/) {
         s = 86;
       }
 
-      else if(LA22_93 == 42/*42 /*'*'*/*/) {
-        s = 70;
+      else if(LA22_72 == 41/*41 /*')'*/*/) {
+        s = 87;
       }
 
-      else if(LA22_93 == 92/*92 /*'\\'*/*/) {
+      else if(LA22_72 == 124/*124 /*'|'*/*/) {
+        s = 88;
+      }
+
+      else if(LA22_72 == 36/*36 /*'$'*/*/) {
+        s = 89;
+      }
+
+      else if(LA22_72 == 42/*42 /*'*'*/*/) {
+        s = 90;
+      }
+
+      else if(LA22_72 == 46/*46 /*'.'*/*/) {
+        s = 91;
+      }
+
+      else if(LA22_72 == 94/*94 /*'^'*/*/) {
+        s = 92;
+      }
+
+      else if(LA22_72 == 63/*63 /*'?'*/*/) {
+        s = 93;
+      }
+
+      else if(LA22_72 == 43/*43 /*'+'*/*/) {
+        s = 94;
+      }
+
+      else if(LA22_72 == 45/*45 /*'-'*/*/) {
+        s = 95;
+      }
+
+      else if(LA22_72 == 110/*110 /*'n'*/*/) {
+        s = 96;
+      }
+
+      else if(LA22_72 == 114/*114 /*'r'*/*/) {
+        s = 97;
+      }
+
+      else if(LA22_72 == 116/*116 /*'t'*/*/) {
+        s = 98;
+      }
+
+      else if(LA22_72 == 115/*115 /*'s'*/*/) {
+        s = 99;
+      }
+
+      else if(LA22_72 == 83/*83 /*'S'*/*/) {
+        s = 100;
+      }
+
+      else if(LA22_72 == 100/*100 /*'d'*/*/) {
+        s = 101;
+      }
+
+      else if(LA22_72 == 68/*68 /*'D'*/*/) {
+        s = 102;
+      }
+
+      else if(LA22_72 == 119/*119 /*'w'*/*/) {
+        s = 103;
+      }
+
+      else if(LA22_72 == 87/*87 /*'W'*/*/) {
+        s = 104;
+      }
+
+      else if((LA22_72 >= 0 /*'\u0000'*/ && LA22_72 <= 35 /*'#'*/)
+        || (LA22_72 >= 37 /*'%'*/ && LA22_72 <= 39 /*'\''*/)
+        || LA22_72 == 44/*44 /*','*/*/
+        || (LA22_72 >= 48 /*'0'*/ && LA22_72 <= 62 /*'>'*/)
+        || (LA22_72 >= 64 /*'@'*/ && LA22_72 <= 67 /*'C'*/)
+        || (LA22_72 >= 69 /*'E'*/ && LA22_72 <= 82 /*'R'*/)
+        || (LA22_72 >= 84 /*'T'*/ && LA22_72 <= 86 /*'V'*/)
+        || (LA22_72 >= 88 /*'X'*/ && LA22_72 <= 91 /*'['*/)
+        || LA22_72 == 93/*93 /*']'*/*/
+        || (LA22_72 >= 95 /*'_'*/ && LA22_72 <= 99 /*'c'*/)
+        || (LA22_72 >= 101 /*'e'*/ && LA22_72 <= 109 /*'m'*/)
+        || (LA22_72 >= 111 /*'o'*/ && LA22_72 <= 113 /*'q'*/)
+        || (LA22_72 >= 117 /*'u'*/ && LA22_72 <= 118 /*'v'*/)
+        || (LA22_72 >= 120 /*'x'*/ && LA22_72 <= 123 /*'{'*/)
+        || (LA22_72 >= 125 /*'}'*/ && LA22_72 <= 65535 /*'\uFFFF'*/)) {
         s = 73;
       }
 
-      else if((LA22_93 >= 32 /*' '*/ && LA22_93 <= 41 /*')'*/)
-        || (LA22_93 >= 43 /*'+'*/ && LA22_93 <= 46 /*'.'*/)
-        || (LA22_93 >= 48 /*'0'*/ && LA22_93 <= 91 /*'['*/)
-        || (LA22_93 >= 93 /*']'*/ && LA22_93 <= 126 /*'~'*/)
-        || (LA22_93 >= 128 /*'\u0080'*/ && LA22_93 <= 65535 /*'\uFFFF'*/)) {
+      if(s>=0) return s;
+      break;
+      case 25 :int LA22_85 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_85 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_85 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_85 == 92/*92 /*'\\'*/*/) {
         s = 72;
       }
 
-      else if((LA22_93 >= 0 /*'\u0000'*/ && LA22_93 <= 31 /*'\u001F'*/)
-        || LA22_93 == 127/*127 /*'\u007F'*/*/) {
-        s = 74;
+      else if((LA22_85 >= 32 /*' '*/ && LA22_85 <= 41 /*')'*/)
+        || (LA22_85 >= 43 /*'+'*/ && LA22_85 <= 46 /*'.'*/)
+        || (LA22_85 >= 48 /*'0'*/ && LA22_85 <= 91 /*'['*/)
+        || (LA22_85 >= 93 /*']'*/ && LA22_85 <= 126 /*'~'*/)
+        || (LA22_85 >= 128 /*'\u0080'*/ && LA22_85 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_85 >= 0 /*'\u0000'*/ && LA22_85 <= 31 /*'\u001F'*/)
+        || LA22_85 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 26 :int LA22_86 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_86 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_86 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_86 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_86 >= 32 /*' '*/ && LA22_86 <= 41 /*')'*/)
+        || (LA22_86 >= 43 /*'+'*/ && LA22_86 <= 46 /*'.'*/)
+        || (LA22_86 >= 48 /*'0'*/ && LA22_86 <= 91 /*'['*/)
+        || (LA22_86 >= 93 /*']'*/ && LA22_86 <= 126 /*'~'*/)
+        || (LA22_86 >= 128 /*'\u0080'*/ && LA22_86 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_86 >= 0 /*'\u0000'*/ && LA22_86 <= 31 /*'\u001F'*/)
+        || LA22_86 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
+      }
+
+      if(s>=0) return s;
+      break;
+      case 27 :int LA22_84 = recognizer.input.LA(1);
+
+      s = -1;
+      if(LA22_84 == 47/*47 /*'/'*/*/) {
+        s = 70;
+      }
+
+      else if(LA22_84 == 42/*42 /*'*'*/*/) {
+        s = 69;
+      }
+
+      else if(LA22_84 == 92/*92 /*'\\'*/*/) {
+        s = 72;
+      }
+
+      else if((LA22_84 >= 32 /*' '*/ && LA22_84 <= 41 /*')'*/)
+        || (LA22_84 >= 43 /*'+'*/ && LA22_84 <= 46 /*'.'*/)
+        || (LA22_84 >= 48 /*'0'*/ && LA22_84 <= 91 /*'['*/)
+        || (LA22_84 >= 93 /*']'*/ && LA22_84 <= 126 /*'~'*/)
+        || (LA22_84 >= 128 /*'\u0080'*/ && LA22_84 <= 65535 /*'\uFFFF'*/)) {
+        s = 71;
+      }
+
+      else if((LA22_84 >= 0 /*'\u0000'*/ && LA22_84 <= 31 /*'\u001F'*/)
+        || LA22_84 == 127/*127 /*'\u007F'*/*/) {
+        s = 73;
       }
 
       if(s>=0) return s;

@@ -62,8 +62,7 @@ class StylesheetBuilder {
       case MapCSSParser.VALUE_INT: return int.parse(node.token.text);
       case MapCSSParser.VALUE_FLOAT: return double.parse(node.token.text);
       case MapCSSParser.VALUE_KEYWORD: return new IdentValue(node.token.text);
-      case MapCSSParser.VALUE_QUOTED: return new QuotedValue(_unquote(node.token.text));
-      case MapCSSParser.VALUE_HEXCOLOR: return new ColorValue.hex(node.token.text);
+      case MapCSSParser.VALUE_QUOTED: return new QuotedValue(node.token.text);
       case MapCSSParser.VALUE_RGB: 
         return new ColorValue.rgb(
             node.children[0].text,
@@ -147,28 +146,9 @@ class StylesheetBuilder {
   
   _buildZoomSelector(CommonTree node) {
     assert(node.token.type == MapCSSParser.ZOOM_SELECTOR);
-    assert(node.childCount == 1);
-    String v = node.getChild(0).text;
-    assert(v.startsWith("|z"));
-    v = v.substring(2);
-    if (new RegExp(r"^\d+$").hasMatch(v)) {
-      return new ZoomSelector.range(int.parse(v), int.parse(v));
-    } else if (new RegExp(r"^\d+\-\d+$").hasMatch(v)) {
-      var bounds = v.split(new RegExp(r"-").pattern);
-      assert(bounds.length == 2);
-      var lower = int.parse(bounds[0]);
-      var upper = int.parse(bounds[1]);
-      assert(lower <= upper);
-      return new ZoomSelector.range(lower,upper);
-    } else if (new RegExp(r"^\d+\-$").hasMatch(v)) {
-      var lower = int.parse(v.substring(0, v.length-1));
-      return new ZoomSelector.from(lower);
-    } else if (new RegExp(r"^\-\d+$").hasMatch(v)) {
-      var upper = int.parse(v.substring(1));
-      return new ZoomSelector.upto(upper);
-    } else {
-      assert(false);
-    }
+    assert(node.childCount == 2);
+    int lower = int.parse(node.children[0].text);
+    int upper = int.parse(node.children[1].text);
   }  
   
   _buildAttributeSelector(CommonTree node) {
@@ -219,17 +199,14 @@ class StylesheetBuilder {
       case MapCSSParser.VALUE_KEYWORD: 
         value = new IdentValue(node_value.token.text); break;
       case MapCSSParser.VALUE_QUOTED: 
-        value = new QuotedValue(_unquote(node_value.token.text)); break;
+        value = new QuotedValue(node_value.token.text); break;
       default:
         throw new StateError("unexpected type of value, got ${node_value.token.type}");
     }
     return new UnaryAttributeSelector(value, op);
   }
   
-  _unquote(String s) => s.replaceFirst(new RegExp(r"""^["']"""), "")
-                         .replaceFirst(new RegExp(r"""["']$"""), "");
   
- 
   _buildBinaryAttributeSelector(CommonTree node) {
     assert(node.token.type == MapCSSParser.ATTRIBUTE_SELECTOR);
     assert(node.childCount == 3);
@@ -256,7 +233,7 @@ class StylesheetBuilder {
     var lhs;
     switch(node_lhs.token.type) {
       case MapCSSParser.VALUE_QUOTED:
-        lhs = new QuotedValue(_unquote(node_lhs.text));
+        lhs = new QuotedValue(node_lhs.text);
         break;
       case MapCSSParser.VALUE_KEYWORD:
         lhs = new IdentValue(node_lhs.text);
@@ -267,7 +244,7 @@ class StylesheetBuilder {
     
     var rhs;
     switch(node_rhs.token.type) {
-      case MapCSSParser.VALUE_QUOTED: rhs = new QuotedValue(_unquote(node_rhs.text)); break;
+      case MapCSSParser.VALUE_QUOTED: rhs = new QuotedValue(node_rhs.text); break;
       case MapCSSParser.VALUE_KEYWORD: rhs = new IdentValue(node_rhs.text); break;
       case MapCSSParser.VALUE_INT: rhs = int.parse(node_rhs.text); break;
       case MapCSSParser.VALUE_FLOAT: rhs = double.parse(node_rhs.text); break;

@@ -41,25 +41,24 @@ tokens {
    SIMPLE_SELECTOR;
    DESCENDANT_COMBINATOR;
    TYPE_SELECTOR;              // .text is the type
-   ZOOM_SELECTOR;              // .text is the value including the leading '|z'
+   ZOOM_SELECTOR;              
    ATTRIBUTE_SELECTOR;
    CLASS_SELECTOR;
    DECLARATION_BLOCK;
    DECLARATION;
    
-   VALUE_HEXCOLOR;             // .text is the value, including the #
    VALUE_RGB;                  
    VALUE_RGBA;
    VALUE_URL;                  
    VALUE_KEYWORD;              // .text is the keyword, without quotes 
-   VALUE_QUOTED;               // .text is the value, *with* quotes (".." or '...')
+   VALUE_QUOTED;               // .text is the value (without quotes)
    VALUE_FLOAT;                // .text is the float value
    VALUE_INT;                  // .text is the int value 
    VALUE_PERCENTAGE;           // .text is a float or int, *with* trailing %
    VALUE_POINTS;               // .text is a float or int, *with* trailing 'pt'
    VALUE_PIXELS;               // .text is a float or int, *with* trailing 'px'
    VALUE_LIST;               
-   VALUE_REGEXP;               // .text is a regular expression, *without* quotes 
+   VALUE_REGEXP;               // .text is a regular expression
    
    OP_EXIST;
    OP_NOT_EXIST;
@@ -82,10 +81,7 @@ tokens {
 //  and the Dart package 'mapcss'. Remove or adjust them 
 //  - if your target is another language
 //  - if you want to generate the parser and lexer in their own library 
-@parser::header {
-  part of mapcss;
-}
-@lexer::header {
+@header {
   part of mapcss;
 }
 
@@ -168,22 +164,20 @@ simple_selector
 	;
 
 zoom_selector
-	: RANGE -> ^(ZOOM_SELECTOR RANGE)
+	: v=RANGE -> ^(ZOOM_SELECTOR VALUE_INT[_zoomLower($v)] VALUE_INT[_zoomUpper($v)])
 	;
 
 quoted
-	: v=DQUOTED_STRING   -> VALUE_QUOTED[$v]
-	| v=SQUOTED_STRING   -> VALUE_QUOTED[$v]
+	: v=DQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
+	| v=SQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
 	; 
 	
 ident
 	: v=IDENT   -> VALUE_KEYWORD[$v]
 	;	
 
-PIPE_Z: '|z';
-
 RANGE
-	: PIPE_Z (
+	: '|z' (
 		  '-' DIGIT+
 		| DIGIT+ 
 		| DIGIT+ '-' 
@@ -329,7 +323,7 @@ single_value
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 
 	| k=IDENT          -> VALUE_KEYWORD[$k]
 	| quoted           -> VALUE_QUOTED[$quoted.text]
-	| c=HEXCOLOR      -> VALUE_HEXCOLOR[$c]
+	| c=HEXCOLOR      -> ^(VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)])
 	| URL '(' quoted ')'                              -> VALUE_URL[$quoted.text]
 	| RGB '(' r=INT ',' g=INT ',' b=INT ')'           -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
 	| RGBA '(' r=INT ',' g=INT ',' b=INT ',' a=num ')'-> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])	
