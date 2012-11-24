@@ -15,6 +15,7 @@ class SimpleSelector implements Selector {
   static final  _classFilter = (s) => s is ClassSelector;
   static final  _zoomFilter = (s) => s is ZoomSelector;
   static final  _pseudoClassFilter = (s) => s is PseudoClassSelector;
+  static final  _layerIdFilter = (s) => s is LayerIdSelector;
   static final _attrFilter = (s) => s is AttributeSelector;
   
   static _one(list, filter) {
@@ -36,6 +37,7 @@ class SimpleSelector implements Selector {
     expect(_selectors.filter(_typeFilter).length, lessThanOrEqualTo(1), reason: "expects at most one TypeSelector");
     expect(_selectors.filter(_classFilter).length, lessThanOrEqualTo(1), reason: "expects at most one ClassSelector");
     expect(_selectors.filter(_zoomFilter).length, lessThanOrEqualTo(1), reason: "expects at most one ZoomSelector");
+    expect(_selectors.filter(_layerIdFilter).length, lessThanOrEqualTo(1), reason: "expects at most one LayerIdSelector");
   }
   
   /// the [TypeSelector] or null, if this selector has no [TypeSelector] as
@@ -67,6 +69,8 @@ class SimpleSelector implements Selector {
     if (s != null) _selectors.add(s);  
   }
   
+  LayerIdSelector get layerIdSelector => _one(_selectors, _layerIdFilter);
+  
   /// an unmodifiable list of the attribute selectors
   List get attributeSelectors => new SequenceList(_selectors.filter(_attrFilter));
   
@@ -92,6 +96,8 @@ class SimpleSelector implements Selector {
     if (s != null) sb.add(s.toSource());
     attributeSelectors.forEach((s) => sb.add(s.toSource()));
     pseudoClassSelectors.forEach((s) => sb.add(s.toSource()));
+    s = layerIdSelector;
+    if (s != null) sb.add(s.toSource());
     return sb.toString();
   }  
 }

@@ -41,6 +41,13 @@ main() {
     expectParseOK("node!.myclass{}");
   });
   
+  test("layer id selector", () {
+    expectParseOK("node::layer_1{}");
+    expectParseOK("node:closed::layer_1{}");
+    expectParseOK("node.myclass:closed::layer_1{}");
+    expectParseOK("way.myclass|z12[highwawy=residential]:closed:new::layer_1{}");
+  });
+  
   test("pseudo class selectors", () {
     expectParseOK("way:closed{}");
     expectParseOK("way[highway=residential]:closed:new{}");

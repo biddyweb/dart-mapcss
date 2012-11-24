@@ -49,6 +49,7 @@ tokens {
    ROLE_SELECTOR;
    INDEX_SELECTOR;
    PSEUDO_CLASS_SELECTOR;
+   LAYER_ID_SELECTOR;
    DECLARATION_BLOCK;
    DECLARATION;
    
@@ -108,6 +109,12 @@ RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
 RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
 ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
 INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
+NODE: ('n' | 'N') ('o' | 'O') ('d' | 'D') ('e' | 'E');
+WAY: ('w' | 'W') ('a' | 'A') ('y' | 'Y');
+RELATION: ('r' | 'R') ('e' | 'E') ('l' | 'L') ('a' | 'A') ('t' | 'T') ('i' | 'I') ('o' | 'O') ('n' | 'N');
+AREA: ('a' | 'A') ('r' | 'R') ('e' | 'E') ('a' | 'A');
+LINE: ('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E');
+CANVAS: ('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
 
 IDENT: SIDCHAR IDCHAR*;
 
@@ -168,6 +175,10 @@ link_selector
 	: '[' ROLE binary_operator rhs ']'  -> ^(ROLE_SELECTOR binary_operator rhs)
 	| '[' INDEX  int_operator num ']'   -> ^(INDEX_SELECTOR int_operator num)
 	;
+
+layer_id_selector
+	: '::' k=IDENT -> LAYER_ID_SELECTOR[$k]
+	;
 	
 int_operator
 	: EQ   -> OP_EQ 
@@ -183,9 +194,9 @@ import_statement
 	;
 
 simple_selector
-	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector*
-	     -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selector* pseudo_class_selector*)
-	| 'canvas'         -> ^(SIMPLE_SELECTOR TYPE_SELECTOR['canvas'])
+	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
+	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
+	| CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR['canvas'])
 	;
 
 zoom_selector
@@ -266,12 +277,7 @@ pseudo_class_selector
 	;	
 
 type_selector
-	: v='node'      -> VALUE_KEYWORD[$v]
-	| v='way'       -> VALUE_KEYWORD[$v]
-	| v='relation'  -> VALUE_KEYWORD[$v]
-	| v='area'      -> VALUE_KEYWORD[$v]
-	| v='line'      -> VALUE_KEYWORD[$v]
-	| v='*'         -> VALUE_KEYWORD[$v]
+	: (v=NODE | v=WAY | v=RELATION | v=AREA | v=LINE | v='*')  -> TYPE_SELECTOR[$v]
 	;
 
 declaration_block

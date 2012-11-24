@@ -233,7 +233,7 @@ way.myclass|z12-[highway='residential'] node {
   /* ---------------------------- parent combinator --------------------------- */
   group("pseudo class selectors", () {
     
-    test("one selector", () {
+    test("- one selector", () {
       var ss, styles;
       styles = """way:closed{}""";
       ss = new Stylesheet.fromString(styles);
@@ -242,7 +242,7 @@ way.myclass|z12-[highway='residential'] node {
       expect(s.pseudoClassSelectors[0].clazz, "closed");
     });
     
-    test("two selectors", () {
+    test("- two selectors", () {
       var ss, styles;
       styles = """way:closed:new{}""";
       ss = new Stylesheet.fromString(styles);
@@ -252,7 +252,7 @@ way.myclass|z12-[highway='residential'] node {
       expect(s.pseudoClassSelectors[1].clazz, "new");
     });
     
-    test("combined with other selectors", () {
+    test("- combined with other selectors", () {
       var ss, styles;
       styles = """way.myclass|z2-3[highway=residential]:closed:new{}""";
       ss = new Stylesheet.fromString(styles);
@@ -260,6 +260,30 @@ way.myclass|z12-[highway='residential'] node {
       expect(s.pseudoClassSelectors.length,2);
       expect(s.pseudoClassSelectors[0].clazz, "closed");
       expect(s.pseudoClassSelectors[1].clazz, "new");
+    });
+  });
+  
+  
+  /* ---------------------------- parent combinator --------------------------- */
+  group("layer id selectors selectors", () {
+    
+    test("- one selector", () {
+      var ss, styles;
+      styles = """way::layer_1{}""";
+      ss = new Stylesheet.fromString(styles);
+      var s = ss.rules[0].selectors[0];
+      expect(s.layerIdSelector,isNotNull);
+      expect(s.layerIdSelector.layer, "layer_1");
+    });
+    
+    
+    test("- combined with other selectors", () {
+      var ss, styles;
+      styles = """way.myclass|z2-3[highway=residential]:closed:new::layer_1{}""";
+      ss = new Stylesheet.fromString(styles);
+      var s = ss.rules[0].selectors[0];
+      expect(s.layerIdSelector,isNotNull);
+      expect(s.layerIdSelector.layer, "layer_1");
     });
   });
 }
