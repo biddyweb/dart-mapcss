@@ -8,25 +8,7 @@ grammar MapCSS;
  *  - doesn't support the "set <...>" declaration in declaration blocks
  *  - doesn't support eval() yet
  * 
- * The grammar emits an AST according to the following tree grammar
- 
- * STYLESHEET: #((RULE | IMPORT)*);
- * RULE: #((SIMPLE_SELECTOR | DESCENDANT_COMBINATOR)+ DECLARATION_BLOCK);
- * SIMPLE_SELECTOR: #(TYPE_SELECTOR CLASS_SELECTOR? ZOOM_SELECTOR? ATTRIBUTE_SELECTOR*)
- * CLASS_SELECTOR: # ((OP_EXIST | OP_NOT_EXIST) VALUE_KEYWORD)
- * ZOOM_SELECTOR:  #(VALUE_INT VALUE_INT)
- * ATTRIBUTE_SELECTOR
- *     : # ((OP_EQ | OP_NEQ | OP_LE | OP_GE | OP_LT | OP_GT | OP_MATCH) term term
- *     | # ((OP_EXIST | OP_NOT_EXIST | OP_NEGATE) term)
- *     ;
- * term: VALUE_KEYWORD | VALUE_QUOTED | VALUE_FLOAT | VALUE_INT | VALUE_REGEXP;
- * DECLARATION_BLOCK: #(DECLARATION*);
- * DECLARATION: #(VALUE_KEYWORD (simple_value VALUE_LIST)); 
- * simple_value: VALUE_HEXCOLOR | VALUE_RGB | VALUE_RGBA| VALUE_QUOTED
- *         | VALUE_FLOAT | VALUE_INT | VALUE_PERCENTAGE | VALUE_POINTS| VALUE_PIXELS;
- * VALUE_RGB: #(VALUE_INT VALUE_INT VALUE_INT);
- * VALUE_RGBA: #(VALUE_INT VALUE_INT VALUE_INT VALUE_FLOAT);
- * VALUE_LIST: #(simple_value+);
+ * The grammar emits an AST.
  *
  */
  
@@ -49,7 +31,7 @@ tokens {
    ROLE_SELECTOR;
    INDEX_SELECTOR;
    PSEUDO_CLASS_SELECTOR;
-   LAYER_ID_SELECTOR;
+   LAYER_ID_SELECTOR;         // .text is the layer id 
    DECLARATION_BLOCK;
    DECLARATION;
    

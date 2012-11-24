@@ -2,6 +2,7 @@ library mapcss;
 import "package:dartlr/dartlr.dart";
 export "package:dartlr/dartlr.dart";
 import "package:unittest/unittest.dart";
+import "dart:io";
 
 part "src/generated/MapCSSParser.dart";
 part "src/generated/MapCSSLexer.dart";
