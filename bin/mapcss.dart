@@ -9,8 +9,6 @@ class AstDumper {
    String _ident = "";
    
    _out(CommonTree tree) {
-     print("** ${tree.text}");
-       
       var s;
       switch(tree.token.type) {
         case MapCSSParser.VALUE_QUOTED:
