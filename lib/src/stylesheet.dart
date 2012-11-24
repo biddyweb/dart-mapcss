@@ -10,14 +10,10 @@ class Stylesheet {
   /// creates an empty stylesheet 
   Stylesheet();
   
-  /// parses a stylesheet from the string [ss].
-  /// Throws an [ArgumentError] if [ss] isn't a valid stylesheet.
-  factory Stylesheet.fromString(String ss) {
-    ANTLRStringStream cstream = new ANTLRStringStream(ss);
-    var lexer = new MapCSSLexer(cstream);
-    CommonTokenStream tstream = new CommonTokenStream(lexer);
-    var parser = new MapCSSParser(tstream); 
-    
+  static Stylesheet _buildFrom(ANTLRStringStream stream) {
+    var parser = new MapCSSParser(
+        new CommonTokenStream(new MapCSSLexer(stream))
+    );     
     var ret = parser.stylesheet();
     var len = parser.reportedErrors.length;
     if (len > 0){
@@ -25,6 +21,32 @@ class Stylesheet {
       throw new ArgumentError("invalid stylesheet\n$msg");
     }    
     return new StylesheetBuilder().build(ret.tree);
+  }
+  
+  /// parses a stylesheet from the string [ss].
+  /// Throws an [ArgumentError] if [ss] isn't a valid stylesheet.
+  factory Stylesheet.fromString(String ss) {
+    assert(ss != null);
+    ANTLRStringStream cstream = new ANTLRStringStream(ss);
+    return _buildFrom(cstream);
+  }
+  
+  /**
+   * Parses the stylesheet from the file given by path [path]. [path]
+   * is either a string or a [Path] object. Must not be null.
+   * 
+   * Throws an [ArgumentError] if [ss] isn't a valid stylesheet.
+   */
+  factory Stylesheet.fromFile(path) {
+     assert(path != null);
+     if (path is String ){
+       path = new Path.fromNative(path);
+     } else if (path is Path) {}
+     else {
+       throw new ArgumentError("expected String or Path, got $path");
+     }
+     ANTLRFileStream stream = new ANTLRFileStream(path);
+     return _buildFrom(stream);
   }
   
   /// an unmodifiable list of the rules 
