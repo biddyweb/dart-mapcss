@@ -97,6 +97,7 @@ RELATION: ('r' | 'R') ('e' | 'E') ('l' | 'L') ('a' | 'A') ('t' | 'T') ('i' | 'I'
 AREA: ('a' | 'A') ('r' | 'R') ('e' | 'E') ('a' | 'A');
 LINE: ('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E');
 CANVAS: ('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
+META: ('m' | 'M') ('e' | 'E') ('t' | 'T') ('a' | 'A');
 
 IDENT: SIDCHAR IDCHAR*;
 
@@ -178,7 +179,8 @@ import_statement
 simple_selector
 	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
 	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
-	| CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR['canvas'])
+	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[v])
+	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[v])
 	;
 
 zoom_selector

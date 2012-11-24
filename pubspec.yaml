@@ -19,6 +19,9 @@ dependencies:
       
   dartlr:
     git: 
-      url: git://github.com/tiagomazzutti/dartlr.git      
+      # url: git://github.com/tiagomazzutti/dartlr.git
+      url: git://github.com/Gubaer/dartlr.git
+      ref: path-in-ANTLRFileStream
+          
       
     
