@@ -13,11 +13,7 @@ main() {
   test("simple - class selector", () {
     var styles = """way.closed{}""";
     var ss = new Stylesheet.fromString(styles);
-    styles = """way:closed{}""";
-    ss = new Stylesheet.fromString(styles);
     styles = """way!.closed{}""";
-    ss = new Stylesheet.fromString(styles);
-    styles = """way!:closed{}""";    
     ss = new Stylesheet.fromString(styles);
   });
   
@@ -173,7 +169,7 @@ main() {
   color: rgb(11,33,44);
   fill: 1,2,4,5
 }
-way:closed|z12-[highway='residential'] node {
+way.myclass|z12-[highway='residential'] node {
   fill-color: #ffffff;
   spacing: even;
 }
@@ -206,7 +202,7 @@ way:closed|z12-[highway='residential'] node {
       expect(rs.rhs.value, "arole");
     });
     
-    test("link combinator - index seelctor", () {
+    test("link combinator - index selector", () {
       var ss, styles;
       styles = """way >[index <= 5] node {}""";
       ss = new Stylesheet.fromString(styles);
@@ -218,9 +214,8 @@ way:closed|z12-[highway='residential'] node {
       expect(rs.rhs is num, true);
       expect(rs.rhs, 5);
     });
-    
+   
   });
-  
   
   /* ---------------------------- parent combinator --------------------------- */
   group("parent combinator", () {

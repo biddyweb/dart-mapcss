@@ -38,9 +38,7 @@ main() {
   
   test("class selectors", () {
     expectParseOK("node.myclass{}");
-    expectParseOK("node:myclass{}");
     expectParseOK("node!.myclass{}");
-    expectParseOK("node!:myclass{}");
   });
   
   test("attribute selectors - binary operators", () {
