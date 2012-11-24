@@ -168,6 +168,9 @@ class StylesheetBuilder {
         case MapCSSParser.ATTRIBUTE_SELECTOR:
           subsels.add(_buildAttributeSelector(child));
           break;
+        case MapCSSParser.PSEUDO_CLASS_SELECTOR:
+          subsels.add(_buildPseudoClassSelector(child));
+          break;
         default:
           throw new StateError("unexpected child node of type ${child.token.type}");
       }      
@@ -187,6 +190,14 @@ class StylesheetBuilder {
       default:
          assert(false);
     }
+  }
+  
+  _buildPseudoClassSelector(CommonTree node) {
+    assert(node.token.type == MapCSSParser.PSEUDO_CLASS_SELECTOR);
+    assert(node.childCount == 2);
+    assert(node.children[0].token.type == MapCSSParser.OP_EXIST);    
+    var cls = node.children[1].text;
+    return new PseudoClassSelector(cls);
   }
   
   _buildZoomSelector(CommonTree node) {

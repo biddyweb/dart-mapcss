@@ -32,6 +32,7 @@ part "src/values/regexp_value.dart";
 part "src/parsing_util.dart";
 part "src/selector.dart";
 part "src/link_selector.dart";
+part "src/pseudo_class_selector.dart";
 
 part "src/test/test_private.dart";
 

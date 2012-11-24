@@ -14,6 +14,7 @@ class SimpleSelector implements Selector {
   static final _typeFilter = (s) => s is TypeSelector;
   static final  _classFilter = (s) => s is ClassSelector;
   static final  _zoomFilter = (s) => s is ZoomSelector;
+  static final  _pseudoClassFilter = (s) => s is PseudoClassSelector;
   static final _attrFilter = (s) => s is AttributeSelector;
   
   static _one(list, filter) {
@@ -69,6 +70,9 @@ class SimpleSelector implements Selector {
   /// an unmodifiable list of the attribute selectors
   List get attributeSelectors => new SequenceList(_selectors.filter(_attrFilter));
   
+  /// an unmodifiable list of the pseudo class selectors
+  List get pseudoClassSelectors => new SequenceList(_selectors.filter(_pseudoClassFilter));
+  
   set attributeSelectors(List<AttributeSelector> sels) {
     if (sels == null) return;
     expect(sels.every((s) => s != null), true, reason: "selectors must not be null");
@@ -87,6 +91,7 @@ class SimpleSelector implements Selector {
     s = zoomSelector;
     if (s != null) sb.add(s.toSource());
     attributeSelectors.forEach((s) => sb.add(s.toSource()));
+    pseudoClassSelectors.forEach((s) => sb.add(s.toSource()));
     return sb.toString();
   }  
 }

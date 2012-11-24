@@ -3,11 +3,8 @@ part of mapcss;
 /**
  * Represents a class selector. It either tests for the existence or 
  * the absence of the class, i.e.
- *    way.closed
- *    way.!closed
- * or
- *    way:closed
- *    way!:closed 
+ *    way.myclass
+ *    way!.myclass
  */
 class ClassSelector implements SubSelector{
   

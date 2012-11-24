@@ -48,6 +48,7 @@ tokens {
    CLASS_SELECTOR;
    ROLE_SELECTOR;
    INDEX_SELECTOR;
+   PSEUDO_CLASS_SELECTOR;
    DECLARATION_BLOCK;
    DECLARATION;
    
@@ -157,8 +158,8 @@ rule
 	;
   
 selector
-	: simple_selector                  -> simple_selector
-	| simple_selector simple_selector  -> ^(DESCENDANT_COMBINATOR simple_selector+)
+	: simple_selector                     -> simple_selector
+	| simple_selector simple_selector     -> ^(DESCENDANT_COMBINATOR simple_selector+)
 	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
 	| simple_selector '<' simple_selector -> ^(PARENT_COMBINATOR simple_selector+)
 	;
@@ -182,8 +183,8 @@ import_statement
 	;
 
 simple_selector
-	: type_selector class_selector? zoom_selector? attribute_selectors  
-	     -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selectors?)
+	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector*
+	     -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$type_selector.text] class_selector? zoom_selector? attribute_selector* pseudo_class_selector*)
 	| 'canvas'         -> ^(SIMPLE_SELECTOR TYPE_SELECTOR['canvas'])
 	;
 
@@ -207,10 +208,6 @@ RANGE
 		| DIGIT+ '-' 
 		| DIGIT+ '-' DIGIT+
 	  )
-	;
-
-attribute_selectors
-	: attribute_selector* -> attribute_selector*
 	;
 
 attribute_selector
@@ -263,6 +260,10 @@ class_selector
 	: '!.'  k=IDENT  -> ^(CLASS_SELECTOR OP_NOT_EXIST VALUE_KEYWORD[$k])
 	|  '.'  k=IDENT  -> ^(CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
 	;
+
+pseudo_class_selector
+	: ':' k=IDENT    -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
+	;	
 
 type_selector
 	: v='node'      -> VALUE_KEYWORD[$v]

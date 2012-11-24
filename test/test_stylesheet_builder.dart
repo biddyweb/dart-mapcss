@@ -206,7 +206,6 @@ way.myclass|z12-[highway='residential'] node {
       var ss, styles;
       styles = """way >[index <= 5] node {}""";
       ss = new Stylesheet.fromString(styles);
-      print(ss.rules[0].selectors[0].runtimeType);
       expect(ss.rules[0].selectors[0] is ChildCombinator, true);
       var rs = ss.rules[0].selectors[0].linkSelectors[0];
       expect(rs  is IndexSelector, true);
@@ -224,12 +223,43 @@ way.myclass|z12-[highway='residential'] node {
       var ss, styles;
       styles = """node < way {}""";
       ss = new Stylesheet.fromString(styles);
-      print(ss.rules[0].selectors[0].runtimeType);      
       var pc = ss.rules[0].selectors[0];
       expect(pc is ParentCombinator, true);
       expect(pc.child.typeSelector.type, "node");
       expect(pc.parent.typeSelector.type, "way");      
     });
+  });
+  
+  /* ---------------------------- parent combinator --------------------------- */
+  group("pseudo class selectors", () {
     
+    test("one selector", () {
+      var ss, styles;
+      styles = """way:closed{}""";
+      ss = new Stylesheet.fromString(styles);
+      var s = ss.rules[0].selectors[0];
+      expect(s.pseudoClassSelectors.length,1);
+      expect(s.pseudoClassSelectors[0].clazz, "closed");
+    });
+    
+    test("two selectors", () {
+      var ss, styles;
+      styles = """way:closed:new{}""";
+      ss = new Stylesheet.fromString(styles);
+      var s = ss.rules[0].selectors[0];
+      expect(s.pseudoClassSelectors.length,2);
+      expect(s.pseudoClassSelectors[0].clazz, "closed");
+      expect(s.pseudoClassSelectors[1].clazz, "new");
+    });
+    
+    test("combined with other selectors", () {
+      var ss, styles;
+      styles = """way.myclass|z2-3[highway=residential]:closed:new{}""";
+      ss = new Stylesheet.fromString(styles);
+      var s = ss.rules[0].selectors[0];
+      expect(s.pseudoClassSelectors.length,2);
+      expect(s.pseudoClassSelectors[0].clazz, "closed");
+      expect(s.pseudoClassSelectors[1].clazz, "new");
+    });
   });
 }

@@ -41,6 +41,11 @@ main() {
     expectParseOK("node!.myclass{}");
   });
   
+  test("pseudo class selectors", () {
+    expectParseOK("way:closed{}");
+    expectParseOK("way[highway=residential]:closed:new{}");
+  });
+  
   test("attribute selectors - binary operators", () {
     expectParseOK("node[a=b]{}");
     expectParseOK("node[a!=b]{}");
