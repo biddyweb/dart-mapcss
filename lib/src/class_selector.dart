@@ -18,7 +18,6 @@ class ClassSelector implements SubSelector{
     assert(_class != null);
     assert([Operator.EXIST, Operator.NOT_EXIST].contains(_op));
     _class = _class.trim();
-    _class = _class.replaceFirst(new RegExp("^[\\.:]+]"), "");
   }
   ClassSelector.exists(String clazz) : this(clazz);
   ClassSelector.notExists(String clazz) : this(clazz, Operator.NOT_EXIST);
