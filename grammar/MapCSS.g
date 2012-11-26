@@ -73,9 +73,15 @@ tokens {
   part of mapcss;
 }
 
+@lexer::members {
+    /// if the scanner in an attribute selectors, i.e. '[highway=residential]'
+	bool isInAttributeSelector = false;
+}
+
 fragment DIGIT:  '0'..'9';
 fragment CHAR: 'a'..'z' | 'A'..'Z';
 fragment IDCHAR: CHAR | '_' | '-' | DIGIT;
+fragment TAGCHAR: CHAR | '_' | DIGIT;
 fragment SIDCHAR: CHAR | '-';
 fragment EDQUOTE: '\\"';
 fragment ESQUOTE: '\\\'';
@@ -86,21 +92,24 @@ fragment PT: ('p' | 'P') ('t' | 'T');
 fragment PX: ('p' | 'P') ('x' | 'X');
 
 
-URL: ('u' | 'U') ('r' | 'R') ('l' | 'L');
-RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
-RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
-ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
-INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
-NODE: ('n' | 'N') ('o' | 'O') ('d' | 'D') ('e' | 'E');
-WAY: ('w' | 'W') ('a' | 'A') ('y' | 'Y');
-RELATION: ('r' | 'R') ('e' | 'E') ('l' | 'L') ('a' | 'A') ('t' | 'T') ('i' | 'I') ('o' | 'O') ('n' | 'N');
-AREA: ('a' | 'A') ('r' | 'R') ('e' | 'E') ('a' | 'A');
-LINE: ('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E');
-CANVAS: ('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
-META: ('m' | 'M') ('e' | 'E') ('t' | 'T') ('a' | 'A');
+URL: {!isInAttributeSelector}?=>('u' | 'U') ('r' | 'R') ('l' | 'L');
+RGBA: {!isInAttributeSelector}?=>('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
+RGB: {!isInAttributeSelector}?=>('r' | 'R') ('g' | 'G') ('b' | 'B');
+ROLE: {!isInAttributeSelector}?=>('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
+INDEX: {!isInAttributeSelector}?=>('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
+NODE: {!isInAttributeSelector}?=>('n' | 'N') ('o' | 'O') ('d' | 'D') ('e' | 'E');
+WAY: {!isInAttributeSelector}?=>('w' | 'W') ('a' | 'A') ('y' | 'Y');
+RELATION: {!isInAttributeSelector}?=>('r' | 'R') ('e' | 'E') ('l' | 'L') ('a' | 'A') ('t' | 'T') ('i' | 'I') ('o' | 'O') ('n' | 'N');
+AREA: {!isInAttributeSelector}?=>('a' | 'A') ('r' | 'R') ('e' | 'E') ('a' | 'A');
+LINE: {!isInAttributeSelector}?=>('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E');
+CANVAS: {!isInAttributeSelector}?=>('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
+META: {!isInAttributeSelector}?=>('m' | 'M') ('e' | 'E') ('t' | 'T') ('a' | 'A');
 
-IDENT: SIDCHAR IDCHAR*;
-
+IDENT: {!isInAttributeSelector}?=> SIDCHAR IDCHAR*;
+TAG:   {isInAttributeSelector}?=> TAGCHAR+ ((':' | '.') TAGCHAR+)*;
+LBRAC: '[' {isInAttributeSelector=true;};
+RBRAC: ']' {isInAttributeSelector=false;};
+       
 DQUOTED_STRING: '"' (' ' | '!' | '#'..'[' | ']'..'~' | UNICODE | EDQUOTE | EBACKSLASH )* '"';
 SQUOTED_STRING: '\'' (' '..'&' | '('..'[' | ']'..'~' | UNICODE | ESQUOTE | EBACKSLASH)* '\'';
 
@@ -179,8 +188,8 @@ import_statement
 simple_selector
 	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
 	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
-	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[v])
-	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[v])
+	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
+	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
 	;
 
 zoom_selector
@@ -206,14 +215,18 @@ RANGE
 	;
 
 attribute_selector
-	: '[' condition ']'  -> ^(ATTRIBUTE_SELECTOR condition)
+	: LBRAC  condition RBRAC   -> ^(ATTRIBUTE_SELECTOR condition)
 	;
 
 lhs
 	: quoted 
-	| ident
+	| tag
 	;
-	
+
+tag
+	: v=TAG -> VALUE_KEYWORD[$v]
+	;
+		
 condition
 	: lhs                         -> OP_EXIST lhs
 	| lhs binary_operator rhs     -> binary_operator lhs rhs
@@ -223,7 +236,7 @@ condition
 	;
 	
 rhs
-	: ident
+	: tag
 	| num
 	| quoted
 	;

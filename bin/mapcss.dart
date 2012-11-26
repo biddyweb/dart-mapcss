@@ -10,9 +10,10 @@ class AstDumper {
    
    _out(CommonTree tree) {
       var s;
+      if (tree == null) return;
       switch(tree.token.type) {
         case MapCSSParser.VALUE_QUOTED:
-          s = "VALUE_QUOTED <${tree.token.text}>";
+          s = "VALUE_QUOTED <${tree.text}>";
           break;
         case MapCSSParser.VALUE_REGEXP:
           s = "VALUE_REGEXP <${tree.token.text}>";
@@ -61,6 +62,7 @@ class AstDumper {
    
    
    _walk(CommonTree tree) {
+     if (tree == null) return;
      _out(tree);     
      if (tree.childCount != 0) {
        _ident = "$_ident  ";

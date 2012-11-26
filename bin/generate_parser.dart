@@ -14,7 +14,7 @@ generate() {
   ]).then((Process process) {
       var errmsg = new StringBuffer();
       var err = new StringInputStream(process.stderr);
-      err.onLine = () => errmsg.add(err.readLine());
+      err.onLine = () => errmsg.add("${err.readLine()}\n");
       process.onExit = (exitCode) {
         if (exitCode == 0) {
           print("""
@@ -22,6 +22,7 @@ Successfully generated MapCSS lexer and MapCSS grammar, see
     lib/src/generated/MapCSSLexer.dart
     lib/src/generated/MapCSSParser.dart 
 """);
+          print(errmsg);
         } else {
           print("Failed.");
           print(errmsg);

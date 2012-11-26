@@ -31,13 +31,14 @@ _unicodeToChar(u) {
 
 _unquote(v) {
   var s = (v is Token) ? v.text : v;
+      
   s = s.replaceFirst(new RegExp(r"""^["']"""), "")
       .replaceFirst(new RegExp(r"""["']$"""), "")
       .replaceAll(new RegExp(r'\\"'), '"')
       .replaceAll(new RegExp(r"\\'"), "'")
       .replaceAll(new RegExp(r"\\\\"), r"\");
   
-  var matches = new RegExp(r"\\u[a-fA-F0-9][a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]").allMatches(s);
+  var matches = new List.from(new RegExp(r"\\u[a-fA-F0-9][a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]").allMatches(s));
   if (!matches.isEmpty) {
   var sb = new StringBuffer();  
     for (int i=0; i<matches.length; i++) {
