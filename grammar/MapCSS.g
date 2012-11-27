@@ -70,53 +70,47 @@ tokens {
    VALUE_REGEXP;               // .text is a regular expression
    
    OP_EXIST;
-   OP_NOT_EXIST;
-   OP_EQ;   
-   OP_NEQ;
-   OP_LE;
-   OP_GE;
-   OP_LT;
-   OP_GT;
-   OP_MATCH;
+   OP_NOT_EXIST;               // NOTE: not identical with OP_NOT -> !tag or !class
+   OP_EQ='=';   
+   OP_NEQ='!=';
+   OP_LE='<=';
+   OP_GE='>=';
+   OP_LT='<';
+   OP_GT='>';
+   OP_MATCH='=~';
    OP_NEGATE;
-   OP_STARTS_WITH;
-   OP_ENDS_WITH;
-   OP_SUBSTRING;
-   OP_CONTAINS;
+   OP_STARTS_WITH='^=';
+   OP_ENDS_WITH='$=';
+   OP_SUBSTRING='*=';
+   OP_CONTAINS='~=';
    OP_TRUTHY;
    
-   OP_OR;
-   OP_AND;
-   OP_NOT;
+   OP_OR='||';
+   OP_AND='&&';
+   OP_NOT;                    // NOTE: boolean not -> !(expr)
    
-   OP_MUL;
+   OP_MUL='*';
    OP_DIV;
-   OP_MOD;
+   OP_MOD='%';
    
-   OP_PLUS;
+   OP_PLUS='+';
    OP_MINUS;
    
    FUNCTION_CALL;
-   EVAL_CALL;
-   
+   EVAL_CALL;   
 }
 
-//NOTE: @parser::header and @lexer::header are specific for the target language Dart
-//  and the Dart package 'mapcss'. Remove or adjust them 
-//  - if your target is another language
-//  - if you want to generate the parser and lexer in their own library 
 @header {
   part of mapcss;
 }
 
 @lexer::members {
-    /// if the scanner in an attribute selectors, i.e. '[highway=residential]'
+    /// true, if the scanner is in an attribute selectors, i.e. '[highway=residential]'
 	bool isInAttributeSelector = false;	
 }
 
 @parser::members {
-
- }
+}
 
 fragment DIGIT:  '0'..'9';
 fragment CHAR: 'a'..'z' | 'A'..'Z';
@@ -145,6 +139,7 @@ LINE: {!isInAttributeSelector}?=>('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E')
 CANVAS: {!isInAttributeSelector}?=>('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
 META: {!isInAttributeSelector}?=>('m' | 'M') ('e' | 'E') ('t' | 'T') ('a' | 'A');
 EVAL: {!isInAttributeSelector}?=>'eval';
+IMPORT:     '@import';
 
 ROLE: {isInAttributeSelector}?=>('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
 INDEX: {isInAttributeSelector}?=>('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
@@ -160,209 +155,11 @@ SQUOTED_STRING: '\'' (' '..'&' | '('..'[' | ']'..'~' | UNICODE | ESQUOTE | EBACK
 
 HEXCOLOR: '#' ((HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT) | (HEXDIGIT HEXDIGIT HEXDIGIT));
 
-GE: 		  '>=';
-LE: 		  '<=';
-GT:  		  '>';
-LT:  		  '<';
-NEQ:          '!=';
-EQ:  		  '=';
-MATCH:        '=~';
-STARTS_WITH:  '^=';
-ENDS_WITH:    '$=';
-SUBSTRING:    '*=';
-CONTAINS:     '~=';
 
 
-
-IMPORT:     '@import';
-
-fragment REGEX_START:  ' '..')' | '+'..'.' |'0'..'[' | ']'..'~' | UNICODE;
-fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE;
-fragment REGEX_ESCAPE:   '\\\\' | '\\/' | '\\(' | '\\)' 
-                       | '\\|' | '\\$' | '\\*' | '\\.' | '\\^' | '\\?' | '\\+' | '\\-'
-                       | '\\n' | '\\r' | '\\t'
-                       | '\\s' | '\\S'
-                       | '\\d' | '\\D'
-                       | '\\w' | '\\W';      
-                       
-/*
- * make sure a / is  followed by a regular expression. If not, treat it
- * as DIV operator.
- */ 
-fragment DIV:;   
-REGEXP:  '/'  (
-              ((REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/') 
-                    => (REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/' {$type=REGEXP}
-           |  (.)   =>                                              {$type=DIV}
-         );
-
-
-
-WS:			  (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
-SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
-ML_COMMENT:   '/*'  (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
-
-stylesheet
-	: entry* EOF -> ^(STYLESHEET entry*)
-	;
-
-entry
-	: rule
-	| import_statement
-	;
-			
-rule
-    // we allow an arbitray number of "empty" selectors seperated by ',' before a declaration block
-	: selector (',' selector)* ','* declaration_block -> ^(RULE selector* declaration_block)
-	;
-  
-selector
-	: simple_selector                     -> simple_selector
-	| simple_selector simple_selector     -> ^(DESCENDANT_COMBINATOR simple_selector+)
-	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
-	| simple_selector '<' simple_selector -> ^(PARENT_COMBINATOR simple_selector+)
-	;
-
-link_selector
-	: LBRAC ROLE binary_operator rhs RBRAC  -> ^(ROLE_SELECTOR binary_operator rhs)
-	| LBRAC INDEX op=int_operator v=POSITIVE_INT RBRAC   -> ^(INDEX_SELECTOR int_operator VALUE_INT[v])
-	;
-
-layer_id_selector
-	: '::' k=IDENT -> LAYER_ID_SELECTOR[$k]
-	;
-	
-int_operator
-	: EQ   -> OP_EQ 
-	| NEQ  -> OP_NEQ 
-	| LT   -> OP_LT
-	| LE   -> OP_LE
-	| GT   -> OP_GT
-	| GE   -> OP_GE
-	;
-		
-import_statement
-	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
-	;
-
-simple_selector
-	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
-	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
-	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
-	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
-	;
-
-zoom_selector
-	: v=RANGE -> ^(ZOOM_SELECTOR VALUE_INT[_zoomLower($v)] VALUE_INT[_zoomUpper($v)])
-	;
-
-quoted
-	: v=DQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
-	| v=SQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
-	; 
-	
-ident
-	: v=IDENT   -> VALUE_KEYWORD[$v]
-	;	
-
-RANGE
-	: '|z' (
-		  '-' DIGIT+
-		| DIGIT+ 
-		| DIGIT+ '-' 
-		| DIGIT+ '-' DIGIT+
-	  )
-	;
-
-attribute_selector
-	: LBRAC  condition RBRAC   -> ^(ATTRIBUTE_SELECTOR condition)
-	;
-
-lhs
-	: quoted 
-	| tag
-	;
-
-tag
-	: v=TAG -> VALUE_KEYWORD[$v]
-	;
-		
-condition
-	: lhs                         -> OP_EXIST lhs
-	| lhs binary_operator rhs     -> binary_operator lhs rhs
-	| lhs MATCH rhs_match         -> OP_MATCH lhs rhs_match
-	| unary_operator lhs          -> unary_operator lhs
-	| lhs '?'                     -> OP_TRUTHY lhs
-	;
-	
-rhs
-	: tag
-	| num
-	| quoted
-	;
-
-rhs_match
-	: quoted
-	| r=REGEXP                     -> VALUE_REGEXP[$r]	
-	;
-	
-binary_operator
-	: EQ          -> OP_EQ
-	| NEQ 		  -> OP_NEQ
-	| LT          -> OP_LT
-	| GT          -> OP_GT
-	| LE          -> OP_LE
-	| GE          -> OP_GE
-	| STARTS_WITH -> OP_STARTS_WITH
-    | ENDS_WITH   -> OP_ENDS_WITH
-    | SUBSTRING   -> OP_SUBSTRING
-    | CONTAINS    -> OP_CONTAINS
-	;        
-
-unary_operator
-	: '-'      -> OP_NEGATE
-	| '!'      -> OP_NOT_EXIST
-	;
-
-class_selector
-	: '!.'  k=IDENT  -> ^(CLASS_SELECTOR OP_NOT_EXIST VALUE_KEYWORD[$k])
-	|  '.'  k=IDENT  -> ^(CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
-	;
-
-pseudo_class_selector
-	: ':' k=IDENT    -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
-	;	
-
-type_selector
-	: (v=NODE | v=WAY | v=RELATION | v=AREA | v=LINE | v='*')  -> TYPE_SELECTOR[$v]
-	;
-
-declaration_block
-	:  '{' declarations '}' -> ^(DECLARATION_BLOCK declarations)
-	|  '{' '}'              -> ^(DECLARATION_BLOCK)
-	;
-
-declarations
-	: declaration (';' declaration)* ';'*  -> declaration*
-	;
-
-declaration
-	: declaration_property ':' declaration_value   -> ^(DECLARATION declaration_property declaration_value)
-	;
-
-declaration_property
-    : k=URL     ->  VALUE_KEYWORD[$k]
-    | k=RGB     ->  VALUE_KEYWORD[$k]
-    | k=RGBA    ->  VALUE_KEYWORD[$k]
-	| k=IDENT   ->  VALUE_KEYWORD[$k]	
-	;	
-
-declaration_value
-	: single_value
-	| EVAL  '(' expr ')'  -> ^(EVAL_CALL expr)					
-	| single_value ',' single_value (',' single_value)*    -> ^(VALUE_LIST single_value*)
-	;
-
+/* ----------------------------------------------------------------------------------------------- */
+/* Positive/Negative numbers and numbers with units                                                */
+/* ----------------------------------------------------------------------------------------------- */
 fragment PERCENTAGE:;
 fragment PIXELS:;
 fragment POINTS:;
@@ -423,7 +220,209 @@ NUMBER
 	       ) 
 	    | {$type=POSITIVE_INT;}
 	  )	  
-	;		 
+	;		
+
+/* ----------------------------------------------------------------------------------------------- */
+/* Zoom range                                                                                      */
+/* ----------------------------------------------------------------------------------------------- */
+RANGE
+	: '|z' (
+		  '-' DIGIT+
+		| DIGIT+ 
+		| DIGIT+ '-' 
+		| DIGIT+ '-' DIGIT+
+	  )
+	;
+	
+/* ----------------------------------------------------------------------------------------------- */
+/* Regular expressions                                                                             */
+/* ----------------------------------------------------------------------------------------------- */
+fragment REGEX_START:  ' '..')' | '+'..'.' |'0'..'[' | ']'..'~' | UNICODE;
+fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE;
+fragment REGEX_ESCAPE:   '\\\\' | '\\/' | '\\(' | '\\)' 
+                       | '\\|' | '\\$' | '\\*' | '\\.' | '\\^' | '\\?' | '\\+' | '\\-'
+                       | '\\n' | '\\r' | '\\t'
+                       | '\\s' | '\\S'
+                       | '\\d' | '\\D'
+                       | '\\w' | '\\W';      
+                       
+/*
+ * make sure a / is  followed by a regular expression. If not, treat it
+ * as DIV operator.
+ */ 
+fragment DIV:;   
+REGEXP:  '/'  (
+              ((REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/') 
+                    => (REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/' {$type=REGEXP}
+           |  (.)   =>                                              {$type=DIV}
+         );
+
+
+/* ----------------------------------------------------------------------------------------------- */
+/* Whitespace and comments                                                                         */
+/* ----------------------------------------------------------------------------------------------- */
+WS:			  (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
+SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
+ML_COMMENT:   '/*'  (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
+
+/* =============================================================================================== */
+/* Grammar                                                                                         */
+/* ===============================================================================================  */
+
+stylesheet
+	: entry* EOF -> ^(STYLESHEET entry*)
+	;
+
+entry
+	: rule
+	| import_statement
+	;
+			
+rule
+    /*
+     * we allow an arbitray number of "empty" selectors seperated by ',' before a declaration block
+     */
+	: selector (',' selector)* ','* declaration_block -> ^(RULE selector* declaration_block)
+	;
+  
+selector
+	: simple_selector                     -> simple_selector
+	| simple_selector simple_selector     -> ^(DESCENDANT_COMBINATOR simple_selector+)
+	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
+	| simple_selector '<' simple_selector -> ^(PARENT_COMBINATOR simple_selector+)
+	;
+
+link_selector
+	: LBRAC ROLE binary_operator rhs RBRAC  -> ^(ROLE_SELECTOR binary_operator rhs)
+	| LBRAC INDEX op=int_operator v=POSITIVE_INT RBRAC   -> ^(INDEX_SELECTOR int_operator VALUE_INT[v])
+	;
+
+layer_id_selector
+	: '::' k=IDENT -> LAYER_ID_SELECTOR[$k]
+	;
+	
+int_operator : OP_EQ | OP_NEQ | OP_LT| OP_LE| OP_GT| OP_GE;
+		
+import_statement
+	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
+	;
+
+simple_selector
+	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
+	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
+	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
+	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
+	;
+
+zoom_selector
+	: v=RANGE -> ^(ZOOM_SELECTOR VALUE_INT[_zoomLower($v)] VALUE_INT[_zoomUpper($v)])
+	;
+
+quoted
+	: v=DQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
+	| v=SQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
+	; 
+	
+ident
+	: v=IDENT   -> VALUE_KEYWORD[$v]
+	;	
+
+attribute_selector
+	: LBRAC  condition RBRAC   -> ^(ATTRIBUTE_SELECTOR condition)
+	;
+
+lhs
+	: quoted 
+	| tag
+	;
+
+tag
+	: v=TAG -> VALUE_KEYWORD[$v]
+	;
+		
+condition
+	: lhs                         -> OP_EXIST lhs
+	| lhs binary_operator rhs     
+	| lhs OP_MATCH^ rhs_match         
+	| unary_operator lhs          -> unary_operator lhs
+	| lhs '?'                     -> OP_TRUTHY lhs
+	;
+	
+rhs
+	: tag
+	| num
+	| quoted
+	;
+
+rhs_match
+	: quoted
+	| r=REGEXP                     -> VALUE_REGEXP[$r]	
+	;
+	
+binary_operator
+	: OP_EQ | OP_NEQ | OP_LT | OP_GT | OP_LE
+	| OP_GE | OP_STARTS_WITH | OP_ENDS_WITH | OP_SUBSTRING
+    | OP_CONTAINS
+	;        
+
+unary_operator
+	: '-'      -> OP_NEGATE
+	| '!'      -> OP_NOT_EXIST
+	;
+
+class_selector
+	: '!.'  k=IDENT  -> ^(CLASS_SELECTOR OP_NOT_EXIST VALUE_KEYWORD[$k])
+	|  '.'  k=IDENT  -> ^(CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
+	;
+
+pseudo_class_selector
+	: ':' k=IDENT    -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
+	;	
+
+type_selector
+	: (v=NODE | v=WAY | v=RELATION | v=AREA | v=LINE | v='*')  -> TYPE_SELECTOR[$v]
+	;
+
+declaration_block
+	:  '{' declarations '}' -> ^(DECLARATION_BLOCK declarations)
+	|  '{' '}'              -> ^(DECLARATION_BLOCK)
+	;
+
+declarations
+	: declaration (';' declaration)* ';'*  -> declaration*
+	;
+
+declaration
+	: declaration_property ':' declaration_value   -> ^(DECLARATION declaration_property declaration_value)
+	;
+
+declaration_property
+    /*
+     * the following keyword are also valid declaration properties
+     */
+    : k=NODE      ->  VALUE_KEYWORD[$k]
+    | k=WAY       ->  VALUE_KEYWORD[$k]
+    | k=RELATION  ->  VALUE_KEYWORD[$k]
+    | k=AREA      ->  VALUE_KEYWORD[$k]
+    | k=LINE      ->  VALUE_KEYWORD[$k]
+    | k=URL       ->  VALUE_KEYWORD[$k]
+    | k=RGB       ->  VALUE_KEYWORD[$k]
+    | k=RGBA      ->  VALUE_KEYWORD[$k]
+    | k=EVAL      ->  VALUE_KEYWORD[$k]    
+    
+    /*
+     * any other valid declaration property is matched with this
+     * rule
+     */
+	| k=IDENT     ->  VALUE_KEYWORD[$k]	
+	;	
+
+declaration_value
+	: single_value
+	| EVAL  '(' expr ')'  -> ^(EVAL_CALL expr)					
+	| single_value ',' single_value (',' single_value)*    -> ^(VALUE_LIST single_value*)
+	;
+ 
 
 num
 	: n=POSITIVE_INT       ->   VALUE_INT[$n]
@@ -444,11 +443,16 @@ single_value
 	| k=LINE           -> VALUE_KEYWORD[$k]
 	| quoted           -> VALUE_QUOTED[$quoted.text]
 	| c=HEXCOLOR      -> ^(VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)])
-	| URL '(' quoted ')'                              -> VALUE_URL[$quoted.text]
-	| RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'           -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
-	| RGBA '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ',' a=num ')'-> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])
+	| URL '(' quoted ')' -> VALUE_URL[$quoted.text]
+	| RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'           
+	         -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
+	| RGBA '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ',' a=num ')'
+	         -> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])
 	;
 
+/* ------------------------------------------------------------------------------------------ */
+/* eval expressions                                                                           */
+/* ------------------------------------------------------------------------------------------ */
 expr
 	: logicalExpression
 	;
@@ -459,39 +463,39 @@ args
 
 logicalExpression
     :    booleanAndExpression ( 
-             ('||') => '||' logicalExpression -> ^(OP_OR booleanAndExpression logicalExpression)
+             (OP_OR) => OP_OR logicalExpression -> ^(OP_OR booleanAndExpression logicalExpression)
            |                                -> booleanAndExpression
          )
     ;
     
 booleanAndExpression
     :    equalityExpression ( 
-             ('&&') => '&&' booleanAndExpression -> ^(OP_AND equalityExpression booleanAndExpression)
+             (OP_AND) => OP_AND booleanAndExpression -> ^(OP_AND equalityExpression booleanAndExpression)
            |                                     -> equalityExpression
          )
     ;
          	
 equalityExpression
     :    relationalExpression (
-             ('=')  => '='  relationalExpression -> ^(OP_EQ  relationalExpression+)
-           | ('!=') => '!=' relationalExpression -> ^(OP_NEQ relationalExpression+)
+             (OP_EQ)  => OP_EQ  relationalExpression -> ^(OP_EQ  relationalExpression+)
+           | (OP_NEQ) => OP_NEQ relationalExpression -> ^(OP_NEQ relationalExpression+)
            |                                     -> relationalExpression
          )
     ;
              	
 relationalExpression
     :   additiveExpression ( 
-            (LT) =>  LT additiveExpression  -> ^(OP_LT additiveExpression+)
-          | (LE) =>  LE additiveExpression  -> ^(OP_LE additiveExpression+)
-          | (GT) =>  GT additiveExpression  -> ^(OP_GT additiveExpression+)
-          | (GE) =>  GE additiveExpression  -> ^(OP_GE additiveExpression+)
+            (OP_LT) =>  OP_LT additiveExpression  -> ^(OP_LT additiveExpression+)
+          | (OP_LE) =>  OP_LE additiveExpression  -> ^(OP_LE additiveExpression+)
+          | (OP_GT) =>  OP_GT additiveExpression  -> ^(OP_GT additiveExpression+)
+          | (OP_GE) =>  OP_GE additiveExpression  -> ^(OP_GE additiveExpression+)
           |                                 -> additiveExpression
         )
     ;
 
 additiveExpression
     :    multiplicativeExpression ( 
-             ('+') => '+'  additiveExpression -> ^(OP_PLUS multiplicativeExpression additiveExpression)
+             (OP_PLUS) => OP_PLUS  additiveExpression -> ^(OP_PLUS multiplicativeExpression additiveExpression)
            | ('-') => '-'  additiveExpression -> ^(OP_MINUS multiplicativeExpression additiveExpression)
            |                                  -> multiplicativeExpression
          )
@@ -499,9 +503,9 @@ additiveExpression
 
 multiplicativeExpression
     :  unaryExpression (
-         ('*') => ('*' multiplicativeExpression) -> ^(OP_MUL unaryExpression multiplicativeExpression)
+         (OP_MUL) => (OP_MUL multiplicativeExpression) -> ^(OP_MUL unaryExpression multiplicativeExpression)
        | (DIV) => (DIV multiplicativeExpression) -> ^(OP_DIV unaryExpression multiplicativeExpression)
-       | ('%') => ('%' multiplicativeExpression) -> ^(OP_MOD unaryExpression multiplicativeExpression)
+       | (OP_MOD) => (OP_MOD multiplicativeExpression) -> ^(OP_MOD unaryExpression multiplicativeExpression)
        |                                         -> unaryExpression
     )                    
     ;
