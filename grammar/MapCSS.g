@@ -414,15 +414,9 @@ pseudo_class_selector
 	;	
 
 type_selector
-    @after {
-       var type = $text;
-       type = type.toLowerCase();
-       if (!['node', 'way', 'relation', 'area', 'line', 'canvas', 'meta', '*'].contains(type)) {
-         StringBuffer sb = new StringBuffer();
-         sb.add('type_selector: unsupported type ').add(type);
-         throw new MapCSSParsingException(sb.toString());
-       }
-    }
+    /*
+     * In the AST we allow any ident as type name
+     */
     : v=CSS_IDENT    -> TYPE_SELECTOR[$v]
     | v='*'          -> TYPE_SELECTOR[$v]
 	;

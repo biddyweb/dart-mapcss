@@ -1,4 +1,4 @@
-// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-28 19:20:17
+// $ANTLR 3.4.1-SNAPSHOT MapCSSLexer.g 2012-11-28 21:46:29
 
 
   part of mapcss;
@@ -7,6 +7,7 @@
 class MapCSSLexer extends Lexer {
 
   static const int EOF = -1;
+  static const int T__112 = 112;
   static const int T__113 = 113;
   static const int T__114 = 114;
   static const int T__115 = 115;
@@ -17,116 +18,114 @@ class MapCSSLexer extends Lexer {
   static const int T__120 = 120;
   static const int T__121 = 121;
   static const int T__122 = 122;
-  static const int T__123 = 123;
-  static const int ANY = 4;
-  static const int ATTRIBUTE_SELECTOR = 5;
-  static const int CHAR = 6;
-  static const int CHILD_COMBINATOR = 7;
-  static const int CLASS_SELECTOR = 8;
-  static const int COLON = 9;
-  static const int CSS_IDENT = 10;
-  static const int DECLARATION = 11;
-  static const int DECLARATION_BLOCK = 12;
-  static const int DESCENDANT_COMBINATOR = 13;
-  static const int DIGIT = 14;
-  static const int DIV = 15;
-  static const int DQUOTED_STRING = 16;
-  static const int EBACKSLASH = 17;
-  static const int EDQUOTE = 18;
-  static const int ESQUOTE = 19;
-  static const int EVAL = 20;
-  static const int EVAL_CALL = 21;
-  static const int FUNCTION_CALL = 22;
-  static const int HEXCOLOR = 23;
-  static const int HEXDIGIT = 24;
-  static const int HWS = 25;
-  static const int IDENTS = 26;
-  static const int IMPORT = 27;
-  static const int INCREASE = 28;
-  static const int INDEX = 29;
-  static const int INDEX_SELECTOR = 30;
-  static const int LAYER_ID_SELECTOR = 31;
-  static const int LBRACE = 32;
-  static const int LBRACKET = 33;
-  static const int ML_COMMENT = 34;
-  static const int NCOMPONENT = 35;
-  static const int NEGATIVE_FLOAT = 36;
-  static const int NEGATIVE_INT = 37;
-  static const int NMCHAR = 38;
-  static const int NMSTART = 39;
-  static const int NONASCII = 40;
-  static const int NUMBER = 41;
-  static const int OP_AND = 42;
-  static const int OP_CONTAINS = 43;
-  static const int OP_DIV = 44;
-  static const int OP_ENDS_WITH = 45;
-  static const int OP_EQ = 46;
-  static const int OP_EXIST = 47;
-  static const int OP_GE = 48;
-  static const int OP_GT = 49;
-  static const int OP_LE = 50;
-  static const int OP_LT = 51;
-  static const int OP_MATCH = 52;
-  static const int OP_MINUS = 53;
-  static const int OP_MOD = 54;
-  static const int OP_MUL = 55;
-  static const int OP_NEGATE = 56;
-  static const int OP_NEQ = 57;
-  static const int OP_NOT = 58;
-  static const int OP_NOT_EXIST = 59;
-  static const int OP_OR = 60;
-  static const int OP_PLUS = 61;
-  static const int OP_STARTS_WITH = 62;
-  static const int OP_SUBSTRING = 63;
-  static const int OP_TRUTHY = 64;
-  static const int OSM_TAG = 65;
-  static const int P = 66;
-  static const int PARENT_COMBINATOR = 67;
-  static const int PERCENTAGE = 68;
-  static const int PIXELS = 69;
-  static const int POINTS = 70;
-  static const int POSITIVE_FLOAT = 71;
-  static const int POSITIVE_INT = 72;
-  static const int PREDICATE = 73;
-  static const int PSEUDO_CLASS_SELECTOR = 74;
-  static const int RANGE = 75;
-  static const int RBRACE = 76;
-  static const int RBRACKET = 77;
-  static const int REGEXP = 78;
-  static const int REGEX_CHAR = 79;
-  static const int REGEX_ESCAPE = 80;
-  static const int REGEX_START = 81;
-  static const int RGB = 82;
-  static const int RGBA = 83;
-  static const int ROLE = 84;
-  static const int ROLE_SELECTOR = 85;
-  static const int RULE = 86;
-  static const int SEMICOLON = 87;
-  static const int SIMPLE_SELECTOR = 88;
-  static const int SL_COMMENT = 89;
-  static const int SQUOTED_STRING = 90;
-  static const int STYLESHEET = 91;
-  static const int T = 92;
-  static const int TAGSEPARATOR = 93;
-  static const int TYPE_SELECTOR = 94;
-  static const int UNICODE = 95;
-  static const int URL = 96;
-  static const int URLCONTENT = 97;
-  static const int VALUE_FLOAT = 98;
-  static const int VALUE_INT = 99;
-  static const int VALUE_KEYWORD = 100;
-  static const int VALUE_LIST = 101;
-  static const int VALUE_PERCENTAGE = 102;
-  static const int VALUE_PIXELS = 103;
-  static const int VALUE_POINTS = 104;
-  static const int VALUE_QUOTED = 105;
-  static const int VALUE_REGEXP = 106;
-  static const int VALUE_RGB = 107;
-  static const int VALUE_RGBA = 108;
-  static const int VALUE_URL = 109;
-  static const int WS = 110;
-  static const int X = 111;
-  static const int ZOOM_SELECTOR = 112;  
+  static const int ATTRIBUTE_SELECTOR = 4;
+  static const int CHAR = 5;
+  static const int CHILD_COMBINATOR = 6;
+  static const int CLASS_SELECTOR = 7;
+  static const int COLON = 8;
+  static const int CSS_IDENT = 9;
+  static const int DECLARATION = 10;
+  static const int DECLARATION_BLOCK = 11;
+  static const int DESCENDANT_COMBINATOR = 12;
+  static const int DIGIT = 13;
+  static const int DIV = 14;
+  static const int DQUOTED_STRING = 15;
+  static const int EBACKSLASH = 16;
+  static const int EDQUOTE = 17;
+  static const int ESQUOTE = 18;
+  static const int EVAL = 19;
+  static const int EVAL_CALL = 20;
+  static const int FUNCTION_CALL = 21;
+  static const int HEXCOLOR = 22;
+  static const int HEXDIGIT = 23;
+  static const int HWS = 24;
+  static const int IDENTS = 25;
+  static const int IMPORT = 26;
+  static const int INCREASE = 27;
+  static const int INDEX = 28;
+  static const int INDEX_SELECTOR = 29;
+  static const int LAYER_ID_SELECTOR = 30;
+  static const int LBRACE = 31;
+  static const int LBRACKET = 32;
+  static const int ML_COMMENT = 33;
+  static const int NCOMPONENT = 34;
+  static const int NEGATIVE_FLOAT = 35;
+  static const int NEGATIVE_INT = 36;
+  static const int NMCHAR = 37;
+  static const int NMSTART = 38;
+  static const int NONASCII = 39;
+  static const int NUMBER = 40;
+  static const int OP_AND = 41;
+  static const int OP_CONTAINS = 42;
+  static const int OP_DIV = 43;
+  static const int OP_ENDS_WITH = 44;
+  static const int OP_EQ = 45;
+  static const int OP_EXIST = 46;
+  static const int OP_GE = 47;
+  static const int OP_GT = 48;
+  static const int OP_LE = 49;
+  static const int OP_LT = 50;
+  static const int OP_MATCH = 51;
+  static const int OP_MINUS = 52;
+  static const int OP_MOD = 53;
+  static const int OP_MUL = 54;
+  static const int OP_NEGATE = 55;
+  static const int OP_NEQ = 56;
+  static const int OP_NOT = 57;
+  static const int OP_NOT_EXIST = 58;
+  static const int OP_OR = 59;
+  static const int OP_PLUS = 60;
+  static const int OP_STARTS_WITH = 61;
+  static const int OP_SUBSTRING = 62;
+  static const int OP_TRUTHY = 63;
+  static const int OSM_TAG = 64;
+  static const int P = 65;
+  static const int PARENT_COMBINATOR = 66;
+  static const int PERCENTAGE = 67;
+  static const int PIXELS = 68;
+  static const int POINTS = 69;
+  static const int POSITIVE_FLOAT = 70;
+  static const int POSITIVE_INT = 71;
+  static const int PREDICATE = 72;
+  static const int PSEUDO_CLASS_SELECTOR = 73;
+  static const int RANGE = 74;
+  static const int RBRACE = 75;
+  static const int RBRACKET = 76;
+  static const int REGEXP = 77;
+  static const int REGEX_CHAR = 78;
+  static const int REGEX_ESCAPE = 79;
+  static const int REGEX_START = 80;
+  static const int RGB = 81;
+  static const int RGBA = 82;
+  static const int ROLE = 83;
+  static const int ROLE_SELECTOR = 84;
+  static const int RULE = 85;
+  static const int SEMICOLON = 86;
+  static const int SIMPLE_SELECTOR = 87;
+  static const int SL_COMMENT = 88;
+  static const int SQUOTED_STRING = 89;
+  static const int STYLESHEET = 90;
+  static const int T = 91;
+  static const int TAGSEPARATOR = 92;
+  static const int TYPE_SELECTOR = 93;
+  static const int UNICODE = 94;
+  static const int URL = 95;
+  static const int URLCONTENT = 96;
+  static const int VALUE_FLOAT = 97;
+  static const int VALUE_INT = 98;
+  static const int VALUE_KEYWORD = 99;
+  static const int VALUE_LIST = 100;
+  static const int VALUE_PERCENTAGE = 101;
+  static const int VALUE_PIXELS = 102;
+  static const int VALUE_POINTS = 103;
+  static const int VALUE_QUOTED = 104;
+  static const int VALUE_REGEXP = 105;
+  static const int VALUE_RGB = 106;
+  static const int VALUE_RGBA = 107;
+  static const int VALUE_URL = 108;
+  static const int WS = 109;
+  static const int X = 110;
+  static const int ZOOM_SELECTOR = 111;  
 
       /// true, if the scanner is in a state, where OSM tag names are 
       /// valid identifiers  '[highway=residential]'
@@ -580,10 +579,10 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "OP_SUBSTRING"
 
-  // $ANTLR start "T__113"
-  void mT__113() {
+  // $ANTLR start "T__112"
+  void mT__112() {
     try {
-  	  int _type = T__113;
+  	  int _type = T__112;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
   	   31:8: ( '!' )*/
@@ -603,6 +602,33 @@ class MapCSSLexer extends Lexer {
   	  // do for sure before leaving
     }
   }
+  // $ANTLR end "T__112"
+
+  // $ANTLR start "T__113"
+  void mT__113() {
+    try {
+  	  int _type = T__113;
+  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
+  	  /* grammar/MapCSS.g:
+  	   32:8: ( '!.' )*/
+  	  /* grammar/MapCSS.g:
+  	   32:10: '!.'*/
+  	  {
+  	  	match("!."); 
+  	  	if(state.failed) 
+  	  	  return ;
+
+
+
+  	  }
+
+  	  state.type = _type;
+  	  state.channel = _channel;
+    }
+    finally {
+  	  // do for sure before leaving
+    }
+  }
   // $ANTLR end "T__113"
 
   // $ANTLR start "T__114"
@@ -611,11 +637,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__114;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   32:8: ( '!.' )*/
+  	   33:8: ( '!:' )*/
   	  /* grammar/MapCSS.g:
-  	   32:10: '!.'*/
+  	   33:10: '!:'*/
   	  {
-  	  	match("!."); 
+  	  	match("!:"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -638,15 +664,13 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__115;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   33:8: ( '!:' )*/
+  	   34:8: ( '(' )*/
   	  /* grammar/MapCSS.g:
-  	   33:10: '!:'*/
+  	   34:10: '('*/
   	  {
-  	  	match("!:"); 
+  	  	match(40 /*'('*/); 
   	  	if(state.failed) 
   	  	  return ;
-
-
 
   	  }
 
@@ -665,11 +689,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__116;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   34:8: ( '(' )*/
+  	   35:8: ( ')' )*/
   	  /* grammar/MapCSS.g:
-  	   34:10: '('*/
+  	   35:10: ')'*/
   	  {
-  	  	match(40 /*'('*/); 
+  	  	match(41 /*')'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -690,11 +714,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__117;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   35:8: ( ')' )*/
+  	   36:8: ( ',' )*/
   	  /* grammar/MapCSS.g:
-  	   35:10: ')'*/
+  	   36:10: ','*/
   	  {
-  	  	match(41 /*')'*/); 
+  	  	match(44 /*','*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -715,11 +739,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__118;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   36:8: ( ',' )*/
+  	   37:8: ( '-' )*/
   	  /* grammar/MapCSS.g:
-  	   36:10: ','*/
+  	   37:10: '-'*/
   	  {
-  	  	match(44 /*','*/); 
+  	  	match(45 /*'-'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -740,11 +764,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__119;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   37:8: ( '-' )*/
+  	   38:8: ( '.' )*/
   	  /* grammar/MapCSS.g:
-  	   37:10: '-'*/
+  	   38:10: '.'*/
   	  {
-  	  	match(45 /*'-'*/); 
+  	  	match(46 /*'.'*/); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -765,13 +789,15 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__120;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   38:8: ( '.' )*/
+  	   39:8: ( ':!' )*/
   	  /* grammar/MapCSS.g:
-  	   38:10: '.'*/
+  	   39:10: ':!'*/
   	  {
-  	  	match(46 /*'.'*/); 
+  	  	match(":!"); 
   	  	if(state.failed) 
   	  	  return ;
+
+
 
   	  }
 
@@ -790,11 +816,11 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__121;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   39:8: ( ':!' )*/
+  	   40:8: ( '::' )*/
   	  /* grammar/MapCSS.g:
-  	   39:10: ':!'*/
+  	   40:10: '::'*/
   	  {
-  	  	match(":!"); 
+  	  	match("::"); 
   	  	if(state.failed) 
   	  	  return ;
 
@@ -817,33 +843,6 @@ class MapCSSLexer extends Lexer {
   	  int _type = T__122;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   40:8: ( '::' )*/
-  	  /* grammar/MapCSS.g:
-  	   40:10: '::'*/
-  	  {
-  	  	match("::"); 
-  	  	if(state.failed) 
-  	  	  return ;
-
-
-
-  	  }
-
-  	  state.type = _type;
-  	  state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "T__122"
-
-  // $ANTLR start "T__123"
-  void mT__123() {
-    try {
-  	  int _type = T__123;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
   	   41:8: ( '?' )*/
   	  /* grammar/MapCSS.g:
   	   41:10: '?'*/
@@ -861,7 +860,7 @@ class MapCSSLexer extends Lexer {
   	  // do for sure before leaving
     }
   }
-  // $ANTLR end "T__123"
+  // $ANTLR end "T__122"
 
   // $ANTLR start "EBACKSLASH"
   void mEBACKSLASH() {
@@ -5037,44 +5036,18 @@ class MapCSSLexer extends Lexer {
   }
   // $ANTLR end "ML_COMMENT"
 
-  // $ANTLR start "ANY"
-  void mANY() {
-    try {
-  	  int _type = ANY;
-  	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
-  	  /* grammar/MapCSS.g:
-  	   304:4: ( . )*/
-  	  /* grammar/MapCSS.g:
-  	   304:6: .*/
-  	  {
-  	  	matchAny(); 
-  	  	if(state.failed) 
-  	  	  return ;
-
-  	  }
-
-  	  state.type = _type;
-  	  state.channel = _channel;
-    }
-    finally {
-  	  // do for sure before leaving
-    }
-  }
-  // $ANTLR end "ANY"
-
   void mTokens() {
     /* grammar/MapCSS.g: 
      1:8: ( OP_AND | OP_CONTAINS | OP_ENDS_WITH | OP_EQ | OP_GE | 
      OP_GT | OP_LE | OP_LT | OP_MATCH | OP_MOD | OP_MUL | OP_NEQ | 
-     OP_OR | OP_PLUS | OP_STARTS_WITH | OP_SUBSTRING | T__113 | T__114 | 
-     T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | T__121 | 
-     T__122 | T__123 | RGB | RGBA | ROLE | INDEX | EVAL | IMPORT | 
+     OP_OR | OP_PLUS | OP_STARTS_WITH | OP_SUBSTRING | T__112 | T__113 | 
+     T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | 
+     T__121 | T__122 | RGB | RGBA | ROLE | INDEX | EVAL | IMPORT | 
      URL | IDENTS | LBRACKET | RBRACKET | LBRACE | RBRACE | COLON | 
      SEMICOLON | DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | NUMBER | 
-     RANGE | REGEXP | WS | SL_COMMENT | ML_COMMENT | ANY )*/
-    int alt36 = 51;
+     RANGE | REGEXP | WS | SL_COMMENT | ML_COMMENT )*/
+    int alt36 = 50;
     alt36 = dfas["dfa36"].predict(input);
-    print("alt36: $alt36");
     switch (alt36) {
       case 1 :
         /* grammar/MapCSS.g:
@@ -5254,9 +5227,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 17 :
         /* grammar/MapCSS.g:
-         1:144: T__113*/
+         1:144: T__112*/
         {
-        	mT__113(); 
+        	mT__112(); 
         	if(state.failed) 
         	  return ;
 
@@ -5265,9 +5238,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 18 :
         /* grammar/MapCSS.g:
-         1:151: T__114*/
+         1:151: T__113*/
         {
-        	mT__114(); 
+        	mT__113(); 
         	if(state.failed) 
         	  return ;
 
@@ -5276,9 +5249,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 19 :
         /* grammar/MapCSS.g:
-         1:158: T__115*/
+         1:158: T__114*/
         {
-        	mT__115(); 
+        	mT__114(); 
         	if(state.failed) 
         	  return ;
 
@@ -5287,9 +5260,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 20 :
         /* grammar/MapCSS.g:
-         1:165: T__116*/
+         1:165: T__115*/
         {
-        	mT__116(); 
+        	mT__115(); 
         	if(state.failed) 
         	  return ;
 
@@ -5298,9 +5271,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 21 :
         /* grammar/MapCSS.g:
-         1:172: T__117*/
+         1:172: T__116*/
         {
-        	mT__117(); 
+        	mT__116(); 
         	if(state.failed) 
         	  return ;
 
@@ -5309,9 +5282,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 22 :
         /* grammar/MapCSS.g:
-         1:179: T__118*/
+         1:179: T__117*/
         {
-        	mT__118(); 
+        	mT__117(); 
         	if(state.failed) 
         	  return ;
 
@@ -5320,9 +5293,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 23 :
         /* grammar/MapCSS.g:
-         1:186: T__119*/
+         1:186: T__118*/
         {
-        	mT__119(); 
+        	mT__118(); 
         	if(state.failed) 
         	  return ;
 
@@ -5331,9 +5304,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 24 :
         /* grammar/MapCSS.g:
-         1:193: T__120*/
+         1:193: T__119*/
         {
-        	mT__120(); 
+        	mT__119(); 
         	if(state.failed) 
         	  return ;
 
@@ -5342,9 +5315,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 25 :
         /* grammar/MapCSS.g:
-         1:200: T__121*/
+         1:200: T__120*/
         {
-        	mT__121(); 
+        	mT__120(); 
         	if(state.failed) 
         	  return ;
 
@@ -5353,9 +5326,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 26 :
         /* grammar/MapCSS.g:
-         1:207: T__122*/
+         1:207: T__121*/
         {
-        	mT__122(); 
+        	mT__121(); 
         	if(state.failed) 
         	  return ;
 
@@ -5364,9 +5337,9 @@ class MapCSSLexer extends Lexer {
         break;
       case 27 :
         /* grammar/MapCSS.g:
-         1:214: T__123*/
+         1:214: T__122*/
         {
-        	mT__123(); 
+        	mT__122(); 
         	if(state.failed) 
         	  return ;
 
@@ -5626,20 +5599,6 @@ class MapCSSLexer extends Lexer {
 
         }
         break;
-      case 51 :
-        /* grammar/MapCSS.g:
-         1:396: ANY*/
-        {
-        	mANY(); 
-        	if(state.failed) 
-        	  return ;
-
-
-        }
-        break;
-        
-      default: 
-        print("no token found alt36: $alt36");
 
     }
 
@@ -6109,181 +6068,151 @@ class MapCSSLexer extends Lexer {
   	return _DFA27_transition;
   }();
   static const String DFA_MapCSSLexer_36_eotS =
-      "\u0001\u0024\u0003\u0027\u0001\u002c\u0001\u002e\u0001\u0030\u0001"
-      "\uffff\u0001\u0033\u0001\u0037\u0001\u0027\u0001\u003a\u0001\u0027"
-      "\u0003\uffff\u0001\u003f\u0001\u0042\u0001\u0045\u0001\uffff\u0003"
-      "\u0041\u0001\u0027\u0002\u0041\u0005\uffff\u0003\u0027\u0003\uffff"
-      "\u0001\u0059\u001a\uffff\u0001\u0041\u0006\uffff\u0004\u0041\u0001"
-      "\uffff\u0001\u0041\u000e\uffff\u0001\u0061\u0004\u0041\u0001\u0066"
-      "\u0001\uffff\u0001\u0067\u0001\u0041\u0001\u0069\u0003\uffff\u0001"
-      "\u006a\u0002\uffff";
+      "\u0001\u0022\u0003\uffff\u0001\u0027\u0001\u0029\u0001\u002b\u0001"
+      "\uffff\u0001\u002e\u0001\u0032\u0001\uffff\u0001\u0035\u0004\uffff"
+      "\u0001\u0036\u0001\u0037\u0001\u003a\u0001\uffff\u0003\u0023\u0001"
+      "\uffff\u0002\u0023\u000a\uffff\u0001\u0044\u0016\uffff\u0005\u0023"
+      "\u0005\uffff\u0001\u004b\u0004\u0023\u0001\u0050\u0001\uffff\u0001"
+      "\u0051\u0001\u0023\u0001\u0053\u0003\uffff\u0001\u0054\u0002\uffff";
   static const String DFA_MapCSSLexer_36_eofS =
-      "\u006b\uffff";
+      "\u0055\uffff";
   static const String DFA_MapCSSLexer_36_minS =
-      "\u0001\u0000\u0001\u0026\u0002\u003d\u0001\u007e\u0002\u003d\u0001"
-      "\uffff\u0001\u003d\u0001\u002e\u0001\u007a\u0001\u0030\u0001\u003d"
-      "\u0003\uffff\u0001\u0025\u0001\u0030\u0001\u0021\u0001\uffff\u0001"
-      "\u0047\u0001\u004e\u0001\u0056\u0001\u0049\u0001\u0052\u0001\u0054"
-      "\u0005\uffff\u0002\u0020\u0001\u0030\u0003\uffff\u0001\u002a\u001a"
-      "\uffff\u0001\u0054\u0006\uffff\u0001\u0042\u0001\u004c\u0001\u0044"
-      "\u0001\u0041\u0001\uffff\u0001\u004c\u000e\uffff\u0001\u002d\u0002"
-      "\u0045\u0001\u004c\u0001\u0009\u0001\u002d\u0001\uffff\u0001\u002d"
-      "\u0001\u0058\u0001\u002d\u0003\uffff\u0001\u002d\u0002\uffff";
+      "\u0001\u0009\u0003\uffff\u0001\u007e\u0002\u003d\u0001\uffff\u0001"
+      "\u003d\u0001\u002e\u0001\u007a\u0001\u0030\u0004\uffff\u0001\u0025"
+      "\u0001\u0030\u0001\u0021\u0001\uffff\u0001\u0047\u0001\u004e\u0001"
+      "\u0056\u0001\uffff\u0001\u0052\u0001\u0054\u000a\uffff\u0001\u002a"
+      "\u0016\uffff\u0001\u0042\u0001\u004c\u0001\u0044\u0001\u0041\u0001"
+      "\u004c\u0005\uffff\u0001\u002d\u0002\u0045\u0001\u004c\u0001\u0009"
+      "\u0001\u002d\u0001\uffff\u0001\u002d\u0001\u0058\u0001\u002d\u0003"
+      "\uffff\u0001\u002d\u0002\uffff";
   static const String DFA_MapCSSLexer_36_maxS =
-      "\u0001\uffff\u0001\u0026\u0002\u003d\u0001\u007e\u0002\u003d\u0001"
-      "\uffff\u0002\u003d\u0001\u007c\u0001\u0039\u0001\u003d\u0003\uffff"
-      "\u0001\u007a\u0001\u0039\u0001\u003a\u0001\uffff\u0001\u006f\u0001"
-      "\u006e\u0001\u0076\u0001\u0069\u0001\u0072\u0001\u0078\u0005\uffff"
-      "\u0002\uffff\u0001\u0066\u0003\uffff\u0001\u002f\u001a\uffff\u0001"
-      "\u0078\u0006\uffff\u0001\u0062\u0001\u006c\u0001\u0064\u0001\u0061"
-      "\u0001\uffff\u0001\u006c\u000e\uffff\u0001\u007a\u0002\u0065\u0001"
-      "\u006c\u0001\u0028\u0001\u007a\u0001\uffff\u0001\u007a\u0001\u0078"
-      "\u0001\u007a\u0003\uffff\u0001\u007a\u0002\uffff";
+      "\u0001\u007e\u0003\uffff\u0001\u007e\u0002\u003d\u0001\uffff\u0002"
+      "\u003d\u0001\u007c\u0001\u0039\u0004\uffff\u0001\u007a\u0001\u0039"
+      "\u0001\u003a\u0001\uffff\u0001\u006f\u0001\u006e\u0001\u0076\u0001"
+      "\uffff\u0001\u0072\u0001\u0078\u000a\uffff\u0001\u002f\u0016\uffff"
+      "\u0001\u0062\u0001\u006c\u0001\u0064\u0001\u0061\u0001\u006c\u0005"
+      "\uffff\u0001\u007a\u0002\u0065\u0001\u006c\u0001\u0028\u0001\u007a"
+      "\u0001\uffff\u0001\u007a\u0001\u0078\u0001\u007a\u0003\uffff\u0001"
+      "\u007a\u0002\uffff";
   static const String DFA_MapCSSLexer_36_acceptS =
-      "\u0007\uffff\u0001\u000a\u0005\uffff\u0001\u0014\u0001\u0015\u0001"
-      "\u0016\u0003\uffff\u0001\u001b\u0006\uffff\u0001\u0024\u0001\u0025"
-      "\u0001\u0026\u0001\u0027\u0001\u0029\u0003\uffff\u0001\u002d\u0001"
-      "\u0023\u0001\u002d\u0001\uffff\u0001\u0030\u0001\u0033\u0001\u0001"
-      "\u0001\u0002\u0001\u0003\u0001\u0009\u0001\u0004\u0001\u0005\u0001"
-      "\u0006\u0001\u0007\u0001\u0008\u0001\u000a\u0001\u0010\u0001\u000b"
-      "\u0001\u000c\u0001\u0012\u0001\u0013\u0001\u0011\u0001\u000d\u0001"
-      "\u002e\u0001\u000e\u0001\u000f\u0001\u0014\u0001\u0015\u0001\u0016"
-      "\u0001\u0017\u0001\uffff\u0001\u0023\u0001\u0018\u0001\u0019\u0001"
-      "\u001a\u0001\u0028\u0001\u001b\u0004\uffff\u0001\u0021\u0001\uffff"
-      "\u0002\u0023\u0001\u0024\u0001\u0025\u0001\u0026\u0001\u0027\u0001"
-      "\u0029\u0001\u002a\u0001\u002b\u0001\u002c\u0001\u0031\u0001\u0032"
-      "\u0001\u002f\u0001\u0030\u0006\uffff\u0001\u001c\u0003\uffff\u0001"
-      "\u0022\u0001\u001d\u0001\u001e\u0001\uffff\u0001\u0020\u0001\u001f";
+      "\u0001\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0003\uffff\u0001"
+      "\u000a\u0004\uffff\u0001\u000f\u0001\u0014\u0001\u0015\u0001\u0016"
+      "\u0003\uffff\u0001\u001b\u0003\uffff\u0001\u0021\u0002\uffff\u0001"
+      "\u0024\u0001\u0025\u0001\u0026\u0001\u0027\u0001\u0029\u0001\u002a"
+      "\u0001\u002b\u0001\u002c\u0001\u002d\u0001\u0023\u0001\uffff\u0001"
+      "\u0030\u0001\u0009\u0001\u0004\u0001\u0005\u0001\u0006\u0001\u0007"
+      "\u0001\u0008\u0001\u000a\u0001\u0010\u0001\u000b\u0001\u000c\u0001"
+      "\u0012\u0001\u0013\u0001\u0011\u0001\u000d\u0001\u002e\u0001\u000e"
+      "\u0001\u0017\u0001\u0018\u0001\u0019\u0001\u001a\u0001\u0028\u0005"
+      "\uffff\u0002\u0023\u0001\u0031\u0001\u0032\u0001\u002f\u0006\uffff"
+      "\u0001\u001c\u0003\uffff\u0001\u0022\u0001\u001d\u0001\u001e\u0001"
+      "\uffff\u0001\u0020\u0001\u001f";
   static const String DFA_MapCSSLexer_36_specialS =
-      "\u0001\u0000\u006a\uffff";
+      "\u0055\uffff";
   static const List<String> DFA_MapCSSLexer_36_transitionS = const [
-      "\u0009\u0027\u0002\u0026\u0001\u0027\u0002\u0026\u0012\u0027\u0001"
-      "\u0026\u0001\u0009\u0001\u001f\u0001\u0021\u0001\u0003\u0001\u0007"
-      "\u0001\u0001\u0001\u0020\u0001\u000d\u0001\u000e\u0001\u0008\u0001"
-      "\u000b\u0001\u000f\u0001\u0010\u0001\u0011\u0001\u0025\u000a\u0022"
-      "\u0001\u0012\u0001\u001e\u0001\u0006\u0001\u0004\u0001\u0005\u0001"
-      "\u0013\u0001\u0017\u0004\u0023\u0001\u0016\u0003\u0023\u0001\u0015"
-      "\u0006\u0023\u0001\u0019\u0001\u0023\u0001\u0014\u0002\u0023\u0001"
-      "\u0018\u0005\u0023\u0001\u001a\u0001\u0027\u0001\u001b\u0001\u000c"
-      "\u0001\u0023\u0001\u0027\u0004\u0023\u0001\u0016\u0003\u0023\u0001"
-      "\u0015\u0006\u0023\u0001\u0019\u0001\u0023\u0001\u0014\u0002\u0023"
-      "\u0001\u0018\u0005\u0023\u0001\u001c\u0001\u000a\u0001\u001d\u0001"
-      "\u0002\uff81\u0027",
+      "\u0002\u0025\u0001\uffff\u0002\u0025\u0012\uffff\u0001\u0025\u0001"
+      "\u0009\u0001\u001f\u0001\u0021\u0001\u0003\u0001\u0007\u0001\u0001"
+      "\u0001\u0020\u0001\u000d\u0001\u000e\u0001\u0008\u0001\u000b\u0001"
+      "\u000f\u0001\u0010\u0001\u0011\u0001\u0024\u000a\uffff\u0001\u0012"
+      "\u0001\u001e\u0001\u0006\u0001\u0004\u0001\u0005\u0001\u0013\u0001"
+      "\u0017\u0004\u0023\u0001\u0016\u0003\u0023\u0001\u0015\u0006\u0023"
+      "\u0001\u0019\u0001\u0023\u0001\u0014\u0002\u0023\u0001\u0018\u0005"
+      "\u0023\u0001\u001a\u0001\uffff\u0001\u001b\u0001\u000c\u0001\u0023"
+      "\u0001\uffff\u0004\u0023\u0001\u0016\u0003\u0023\u0001\u0015\u0006"
+      "\u0023\u0001\u0019\u0001\u0023\u0001\u0014\u0002\u0023\u0001\u0018"
+      "\u0005\u0023\u0001\u001c\u0001\u000a\u0001\u001d\u0001\u0002",
+      "",
+      "",
+      "",
+      "\u0001\u0026",
       "\u0001\u0028",
-      "\u0001\u0029",
       "\u0001\u002a",
-      "\u0001\u002b",
+      "",
       "\u0001\u002d",
-      "\u0001\u002f",
-      "",
-      "\u0001\u0032",
-      "\u0001\u0035\u000b\uffff\u0001\u0036\u0002\uffff\u0001\u0034",
-      "\u0001\u0039\u0001\uffff\u0001\u0038",
-      "\u000a\u0024",
-      "\u0001\u003b",
+      "\u0001\u0030\u000b\uffff\u0001\u0031\u0002\uffff\u0001\u002f",
+      "\u0001\u0034\u0001\uffff\u0001\u0033",
+      "\u000a\u0022",
       "",
       "",
       "",
-      "\u0001\u0024\u0008\uffff\u0001\u0024\u0001\uffff\u000a\u0024\u0007"
-      "\uffff\u000f\u0041\u0001\u0040\u000a\u0041\u0004\uffff\u0001\u0041"
-      "\u0001\uffff\u000f\u0041\u0001\u0040\u000a\u0041",
-      "\u000a\u0024",
-      "\u0001\u0043\u0018\uffff\u0001\u0044",
       "",
-      "\u0001\u0047\u0007\uffff\u0001\u0048\u0017\uffff\u0001\u0047\u0007"
-      "\uffff\u0001\u0048",
+      "\u0001\u0022\u0008\uffff\u0001\u0022\u0001\uffff\u000a\u0022\u0007"
+      "\uffff\u000f\u0023\u0001\u0019\u000a\u0023\u0004\uffff\u0001\u0023"
+      "\u0001\uffff\u000f\u0023\u0001\u0019\u000a\u0023",
+      "\u000a\u0022",
+      "\u0001\u0038\u0018\uffff\u0001\u0039",
+      "",
+      "\u0001\u003b\u0007\uffff\u0001\u003c\u0017\uffff\u0001\u003b\u0007"
+      "\uffff\u0001\u003c",
+      "\u0001\u003d\u001f\uffff\u0001\u003d",
+      "\u0001\u003e\u001f\uffff\u0001\u003e",
+      "",
+      "\u0001\u003f\u001f\uffff\u0001\u003f",
+      "\u0001\u0040\u0003\uffff\u0001\u0041\u001b\uffff\u0001\u0040\u0003"
+      "\uffff\u0001\u0041",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "\u0001\u0043\u0004\uffff\u0001\u0042",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "\u0001\u0045\u001f\uffff\u0001\u0045",
+      "\u0001\u0046\u001f\uffff\u0001\u0046",
+      "\u0001\u0047\u001f\uffff\u0001\u0047",
+      "\u0001\u0048\u001f\uffff\u0001\u0048",
       "\u0001\u0049\u001f\uffff\u0001\u0049",
-      "\u0001\u004a\u001f\uffff\u0001\u004a",
-      "\u0001\u004b\u001f\uffff\u0001\u004b",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "\u0002\u0023\u0001\uffff\u000b\u0023\u0006\uffff\u0001\u004a\u0019"
+      "\u0023\u0004\uffff\u0001\u0023\u0001\uffff\u0001\u004a\u0019\u0023",
       "\u0001\u004c\u001f\uffff\u0001\u004c",
-      "\u0001\u004d\u0003\uffff\u0001\u004e\u001b\uffff\u0001\u004d\u0003"
-      "\uffff\u0001\u004e",
+      "\u0001\u004d\u001f\uffff\u0001\u004d",
+      "\u0001\u004e\u001f\uffff\u0001\u004e",
+      "\u0001\u004f\u0002\uffff\u0001\u004f\u0013\uffff\u0001\u004f\u0007"
+      "\uffff\u0001\u004f",
+      "\u0002\u0023\u0001\uffff\u000b\u0023\u0006\uffff\u001a\u0023\u0004"
+      "\uffff\u0001\u0023\u0001\uffff\u001a\u0023",
+      "",
+      "\u0002\u0023\u0001\uffff\u000b\u0023\u0006\uffff\u001a\u0023\u0004"
+      "\uffff\u0001\u0023\u0001\uffff\u001a\u0023",
+      "\u0001\u0052\u001f\uffff\u0001\u0052",
+      "\u0002\u0023\u0001\uffff\u000b\u0023\u0006\uffff\u001a\u0023\u0004"
+      "\uffff\u0001\u0023\u0001\uffff\u001a\u0023",
       "",
       "",
       "",
-      "",
-      "",
-      "\u005f\u0054\u0001\uffff\uff80\u0054",
-      "\u005f\u0055\u0001\uffff\uff80\u0055",
-      "\u000a\u0056\u0007\uffff\u0006\u0056\u001a\uffff\u0006\u0056",
-      "",
-      "",
-      "",
-      "\u0001\u0058\u0004\uffff\u0001\u0057",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "\u0001\u004d\u0003\uffff\u0001\u004e\u001b\uffff\u0001\u004d\u0003"
-      "\uffff\u0001\u004e",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "\u0001\u005b\u001f\uffff\u0001\u005b",
-      "\u0001\u005c\u001f\uffff\u0001\u005c",
-      "\u0001\u005d\u001f\uffff\u0001\u005d",
-      "\u0001\u005e\u001f\uffff\u0001\u005e",
-      "",
-      "\u0001\u005f\u001f\uffff\u0001\u005f",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "\u0002\u0041\u0001\uffff\u000b\u0041\u0006\uffff\u0001\u0060\u0019"
-      "\u0041\u0004\uffff\u0001\u0041\u0001\uffff\u0001\u0060\u0019\u0041",
-      "\u0001\u0062\u001f\uffff\u0001\u0062",
-      "\u0001\u0063\u001f\uffff\u0001\u0063",
-      "\u0001\u0064\u001f\uffff\u0001\u0064",
-      "\u0001\u0065\u0002\uffff\u0001\u0065\u0013\uffff\u0001\u0065\u0007"
-      "\uffff\u0001\u0065",
-      "\u0002\u0041\u0001\uffff\u000b\u0041\u0006\uffff\u001a\u0041\u0004"
-      "\uffff\u0001\u0041\u0001\uffff\u001a\u0041",
-      "",
-      "\u0002\u0041\u0001\uffff\u000b\u0041\u0006\uffff\u001a\u0041\u0004"
-      "\uffff\u0001\u0041\u0001\uffff\u001a\u0041",
-      "\u0001\u0068\u001f\uffff\u0001\u0068",
-      "\u0002\u0041\u0001\uffff\u000b\u0041\u0006\uffff\u001a\u0041\u0004"
-      "\uffff\u0001\u0041\u0001\uffff\u001a\u0041",
-      "",
-      "",
-      "",
-      "\u0002\u0041\u0001\uffff\u000b\u0041\u0006\uffff\u001a\u0041\u0004"
-      "\uffff\u0001\u0041\u0001\uffff\u001a\u0041",
+      "\u0002\u0023\u0001\uffff\u000b\u0023\u0006\uffff\u001a\u0023\u0004"
+      "\uffff\u0001\u0023\u0001\uffff\u001a\u0023",
       "",
       ""
   ];
@@ -6351,208 +6280,11 @@ class DFA_MapCSSLexer_36 extends DFA {
   String get description => 
         """1:1: Tokens : ( OP_AND | OP_CONTAINS | OP_ENDS_WITH | OP_EQ | 
 OP_GE | OP_GT | OP_LE | OP_LT | OP_MATCH | OP_MOD | OP_MUL | 
-OP_NEQ | OP_OR | OP_PLUS | OP_STARTS_WITH | OP_SUBSTRING | T__113 | 
-T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | 
-T__121 | T__122 | T__123 | RGB | RGBA | ROLE | INDEX | EVAL | 
+OP_NEQ | OP_OR | OP_PLUS | OP_STARTS_WITH | OP_SUBSTRING | T__112 | 
+T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | 
+T__120 | T__121 | T__122 | RGB | RGBA | ROLE | INDEX | EVAL | 
 IMPORT | URL | IDENTS | LBRACKET | RBRACKET | LBRACE | RBRACE | 
 COLON | SEMICOLON | DQUOTED_STRING | SQUOTED_STRING | HEXCOLOR | 
-NUMBER | RANGE | REGEXP | WS | SL_COMMENT | ML_COMMENT | ANY ); """;
-
-  int specialStateTransition(int s, IntStream _input){
-    IntStream input = _input;
-    int _s = s;
-    switch(s) {
-      case 0 :int LA36_0 = recognizer.input.LA(1);
-
-      s = -1;
-      if(LA36_0 == 38/*38 /*'&'*/*/) {
-        s = 1;
-      }
-
-      else if(LA36_0 == 126/*126 /*'~'*/*/) {
-        s = 2;
-      }
-
-      else if(LA36_0 == 36/*36 /*'$'*/*/) {
-        s = 3;
-      }
-
-      else if(LA36_0 == 61/*61 /*'='*/*/) {
-        s = 4;
-      }
-
-      else if(LA36_0 == 62/*62 /*'>'*/*/) {
-        s = 5;
-      }
-
-      else if(LA36_0 == 60/*60 /*'<'*/*/) {
-        s = 6;
-      }
-
-      else if(LA36_0 == 37/*37 /*'%'*/*/) {
-        s = 7;
-      }
-
-      else if(LA36_0 == 42/*42 /*'*'*/*/) {
-        s = 8;
-      }
-
-      else if(LA36_0 == 33/*33 /*'!'*/*/) {
-        s = 9;
-      }
-
-      else if(LA36_0 == 124/*124 /*'|'*/*/) {
-        s = 10;
-      }
-
-      else if(LA36_0 == 43/*43 /*'+'*/*/) {
-        s = 11;
-      }
-
-      else if(LA36_0 == 94/*94 /*'^'*/*/) {
-        s = 12;
-      }
-
-      else if(LA36_0 == 40/*40 /*'('*/*/) {
-        s = 13;
-      }
-
-      else if(LA36_0 == 41/*41 /*')'*/*/) {
-        s = 14;
-      }
-
-      else if(LA36_0 == 44/*44 /*','*/*/) {
-        s = 15;
-      }
-
-      else if(LA36_0 == 45/*45 /*'-'*/*/) {
-        s = 16;
-      }
-
-      else if(LA36_0 == 46/*46 /*'.'*/*/) {
-        s = 17;
-      }
-
-      else if(LA36_0 == 58/*58 /*':'*/*/) {
-        s = 18;
-      }
-
-      else if(LA36_0 == 63/*63 /*'?'*/*/) {
-        s = 19;
-      }
-
-      else if(LA36_0 == 82/*82 /*'R'*/*/
-        || LA36_0 == 114/*114 /*'r'*/*/) {
-        s = 20;
-      }
-
-      else if(LA36_0 == 73/*73 /*'I'*/*/
-        || LA36_0 == 105/*105 /*'i'*/*/) {
-        s = 21;
-      }
-
-      else if(LA36_0 == 69/*69 /*'E'*/*/
-        || LA36_0 == 101/*101 /*'e'*/*/) {
-        s = 22;
-      }
-
-      else if(LA36_0 == 64/*64 /*'@'*/*/) {
-        s = 23;
-      }
-
-      else if(LA36_0 == 85/*85 /*'U'*/*/
-        || LA36_0 == 117/*117 /*'u'*/*/) {
-        s = 24;
-      }
-
-      else if(LA36_0 == 80/*80 /*'P'*/*/
-        || LA36_0 == 112/*112 /*'p'*/*/) {
-        s = 25;
-      }
-
-      else if(LA36_0 == 91/*91 /*'['*/*/) {
-        s = 26;
-      }
-
-      else if(LA36_0 == 93/*93 /*']'*/*/) {
-        s = 27;
-      }
-
-      else if(LA36_0 == 123/*123 /*'{'*/*/) {
-        s = 28;
-      }
-
-      else if(LA36_0 == 125/*125 /*'}'*/*/) {
-        s = 29;
-      }
-
-      else if(LA36_0 == 59/*59 /*';'*/*/) {
-        s = 30;
-      }
-
-      else if(LA36_0 == 34/*34 /*'\"'*/*/) {
-        s = 31;
-      }
-
-      else if(LA36_0 == 39/*39 /*'\''*/*/) {
-        s = 32;
-      }
-
-      else if(LA36_0 == 35/*35 /*'#'*/*/) {
-        s = 33;
-      }
-
-      else if((LA36_0 >= 48 /*'0'*/ && LA36_0 <= 57 /*'9'*/)) {
-        s = 34;
-      }
-
-      else if((LA36_0 >= 65 /*'A'*/ && LA36_0 <= 68 /*'D'*/)
-        || (LA36_0 >= 70 /*'F'*/ && LA36_0 <= 72 /*'H'*/)
-        || (LA36_0 >= 74 /*'J'*/ && LA36_0 <= 79 /*'O'*/)
-        || LA36_0 == 81/*81 /*'Q'*/*/
-        || (LA36_0 >= 83 /*'S'*/ && LA36_0 <= 84 /*'T'*/)
-        || (LA36_0 >= 86 /*'V'*/ && LA36_0 <= 90 /*'Z'*/)
-        || LA36_0 == 95/*95 /*'_'*/*/
-        || (LA36_0 >= 97 /*'a'*/ && LA36_0 <= 100 /*'d'*/)
-        || (LA36_0 >= 102 /*'f'*/ && LA36_0 <= 104 /*'h'*/)
-        || (LA36_0 >= 106 /*'j'*/ && LA36_0 <= 111 /*'o'*/)
-        || LA36_0 == 113/*113 /*'q'*/*/
-        || (LA36_0 >= 115 /*'s'*/ && LA36_0 <= 116 /*'t'*/)
-        || (LA36_0 >= 118 /*'v'*/ && LA36_0 <= 122 /*'z'*/)) {
-        s = 35;
-      }
-
-      else if(LA36_0 == 47/*47 /*'/'*/*/) {
-        s = 37;
-      }
-
-      else if((LA36_0 >= 9 /*'\t'*/ && LA36_0 <= 10 /*'\n'*/)
-        || (LA36_0 >= 12 /*'\f'*/ && LA36_0 <= 13 /*'\r'*/)
-        || LA36_0 == 32/*32 /*' '*/*/) {
-        s = 38;
-      }
-
-      else if((LA36_0 >= 0 /*'\u0000'*/ && LA36_0 <= 8 /*'\b'*/)
-        || LA36_0 == 11/*11 /*'\u000B'*/*/
-        || (LA36_0 >= 14 /*'\u000E'*/ && LA36_0 <= 31 /*'\u001F'*/)
-        || LA36_0 == 92/*92 /*'\\'*/*/
-        || LA36_0 == 96/*96 /*'`'*/*/
-        || (LA36_0 >= 127 /*'\u007F'*/ && LA36_0 <= 65535 /*'\uFFFF'*/)) {
-        s = 39;
-      }
-
-      else s = 36;
-
-      if(s>=0) return s;
-      break;
-    }
-    if(recognizer.state.backtracking > 0) {
-      recognizer.state.failed = true; 
-      return -1;
-    }
-    NoViableAltException nvae = new NoViableAltException(description, 36, _s, recognizer.input);
-    recognizer.reportError(nvae);
-    throw nvae;
-  }
+NUMBER | RANGE | REGEXP | WS | SL_COMMENT | ML_COMMENT );""";
 
 }
