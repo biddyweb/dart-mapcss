@@ -5,16 +5,32 @@
 MapCSS is used to define stylesheets for map rendering in the [OpenStreetMap](http://www.osm.org)
 project, see the [project wiki](http://wiki.openstreetmap.org/wiki/MapCSS) for more information.
 
-# Status
+Example style sheets used in editors and renderers of the OSM project can be found 
+[here](http://code.google.com/p/kothic/source/browse/#hg%2Fsrc%2Fstyles) and 
+[here](http://josm.openstreetmap.de/wiki/Styles).
 
-- initial antlr grammar available, creates an abstract syntax tree (AST)
-- generated Parser and Lexer for [Dart](http://www.dartlang.org)
+# Compatibility 
 
-# Todos
+ - Some editors/renderers accept raw content as declaration values. Sample styles sheet include for instance
+   the following declarations:
+   ```css
+   font-family: DejaVu Sans Book;
+   icon-image: icons/place.png;
+   ```
+   
+   In **mapcss** these values have to be included in quotes:
+   ```css
+   font-family: "DejaVu Sans Book";
+   icon-image: "icons/place.png";
+   ```
 
-- parser/lexers in [various languages](http://www.antlr.org/wiki/display/ANTLR3/Code+Generation+Targets)
-  can be generated from the supplied antlr grammar. To write a wiki page.  
-- Dart framework for MapCSS  
+# Creating an AST 
+
+Run
+  ```sh
+  promp: dart bin/mapcss.dart --ast stylesheet.mapcss
+  ```
+to dump an abstract syntax tree for the stylesheet
 
 # License
  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
