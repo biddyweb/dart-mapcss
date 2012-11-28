@@ -1,0 +1,20 @@
+node {
+  //e1: eval(min(1,2));
+  //e2: eval("a" + "b");
+  //e3: eval("a" < 2.0);
+  //e4: eval("a" <= 2.0);
+  //e5: eval("a" > 2.0);
+  //e6: eval("a" >= 2.0);
+  //e7: eval("a" = 2.0);
+  //e8: eval("a" != 2.0);
+  //e9: eval("a" = "b" && 1 != 2 || "c" <= "a");
+  //e10: eval( 1 || 2);
+  // e11: eval(
+  //       (tag("a") = "b") && 1
+  //		||  min(1,2) != (2 % 3)
+  // );
+  //e12:  eval(1 / 2);
+  //e13: eval(  zmetric(3) - num(prop("raise")) );
+  //e14: eval(1 - 2);
+  e15: eval(1.0 + -3.4);
+}
