@@ -15,6 +15,7 @@ grammar MapCSS;
  * ===========
  *
  * MapCSS knows different types of identifier tokens: 
+ *
  * - In attribute selectors identifier tokens refer to OSM tag names.
  *   There's not formal syntax, but typical examples are
  *     highway
@@ -101,7 +102,8 @@ tokens {
    OP_PLUS='+';
    OP_MINUS;
    
-   FUNCTION_CALL;
+   FUNCTION_CALL;   
+   PREDICATE;
    EVAL_CALL;   
 }
 
@@ -230,59 +232,29 @@ fragment POSITIVE_FLOAT:;
 fragment POSITIVE_INT:;
 fragment NEGATIVE_FLOAT:;
 fragment NEGATIVE_INT:;
+fragment INCREASE:;
 fragment P: ('p' | 'P');
 fragment T: ('t' | 'T');
 fragment X: ('x' | 'X');
 
 
 NUMBER
-	: ('-') => '-' ('.')? DIGIT+ 
-	  (
-		(P (T | X)) => 
-			P
-			(
-				 T              {$type = POINTS;}
-			   | X              {$type = PIXELS;}
-			)
-	    | ('%') => '%'          {$type = PERCENTAGE;}
-	    | ('.') => '.' 
-	       DIGIT+
-	       (	       
-	         (P (T | X)) => 
-			   P
-				(
-					 T          {$type = POINTS;}
-				   | X          {$type = PIXELS;}
-				)
-		     | ('%') => '%'     {$type = PERCENTAGE;}
-	         | {$type = NEGATIVE_FLOAT;}         
-	       ) 
-	    | {$type=NEGATIVE_INT;}
-	  )	  
-	  
-	| ('.')? DIGIT+ 
-	  (
-		(P (T | X)) => 
-			P
-			(
-				 T              {$type = POINTS;}
-			   | X              {$type = PIXELS;}
-			)
-	    | ('%') => '%'          {$type = PERCENTAGE;}
-	    | ('.') => '.' 
-	       DIGIT+
-	       (	       
-	         (P (T | X)) => 
-			   P
-				(
-					 T          {$type = POINTS;}
-				   | X          {$type = PIXELS;}
-				)
-		     | ('%') => '%'     {$type = PERCENTAGE;}
-	         | {$type = POSITIVE_FLOAT;}         
-	       ) 
-	    | {$type=POSITIVE_INT;}
-	  )	  
+	: ('-'? DIGIT* ('.' DIGIT+)?) => s='-'? DIGIT* (d='.' DIGIT+)?
+	    (
+		   (P (T | X)) => 
+			  P
+			  (
+				   T              {$type = POINTS;}
+			     | X              {$type = PIXELS;}
+		  	)
+	      | ('%') => '%'          {$type = PERCENTAGE;}	    
+	      | 
+	        {
+	           if ($s == null) $type = $d == null ? POSITIVE_INT : NEGATIVE_INT;
+	           else  $type = $d == null ? POSITIVE_FLOAT : NEGATIVE_FLOAT;
+   	        }
+	  )	 	
+	| ('+') => '+' DIGIT+         {$type = INCREASE;}
 	;		
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -406,6 +378,7 @@ predicate
 	| predicate_ident OP_MATCH rhs_match  -> OP_MATCH  predicate_ident  rhs_match
 	| '!' predicate_ident                 -> OP_NOT_EXIST predicate_ident
 	| predicate_ident '?'                 -> OP_TRUTHY predicate_ident
+	| p=CSS_IDENT '(' quoted ')'          -> PREDICATE[$p] quoted  
 	;
 
 predicate_ident
@@ -436,7 +409,9 @@ class_selector
 	;
 
 pseudo_class_selector
-	: ':' cssident   -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST cssident)
+    : ':!' cssident   -> ^(PSEUDO_CLASS_SELECTOR OP_NOT_EXIST cssident) 
+    | '!:' cssident   -> ^(PSEUDO_CLASS_SELECTOR OP_NOT_EXIST cssident)
+	| ':' cssident   -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST cssident)
 	;	
 
 type_selector
@@ -489,6 +464,7 @@ single_value
 	| v=NEGATIVE_INT            -> VALUE_INT[$v]
 	| v=POSITIVE_FLOAT          -> VALUE_FLOAT[$v]
 	| v=NEGATIVE_FLOAT          -> VALUE_FLOAT[$v]	
+	| v=INCREASE                -> VALUE_INT[$v]
 	| v=POINTS 		   -> VALUE_POINTS[$v]
 	| v=PIXELS         -> VALUE_PIXELS[$v]
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 

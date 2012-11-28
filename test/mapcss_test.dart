@@ -231,6 +231,32 @@ main() {
            a: 1.1;
           }"""
       );
+      expectParseOK(
+          """node{
+          a: -1;
+          }"""
+      );
+      expectParseOK(
+          """node{
+          a: -1.1;
+          }"""
+      );
+      expectParseOK(
+          """node{
+          a: .1;
+          }"""
+      );
+      expectParseOK(
+          """node{
+          a: -.1;
+          }"""
+      );
+      expectParseOK(
+          // an increase 
+          """node{
+           a: +1;
+          }"""
+      );
     });
     test("accept strings in values", () {
       expectParseOK(
