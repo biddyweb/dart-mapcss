@@ -31,4 +31,10 @@ runPrivateTests() {
     expect(_blue("#BCA"), "10");
     expect(_blue("#aabb10"), "16");
   });
+  
+  solo_test("_extractUrl", () {
+    expect(_extractUrl("""url("http://no.such.domain/")"""), "http://no.such.domain/");    
+    expect(_extractUrl("""  url  (  "http://no.such.domain/"  )"""), "http://no.such.domain/");
+    expect(_extractUrl("""URL  ('http://no.such.domain/'  )"""), "http://no.such.domain/");
+  });
 }

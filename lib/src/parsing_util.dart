@@ -94,3 +94,9 @@ _blue(c) {
     return int.parse("0x${c.substring(5)}").toString();
   }
 }
+
+_extractUrl(v) {
+  v = (v is Token) ? v.text : v;
+  return v.replaceFirst(new RegExp(r"""^\s*url\s*\(\s*['"]\s*""", ignoreCase:true), "")
+    .replaceFirst(new RegExp(r"""["']\s*\)$""", ignoreCase:true), "");
+}

@@ -340,6 +340,15 @@ main() {
          list: 1, 2, 3pt, keyword;
      }""");
    });
+   
+   test("accept URL values ", () {
+     expectParseOK("""node{
+         p1: url("anurl");
+         p2: url ( "anurl" ) ;
+         p3: url ( 'anurl' ) ;
+         p3: url (http://no.such.domain/foo/bar?a=b&c=d) ;         
+     }""");
+   });
   });
   
     

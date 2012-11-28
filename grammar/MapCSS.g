@@ -123,13 +123,23 @@ tokens {
 fragment EBACKSLASH: '\\\\';
 fragment UNICODE: '\u0080'..'\uFFFF';
  
-URL: ('u' | 'U') ('r' | 'R') ('l' | 'L');
+
 RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
 RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
 ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
 INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
 EVAL: ('e' | 'E') ('v' | 'V') ('a' | 'A') ('l' | 'L');
 IMPORT: '@' ('i' | 'I') ('m' | 'M') ('p' | 'P') ('o' | 'O')('r' | 'R') ('t' | 'T');
+
+fragment HWS: (' ' | '\t' | '\f');
+fragment URLCONTENT: ('!' | '#' | '$' | '%' | '&' | '*'..'[' | ']'..'~' | NONASCII)+;
+URL: ('u' | 'U') ('r' | 'R') ('l' | 'L') HWS* '(' HWS* 
+     (
+	         URLCONTENT
+	   | '"' URLCONTENT '"'  
+	   | '\'' URLCONTENT '\''
+     )
+     HWS* ')';
 
 fragment DIGIT:  '0'..'9';
 fragment CHAR: 'a'..'z' | 'A'..'Z';
@@ -311,13 +321,13 @@ REGEXP:  '/'  (
            |  (.)   =>                               {$type=DIV}
          );
 
-
 /* ----------------------------------------------------------------------------------------------- */
 /* Whitespace and comments                                                                         */
 /* ----------------------------------------------------------------------------------------------- */
-WS:			  (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
+WS:		    (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
 SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
 ML_COMMENT:   '/*'  (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
+
 
 
 /* =============================================================================================== */
@@ -482,8 +492,8 @@ single_value
 	| v=POINTS 		   -> VALUE_POINTS[$v]
 	| v=PIXELS         -> VALUE_PIXELS[$v]
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 
-	| URL '(' quoted ')' -> VALUE_URL[$quoted.text]
-    | RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'           
+	| URL   -> VALUE_URL[_extractUrl($URL)]
+    | RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'            
 	         -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])	
 	| RGBA '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ',' a=num ')'
 	         -> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])
@@ -492,9 +502,9 @@ single_value
 
     /* make sure these are the last alternatives in this rule */
     | k=OSM_TAG            -> VALUE_KEYWORD[$k]    	 
-    | cssident        	         
+    | cssident   
 	;
-
+	
 /* ------------------------------------------------------------------------------------------ */
 /* eval expressions                                                                           */
 /* ------------------------------------------------------------------------------------------ */

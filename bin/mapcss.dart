@@ -52,6 +52,10 @@ class AstDumper {
           s = "VALUE_POINTS <${tree.token.text}>";
           break;
           
+        case MapCSSParser.VALUE_URL:
+          s = "VALUE_URL <${tree.token.text}>";
+          break;
+          
         default:
           s= tree.toString();
       }
