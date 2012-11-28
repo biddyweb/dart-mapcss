@@ -11,25 +11,30 @@ grammar MapCSS;
  *
  * The grammar emits an AST.
  *
+ * Identifiers
+ * ===========
+ *
  * MapCSS knows different types of identifier tokens: 
- * - in attribute selectors identifier tokens refer to OSM tag names.
+ * - In attribute selectors identifier tokens refer to OSM tag names.
  *   There's not formal syntax, but typical examples are
- *     - highway
- *     - size2
- *     - addr:house  (note  the ':' - in OSM it used as separator between
+ *     highway
+ *     size2
+ *     addr:house  (note  the ':' - in OSM it used as separator between
  *                    different "tag components")
- *   Tag names should also be valid in the context of eval(). 
+ *     a.b         (we allow '.' as as separator, too)
  *
- * - declaration properties follow the syntactical conventions of CSS. 
- *   In particular, the can include '-'. They may even start with a '-'. 
- *   Per convention a declaration property with a leading '-' is a 
+ *   In MapCSS tag names are also valid identifiers in declaration values,
+ *   in particular in eval()-expressions.
+ *
+ * - Other identifiers follow the syntactical conventions of CSS, 
+ *   which supports '-' in identifiers. Identifiers may even start with a '-'. 
+ *   Per convention an identifier with a leading '-' is a 
  *   vendor specific extension.
- *
- * - we assume,that class names, pseudo class names, and layer identifiers 
- *   follow the traditional syntactical conventions for identifiers. 
- *   '-' can be used within a class name, a pseudo class name, or a
- *   layer identifier, but not at the beginning: 
- *      [a-zA-Z_]([a-zA-Z0-9_-]*)
+ *   Typical examples are:
+ *       fill-width
+ *       -x-border-shading
+ *   In MapCSS layer ids, class names, pseudo class names, and declaration
+ *   properties are CSS identifiers. 
  *       
  */
  
@@ -105,60 +110,108 @@ tokens {
 }
 
 @lexer::members {
-    /// true, if the scanner is in an attribute selectors, i.e. '[highway=residential]'
-	bool isInAttributeSelector = false;	
+    /// true, if the scanner is in a state, where OSM tag names are 
+    /// valid identifiers  '[highway=residential]'
+	bool isOsmTagAllowed = false;	
+	/// true, if the lexer is currently in a declaration block
+	bool isInDeclarationBlock = false;
 }
 
 @parser::members {
 }
 
-fragment DIGIT:  '0'..'9';
-fragment CHAR: 'a'..'z' | 'A'..'Z';
-fragment IDCHAR: CHAR | '_'| '-' | DIGIT;
-fragment IDCHAR_START: CHAR | '_';
-fragment TAGCHAR_START: CHAR | '_';
-fragment TAGCHAR: CHAR | '_' | DIGIT;
-
-fragment EDQUOTE: '\\"';
-fragment ESQUOTE: '\\\'';
 fragment EBACKSLASH: '\\\\';
 fragment UNICODE: '\u0080'..'\uFFFF';
-fragment HEXDIGIT: DIGIT | 'a'..'f' | 'A'..'F'; 
-fragment PT: ('p' | 'P') ('t' | 'T');
-fragment PX: ('p' | 'P') ('x' | 'X');
+ 
+URL: ('u' | 'U') ('r' | 'R') ('l' | 'L');
+RGB: ('r' | 'R') ('g' | 'G') ('b' | 'B');
+RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
+ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
+INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
+EVAL: ('e' | 'E') ('v' | 'V') ('a' | 'A') ('l' | 'L');
+IMPORT: '@' ('i' | 'I') ('m' | 'M') ('p' | 'P') ('o' | 'O')('r' | 'R') ('t' | 'T');
+
+fragment DIGIT:  '0'..'9';
+fragment CHAR: 'a'..'z' | 'A'..'Z';
 
 
-URL: {!isInAttributeSelector}?=>('u' | 'U') ('r' | 'R') ('l' | 'L');
-RGBA: {!isInAttributeSelector}?=>('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
-RGB: {!isInAttributeSelector}?=>('r' | 'R') ('g' | 'G') ('b' | 'B');
-NODE: {!isInAttributeSelector}?=>('n' | 'N') ('o' | 'O') ('d' | 'D') ('e' | 'E');
-WAY: {!isInAttributeSelector}?=>('w' | 'W') ('a' | 'A') ('y' | 'Y');
-RELATION: {!isInAttributeSelector}?=>('r' | 'R') ('e' | 'E') ('l' | 'L') ('a' | 'A') ('t' | 'T') ('i' | 'I') ('o' | 'O') ('n' | 'N');
-AREA: {!isInAttributeSelector}?=>('a' | 'A') ('r' | 'R') ('e' | 'E') ('a' | 'A');
-LINE: {!isInAttributeSelector}?=>('l' | 'L') ('i' | 'I') ('n' | 'N') ('e' | 'E');
-CANVAS: {!isInAttributeSelector}?=>('c' | 'C') ('a' | 'A') ('n' | 'N') ('v' | 'V')('a' | 'A') ('s' | 'S');
-META: {!isInAttributeSelector}?=>('m' | 'M') ('e' | 'E') ('t' | 'T') ('a' | 'A');
-EVAL: {!isInAttributeSelector}?=>'eval';
-IMPORT:     '@import';
+/* Basic character sets from CSS specification */
+fragment NONASCII: ~('\u0000' .. '\u009F');                     
+fragment NMSTART: 'a'..'z' | 'A'..'Z' | '_' | NONASCII;
+fragment NMCHAR: 'a'..'z' | 'A'..'Z' | '_' | '-' | NONASCII;
 
-ROLE: {isInAttributeSelector}?=>('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
-INDEX: {isInAttributeSelector}?=>('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
+/* helpers */
+fragment NCOMPONENT: (CHAR | '_') (CHAR | DIGIT | '_' | '-')*;
+fragment TAGSEPARATOR: (':') | ('.');
 
-IDENT: {!isInAttributeSelector}?=> IDCHAR_START IDCHAR*;
+/* context specific lexer for identifiers. Recognizes CSS idents and OSM tag names */
+fragment CSS_IDENT:;
+fragment OSM_TAG:;
+IDENTS:
+	'-' ?  NCOMPONENT (
+	      {isOsmTagAllowed}? =>  (
+	          (TAGSEPARATOR) =>  TAGSEPARATOR NCOMPONENT (TAGSEPARATOR NCOMPONENT)*  {$type=OSM_TAG}
+	        | {$type=CSS_IDENT}	                    
+	      )
+	   |  {$type=CSS_IDENT}
+	); 	
 
-TAG:   {isInAttributeSelector}?=> TAGCHAR_START TAGCHAR* ((':') TAGCHAR+)*;
-LBRAC: '[' {isInAttributeSelector=true;};
-RBRAC: ']' {isInAttributeSelector=false;};
-       
+/*
+ * OSM tag names are allowed in attribute and link selectors 
+ */
+LBRACKET 
+  @after{isOsmTagAllowed=true;}
+  : '[';
+  
+ RBRACKET
+  @after{isOsmTagAllowed=false;}
+  : ']'; 
+
+/*
+ * OSM tag names are allowed in declaration values, but not in declaration
+ * properties. We enable them, after we've scanned a '{' and then a ':'
+ * separating the declaration property from the declaration value.
+ */
+
+LBRACE
+  @after{
+    isInDeclarationBlock=true;
+    isOsmTagAllowed=false;
+  }
+  : '{';
+  
+RBRACE
+  @after{
+    isInDeclarationBlock=false;
+    isOsmTagAllowed=false;
+  }
+  : '}'; 
+  
+COLON
+  @after{
+    isOsmTagAllowed=isInDeclarationBlock;
+  }
+  : ':';   
+  
+SEMICOLON
+  @after{
+    isOsmTagAllowed=false;
+  }
+  : ';';
+
+/* -------------------- quoted strings -----------------------------------------------------------*/
+fragment EDQUOTE: '\\"';
+fragment ESQUOTE: '\\\'';
 DQUOTED_STRING: '"' (' ' | '!' | '#'..'[' | ']'..'~' | UNICODE | EDQUOTE | EBACKSLASH )* '"';
 SQUOTED_STRING: '\'' (' '..'&' | '('..'[' | ']'..'~' | UNICODE | ESQUOTE | EBACKSLASH)* '\'';
 
+/* -------------------- hex color constants -------------------------------------------------------*/
+fragment HEXDIGIT: DIGIT | 'a'..'f' | 'A'..'F'; 
 HEXCOLOR: '#' ((HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT) | (HEXDIGIT HEXDIGIT HEXDIGIT));
 
-
-
 /* ----------------------------------------------------------------------------------------------- */
-/* Positive/Negative numbers and numbers with units                                                */
+/* Positive/Negative numbers and numbers with units  (derived from an ANTLR grammar for            */
+/* CSS 2.1)                                                                                        */
 /* ----------------------------------------------------------------------------------------------- */
 fragment PERCENTAGE:;
 fragment PIXELS:;
@@ -173,7 +226,7 @@ fragment X: ('x' | 'X');
 
 
 NUMBER
-	: ('-') => '-' DIGIT+ 
+	: ('-') => '-' ('.')? DIGIT+ 
 	  (
 		(P (T | X)) => 
 			P
@@ -197,7 +250,7 @@ NUMBER
 	    | {$type=NEGATIVE_INT;}
 	  )	  
 	  
-	| DIGIT+ 
+	| ('.')? DIGIT+ 
 	  (
 		(P (T | X)) => 
 			P
@@ -235,16 +288,17 @@ RANGE
 	;
 	
 /* ----------------------------------------------------------------------------------------------- */
-/* Regular expressions                                                                             */
+/* Regular expressions  and the '/' operator                                                       */
 /* ----------------------------------------------------------------------------------------------- */
-fragment REGEX_START:  ' '..')' | '+'..'.' |'0'..'[' | ']'..'~' | UNICODE;
-fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE;
 fragment REGEX_ESCAPE:   '\\\\' | '\\/' | '\\(' | '\\)' 
                        | '\\|' | '\\$' | '\\*' | '\\.' | '\\^' | '\\?' | '\\+' | '\\-'
                        | '\\n' | '\\r' | '\\t'
                        | '\\s' | '\\S'
                        | '\\d' | '\\D'
-                       | '\\w' | '\\W';      
+                       | '\\w' | '\\W';   
+fragment REGEX_START:  ' '..')' | '+'..'.' |'0'..'[' | ']'..'~' | UNICODE | REGEX_ESCAPE;
+fragment REGEX_CHAR:  ' '..'.' |'0'..'[' | ']'..'~' | UNICODE | REGEX_ESCAPE;
+   
                        
 /*
  * make sure a / is  followed by a regular expression. If not, treat it
@@ -252,9 +306,9 @@ fragment REGEX_ESCAPE:   '\\\\' | '\\/' | '\\(' | '\\)'
  */ 
 fragment DIV:;   
 REGEXP:  '/'  (
-              ((REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/') 
-                    => (REGEX_START | REGEX_ESCAPE) (REGEX_CHAR | REGEX_ESCAPE)* '/' {$type=REGEXP}
-           |  (.)   =>                                              {$type=DIV}
+              (REGEX_START REGEX_CHAR* '/') 
+                    => REGEX_START REGEX_CHAR* '/'   {$type=REGEXP}
+           |  (.)   =>                               {$type=DIV}
          );
 
 
@@ -264,6 +318,7 @@ REGEXP:  '/'  (
 WS:			  (' ' | '\t' | '\n' | '\r' | '\f') {$channel=HIDDEN;}; 
 SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
 ML_COMMENT:   '/*'  (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
+
 
 /* =============================================================================================== */
 /* Grammar                                                                                         */
@@ -293,25 +348,23 @@ selector
 	;
 
 link_selector
-	: LBRAC ROLE binary_operator rhs RBRAC  -> ^(ROLE_SELECTOR binary_operator rhs)
-	| LBRAC INDEX op=int_operator v=POSITIVE_INT RBRAC   -> ^(INDEX_SELECTOR int_operator VALUE_INT[v])
+	: LBRACKET ROLE binary_operator predicate_primitive RBRACKET  -> ^(ROLE_SELECTOR binary_operator predicate_primitive)
+	| LBRACKET INDEX op=int_operator v=POSITIVE_INT RBRACKET   -> ^(INDEX_SELECTOR int_operator VALUE_INT[v])
 	;
 
 layer_id_selector
-	: '::' k=IDENT -> LAYER_ID_SELECTOR[$k]
+	: '::' k=CSS_IDENT -> LAYER_ID_SELECTOR[$k]
 	;
 	
 int_operator : OP_EQ | OP_NEQ | OP_LT| OP_LE| OP_GT| OP_GE;
 		
 import_statement
-	: IMPORT URL '(' url=quoted ')' id=IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
+	: IMPORT URL '(' url=quoted ')' id=CSS_IDENT ';' -> ^(IMPORT VALUE_URL[$url.text] VALUE_KEYWORD[$id])
 	;
 
 simple_selector
-	: type_selector class_selector? zoom_selector?  attribute_selector* pseudo_class_selector* layer_id_selector?
+	: type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?
 	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
-	| v=CANVAS        -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
-	| v=META          -> ^(SIMPLE_SELECTOR TYPE_SELECTOR[$v])
 	;
 
 zoom_selector
@@ -323,37 +376,39 @@ quoted
 	| v=SQUOTED_STRING   -> VALUE_QUOTED[_unquote($v)]
 	; 
 	
-ident
-	: v=IDENT   -> VALUE_KEYWORD[$v]
+cssident
+	: v=CSS_IDENT   -> VALUE_KEYWORD[$v]
 	;	
 
 attribute_selector
-	: LBRAC  condition RBRAC   -> ^(ATTRIBUTE_SELECTOR condition)
+	: LBRACKET  predicate RBRACKET   -> ^(ATTRIBUTE_SELECTOR predicate)
 	;
 
 lhs
 	: quoted 
-	| tag
-	;
-
-tag
-	: v=TAG -> VALUE_KEYWORD[$v]
+	| k=CSS_IDENT  -> VALUE_KEYWORD[$k]
+    | k=OSM_TAG    -> VALUE_KEYWORD[$k]
 	;
 		
-condition
-	: lhs                         -> OP_EXIST lhs
-	| lhs binary_operator rhs     
-	| lhs OP_MATCH^ rhs_match         
-	| unary_operator lhs          -> unary_operator lhs
-	| lhs '?'                     -> OP_TRUTHY lhs
-	;
-	
-rhs
-	: tag
-	| num
-	| quoted
+predicate
+	: predicate_ident                     -> OP_EXIST predicate_ident
+	| predicate_primitive binary_operator predicate_primitive ->   binary_operator predicate_primitive+  
+	| predicate_ident OP_MATCH rhs_match  -> OP_MATCH  predicate_ident  rhs_match
+	| '!' predicate_ident                 -> OP_NOT_EXIST predicate_ident
+	| predicate_ident '?'                 -> OP_TRUTHY predicate_ident
 	;
 
+predicate_ident
+	: cssident
+	| k=OSM_TAG   -> VALUE_KEYWORD[$k]
+	;
+	
+predicate_primitive
+	: num	
+	| predicate_ident
+	| quoted
+	;
+	
 rhs_match
 	: quoted
 	| r=REGEXP                     -> VALUE_REGEXP[$r]	
@@ -365,56 +420,44 @@ binary_operator
     | OP_CONTAINS
 	;        
 
-unary_operator
-	: '-'      -> OP_NEGATE
-	| '!'      -> OP_NOT_EXIST
-	;
-
 class_selector
-	: '!.'  k=IDENT  -> ^(CLASS_SELECTOR OP_NOT_EXIST VALUE_KEYWORD[$k])
-	|  '.'  k=IDENT  -> ^(CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
+	: '!.'  cssident  -> ^(CLASS_SELECTOR OP_NOT_EXIST cssident)
+	|  '.'  cssident  -> ^(CLASS_SELECTOR OP_EXIST     cssident)
 	;
 
 pseudo_class_selector
-	: ':' k=IDENT    -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST VALUE_KEYWORD[$k])
+	: ':' cssident   -> ^(PSEUDO_CLASS_SELECTOR OP_EXIST cssident)
 	;	
 
 type_selector
-	: (v=NODE | v=WAY | v=RELATION | v=AREA | v=LINE | v='*')  -> TYPE_SELECTOR[$v]
+    @after {
+       var type = $text;
+       type = type.toLowerCase();
+       if (!['node', 'way', 'relation', 'area', 'line', 'canvas', 'meta', '*'].contains(type)) {
+         StringBuffer sb = new StringBuffer();
+         sb.add('type_selector: unsupported type ').add(type);
+         throw new MapCSSParsingException(sb.toString());
+       }
+    }
+    : v=CSS_IDENT    -> TYPE_SELECTOR[$v]
+    | v='*'          -> TYPE_SELECTOR[$v]
 	;
 
 declaration_block
-	:  '{' declarations '}' -> ^(DECLARATION_BLOCK declarations)
-	|  '{' '}'              -> ^(DECLARATION_BLOCK)
+	:  LBRACE declarations RBRACE -> ^(DECLARATION_BLOCK declarations)
+	|  LBRACE RBRACE              -> ^(DECLARATION_BLOCK)
 	;
 
 declarations
-	: declaration (';' declaration)* ';'*  -> declaration*
+	: declaration (SEMICOLON declaration)* ';'*  -> declaration*
 	;
 
 declaration
-	: declaration_property ':' declaration_value   -> ^(DECLARATION declaration_property declaration_value)
+	: declaration_property COLON declaration_value  -> ^(DECLARATION declaration_property declaration_value)
 	;
 
 declaration_property
-    /*
-     * the following keyword are also valid declaration properties
-     */
-    : k=NODE      ->  VALUE_KEYWORD[$k]
-    | k=WAY       ->  VALUE_KEYWORD[$k]
-    | k=RELATION  ->  VALUE_KEYWORD[$k]
-    | k=AREA      ->  VALUE_KEYWORD[$k]
-    | k=LINE      ->  VALUE_KEYWORD[$k]
-    | k=URL       ->  VALUE_KEYWORD[$k]
-    | k=RGB       ->  VALUE_KEYWORD[$k]
-    | k=RGBA      ->  VALUE_KEYWORD[$k]
-    | k=EVAL      ->  VALUE_KEYWORD[$k]    
-    
-    /*
-     * any other valid declaration property is matched with this
-     * rule
-     */
-	| k=IDENT     ->  VALUE_KEYWORD[$k]	
+	: cssident
 	;	
 
 declaration_value
@@ -439,15 +482,17 @@ single_value
 	| v=POINTS 		   -> VALUE_POINTS[$v]
 	| v=PIXELS         -> VALUE_PIXELS[$v]
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 
-	| k=IDENT          -> VALUE_KEYWORD[$k]
-	| k=LINE           -> VALUE_KEYWORD[$k]
-	| quoted           -> VALUE_QUOTED[$quoted.text]
-	| c=HEXCOLOR      -> ^(VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)])
 	| URL '(' quoted ')' -> VALUE_URL[$quoted.text]
-	| RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'           
-	         -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])
+    | RGB '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ')'           
+	         -> ^(VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b])	
 	| RGBA '(' r=POSITIVE_INT ',' g=POSITIVE_INT ',' b=POSITIVE_INT ',' a=num ')'
 	         -> ^(VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text])
+	| c=HEXCOLOR      -> ^(VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)])
+	| quoted           -> VALUE_QUOTED[$quoted.text]
+
+    /* make sure these are the last alternatives in this rule */
+    | k=OSM_TAG            -> VALUE_KEYWORD[$k]    	 
+    | cssident        	         
 	;
 
 /* ------------------------------------------------------------------------------------------ */
@@ -517,12 +562,14 @@ unaryExpression
 
 primaryExpression
     :    '(' expr ')'
-    |    f=IDENT '(' args? ')' -> ^(FUNCTION_CALL[$f] args?)
-    |    POSITIVE_FLOAT
-    |    POSITIVE_INT
-    |    NEGATIVE_FLOAT
-    |    NEGATIVE_INT
+    |    f=CSS_IDENT '(' args? ')' -> ^(FUNCTION_CALL[$f] args?)
+    |    v=POSITIVE_FLOAT  ->  VALUE_FLOAT[$v]
+    |    v=POSITIVE_INT    ->  VALUE_INT[$v]
+    |    v=NEGATIVE_FLOAT  ->  VALUE_FLOAT[$v]
+    |    v=NEGATIVE_INT    ->  VALUE_INT[$v]
     |    quoted
+    |    cssident
+    |    v=OSM_TAG   -> VALUE_KEYWORD[$v]
     ;
                  	
 

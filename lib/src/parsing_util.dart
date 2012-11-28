@@ -1,5 +1,10 @@
 part of mapcss;
 
+class MapCSSParsingException extends RuntimeError {
+  MapCSSParsingException(message) : super(message);
+  String toString() => "MapCSSParsingException: $message";
+}
+
 _zoomLower(v) {
   var s = v.text;
   var re = new RegExp(r"^\|z(\d+)");
