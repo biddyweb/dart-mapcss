@@ -301,7 +301,6 @@ SL_COMMENT:   '//' (options {greedy=false;}: .)* '\r'? '\n' {$channel=HIDDEN;};
 ML_COMMENT:   '/*'  (options {greedy=false;} : .)* '*/' {$channel=HIDDEN;};
 
 
-
 /* =============================================================================================== */
 /* Grammar                                                                                         */
 /* ===============================================================================================  */
@@ -447,8 +446,8 @@ declaration_property
 
 declaration_value
 	: single_value
+	| single_value  ',' single_value (',' single_value)* -> ^(VALUE_LIST single_value*)
 	| EVAL  '(' expr ')'  -> ^(EVAL_CALL expr)					
-	| single_value ',' single_value (',' single_value)*    -> ^(VALUE_LIST single_value*)
 	;
  
 

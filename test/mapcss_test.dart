@@ -473,6 +473,11 @@ main() {
        });
      });     
   });  
-  
+ 
+  solo_test("accept URL values ", () {
+    expectParseOK("""node{
+        p1:abc*dde;
+    }""");
+  });
  
 }
