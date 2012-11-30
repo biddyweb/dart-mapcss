@@ -65,8 +65,8 @@ class StylesheetBuilder {
   
   _buildValue(CommonTree node) {
     switch(node.token.type) {
-      case MapCSSParser.VALUE_INT: return int.parse(node.token.text);
-      case MapCSSParser.VALUE_FLOAT: return double.parse(node.token.text);
+      case MapCSSParser.VALUE_INT: return new NumberValue(int.parse(node.token.text));
+      case MapCSSParser.VALUE_FLOAT: return new NumberValue(double.parse(node.token.text));
       case MapCSSParser.VALUE_KEYWORD: return new IdentValue(node.token.text);
       case MapCSSParser.VALUE_QUOTED: return new QuotedValue(node.token.text);
       case MapCSSParser.VALUE_RGB: 
@@ -94,7 +94,36 @@ class StylesheetBuilder {
         
       case MapCSSParser.VALUE_PERCENTAGE:
         return new UnitValue.prozent(int.parse(node.token.text));
+        
+      case MapCSSParser.VALUE_INCREMENT:
+        return new IncrementValue(int.parse(node.token.text));
+        
+      case MapCSSParser.EVAL_CALL:
+        return _buildExpression(node.children[0]);
+      
+      default:
+        throw new StateError("unsupported node type, got ${node.token.type}, ${node.token.text}");
     }
+  }
+  
+  _buildExpression(CommonTree node) {
+    if (node.token.type == MapCSSParser.FUNCTION_CALL) {
+      var args = [];
+      args = node.children.map((child) => _buildExpression(child));
+      return new FunctionExpression(node.text, args);
+    }    
+    Operator op = _buildExpressionOperator(node);
+    if (op != null) {
+      if (op.isBinary) {
+        var lhs = _buildExpression(node.children[0]);
+        var rhs = _buildExpression(node.children[1]);
+        return new BinaryExpression(op, lhs, rhs);
+      } else {
+        var rhs = _buildExpression(node.children[0]);
+        return new UnaryExpression(op, rhs);
+      }
+    } 
+    return _buildValue(node);
   }
   
   _buildDescendantCombinator(CommonTree node) {
@@ -123,7 +152,6 @@ class StylesheetBuilder {
     var child = _buildSimpleSelector(node.children[0]);
     var parent = _buildSimpleSelector(node.children[1]);
     return new ParentCombinator(child,parent);
-    return cc;
   }
   
   _buildLinkSelector(CommonTree node) {
@@ -289,12 +317,39 @@ class StylesheetBuilder {
     }
   }
   
+  _buildExpressionOperator(CommonTree node) {
+    switch(node.token.type) {
+      case MapCSSParser.OP_EQ: return Operator.EQ; 
+      case MapCSSParser.OP_NEQ: return Operator.NEQ; 
+      case MapCSSParser.OP_GE: return Operator.GE; 
+      case MapCSSParser.OP_GT: return Operator.GT; 
+      case MapCSSParser.OP_LE: return Operator.LE; 
+      case MapCSSParser.OP_LT: return Operator.LT; 
+      case MapCSSParser.OP_MATCH: return Operator.MATCH; 
+      case MapCSSParser.OP_STARTS_WITH: return Operator.STARTS_WITH; 
+      case MapCSSParser.OP_ENDS_WITH: return Operator.ENDS_WITH; 
+      case MapCSSParser.OP_SUBSTRING: return Operator.SUBSTRING; 
+      case MapCSSParser.OP_CONTAINS: return Operator.CONTAINS; 
+      case MapCSSParser.OP_EXIST: return Operator.EXIST; 
+      
+      case MapCSSParser.OP_AND: return Operator.AND; 
+      case MapCSSParser.OP_OR: return Operator.OR; 
+      case MapCSSParser.OP_NOT: return Operator.NOT; 
+      case MapCSSParser.OP_PLUS: return Operator.PLUS; 
+      case MapCSSParser.OP_MINUS: return Operator.MINUS;
+      case MapCSSParser.OP_MUL: return Operator.MULT;
+      case MapCSSParser.OP_DIV: return Operator.DIV;
+      default:
+        return null;
+    }
+  }
+  
   _buildRhs(CommonTree node) {
     switch(node.token.type) {
       case MapCSSParser.VALUE_QUOTED: return  new QuotedValue(node.token.text); 
       case MapCSSParser.VALUE_KEYWORD:  return new IdentValue(node.token.text); 
-      case MapCSSParser.VALUE_INT:  return int.parse(node.token.text); 
-      case MapCSSParser.VALUE_FLOAT:  return double.parse(node.token.text); 
+      case MapCSSParser.VALUE_INT:  return new NumberValue(int.parse(node.token.text)); 
+      case MapCSSParser.VALUE_FLOAT:  return new NumberValue(double.parse(node.token.text)); 
       case MapCSSParser.VALUE_REGEXP: return new RegExpValue(node.token.text);
       default:
         throw new StateError("unexpected type of value on rhs, got ${node.token.type}");

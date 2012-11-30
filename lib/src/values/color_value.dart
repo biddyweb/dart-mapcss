@@ -11,7 +11,7 @@ part of mapcss;
  *    yellow
  *    etc.
  */ 
-class ColorValue {
+class ColorValue implements Value{
   static final black = new ColorValue.hex("#000000");
   static final silver = new ColorValue.hex("#C0C0C0");
   static final gray = new ColorValue.hex("#808080");
@@ -81,7 +81,7 @@ class ColorValue {
   /// create a color from a [hex] color code, either a short #ABC or a long #ABC123
   /// code 
   ColorValue.hex(String hex) {
-    if (hex == null) throw new NullPointerException("hex must not be null");
+    if (hex == null) throw new ArgumentError("hex must not be null");
     hex = hex.trim().toLowerCase();
     var short = new RegExp(r"^#[0-9a-f]{3}$");
     var long = new RegExp(r"^#[0-9a-f]{6}$");

@@ -74,6 +74,7 @@ tokens {
    VALUE_PIXELS;               // .text is a float or int, *with* trailing 'px'
    VALUE_LIST;               
    VALUE_REGEXP;               // .text is a regular expression
+   VALUE_INCREMENT;            // .text is the increment
    
    OP_EXIST;
    OP_NOT_EXIST;               // NOTE: not identical with OP_NOT -> !tag or !class
@@ -232,7 +233,7 @@ fragment POSITIVE_FLOAT:;
 fragment POSITIVE_INT:;
 fragment NEGATIVE_FLOAT:;
 fragment NEGATIVE_INT:;
-fragment INCREASE:;
+fragment INCREMENT:;
 fragment P: ('p' | 'P');
 fragment T: ('t' | 'T');
 fragment X: ('x' | 'X');
@@ -250,11 +251,14 @@ NUMBER
 	      | ('%') => '%'          {$type = PERCENTAGE;}	    
 	      | 
 	        {
-	           if ($s == null) $type = $d == null ? POSITIVE_INT : NEGATIVE_INT;
-	           else  $type = $d == null ? POSITIVE_FLOAT : NEGATIVE_FLOAT;
+	           if ($s == null) {
+	              $type = ($d == null ? POSITIVE_INT : POSITIVE_FLOAT);
+	           } else {
+	              $type = ($d == null ? NEGATIVE_INT : NEGATIVE_FLOAT);
+	           }
    	        }
 	  )	 	
-	| ('+') => '+' DIGIT+         {$type = INCREASE;}
+	| ('+') => '+' DIGIT+         {$type = INCREMENT;}
 	;		
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -373,10 +377,13 @@ lhs
 		
 predicate
 	: predicate_ident                     -> OP_EXIST predicate_ident
+	| quoted                     		  -> OP_EXIST quoted
 	| predicate_primitive binary_operator predicate_primitive ->   binary_operator predicate_primitive+  
 	| predicate_ident OP_MATCH rhs_match  -> OP_MATCH  predicate_ident  rhs_match
 	| '!' predicate_ident                 -> OP_NOT_EXIST predicate_ident
 	| predicate_ident '?'                 -> OP_TRUTHY predicate_ident
+	| '!' quoted                 		  -> OP_NOT_EXIST quoted
+	| quoted '?'                		  -> OP_TRUTHY quoted	
 	| p=CSS_IDENT '(' quoted ')'          -> PREDICATE[$p] quoted  
 	;
 
@@ -457,7 +464,7 @@ single_value
 	| v=NEGATIVE_INT            -> VALUE_INT[$v]
 	| v=POSITIVE_FLOAT          -> VALUE_FLOAT[$v]
 	| v=NEGATIVE_FLOAT          -> VALUE_FLOAT[$v]	
-	| v=INCREASE                -> VALUE_INT[$v]
+	| v=INCREMENT               -> VALUE_INCREMENT[$v]
 	| v=POINTS 		   -> VALUE_POINTS[$v]
 	| v=PIXELS         -> VALUE_PIXELS[$v]
 	| v=PERCENTAGE     -> VALUE_PERCENTAGE[$v] 
@@ -540,7 +547,7 @@ unaryExpression
     ;
 
 primaryExpression
-    :    '(' expr ')'
+    :    '(' expr ')'      -> expr
     |    f=CSS_IDENT '(' args? ')' -> ^(FUNCTION_CALL[$f] args?)
     |    v=POSITIVE_FLOAT  ->  VALUE_FLOAT[$v]
     |    v=POSITIVE_INT    ->  VALUE_INT[$v]

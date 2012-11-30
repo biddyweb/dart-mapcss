@@ -6,7 +6,7 @@ part of mapcss;
  */
 class Operator {
   
-   // binary operators 
+   // --- binary operators 
    static const EQ = const Operator._instance("=");
    static const NEQ = const Operator._instance("!=");
    static const LT = const Operator._instance("<");
@@ -18,9 +18,16 @@ class Operator {
    static const ENDS_WITH = const Operator._instance(r"$=");
    static const SUBSTRING = const Operator._instance("*=");
    static const CONTAINS = const Operator._instance("~=");
+   static const PLUS = const Operator._instance("+");
+   static const MINUS = const Operator._instance("-");
+   static const MULT = const Operator._instance("*");
+   static const DIV = const Operator._instance("/");
+   static const AND = const Operator._instance("&&");
+   static const OR = const Operator._instance("||");
+   static const NOT = const Operator._instance("!");
    
-   // unary operators
    
+   // --- unary operators   
    // no text representation in the MapCSS grammar
    static const EXIST = const Operator._instance("", false);
    static const NOT_EXIST = const Operator._instance("!", false);
@@ -28,7 +35,9 @@ class Operator {
    
    static final List _ops = [EQ, NEQ, LT, LE, GT, GE, MATCH,STARTS_WITH,
                              ENDS_WITH, SUBSTRING, CONTAINS,
-                             EXIST, NOT_EXIST, TRUTHY];
+                             EXIST, NOT_EXIST, TRUTHY,
+                             PLUS, MINUS, MULT, DIV,
+                             AND, OR, NOT];
    final String _text;
    final bool _isBinary;
    const Operator._instance(this._text, [bool this._isBinary=true]);

@@ -35,6 +35,10 @@ part "src/selector.dart";
 part "src/link_selector.dart";
 part "src/pseudo_class_selector.dart";
 part "src/layer_id_selector.dart";
+part "src/values/number_value.dart";
+part "src/values/value.dart";
+part "src/expression.dart";
+part "src/values/increment_value.dart";
 
 part "src/test/test_private.dart";
 

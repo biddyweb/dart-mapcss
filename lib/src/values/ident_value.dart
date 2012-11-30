@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * Represents an identifier in a MapCSS stylesheet
  */
-class IdentValue {
+class IdentValue implements Value{
   final String value;
   const IdentValue(this.value);
   bool operator ==(other) {
