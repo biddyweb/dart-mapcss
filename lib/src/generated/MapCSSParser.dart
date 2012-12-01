@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1-SNAPSHOT MapCSSParser.g 2012-11-30 15:07:53
+// $ANTLR 3.5.1-SNAPSHOT MapCSSParser.g 2012-12-01 11:49:18
 
 
   part of mapcss;
@@ -4284,8 +4284,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "declaration_block"
   /* grammar/MapCSS.g:
-   431:1: declaration_block : ( LBRACE declarations RBRACE -> ^( DECLARATION_BLOCK declarations ) | 
-   LBRACE RBRACE -> ^( DECLARATION_BLOCK ) );*/
+   431:1: declaration_block : (l= LBRACE declarations RBRACE -> ^( DECLARATION_BLOCK[$l] declarations ) |l= LBRACE RBRACE -> ^( DECLARATION_BLOCK[$l] ) ); */
   MapCSSParser_declaration_block_return declaration_block() {
     MapCSSParser_declaration_block_return retval = new MapCSSParser_declaration_block_return();
     retval.start = input.LT(1);
@@ -4293,24 +4292,21 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token LBRACE80 = null;
+    Token l = null;
+    Token RBRACE81 = null;
     Token RBRACE82 = null;
-    Token LBRACE83 = null;
-    Token RBRACE84 = null;
-    MapCSSParser_declarations_return declarations81 =null;
+    MapCSSParser_declarations_return declarations80 =null;
 
 
-    Object LBRACE80_tree=null;
+    Object l_tree=null;
+    Object RBRACE81_tree=null;
     Object RBRACE82_tree=null;
-    Object LBRACE83_tree=null;
-    Object RBRACE84_tree=null;
     RewriteRuleTokenStream stream_RBRACE=new RewriteRuleTokenStream(_adaptor,"token RBRACE");
     RewriteRuleTokenStream stream_LBRACE=new RewriteRuleTokenStream(_adaptor,"token LBRACE");
     RewriteRuleSubtreeStream stream_declarations=new RewriteRuleSubtreeStream(_adaptor,"rule declarations");
     try {
       /* grammar/MapCSS.g: 
-       432:2: ( LBRACE declarations RBRACE -> ^( DECLARATION_BLOCK declarations ) | 
-       LBRACE RBRACE -> ^( DECLARATION_BLOCK ) )*/
+       436:2: (l= LBRACE declarations RBRACE -> ^( DECLARATION_BLOCK[$l] declarations ) |l= LBRACE RBRACE -> ^( DECLARATION_BLOCK[$l] ) ) */
       int alt22 = 2;
       int LA22_0 = input.LA(1);
 
@@ -4349,29 +4345,29 @@ class MapCSSParser extends Parser {
       switch (alt22) {
         case 1 :
           /* grammar/MapCSS.g:
-           432:5: LBRACE declarations RBRACE*/
+           436:5: l= LBRACE declarations RBRACE*/
           {
-          	LBRACE80 = matchSymbol(input,
-          	    LBRACE,FOLLOW_LBRACE_in_declaration_block3788); 
+          	l = matchSymbol(input,
+          	    LBRACE,FOLLOW_LBRACE_in_declaration_block3796); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_LBRACE.add(LBRACE80);
+          	if(state.backtracking == 0) stream_LBRACE.add(l);
 
 
-          	pushFollow(FOLLOW_declarations_in_declaration_block3790);
-          	declarations81 = declarations();
+          	pushFollow(FOLLOW_declarations_in_declaration_block3798);
+          	declarations80 = declarations();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_declarations.add(declarations81.tree);
+          	  stream_declarations.add(declarations80.tree);
 
-          	RBRACE82 = matchSymbol(input,
-          	    RBRACE,FOLLOW_RBRACE_in_declaration_block3792); 
+          	RBRACE81 = matchSymbol(input,
+          	    RBRACE,FOLLOW_RBRACE_in_declaration_block3800); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_RBRACE.add(RBRACE82);
+          	if(state.backtracking == 0) stream_RBRACE.add(RBRACE81);
 
 
           	// AST REWRITE
@@ -4387,14 +4383,14 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 432:32: -> ^( DECLARATION_BLOCK declarations )*/
+          	/* 436:34: -> ^( DECLARATION_BLOCK[$l] declarations )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     432:35: ^( DECLARATION_BLOCK declarations )*/
+          	     436:37: ^( DECLARATION_BLOCK[$l] declarations )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
-          	    	_adaptor.create(DECLARATION_BLOCK, "DECLARATION_BLOCK")
+          	    	_adaptor.create(DECLARATION_BLOCK, l)
           	    	, root_1);
 
           	    	_adaptor.addChild(root_1, stream_declarations.nextTree());
@@ -4412,20 +4408,20 @@ class MapCSSParser extends Parser {
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           433:5: LBRACE RBRACE*/
+           437:5: l= LBRACE RBRACE*/
           {
-          	LBRACE83 = matchSymbol(input,
-          	    LBRACE,FOLLOW_LBRACE_in_declaration_block3806); 
+          	l = matchSymbol(input,
+          	    LBRACE,FOLLOW_LBRACE_in_declaration_block3817); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_LBRACE.add(LBRACE83);
+          	if(state.backtracking == 0) stream_LBRACE.add(l);
 
 
-          	RBRACE84 = matchSymbol(input,
-          	    RBRACE,FOLLOW_RBRACE_in_declaration_block3808); 
+          	RBRACE82 = matchSymbol(input,
+          	    RBRACE,FOLLOW_RBRACE_in_declaration_block3819); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_RBRACE.add(RBRACE84);
+          	if(state.backtracking == 0) stream_RBRACE.add(RBRACE82);
 
 
           	// AST REWRITE
@@ -4441,14 +4437,14 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 433:32: -> ^( DECLARATION_BLOCK )*/
+          	/* 437:34: -> ^( DECLARATION_BLOCK[$l] )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     433:35: ^( DECLARATION_BLOCK )*/
+          	     437:37: ^( DECLARATION_BLOCK[$l] )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
-          	    	_adaptor.create(DECLARATION_BLOCK, "DECLARATION_BLOCK")
+          	    	_adaptor.create(DECLARATION_BLOCK, l)
           	    	, root_1);
 
           	    	_adaptor.addChild(root_0, root_1);
@@ -4488,7 +4484,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "declarations"
   /* grammar/MapCSS.g:
-   436:1: declarations : declaration ( SEMICOLON declaration )* ( ';' )* -> ( declaration )* ;*/
+   440:1: declarations : declaration ( SEMICOLON declaration )* ( ';' )* -> ( declaration )* ;*/
   MapCSSParser_declarations_return declarations() {
     MapCSSParser_declarations_return retval = new MapCSSParser_declarations_return();
     retval.start = input.LT(1);
@@ -4496,34 +4492,34 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token SEMICOLON86 = null;
-    Token char_literal88 = null;
+    Token SEMICOLON84 = null;
+    Token char_literal86 = null;
+    MapCSSParser_declaration_return declaration83 =null;
+
     MapCSSParser_declaration_return declaration85 =null;
 
-    MapCSSParser_declaration_return declaration87 =null;
 
-
-    Object SEMICOLON86_tree=null;
-    Object char_literal88_tree=null;
+    Object SEMICOLON84_tree=null;
+    Object char_literal86_tree=null;
     RewriteRuleTokenStream stream_SEMICOLON=new RewriteRuleTokenStream(_adaptor,"token SEMICOLON");
     RewriteRuleSubtreeStream stream_declaration=new RewriteRuleSubtreeStream(_adaptor,"rule declaration");
     try {
       /* grammar/MapCSS.g:
-       437:2: ( declaration ( SEMICOLON declaration )* ( ';' )* -> ( declaration )* )*/
+       441:2: ( declaration ( SEMICOLON declaration )* ( ';' )* -> ( declaration )* )*/
       /* grammar/MapCSS.g:
-       437:4: declaration ( SEMICOLON declaration )* ( ';' )**/
+       441:4: declaration ( SEMICOLON declaration )* ( ';' )**/
       {
-      	pushFollow(FOLLOW_declaration_in_declarations3838);
-      	declaration85 = declaration();
+      	pushFollow(FOLLOW_declaration_in_declarations3850);
+      	declaration83 = declaration();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_declaration.add(declaration85.tree);
+      	  stream_declaration.add(declaration83.tree);
 
       	/* grammar/MapCSS.g:
-      	 437:16: ( SEMICOLON declaration )**/
+      	 441:16: ( SEMICOLON declaration )**/
       	loop23:
       	do {
       	  int alt23 = 2;
@@ -4543,23 +4539,23 @@ class MapCSSParser extends Parser {
       	  switch (alt23) {
       			case 1 :
       			  /* grammar/MapCSS.g:
-      			   437:17: SEMICOLON declaration*/
+      			   441:17: SEMICOLON declaration*/
       			  {
-      			  	SEMICOLON86 = matchSymbol(input,
-      			  	    SEMICOLON,FOLLOW_SEMICOLON_in_declarations3841); 
+      			  	SEMICOLON84 = matchSymbol(input,
+      			  	    SEMICOLON,FOLLOW_SEMICOLON_in_declarations3853); 
       			  	if(state.failed) 
       			  	  return retval; 
-      			  	if(state.backtracking == 0) stream_SEMICOLON.add(SEMICOLON86);
+      			  	if(state.backtracking == 0) stream_SEMICOLON.add(SEMICOLON84);
 
 
-      			  	pushFollow(FOLLOW_declaration_in_declarations3843);
-      			  	declaration87 = declaration();
+      			  	pushFollow(FOLLOW_declaration_in_declarations3855);
+      			  	declaration85 = declaration();
 
       			  	state.fsp--;
       			  	if(state.failed) 
       			  	  return retval;
       			  	if(state.backtracking == 0) 
-      			  	  stream_declaration.add(declaration87.tree);
+      			  	  stream_declaration.add(declaration85.tree);
 
       			  }
       			  break;
@@ -4571,7 +4567,7 @@ class MapCSSParser extends Parser {
 
 
       	/* grammar/MapCSS.g:
-      	 437:41: ( ';' )**/
+      	 441:41: ( ';' )**/
       	loop24:
       	do {
       	  int alt24 = 2;
@@ -4585,13 +4581,13 @@ class MapCSSParser extends Parser {
       	  switch (alt24) {
       			case 1 :
       			  /* grammar/MapCSS.g:
-      			   437:41: ';'*/
+      			   441:41: ';'*/
       			  {
-      			  	char_literal88 = matchSymbol(input,
-      			  	    SEMICOLON,FOLLOW_SEMICOLON_in_declarations3847); 
+      			  	char_literal86 = matchSymbol(input,
+      			  	    SEMICOLON,FOLLOW_SEMICOLON_in_declarations3859); 
       			  	if(state.failed) 
       			  	  return retval; 
-      			  	if(state.backtracking == 0) stream_SEMICOLON.add(char_literal88);
+      			  	if(state.backtracking == 0) stream_SEMICOLON.add(char_literal86);
 
 
       			  }
@@ -4616,10 +4612,10 @@ class MapCSSParser extends Parser {
       	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	root_0 = _adaptor.nil();
-      	/* 437:47: -> ( declaration )**/
+      	/* 441:47: -> ( declaration )**/
       	{
       	    /* grammar/MapCSS.g:
-      	     437:50: ( declaration )**/
+      	     441:50: ( declaration )**/
       	    while ( stream_declaration.hasNext()) {
       	        _adaptor.addChild(root_0, stream_declaration.nextTree());
 
@@ -4658,7 +4654,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "declaration"
   /* grammar/MapCSS.g:
-   440:1: declaration : declaration_property COLON declaration_value -> ^( DECLARATION declaration_property declaration_value ) ;*/
+   444:1: declaration : declaration_property COLON declaration_value -> ^( DECLARATION declaration_property declaration_value ) ;*/
   MapCSSParser_declaration_return declaration() {
     MapCSSParser_declaration_return retval = new MapCSSParser_declaration_return();
     retval.start = input.LT(1);
@@ -4666,46 +4662,46 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token COLON90 = null;
-    MapCSSParser_declaration_property_return declaration_property89 =null;
+    Token COLON88 = null;
+    MapCSSParser_declaration_property_return declaration_property87 =null;
 
-    MapCSSParser_declaration_value_return declaration_value91 =null;
+    MapCSSParser_declaration_value_return declaration_value89 =null;
 
 
-    Object COLON90_tree=null;
+    Object COLON88_tree=null;
     RewriteRuleTokenStream stream_COLON=new RewriteRuleTokenStream(_adaptor,"token COLON");
     RewriteRuleSubtreeStream stream_declaration_property=new RewriteRuleSubtreeStream(_adaptor,"rule declaration_property");
     RewriteRuleSubtreeStream stream_declaration_value=new RewriteRuleSubtreeStream(_adaptor,"rule declaration_value");
     try {
       /* grammar/MapCSS.g:
-       441:2: ( declaration_property COLON declaration_value -> ^( DECLARATION declaration_property declaration_value ) )*/
+       445:2: ( declaration_property COLON declaration_value -> ^( DECLARATION declaration_property declaration_value ) )*/
       /* grammar/MapCSS.g:
-       441:4: declaration_property COLON declaration_value*/
+       445:4: declaration_property COLON declaration_value*/
       {
-      	pushFollow(FOLLOW_declaration_property_in_declaration3865);
-      	declaration_property89 = declaration_property();
+      	pushFollow(FOLLOW_declaration_property_in_declaration3877);
+      	declaration_property87 = declaration_property();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_declaration_property.add(declaration_property89.tree);
+      	  stream_declaration_property.add(declaration_property87.tree);
 
-      	COLON90 = matchSymbol(input,
-      	    COLON,FOLLOW_COLON_in_declaration3867); 
+      	COLON88 = matchSymbol(input,
+      	    COLON,FOLLOW_COLON_in_declaration3879); 
       	if(state.failed) 
       	  return retval; 
-      	if(state.backtracking == 0) stream_COLON.add(COLON90);
+      	if(state.backtracking == 0) stream_COLON.add(COLON88);
 
 
-      	pushFollow(FOLLOW_declaration_value_in_declaration3869);
-      	declaration_value91 = declaration_value();
+      	pushFollow(FOLLOW_declaration_value_in_declaration3881);
+      	declaration_value89 = declaration_value();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_declaration_value.add(declaration_value91.tree);
+      	  stream_declaration_value.add(declaration_value89.tree);
 
       	// AST REWRITE
       	// elements: declaration_value, declaration_property
@@ -4720,10 +4716,10 @@ class MapCSSParser extends Parser {
       	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	root_0 = _adaptor.nil();
-      	/* 441:50: -> ^( DECLARATION declaration_property declaration_value )*/
+      	/* 445:50: -> ^( DECLARATION declaration_property declaration_value )*/
       	{
       	    /* grammar/MapCSS.g:
-      	     441:53: ^( DECLARATION declaration_property declaration_value )*/
+      	     445:53: ^( DECLARATION declaration_property declaration_value )*/
       	    {
       	    	Object root_1 = _adaptor.nil();
       	    	root_1 = _adaptor.becomeRoot(
@@ -4769,7 +4765,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "declaration_property"
   /* grammar/MapCSS.g:
-   444:1: declaration_property : cssident ;*/
+   448:1: declaration_property : cssident ;*/
   MapCSSParser_declaration_property_return declaration_property() {
     MapCSSParser_declaration_property_return retval = new MapCSSParser_declaration_property_return();
     retval.start = input.LT(1);
@@ -4777,27 +4773,27 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    MapCSSParser_cssident_return cssident92 =null;
+    MapCSSParser_cssident_return cssident90 =null;
 
 
 
     try {
       /* grammar/MapCSS.g:
-       445:2: ( cssident )*/
+       449:2: ( cssident )*/
       /* grammar/MapCSS.g:
-       445:4: cssident*/
+       449:4: cssident*/
       {
       	root_0 = _adaptor.nil();
 
 
-      	pushFollow(FOLLOW_cssident_in_declaration_property3891);
-      	cssident92 = cssident();
+      	pushFollow(FOLLOW_cssident_in_declaration_property3903);
+      	cssident90 = cssident();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0)
-      	  _adaptor.addChild(root_0, cssident92.tree);
+      	  _adaptor.addChild(root_0, cssident90.tree);
 
       }
 
@@ -4825,7 +4821,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "declaration_value"
   /* grammar/MapCSS.g:
-   448:1: declaration_value : ( single_value | single_value ',' single_value ( ',' single_value )* -> ^( VALUE_LIST ( single_value )* ) | 
+   452:1: declaration_value : ( single_value | single_value ',' single_value ( ',' single_value )* -> ^( VALUE_LIST ( single_value )* ) | 
    EVAL '(' expr ')' -> ^( EVAL_CALL expr ) );*/
   MapCSSParser_declaration_value_return declaration_value() {
     MapCSSParser_declaration_value_return retval = new MapCSSParser_declaration_value_return();
@@ -4834,27 +4830,27 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
+    Token char_literal93 = null;
     Token char_literal95 = null;
-    Token char_literal97 = null;
-    Token EVAL99 = null;
+    Token EVAL97 = null;
+    Token char_literal98 = null;
     Token char_literal100 = null;
-    Token char_literal102 = null;
-    MapCSSParser_single_value_return single_value93 =null;
+    MapCSSParser_single_value_return single_value91 =null;
+
+    MapCSSParser_single_value_return single_value92 =null;
 
     MapCSSParser_single_value_return single_value94 =null;
 
     MapCSSParser_single_value_return single_value96 =null;
 
-    MapCSSParser_single_value_return single_value98 =null;
-
-    MapCSSParser_expr_return expr101 =null;
+    MapCSSParser_expr_return expr99 =null;
 
 
+    Object char_literal93_tree=null;
     Object char_literal95_tree=null;
-    Object char_literal97_tree=null;
-    Object EVAL99_tree=null;
+    Object EVAL97_tree=null;
+    Object char_literal98_tree=null;
     Object char_literal100_tree=null;
-    Object char_literal102_tree=null;
     RewriteRuleTokenStream stream_116=new RewriteRuleTokenStream(_adaptor,"token 116");
     RewriteRuleTokenStream stream_117=new RewriteRuleTokenStream(_adaptor,"token 117");
     RewriteRuleTokenStream stream_EVAL=new RewriteRuleTokenStream(_adaptor,"token EVAL");
@@ -4863,7 +4859,7 @@ class MapCSSParser extends Parser {
     RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(_adaptor,"rule expr");
     try {
       /* grammar/MapCSS.g: 
-       449:2: ( single_value | single_value ',' single_value ( ',' single_value )* -> ^( VALUE_LIST ( single_value )* ) | 
+       453:2: ( single_value | single_value ',' single_value ( ',' single_value )* -> ^( VALUE_LIST ( single_value )* ) | 
        EVAL '(' expr ')' -> ^( EVAL_CALL expr ) )*/
       int alt26 = 3;
       switch(input.LA(1)) {
@@ -5630,27 +5626,43 @@ class MapCSSParser extends Parser {
       switch (alt26) {
         case 1 :
           /* grammar/MapCSS.g:
-           449:4: single_value*/
+           453:4: single_value*/
           {
           	root_0 = _adaptor.nil();
 
 
-          	pushFollow(FOLLOW_single_value_in_declaration_value3903);
-          	single_value93 = single_value();
+          	pushFollow(FOLLOW_single_value_in_declaration_value3915);
+          	single_value91 = single_value();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0)
-          	  _adaptor.addChild(root_0, single_value93.tree);
+          	  _adaptor.addChild(root_0, single_value91.tree);
 
           }
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           450:4: single_value ',' single_value ( ',' single_value )**/
+           454:4: single_value ',' single_value ( ',' single_value )**/
           {
-          	pushFollow(FOLLOW_single_value_in_declaration_value3908);
+          	pushFollow(FOLLOW_single_value_in_declaration_value3920);
+          	single_value92 = single_value();
+
+          	state.fsp--;
+          	if(state.failed) 
+          	  return retval;
+          	if(state.backtracking == 0) 
+          	  stream_single_value.add(single_value92.tree);
+
+          	char_literal93 = matchSymbol(input,
+          	    118,FOLLOW_118_in_declaration_value3923); 
+          	if(state.failed) 
+          	  return retval; 
+          	if(state.backtracking == 0) stream_118.add(char_literal93);
+
+
+          	pushFollow(FOLLOW_single_value_in_declaration_value3925);
           	single_value94 = single_value();
 
           	state.fsp--;
@@ -5659,24 +5671,8 @@ class MapCSSParser extends Parser {
           	if(state.backtracking == 0) 
           	  stream_single_value.add(single_value94.tree);
 
-          	char_literal95 = matchSymbol(input,
-          	    118,FOLLOW_118_in_declaration_value3911); 
-          	if(state.failed) 
-          	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal95);
-
-
-          	pushFollow(FOLLOW_single_value_in_declaration_value3913);
-          	single_value96 = single_value();
-
-          	state.fsp--;
-          	if(state.failed) 
-          	  return retval;
-          	if(state.backtracking == 0) 
-          	  stream_single_value.add(single_value96.tree);
-
           	/* grammar/MapCSS.g:
-          	 450:35: ( ',' single_value )**/
+          	 454:35: ( ',' single_value )**/
           	loop25:
           	do {
           	  int alt25 = 2;
@@ -5690,23 +5686,23 @@ class MapCSSParser extends Parser {
           	  switch (alt25) {
           			case 1 :
           			  /* grammar/MapCSS.g:
-          			   450:36: ',' single_value*/
+          			   454:36: ',' single_value*/
           			  {
-          			  	char_literal97 = matchSymbol(input,
-          			  	    118,FOLLOW_118_in_declaration_value3916); 
+          			  	char_literal95 = matchSymbol(input,
+          			  	    118,FOLLOW_118_in_declaration_value3928); 
           			  	if(state.failed) 
           			  	  return retval; 
-          			  	if(state.backtracking == 0) stream_118.add(char_literal97);
+          			  	if(state.backtracking == 0) stream_118.add(char_literal95);
 
 
-          			  	pushFollow(FOLLOW_single_value_in_declaration_value3918);
-          			  	single_value98 = single_value();
+          			  	pushFollow(FOLLOW_single_value_in_declaration_value3930);
+          			  	single_value96 = single_value();
 
           			  	state.fsp--;
           			  	if(state.failed) 
           			  	  return retval;
           			  	if(state.backtracking == 0) 
-          			  	  stream_single_value.add(single_value98.tree);
+          			  	  stream_single_value.add(single_value96.tree);
 
           			  }
           			  break;
@@ -5730,10 +5726,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 450:55: -> ^( VALUE_LIST ( single_value )* )*/
+          	/* 454:55: -> ^( VALUE_LIST ( single_value )* )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     450:58: ^( VALUE_LIST ( single_value )* )*/
+          	     454:58: ^( VALUE_LIST ( single_value )* )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -5741,7 +5737,7 @@ class MapCSSParser extends Parser {
           	    	, root_1);
 
           	    	/* grammar/MapCSS.g:
-          	    	 450:71: ( single_value )**/
+          	    	 454:71: ( single_value )**/
           	    	while ( stream_single_value.hasNext()) {
           	    	    _adaptor.addChild(root_1, stream_single_value.nextTree());
 
@@ -5761,36 +5757,36 @@ class MapCSSParser extends Parser {
           break;
         case 3 :
           /* grammar/MapCSS.g:
-           451:4: EVAL '(' expr ')'*/
+           455:4: EVAL '(' expr ')'*/
           {
-          	EVAL99 = matchSymbol(input,
-          	    EVAL,FOLLOW_EVAL_in_declaration_value3934); 
+          	EVAL97 = matchSymbol(input,
+          	    EVAL,FOLLOW_EVAL_in_declaration_value3946); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_EVAL.add(EVAL99);
+          	if(state.backtracking == 0) stream_EVAL.add(EVAL97);
 
 
-          	char_literal100 = matchSymbol(input,
-          	    116,FOLLOW_116_in_declaration_value3937); 
+          	char_literal98 = matchSymbol(input,
+          	    116,FOLLOW_116_in_declaration_value3949); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_116.add(char_literal100);
+          	if(state.backtracking == 0) stream_116.add(char_literal98);
 
 
-          	pushFollow(FOLLOW_expr_in_declaration_value3939);
-          	expr101 = expr();
+          	pushFollow(FOLLOW_expr_in_declaration_value3951);
+          	expr99 = expr();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_expr.add(expr101.tree);
+          	  stream_expr.add(expr99.tree);
 
-          	char_literal102 = matchSymbol(input,
-          	    117,FOLLOW_117_in_declaration_value3941); 
+          	char_literal100 = matchSymbol(input,
+          	    117,FOLLOW_117_in_declaration_value3953); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_117.add(char_literal102);
+          	if(state.backtracking == 0) stream_117.add(char_literal100);
 
 
           	// AST REWRITE
@@ -5806,10 +5802,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 451:24: -> ^( EVAL_CALL expr )*/
+          	/* 455:24: -> ^( EVAL_CALL expr )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     451:27: ^( EVAL_CALL expr )*/
+          	     455:27: ^( EVAL_CALL expr )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -5855,7 +5851,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "num"
   /* grammar/MapCSS.g:
-   455:1: num : (n= POSITIVE_INT -> VALUE_INT[$n] |n= NEGATIVE_INT -> VALUE_INT[$n] |n= POSITIVE_FLOAT -> VALUE_FLOAT[$n] |n= NEGATIVE_FLOAT -> VALUE_FLOAT[$n] ); */
+   459:1: num : (n= POSITIVE_INT -> VALUE_INT[$n] |n= NEGATIVE_INT -> VALUE_INT[$n] |n= POSITIVE_FLOAT -> VALUE_FLOAT[$n] |n= NEGATIVE_FLOAT -> VALUE_FLOAT[$n] ); */
   MapCSSParser_num_return num() {
     MapCSSParser_num_return retval = new MapCSSParser_num_return();
     retval.start = input.LT(1);
@@ -5873,7 +5869,7 @@ class MapCSSParser extends Parser {
 
     try {
       /* grammar/MapCSS.g: 
-       456:2: (n= POSITIVE_INT -> VALUE_INT[$n] |n= NEGATIVE_INT -> VALUE_INT[$n] |n= POSITIVE_FLOAT -> VALUE_FLOAT[$n] |n= NEGATIVE_FLOAT -> VALUE_FLOAT[$n] ) */
+       460:2: (n= POSITIVE_INT -> VALUE_INT[$n] |n= NEGATIVE_INT -> VALUE_INT[$n] |n= POSITIVE_FLOAT -> VALUE_FLOAT[$n] |n= NEGATIVE_FLOAT -> VALUE_FLOAT[$n] ) */
       int alt27 = 4;
       switch(input.LA(1)) {
       case POSITIVE_INT:
@@ -5911,10 +5907,10 @@ class MapCSSParser extends Parser {
       switch (alt27) {
         case 1 :
           /* grammar/MapCSS.g:
-           456:4: n= POSITIVE_INT*/
+           460:4: n= POSITIVE_INT*/
           {
           	n = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_num3970); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_num3982); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(n);
@@ -5933,7 +5929,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 456:25: -> VALUE_INT[$n]*/
+          	/* 460:25: -> VALUE_INT[$n]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, n)
@@ -5949,10 +5945,10 @@ class MapCSSParser extends Parser {
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           457:4: n= NEGATIVE_INT*/
+           461:4: n= NEGATIVE_INT*/
           {
           	n = matchSymbol(input,
-          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_num3990); 
+          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_num4002); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_INT.add(n);
@@ -5971,7 +5967,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 457:25: -> VALUE_INT[$n]*/
+          	/* 461:25: -> VALUE_INT[$n]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, n)
@@ -5987,10 +5983,10 @@ class MapCSSParser extends Parser {
           break;
         case 3 :
           /* grammar/MapCSS.g:
-           458:4: n= POSITIVE_FLOAT*/
+           462:4: n= POSITIVE_FLOAT*/
           {
           	n = matchSymbol(input,
-          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_num4010); 
+          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_num4022); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_FLOAT.add(n);
@@ -6009,7 +6005,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 458:25: -> VALUE_FLOAT[$n]*/
+          	/* 462:25: -> VALUE_FLOAT[$n]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, n)
@@ -6025,10 +6021,10 @@ class MapCSSParser extends Parser {
           break;
         case 4 :
           /* grammar/MapCSS.g:
-           459:4: n= NEGATIVE_FLOAT*/
+           463:4: n= NEGATIVE_FLOAT*/
           {
           	n = matchSymbol(input,
-          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_num4028); 
+          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_num4040); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_FLOAT.add(n);
@@ -6047,7 +6043,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 459:25: -> VALUE_FLOAT[$n]*/
+          	/* 463:25: -> VALUE_FLOAT[$n]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, n)
@@ -6087,7 +6083,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "single_value"
   /* grammar/MapCSS.g:
-   462:1: single_value : (v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= INCREMENT -> VALUE_INCREMENT[$v] |v= POINTS -> VALUE_POINTS[$v] |v= PIXELS -> VALUE_PIXELS[$v] |v= PERCENTAGE -> VALUE_PERCENTAGE[$v] | 
+   466:1: single_value : (v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= INCREMENT -> VALUE_INCREMENT[$v] |v= POINTS -> VALUE_POINTS[$v] |v= PIXELS -> VALUE_PIXELS[$v] |v= PERCENTAGE -> VALUE_PERCENTAGE[$v] | 
    URL -> VALUE_URL[_extractUrl($URL)] | RGB '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ')' -> ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] ) | 
    RGBA '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ',' a= num ')' -> ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] ) |c= HEXCOLOR -> ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] ) | 
    quoted -> VALUE_QUOTED[$quoted.text] |k= OSM_TAG -> VALUE_KEYWORD[$k] | 
@@ -6105,23 +6101,23 @@ class MapCSSParser extends Parser {
     Token b = null;
     Token c = null;
     Token k = null;
-    Token URL103 = null;
-    Token RGB104 = null;
+    Token URL101 = null;
+    Token RGB102 = null;
+    Token char_literal103 = null;
+    Token char_literal104 = null;
     Token char_literal105 = null;
     Token char_literal106 = null;
-    Token char_literal107 = null;
+    Token RGBA107 = null;
     Token char_literal108 = null;
-    Token RGBA109 = null;
+    Token char_literal109 = null;
     Token char_literal110 = null;
     Token char_literal111 = null;
     Token char_literal112 = null;
-    Token char_literal113 = null;
-    Token char_literal114 = null;
     MapCSSParser_num_return a =null;
 
-    MapCSSParser_quoted_return quoted115 =null;
+    MapCSSParser_quoted_return quoted113 =null;
 
-    MapCSSParser_cssident_return cssident116 =null;
+    MapCSSParser_cssident_return cssident114 =null;
 
 
     Object v_tree=null;
@@ -6130,18 +6126,18 @@ class MapCSSParser extends Parser {
     Object b_tree=null;
     Object c_tree=null;
     Object k_tree=null;
-    Object URL103_tree=null;
-    Object RGB104_tree=null;
+    Object URL101_tree=null;
+    Object RGB102_tree=null;
+    Object char_literal103_tree=null;
+    Object char_literal104_tree=null;
     Object char_literal105_tree=null;
     Object char_literal106_tree=null;
-    Object char_literal107_tree=null;
+    Object RGBA107_tree=null;
     Object char_literal108_tree=null;
-    Object RGBA109_tree=null;
+    Object char_literal109_tree=null;
     Object char_literal110_tree=null;
     Object char_literal111_tree=null;
     Object char_literal112_tree=null;
-    Object char_literal113_tree=null;
-    Object char_literal114_tree=null;
     RewriteRuleTokenStream stream_116=new RewriteRuleTokenStream(_adaptor,"token 116");
     RewriteRuleTokenStream stream_117=new RewriteRuleTokenStream(_adaptor,"token 117");
     RewriteRuleTokenStream stream_INCREMENT=new RewriteRuleTokenStream(_adaptor,"token INCREMENT");
@@ -6162,7 +6158,7 @@ class MapCSSParser extends Parser {
     RewriteRuleSubtreeStream stream_quoted=new RewriteRuleSubtreeStream(_adaptor,"rule quoted");
     try {
       /* grammar/MapCSS.g: 
-       463:2: (v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= INCREMENT -> VALUE_INCREMENT[$v] |v= POINTS -> VALUE_POINTS[$v] |v= PIXELS -> VALUE_PIXELS[$v] |v= PERCENTAGE -> VALUE_PERCENTAGE[$v] | 
+       467:2: (v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= INCREMENT -> VALUE_INCREMENT[$v] |v= POINTS -> VALUE_POINTS[$v] |v= PIXELS -> VALUE_PIXELS[$v] |v= PERCENTAGE -> VALUE_PERCENTAGE[$v] | 
        URL -> VALUE_URL[_extractUrl($URL)] | RGB '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ')' -> ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] ) | 
        RGBA '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ',' a= num ')' -> ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] ) |c= HEXCOLOR -> ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] ) | 
        quoted -> VALUE_QUOTED[$quoted.text] |k= OSM_TAG -> VALUE_KEYWORD[$k] | 
@@ -6260,10 +6256,10 @@ class MapCSSParser extends Parser {
       switch (alt28) {
         case 1 :
           /* grammar/MapCSS.g:
-           463:4: v= POSITIVE_INT*/
+           467:4: v= POSITIVE_INT*/
           {
           	v = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4053); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4065); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(v);
@@ -6282,7 +6278,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 463:30: -> VALUE_INT[$v]*/
+          	/* 467:30: -> VALUE_INT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, v)
@@ -6298,10 +6294,10 @@ class MapCSSParser extends Parser {
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           464:4: v= NEGATIVE_INT*/
+           468:4: v= NEGATIVE_INT*/
           {
           	v = matchSymbol(input,
-          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_single_value4076); 
+          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_single_value4088); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_INT.add(v);
@@ -6320,7 +6316,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 464:30: -> VALUE_INT[$v]*/
+          	/* 468:30: -> VALUE_INT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, v)
@@ -6336,10 +6332,10 @@ class MapCSSParser extends Parser {
           break;
         case 3 :
           /* grammar/MapCSS.g:
-           465:4: v= POSITIVE_FLOAT*/
+           469:4: v= POSITIVE_FLOAT*/
           {
           	v = matchSymbol(input,
-          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_single_value4099); 
+          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_single_value4111); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_FLOAT.add(v);
@@ -6358,7 +6354,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 465:30: -> VALUE_FLOAT[$v]*/
+          	/* 469:30: -> VALUE_FLOAT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, v)
@@ -6374,10 +6370,10 @@ class MapCSSParser extends Parser {
           break;
         case 4 :
           /* grammar/MapCSS.g:
-           466:4: v= NEGATIVE_FLOAT*/
+           470:4: v= NEGATIVE_FLOAT*/
           {
           	v = matchSymbol(input,
-          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_single_value4120); 
+          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_single_value4132); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_FLOAT.add(v);
@@ -6396,7 +6392,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 466:30: -> VALUE_FLOAT[$v]*/
+          	/* 470:30: -> VALUE_FLOAT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, v)
@@ -6412,10 +6408,10 @@ class MapCSSParser extends Parser {
           break;
         case 5 :
           /* grammar/MapCSS.g:
-           467:4: v= INCREMENT*/
+           471:4: v= INCREMENT*/
           {
           	v = matchSymbol(input,
-          	    INCREMENT,FOLLOW_INCREMENT_in_single_value4142); 
+          	    INCREMENT,FOLLOW_INCREMENT_in_single_value4154); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_INCREMENT.add(v);
@@ -6434,7 +6430,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 467:30: -> VALUE_INCREMENT[$v]*/
+          	/* 471:30: -> VALUE_INCREMENT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INCREMENT, v)
@@ -6450,10 +6446,10 @@ class MapCSSParser extends Parser {
           break;
         case 6 :
           /* grammar/MapCSS.g:
-           468:4: v= POINTS*/
+           472:4: v= POINTS*/
           {
           	v = matchSymbol(input,
-          	    POINTS,FOLLOW_POINTS_in_single_value4168); 
+          	    POINTS,FOLLOW_POINTS_in_single_value4180); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POINTS.add(v);
@@ -6472,7 +6468,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 468:18: -> VALUE_POINTS[$v]*/
+          	/* 472:18: -> VALUE_POINTS[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_POINTS, v)
@@ -6488,10 +6484,10 @@ class MapCSSParser extends Parser {
           break;
         case 7 :
           /* grammar/MapCSS.g:
-           469:4: v= PIXELS*/
+           473:4: v= PIXELS*/
           {
           	v = matchSymbol(input,
-          	    PIXELS,FOLLOW_PIXELS_in_single_value4185); 
+          	    PIXELS,FOLLOW_PIXELS_in_single_value4197); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_PIXELS.add(v);
@@ -6510,7 +6506,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 469:21: -> VALUE_PIXELS[$v]*/
+          	/* 473:21: -> VALUE_PIXELS[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_PIXELS, v)
@@ -6526,10 +6522,10 @@ class MapCSSParser extends Parser {
           break;
         case 8 :
           /* grammar/MapCSS.g:
-           470:4: v= PERCENTAGE*/
+           474:4: v= PERCENTAGE*/
           {
           	v = matchSymbol(input,
-          	    PERCENTAGE,FOLLOW_PERCENTAGE_in_single_value4205); 
+          	    PERCENTAGE,FOLLOW_PERCENTAGE_in_single_value4217); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_PERCENTAGE.add(v);
@@ -6548,7 +6544,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 470:21: -> VALUE_PERCENTAGE[$v]*/
+          	/* 474:21: -> VALUE_PERCENTAGE[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_PERCENTAGE, v)
@@ -6564,13 +6560,13 @@ class MapCSSParser extends Parser {
           break;
         case 9 :
           /* grammar/MapCSS.g:
-           471:4: URL*/
+           475:4: URL*/
           {
-          	URL103 = matchSymbol(input,
-          	    URL,FOLLOW_URL_in_single_value4220); 
+          	URL101 = matchSymbol(input,
+          	    URL,FOLLOW_URL_in_single_value4232); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_URL.add(URL103);
+          	if(state.backtracking == 0) stream_URL.add(URL101);
 
 
           	// AST REWRITE
@@ -6586,10 +6582,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 471:10: -> VALUE_URL[_extractUrl($URL)]*/
+          	/* 475:10: -> VALUE_URL[_extractUrl($URL)]*/
           	{
           	    _adaptor.addChild(root_0, 
-          	    _adaptor.create(VALUE_URL, _extractUrl(URL103))
+          	    _adaptor.create(VALUE_URL, _extractUrl(URL101))
           	    );
 
           	}
@@ -6602,62 +6598,62 @@ class MapCSSParser extends Parser {
           break;
         case 10 :
           /* grammar/MapCSS.g:
-           472:7: RGB '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ')'*/
+           476:7: RGB '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ')'*/
           {
-          	RGB104 = matchSymbol(input,
-          	    RGB,FOLLOW_RGB_in_single_value4235); 
+          	RGB102 = matchSymbol(input,
+          	    RGB,FOLLOW_RGB_in_single_value4247); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_RGB.add(RGB104);
+          	if(state.backtracking == 0) stream_RGB.add(RGB102);
 
 
-          	char_literal105 = matchSymbol(input,
-          	    116,FOLLOW_116_in_single_value4237); 
+          	char_literal103 = matchSymbol(input,
+          	    116,FOLLOW_116_in_single_value4249); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_116.add(char_literal105);
+          	if(state.backtracking == 0) stream_116.add(char_literal103);
 
 
           	r = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4241); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4253); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(r);
 
 
-          	char_literal106 = matchSymbol(input,
-          	    118,FOLLOW_118_in_single_value4243); 
+          	char_literal104 = matchSymbol(input,
+          	    118,FOLLOW_118_in_single_value4255); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal106);
+          	if(state.backtracking == 0) stream_118.add(char_literal104);
 
 
           	g = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4247); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4259); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(g);
 
 
-          	char_literal107 = matchSymbol(input,
-          	    118,FOLLOW_118_in_single_value4249); 
+          	char_literal105 = matchSymbol(input,
+          	    118,FOLLOW_118_in_single_value4261); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal107);
+          	if(state.backtracking == 0) stream_118.add(char_literal105);
 
 
           	b = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4253); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4265); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(b);
 
 
-          	char_literal108 = matchSymbol(input,
-          	    117,FOLLOW_117_in_single_value4255); 
+          	char_literal106 = matchSymbol(input,
+          	    117,FOLLOW_117_in_single_value4267); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_117.add(char_literal108);
+          	if(state.backtracking == 0) stream_117.add(char_literal106);
 
 
           	// AST REWRITE
@@ -6673,10 +6669,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 473:11: -> ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] )*/
+          	/* 477:11: -> ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     473:14: ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] )*/
+          	     477:14: ^( VALUE_RGB VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -6708,65 +6704,65 @@ class MapCSSParser extends Parser {
           break;
         case 11 :
           /* grammar/MapCSS.g:
-           474:4: RGBA '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ',' a= num ')'*/
+           478:4: RGBA '(' r= POSITIVE_INT ',' g= POSITIVE_INT ',' b= POSITIVE_INT ',' a= num ')'*/
           {
-          	RGBA109 = matchSymbol(input,
-          	    RGBA,FOLLOW_RGBA_in_single_value4298); 
+          	RGBA107 = matchSymbol(input,
+          	    RGBA,FOLLOW_RGBA_in_single_value4310); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_RGBA.add(RGBA109);
+          	if(state.backtracking == 0) stream_RGBA.add(RGBA107);
 
 
-          	char_literal110 = matchSymbol(input,
-          	    116,FOLLOW_116_in_single_value4300); 
+          	char_literal108 = matchSymbol(input,
+          	    116,FOLLOW_116_in_single_value4312); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_116.add(char_literal110);
+          	if(state.backtracking == 0) stream_116.add(char_literal108);
 
 
           	r = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4304); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4316); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(r);
 
 
-          	char_literal111 = matchSymbol(input,
-          	    118,FOLLOW_118_in_single_value4306); 
+          	char_literal109 = matchSymbol(input,
+          	    118,FOLLOW_118_in_single_value4318); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal111);
+          	if(state.backtracking == 0) stream_118.add(char_literal109);
 
 
           	g = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4310); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4322); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(g);
 
 
-          	char_literal112 = matchSymbol(input,
-          	    118,FOLLOW_118_in_single_value4312); 
+          	char_literal110 = matchSymbol(input,
+          	    118,FOLLOW_118_in_single_value4324); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal112);
+          	if(state.backtracking == 0) stream_118.add(char_literal110);
 
 
           	b = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4316); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_single_value4328); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(b);
 
 
-          	char_literal113 = matchSymbol(input,
-          	    118,FOLLOW_118_in_single_value4318); 
+          	char_literal111 = matchSymbol(input,
+          	    118,FOLLOW_118_in_single_value4330); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_118.add(char_literal113);
+          	if(state.backtracking == 0) stream_118.add(char_literal111);
 
 
-          	pushFollow(FOLLOW_num_in_single_value4322);
+          	pushFollow(FOLLOW_num_in_single_value4334);
           	a = num();
 
           	state.fsp--;
@@ -6775,11 +6771,11 @@ class MapCSSParser extends Parser {
           	if(state.backtracking == 0) 
           	  stream_num.add(a.tree);
 
-          	char_literal114 = matchSymbol(input,
-          	    117,FOLLOW_117_in_single_value4324); 
+          	char_literal112 = matchSymbol(input,
+          	    117,FOLLOW_117_in_single_value4336); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_117.add(char_literal114);
+          	if(state.backtracking == 0) stream_117.add(char_literal112);
 
 
           	// AST REWRITE
@@ -6795,10 +6791,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 475:11: -> ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] )*/
+          	/* 479:11: -> ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     475:14: ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] )*/
+          	     479:14: ^( VALUE_RGBA VALUE_INT[$r] VALUE_INT[$g] VALUE_INT[$b] VALUE_FLOAT[$a.text] )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -6834,10 +6830,10 @@ class MapCSSParser extends Parser {
           break;
         case 12 :
           /* grammar/MapCSS.g:
-           476:4: c= HEXCOLOR*/
+           480:4: c= HEXCOLOR*/
           {
           	c = matchSymbol(input,
-          	    HEXCOLOR,FOLLOW_HEXCOLOR_in_single_value4359); 
+          	    HEXCOLOR,FOLLOW_HEXCOLOR_in_single_value4371); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_HEXCOLOR.add(c);
@@ -6856,10 +6852,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 476:20: -> ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] )*/
+          	/* 480:20: -> ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     476:23: ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] )*/
+          	     480:23: ^( VALUE_RGB VALUE_INT[_red(c)] VALUE_INT[_green(c)] VALUE_INT[_blue(c)] )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -6891,16 +6887,16 @@ class MapCSSParser extends Parser {
           break;
         case 13 :
           /* grammar/MapCSS.g:
-           477:4: quoted*/
+           481:4: quoted*/
           {
-          	pushFollow(FOLLOW_quoted_in_single_value4384);
-          	quoted115 = quoted();
+          	pushFollow(FOLLOW_quoted_in_single_value4396);
+          	quoted113 = quoted();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_quoted.add(quoted115.tree);
+          	  stream_quoted.add(quoted113.tree);
 
           	// AST REWRITE
           	// elements: 
@@ -6915,10 +6911,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 477:21: -> VALUE_QUOTED[$quoted.text]*/
+          	/* 481:21: -> VALUE_QUOTED[$quoted.text]*/
           	{
           	    _adaptor.addChild(root_0, 
-          	    _adaptor.create(VALUE_QUOTED, (quoted115 != null) ? input.toTokenString(quoted115.start,quoted115.stop):null)
+          	    _adaptor.create(VALUE_QUOTED, (quoted113 != null) ? input.toTokenString(quoted113.start,quoted113.stop):null)
           	    );
 
           	}
@@ -6931,10 +6927,10 @@ class MapCSSParser extends Parser {
           break;
         case 14 :
           /* grammar/MapCSS.g:
-           480:7: k= OSM_TAG*/
+           484:7: k= OSM_TAG*/
           {
           	k = matchSymbol(input,
-          	    OSM_TAG,FOLLOW_OSM_TAG_in_single_value4416); 
+          	    OSM_TAG,FOLLOW_OSM_TAG_in_single_value4428); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_OSM_TAG.add(k);
@@ -6953,7 +6949,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 480:28: -> VALUE_KEYWORD[$k]*/
+          	/* 484:28: -> VALUE_KEYWORD[$k]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_KEYWORD, k)
@@ -6969,19 +6965,19 @@ class MapCSSParser extends Parser {
           break;
         case 15 :
           /* grammar/MapCSS.g:
-           481:7: cssident*/
+           485:7: cssident*/
           {
           	root_0 = _adaptor.nil();
 
 
-          	pushFollow(FOLLOW_cssident_in_single_value4446);
-          	cssident116 = cssident();
+          	pushFollow(FOLLOW_cssident_in_single_value4458);
+          	cssident114 = cssident();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0)
-          	  _adaptor.addChild(root_0, cssident116.tree);
+          	  _adaptor.addChild(root_0, cssident114.tree);
 
           }
           break;
@@ -7011,7 +7007,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "expr"
   /* grammar/MapCSS.g:
-   487:1: expr : logicalExpression ;*/
+   491:1: expr : logicalExpression ;*/
   MapCSSParser_expr_return expr() {
     MapCSSParser_expr_return retval = new MapCSSParser_expr_return();
     retval.start = input.LT(1);
@@ -7019,27 +7015,27 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    MapCSSParser_logicalExpression_return logicalExpression117 =null;
+    MapCSSParser_logicalExpression_return logicalExpression115 =null;
 
 
 
     try {
       /* grammar/MapCSS.g:
-       488:2: ( logicalExpression )*/
+       492:2: ( logicalExpression )*/
       /* grammar/MapCSS.g:
-       488:4: logicalExpression*/
+       492:4: logicalExpression*/
       {
       	root_0 = _adaptor.nil();
 
 
-      	pushFollow(FOLLOW_logicalExpression_in_expr4467);
-      	logicalExpression117 = logicalExpression();
+      	pushFollow(FOLLOW_logicalExpression_in_expr4479);
+      	logicalExpression115 = logicalExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0)
-      	  _adaptor.addChild(root_0, logicalExpression117.tree);
+      	  _adaptor.addChild(root_0, logicalExpression115.tree);
 
       }
 
@@ -7067,7 +7063,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "args"
   /* grammar/MapCSS.g:
-   491:1: args : expr ( ',' expr )* -> ( expr )+ ;*/
+   495:1: args : expr ( ',' expr )* -> ( expr )+ ;*/
   MapCSSParser_args_return args() {
     MapCSSParser_args_return retval = new MapCSSParser_args_return();
     retval.start = input.LT(1);
@@ -7075,32 +7071,32 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token char_literal119 = null;
+    Token char_literal117 = null;
+    MapCSSParser_expr_return expr116 =null;
+
     MapCSSParser_expr_return expr118 =null;
 
-    MapCSSParser_expr_return expr120 =null;
 
-
-    Object char_literal119_tree=null;
+    Object char_literal117_tree=null;
     RewriteRuleTokenStream stream_118=new RewriteRuleTokenStream(_adaptor,"token 118");
     RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(_adaptor,"rule expr");
     try {
       /* grammar/MapCSS.g:
-       492:2: ( expr ( ',' expr )* -> ( expr )+ )*/
+       496:2: ( expr ( ',' expr )* -> ( expr )+ )*/
       /* grammar/MapCSS.g:
-       492:4: expr ( ',' expr )**/
+       496:4: expr ( ',' expr )**/
       {
-      	pushFollow(FOLLOW_expr_in_args4478);
-      	expr118 = expr();
+      	pushFollow(FOLLOW_expr_in_args4490);
+      	expr116 = expr();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_expr.add(expr118.tree);
+      	  stream_expr.add(expr116.tree);
 
       	/* grammar/MapCSS.g:
-      	 492:9: ( ',' expr )**/
+      	 496:9: ( ',' expr )**/
       	loop29:
       	do {
       	  int alt29 = 2;
@@ -7114,23 +7110,23 @@ class MapCSSParser extends Parser {
       	  switch (alt29) {
       			case 1 :
       			  /* grammar/MapCSS.g:
-      			   492:10: ',' expr*/
+      			   496:10: ',' expr*/
       			  {
-      			  	char_literal119 = matchSymbol(input,
-      			  	    118,FOLLOW_118_in_args4481); 
+      			  	char_literal117 = matchSymbol(input,
+      			  	    118,FOLLOW_118_in_args4493); 
       			  	if(state.failed) 
       			  	  return retval; 
-      			  	if(state.backtracking == 0) stream_118.add(char_literal119);
+      			  	if(state.backtracking == 0) stream_118.add(char_literal117);
 
 
-      			  	pushFollow(FOLLOW_expr_in_args4483);
-      			  	expr120 = expr();
+      			  	pushFollow(FOLLOW_expr_in_args4495);
+      			  	expr118 = expr();
 
       			  	state.fsp--;
       			  	if(state.failed) 
       			  	  return retval;
       			  	if(state.backtracking == 0) 
-      			  	  stream_expr.add(expr120.tree);
+      			  	  stream_expr.add(expr118.tree);
 
       			  }
       			  break;
@@ -7154,7 +7150,7 @@ class MapCSSParser extends Parser {
       	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	root_0 = _adaptor.nil();
-      	/* 492:24: -> ( expr )+*/
+      	/* 496:24: -> ( expr )+*/
       	{
       	    if(!(stream_expr.hasNext())) {
       	        throw new RewriteEarlyExitException();
@@ -7197,7 +7193,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "logicalExpression"
   /* grammar/MapCSS.g:
-   495:1: logicalExpression : booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
+   499:1: logicalExpression : booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
    -> booleanAndExpression ) ;*/
   MapCSSParser_logicalExpression_return logicalExpression() {
     MapCSSParser_logicalExpression_return retval = new MapCSSParser_logicalExpression_return();
@@ -7206,35 +7202,35 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_OR122 = null;
-    MapCSSParser_booleanAndExpression_return booleanAndExpression121 =null;
+    Token OP_OR120 = null;
+    MapCSSParser_booleanAndExpression_return booleanAndExpression119 =null;
 
-    MapCSSParser_logicalExpression_return logicalExpression123 =null;
+    MapCSSParser_logicalExpression_return logicalExpression121 =null;
 
 
-    Object OP_OR122_tree=null;
+    Object OP_OR120_tree=null;
     RewriteRuleTokenStream stream_OP_OR=new RewriteRuleTokenStream(_adaptor,"token OP_OR");
     RewriteRuleSubtreeStream stream_booleanAndExpression=new RewriteRuleSubtreeStream(_adaptor,"rule booleanAndExpression");
     RewriteRuleSubtreeStream stream_logicalExpression=new RewriteRuleSubtreeStream(_adaptor,"rule logicalExpression");
     try {
       /* grammar/MapCSS.g:
-       496:5: ( booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
+       500:5: ( booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
        -> booleanAndExpression ) )*/
       /* grammar/MapCSS.g:
-       496:10: booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
+       500:10: booleanAndExpression ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
        -> booleanAndExpression )*/
       {
-      	pushFollow(FOLLOW_booleanAndExpression_in_logicalExpression4512);
-      	booleanAndExpression121 = booleanAndExpression();
+      	pushFollow(FOLLOW_booleanAndExpression_in_logicalExpression4524);
+      	booleanAndExpression119 = booleanAndExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_booleanAndExpression.add(booleanAndExpression121.tree);
+      	  stream_booleanAndExpression.add(booleanAndExpression119.tree);
 
       	/* grammar/MapCSS.g:
-      	 496:31: ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
+      	 500:31: ( ( OP_OR )=> OP_OR logicalExpression -> ^( OP_OR booleanAndExpression logicalExpression ) | 
       	 -> booleanAndExpression )*/
       	int alt30 = 2;
       	int LA30_0 = input.LA(1);
@@ -7259,23 +7255,23 @@ class MapCSSParser extends Parser {
       	switch (alt30) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     497:14: ( OP_OR )=> OP_OR logicalExpression*/
+      	     501:14: ( OP_OR )=> OP_OR logicalExpression*/
       	    {
-      	    	OP_OR122 = matchSymbol(input,
-      	    	    OP_OR,FOLLOW_OP_OR_in_logicalExpression4536); 
+      	    	OP_OR120 = matchSymbol(input,
+      	    	    OP_OR,FOLLOW_OP_OR_in_logicalExpression4548); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_OR.add(OP_OR122);
+      	    	if(state.backtracking == 0) stream_OP_OR.add(OP_OR120);
 
 
-      	    	pushFollow(FOLLOW_logicalExpression_in_logicalExpression4538);
-      	    	logicalExpression123 = logicalExpression();
+      	    	pushFollow(FOLLOW_logicalExpression_in_logicalExpression4550);
+      	    	logicalExpression121 = logicalExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_logicalExpression.add(logicalExpression123.tree);
+      	    	  stream_logicalExpression.add(logicalExpression121.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_OR, logicalExpression, booleanAndExpression
@@ -7290,10 +7286,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 497:49: -> ^( OP_OR booleanAndExpression logicalExpression )*/
+      	    	/* 501:49: -> ^( OP_OR booleanAndExpression logicalExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     497:52: ^( OP_OR booleanAndExpression logicalExpression )*/
+      	    	     501:52: ^( OP_OR booleanAndExpression logicalExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -7317,7 +7313,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     498:45: */
+      	     502:45: */
       	    {
       	    	// AST REWRITE
       	    	// elements: booleanAndExpression
@@ -7332,7 +7328,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 498:45: -> booleanAndExpression*/
+      	    	/* 502:45: -> booleanAndExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_booleanAndExpression.nextTree());
 
@@ -7374,7 +7370,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "booleanAndExpression"
   /* grammar/MapCSS.g:
-   502:1: booleanAndExpression : equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
+   506:1: booleanAndExpression : equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
    -> equalityExpression ) ;*/
   MapCSSParser_booleanAndExpression_return booleanAndExpression() {
     MapCSSParser_booleanAndExpression_return retval = new MapCSSParser_booleanAndExpression_return();
@@ -7383,35 +7379,35 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_AND125 = null;
-    MapCSSParser_equalityExpression_return equalityExpression124 =null;
+    Token OP_AND123 = null;
+    MapCSSParser_equalityExpression_return equalityExpression122 =null;
 
-    MapCSSParser_booleanAndExpression_return booleanAndExpression126 =null;
+    MapCSSParser_booleanAndExpression_return booleanAndExpression124 =null;
 
 
-    Object OP_AND125_tree=null;
+    Object OP_AND123_tree=null;
     RewriteRuleTokenStream stream_OP_AND=new RewriteRuleTokenStream(_adaptor,"token OP_AND");
     RewriteRuleSubtreeStream stream_booleanAndExpression=new RewriteRuleSubtreeStream(_adaptor,"rule booleanAndExpression");
     RewriteRuleSubtreeStream stream_equalityExpression=new RewriteRuleSubtreeStream(_adaptor,"rule equalityExpression");
     try {
       /* grammar/MapCSS.g:
-       503:5: ( equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
+       507:5: ( equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
        -> equalityExpression ) )*/
       /* grammar/MapCSS.g:
-       503:10: equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
+       507:10: equalityExpression ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
        -> equalityExpression )*/
       {
-      	pushFollow(FOLLOW_equalityExpression_in_booleanAndExpression4631);
-      	equalityExpression124 = equalityExpression();
+      	pushFollow(FOLLOW_equalityExpression_in_booleanAndExpression4643);
+      	equalityExpression122 = equalityExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_equalityExpression.add(equalityExpression124.tree);
+      	  stream_equalityExpression.add(equalityExpression122.tree);
 
       	/* grammar/MapCSS.g:
-      	 503:29: ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
+      	 507:29: ( ( OP_AND )=> OP_AND booleanAndExpression -> ^( OP_AND equalityExpression booleanAndExpression ) | 
       	 -> equalityExpression )*/
       	int alt31 = 2;
       	int LA31_0 = input.LA(1);
@@ -7437,23 +7433,23 @@ class MapCSSParser extends Parser {
       	switch (alt31) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     504:14: ( OP_AND )=> OP_AND booleanAndExpression*/
+      	     508:14: ( OP_AND )=> OP_AND booleanAndExpression*/
       	    {
-      	    	OP_AND125 = matchSymbol(input,
-      	    	    OP_AND,FOLLOW_OP_AND_in_booleanAndExpression4655); 
+      	    	OP_AND123 = matchSymbol(input,
+      	    	    OP_AND,FOLLOW_OP_AND_in_booleanAndExpression4667); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_AND.add(OP_AND125);
+      	    	if(state.backtracking == 0) stream_OP_AND.add(OP_AND123);
 
 
-      	    	pushFollow(FOLLOW_booleanAndExpression_in_booleanAndExpression4657);
-      	    	booleanAndExpression126 = booleanAndExpression();
+      	    	pushFollow(FOLLOW_booleanAndExpression_in_booleanAndExpression4669);
+      	    	booleanAndExpression124 = booleanAndExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_booleanAndExpression.add(booleanAndExpression126.tree);
+      	    	  stream_booleanAndExpression.add(booleanAndExpression124.tree);
 
       	    	// AST REWRITE
       	    	// elements: equalityExpression, booleanAndExpression, OP_AND
@@ -7468,10 +7464,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 504:54: -> ^( OP_AND equalityExpression booleanAndExpression )*/
+      	    	/* 508:54: -> ^( OP_AND equalityExpression booleanAndExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     504:57: ^( OP_AND equalityExpression booleanAndExpression )*/
+      	    	     508:57: ^( OP_AND equalityExpression booleanAndExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -7495,7 +7491,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     505:50: */
+      	     509:50: */
       	    {
       	    	// AST REWRITE
       	    	// elements: equalityExpression
@@ -7510,7 +7506,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 505:50: -> equalityExpression*/
+      	    	/* 509:50: -> equalityExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_equalityExpression.nextTree());
 
@@ -7552,7 +7548,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "equalityExpression"
   /* grammar/MapCSS.g:
-   509:1: equalityExpression : relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
+   513:1: equalityExpression : relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
    ( OP_NEQ )=> OP_NEQ relationalExpression -> ^( OP_NEQ ( relationalExpression )+ ) | 
    -> relationalExpression ) ;*/
   MapCSSParser_equalityExpression_return equalityExpression() {
@@ -7562,41 +7558,41 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_EQ128 = null;
-    Token OP_NEQ130 = null;
+    Token OP_EQ126 = null;
+    Token OP_NEQ128 = null;
+    MapCSSParser_relationalExpression_return relationalExpression125 =null;
+
     MapCSSParser_relationalExpression_return relationalExpression127 =null;
 
     MapCSSParser_relationalExpression_return relationalExpression129 =null;
 
-    MapCSSParser_relationalExpression_return relationalExpression131 =null;
 
-
-    Object OP_EQ128_tree=null;
-    Object OP_NEQ130_tree=null;
+    Object OP_EQ126_tree=null;
+    Object OP_NEQ128_tree=null;
     RewriteRuleTokenStream stream_OP_EQ=new RewriteRuleTokenStream(_adaptor,"token OP_EQ");
     RewriteRuleTokenStream stream_OP_NEQ=new RewriteRuleTokenStream(_adaptor,"token OP_NEQ");
     RewriteRuleSubtreeStream stream_relationalExpression=new RewriteRuleSubtreeStream(_adaptor,"rule relationalExpression");
     try {
       /* grammar/MapCSS.g:
-       510:5: ( relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
+       514:5: ( relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
        ( OP_NEQ )=> OP_NEQ relationalExpression -> ^( OP_NEQ ( relationalExpression )+ ) | 
        -> relationalExpression ) )*/
       /* grammar/MapCSS.g:
-       510:10: relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
+       514:10: relationalExpression ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
        ( OP_NEQ )=> OP_NEQ relationalExpression -> ^( OP_NEQ ( relationalExpression )+ ) | 
        -> relationalExpression )*/
       {
-      	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4761);
-      	relationalExpression127 = relationalExpression();
+      	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4773);
+      	relationalExpression125 = relationalExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_relationalExpression.add(relationalExpression127.tree);
+      	  stream_relationalExpression.add(relationalExpression125.tree);
 
       	/* grammar/MapCSS.g:
-      	 510:31: ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
+      	 514:31: ( ( OP_EQ )=> OP_EQ relationalExpression -> ^( OP_EQ ( relationalExpression )+ ) | 
       	 ( OP_NEQ )=> OP_NEQ relationalExpression -> ^( OP_NEQ ( relationalExpression )+ ) | 
       	 -> relationalExpression )*/
       	int alt32 = 3;
@@ -7627,23 +7623,23 @@ class MapCSSParser extends Parser {
       	switch (alt32) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     511:14: ( OP_EQ )=> OP_EQ relationalExpression*/
+      	     515:14: ( OP_EQ )=> OP_EQ relationalExpression*/
       	    {
-      	    	OP_EQ128 = matchSymbol(input,
-      	    	    OP_EQ,FOLLOW_OP_EQ_in_equalityExpression4785); 
+      	    	OP_EQ126 = matchSymbol(input,
+      	    	    OP_EQ,FOLLOW_OP_EQ_in_equalityExpression4797); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_EQ.add(OP_EQ128);
+      	    	if(state.backtracking == 0) stream_OP_EQ.add(OP_EQ126);
 
 
-      	    	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4788);
-      	    	relationalExpression129 = relationalExpression();
+      	    	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4800);
+      	    	relationalExpression127 = relationalExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_relationalExpression.add(relationalExpression129.tree);
+      	    	  stream_relationalExpression.add(relationalExpression127.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_EQ, relationalExpression
@@ -7658,10 +7654,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 511:54: -> ^( OP_EQ ( relationalExpression )+ )*/
+      	    	/* 515:54: -> ^( OP_EQ ( relationalExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     511:57: ^( OP_EQ ( relationalExpression )+ )*/
+      	    	     515:57: ^( OP_EQ ( relationalExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -7690,23 +7686,23 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     512:14: ( OP_NEQ )=> OP_NEQ relationalExpression*/
+      	     516:14: ( OP_NEQ )=> OP_NEQ relationalExpression*/
       	    {
-      	    	OP_NEQ130 = matchSymbol(input,
-      	    	    OP_NEQ,FOLLOW_OP_NEQ_in_equalityExpression4819); 
+      	    	OP_NEQ128 = matchSymbol(input,
+      	    	    OP_NEQ,FOLLOW_OP_NEQ_in_equalityExpression4831); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_NEQ.add(OP_NEQ130);
+      	    	if(state.backtracking == 0) stream_OP_NEQ.add(OP_NEQ128);
 
 
-      	    	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4821);
-      	    	relationalExpression131 = relationalExpression();
+      	    	pushFollow(FOLLOW_relationalExpression_in_equalityExpression4833);
+      	    	relationalExpression129 = relationalExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_relationalExpression.add(relationalExpression131.tree);
+      	    	  stream_relationalExpression.add(relationalExpression129.tree);
 
       	    	// AST REWRITE
       	    	// elements: relationalExpression, OP_NEQ
@@ -7721,10 +7717,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 512:54: -> ^( OP_NEQ ( relationalExpression )+ )*/
+      	    	/* 516:54: -> ^( OP_NEQ ( relationalExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     512:57: ^( OP_NEQ ( relationalExpression )+ )*/
+      	    	     516:57: ^( OP_NEQ ( relationalExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -7753,7 +7749,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 3 :
       	    /* grammar/MapCSS.g:
-      	     513:50: */
+      	     517:50: */
       	    {
       	    	// AST REWRITE
       	    	// elements: relationalExpression
@@ -7768,7 +7764,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 513:50: -> relationalExpression*/
+      	    	/* 517:50: -> relationalExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_relationalExpression.nextTree());
 
@@ -7810,7 +7806,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "relationalExpression"
   /* grammar/MapCSS.g:
-   517:1: relationalExpression : additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
+   521:1: relationalExpression : additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
    ( OP_LE )=> OP_LE additiveExpression -> ^( OP_LE ( additiveExpression )+ ) | 
    ( OP_GT )=> OP_GT additiveExpression -> ^( OP_GT ( additiveExpression )+ ) | 
    ( OP_GE )=> OP_GE additiveExpression -> ^( OP_GE ( additiveExpression )+ ) | 
@@ -7822,10 +7818,12 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_LT133 = null;
-    Token OP_LE135 = null;
-    Token OP_GT137 = null;
-    Token OP_GE139 = null;
+    Token OP_LT131 = null;
+    Token OP_LE133 = null;
+    Token OP_GT135 = null;
+    Token OP_GE137 = null;
+    MapCSSParser_additiveExpression_return additiveExpression130 =null;
+
     MapCSSParser_additiveExpression_return additiveExpression132 =null;
 
     MapCSSParser_additiveExpression_return additiveExpression134 =null;
@@ -7834,13 +7832,11 @@ class MapCSSParser extends Parser {
 
     MapCSSParser_additiveExpression_return additiveExpression138 =null;
 
-    MapCSSParser_additiveExpression_return additiveExpression140 =null;
 
-
-    Object OP_LT133_tree=null;
-    Object OP_LE135_tree=null;
-    Object OP_GT137_tree=null;
-    Object OP_GE139_tree=null;
+    Object OP_LT131_tree=null;
+    Object OP_LE133_tree=null;
+    Object OP_GT135_tree=null;
+    Object OP_GE137_tree=null;
     RewriteRuleTokenStream stream_OP_GT=new RewriteRuleTokenStream(_adaptor,"token OP_GT");
     RewriteRuleTokenStream stream_OP_LE=new RewriteRuleTokenStream(_adaptor,"token OP_LE");
     RewriteRuleTokenStream stream_OP_LT=new RewriteRuleTokenStream(_adaptor,"token OP_LT");
@@ -7848,29 +7844,29 @@ class MapCSSParser extends Parser {
     RewriteRuleSubtreeStream stream_additiveExpression=new RewriteRuleSubtreeStream(_adaptor,"rule additiveExpression");
     try {
       /* grammar/MapCSS.g:
-       518:5: ( additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
+       522:5: ( additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
        ( OP_LE )=> OP_LE additiveExpression -> ^( OP_LE ( additiveExpression )+ ) | 
        ( OP_GT )=> OP_GT additiveExpression -> ^( OP_GT ( additiveExpression )+ ) | 
        ( OP_GE )=> OP_GE additiveExpression -> ^( OP_GE ( additiveExpression )+ ) | 
        -> additiveExpression ) )*/
       /* grammar/MapCSS.g:
-       518:9: additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
+       522:9: additiveExpression ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
        ( OP_LE )=> OP_LE additiveExpression -> ^( OP_LE ( additiveExpression )+ ) | 
        ( OP_GT )=> OP_GT additiveExpression -> ^( OP_GT ( additiveExpression )+ ) | 
        ( OP_GE )=> OP_GE additiveExpression -> ^( OP_GE ( additiveExpression )+ ) | 
        -> additiveExpression )*/
       {
-      	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4927);
-      	additiveExpression132 = additiveExpression();
+      	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4939);
+      	additiveExpression130 = additiveExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_additiveExpression.add(additiveExpression132.tree);
+      	  stream_additiveExpression.add(additiveExpression130.tree);
 
       	/* grammar/MapCSS.g:
-      	 518:28: ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
+      	 522:28: ( ( OP_LT )=> OP_LT additiveExpression -> ^( OP_LT ( additiveExpression )+ ) | 
       	 ( OP_LE )=> OP_LE additiveExpression -> ^( OP_LE ( additiveExpression )+ ) | 
       	 ( OP_GT )=> OP_GT additiveExpression -> ^( OP_GT ( additiveExpression )+ ) | 
       	 ( OP_GE )=> OP_GE additiveExpression -> ^( OP_GE ( additiveExpression )+ ) | 
@@ -7911,23 +7907,23 @@ class MapCSSParser extends Parser {
       	switch (alt33) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     519:13: ( OP_LT )=> OP_LT additiveExpression*/
+      	     523:13: ( OP_LT )=> OP_LT additiveExpression*/
       	    {
-      	    	OP_LT133 = matchSymbol(input,
-      	    	    OP_LT,FOLLOW_OP_LT_in_relationalExpression4951); 
+      	    	OP_LT131 = matchSymbol(input,
+      	    	    OP_LT,FOLLOW_OP_LT_in_relationalExpression4963); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_LT.add(OP_LT133);
+      	    	if(state.backtracking == 0) stream_OP_LT.add(OP_LT131);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4953);
-      	    	additiveExpression134 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4965);
+      	    	additiveExpression132 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression134.tree);
+      	    	  stream_additiveExpression.add(additiveExpression132.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_LT, additiveExpression
@@ -7942,10 +7938,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 519:51: -> ^( OP_LT ( additiveExpression )+ )*/
+      	    	/* 523:51: -> ^( OP_LT ( additiveExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     519:54: ^( OP_LT ( additiveExpression )+ )*/
+      	    	     523:54: ^( OP_LT ( additiveExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -7974,23 +7970,23 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     520:13: ( OP_LE )=> OP_LE additiveExpression*/
+      	     524:13: ( OP_LE )=> OP_LE additiveExpression*/
       	    {
-      	    	OP_LE135 = matchSymbol(input,
-      	    	    OP_LE,FOLLOW_OP_LE_in_relationalExpression4984); 
+      	    	OP_LE133 = matchSymbol(input,
+      	    	    OP_LE,FOLLOW_OP_LE_in_relationalExpression4996); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_LE.add(OP_LE135);
+      	    	if(state.backtracking == 0) stream_OP_LE.add(OP_LE133);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4986);
-      	    	additiveExpression136 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression4998);
+      	    	additiveExpression134 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression136.tree);
+      	    	  stream_additiveExpression.add(additiveExpression134.tree);
 
       	    	// AST REWRITE
       	    	// elements: additiveExpression, OP_LE
@@ -8005,10 +8001,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 520:51: -> ^( OP_LE ( additiveExpression )+ )*/
+      	    	/* 524:51: -> ^( OP_LE ( additiveExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     520:54: ^( OP_LE ( additiveExpression )+ )*/
+      	    	     524:54: ^( OP_LE ( additiveExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8037,23 +8033,23 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 3 :
       	    /* grammar/MapCSS.g:
-      	     521:13: ( OP_GT )=> OP_GT additiveExpression*/
+      	     525:13: ( OP_GT )=> OP_GT additiveExpression*/
       	    {
-      	    	OP_GT137 = matchSymbol(input,
-      	    	    OP_GT,FOLLOW_OP_GT_in_relationalExpression5017); 
+      	    	OP_GT135 = matchSymbol(input,
+      	    	    OP_GT,FOLLOW_OP_GT_in_relationalExpression5029); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_GT.add(OP_GT137);
+      	    	if(state.backtracking == 0) stream_OP_GT.add(OP_GT135);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression5019);
-      	    	additiveExpression138 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression5031);
+      	    	additiveExpression136 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression138.tree);
+      	    	  stream_additiveExpression.add(additiveExpression136.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_GT, additiveExpression
@@ -8068,10 +8064,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 521:51: -> ^( OP_GT ( additiveExpression )+ )*/
+      	    	/* 525:51: -> ^( OP_GT ( additiveExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     521:54: ^( OP_GT ( additiveExpression )+ )*/
+      	    	     525:54: ^( OP_GT ( additiveExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8100,23 +8096,23 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 4 :
       	    /* grammar/MapCSS.g:
-      	     522:13: ( OP_GE )=> OP_GE additiveExpression*/
+      	     526:13: ( OP_GE )=> OP_GE additiveExpression*/
       	    {
-      	    	OP_GE139 = matchSymbol(input,
-      	    	    OP_GE,FOLLOW_OP_GE_in_relationalExpression5050); 
+      	    	OP_GE137 = matchSymbol(input,
+      	    	    OP_GE,FOLLOW_OP_GE_in_relationalExpression5062); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_GE.add(OP_GE139);
+      	    	if(state.backtracking == 0) stream_OP_GE.add(OP_GE137);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression5052);
-      	    	additiveExpression140 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_relationalExpression5064);
+      	    	additiveExpression138 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression140.tree);
+      	    	  stream_additiveExpression.add(additiveExpression138.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_GE, additiveExpression
@@ -8131,10 +8127,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 522:51: -> ^( OP_GE ( additiveExpression )+ )*/
+      	    	/* 526:51: -> ^( OP_GE ( additiveExpression )+ )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     522:54: ^( OP_GE ( additiveExpression )+ )*/
+      	    	     526:54: ^( OP_GE ( additiveExpression )+ )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8163,7 +8159,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 5 :
       	    /* grammar/MapCSS.g:
-      	     523:45: */
+      	     527:45: */
       	    {
       	    	// AST REWRITE
       	    	// elements: additiveExpression
@@ -8178,7 +8174,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 523:45: -> additiveExpression*/
+      	    	/* 527:45: -> additiveExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_additiveExpression.nextTree());
 
@@ -8220,7 +8216,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "additiveExpression"
   /* grammar/MapCSS.g:
-   527:1: additiveExpression : multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
+   531:1: additiveExpression : multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
    ( '-' )=> '-' additiveExpression -> ^( OP_MINUS multiplicativeExpression additiveExpression ) | 
    -> multiplicativeExpression ) ;*/
   MapCSSParser_additiveExpression_return additiveExpression() {
@@ -8230,42 +8226,42 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_PLUS142 = null;
-    Token char_literal144 = null;
-    MapCSSParser_multiplicativeExpression_return multiplicativeExpression141 =null;
+    Token OP_PLUS140 = null;
+    Token char_literal142 = null;
+    MapCSSParser_multiplicativeExpression_return multiplicativeExpression139 =null;
+
+    MapCSSParser_additiveExpression_return additiveExpression141 =null;
 
     MapCSSParser_additiveExpression_return additiveExpression143 =null;
 
-    MapCSSParser_additiveExpression_return additiveExpression145 =null;
 
-
-    Object OP_PLUS142_tree=null;
-    Object char_literal144_tree=null;
+    Object OP_PLUS140_tree=null;
+    Object char_literal142_tree=null;
     RewriteRuleTokenStream stream_OP_PLUS=new RewriteRuleTokenStream(_adaptor,"token OP_PLUS");
     RewriteRuleTokenStream stream_119=new RewriteRuleTokenStream(_adaptor,"token 119");
     RewriteRuleSubtreeStream stream_additiveExpression=new RewriteRuleSubtreeStream(_adaptor,"rule additiveExpression");
     RewriteRuleSubtreeStream stream_multiplicativeExpression=new RewriteRuleSubtreeStream(_adaptor,"rule multiplicativeExpression");
     try {
       /* grammar/MapCSS.g:
-       528:5: ( multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
+       532:5: ( multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
        ( '-' )=> '-' additiveExpression -> ^( OP_MINUS multiplicativeExpression additiveExpression ) | 
        -> multiplicativeExpression ) )*/
       /* grammar/MapCSS.g:
-       528:10: multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
+       532:10: multiplicativeExpression ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
        ( '-' )=> '-' additiveExpression -> ^( OP_MINUS multiplicativeExpression additiveExpression ) | 
        -> multiplicativeExpression )*/
       {
-      	pushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression5140);
-      	multiplicativeExpression141 = multiplicativeExpression();
+      	pushFollow(FOLLOW_multiplicativeExpression_in_additiveExpression5152);
+      	multiplicativeExpression139 = multiplicativeExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_multiplicativeExpression.add(multiplicativeExpression141.tree);
+      	  stream_multiplicativeExpression.add(multiplicativeExpression139.tree);
 
       	/* grammar/MapCSS.g:
-      	 528:35: ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
+      	 532:35: ( ( OP_PLUS )=> OP_PLUS additiveExpression -> ^( OP_PLUS multiplicativeExpression additiveExpression ) | 
       	 ( '-' )=> '-' additiveExpression -> ^( OP_MINUS multiplicativeExpression additiveExpression ) | 
       	 -> multiplicativeExpression )*/
       	int alt34 = 3;
@@ -8299,23 +8295,23 @@ class MapCSSParser extends Parser {
       	switch (alt34) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     529:14: ( OP_PLUS )=> OP_PLUS additiveExpression*/
+      	     533:14: ( OP_PLUS )=> OP_PLUS additiveExpression*/
       	    {
-      	    	OP_PLUS142 = matchSymbol(input,
-      	    	    OP_PLUS,FOLLOW_OP_PLUS_in_additiveExpression5164); 
+      	    	OP_PLUS140 = matchSymbol(input,
+      	    	    OP_PLUS,FOLLOW_OP_PLUS_in_additiveExpression5176); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_OP_PLUS.add(OP_PLUS142);
+      	    	if(state.backtracking == 0) stream_OP_PLUS.add(OP_PLUS140);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_additiveExpression5167);
-      	    	additiveExpression143 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_additiveExpression5179);
+      	    	additiveExpression141 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression143.tree);
+      	    	  stream_additiveExpression.add(additiveExpression141.tree);
 
       	    	// AST REWRITE
       	    	// elements: OP_PLUS, multiplicativeExpression, additiveExpression
@@ -8330,10 +8326,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 529:55: -> ^( OP_PLUS multiplicativeExpression additiveExpression )*/
+      	    	/* 533:55: -> ^( OP_PLUS multiplicativeExpression additiveExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     529:58: ^( OP_PLUS multiplicativeExpression additiveExpression )*/
+      	    	     533:58: ^( OP_PLUS multiplicativeExpression additiveExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8357,23 +8353,23 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     530:14: ( '-' )=> '-' additiveExpression*/
+      	     534:14: ( '-' )=> '-' additiveExpression*/
       	    {
-      	    	char_literal144 = matchSymbol(input,
-      	    	    119,FOLLOW_119_in_additiveExpression5198); 
+      	    	char_literal142 = matchSymbol(input,
+      	    	    119,FOLLOW_119_in_additiveExpression5210); 
       	    	if(state.failed) 
       	    	  return retval; 
-      	    	if(state.backtracking == 0) stream_119.add(char_literal144);
+      	    	if(state.backtracking == 0) stream_119.add(char_literal142);
 
 
-      	    	pushFollow(FOLLOW_additiveExpression_in_additiveExpression5201);
-      	    	additiveExpression145 = additiveExpression();
+      	    	pushFollow(FOLLOW_additiveExpression_in_additiveExpression5213);
+      	    	additiveExpression143 = additiveExpression();
 
       	    	state.fsp--;
       	    	if(state.failed) 
       	    	  return retval;
       	    	if(state.backtracking == 0) 
-      	    	  stream_additiveExpression.add(additiveExpression145.tree);
+      	    	  stream_additiveExpression.add(additiveExpression143.tree);
 
       	    	// AST REWRITE
       	    	// elements: additiveExpression, multiplicativeExpression
@@ -8388,10 +8384,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 530:47: -> ^( OP_MINUS multiplicativeExpression additiveExpression )*/
+      	    	/* 534:47: -> ^( OP_MINUS multiplicativeExpression additiveExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     530:50: ^( OP_MINUS multiplicativeExpression additiveExpression )*/
+      	    	     534:50: ^( OP_MINUS multiplicativeExpression additiveExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8415,7 +8411,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 3 :
       	    /* grammar/MapCSS.g:
-      	     531:47: */
+      	     535:47: */
       	    {
       	    	// AST REWRITE
       	    	// elements: multiplicativeExpression
@@ -8430,7 +8426,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 531:47: -> multiplicativeExpression*/
+      	    	/* 535:47: -> multiplicativeExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_multiplicativeExpression.nextTree());
 
@@ -8472,7 +8468,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "multiplicativeExpression"
   /* grammar/MapCSS.g:
-   535:1: multiplicativeExpression : unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
+   539:1: multiplicativeExpression : unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
    ( DIV )=> ( DIV multiplicativeExpression ) -> ^( OP_DIV unaryExpression multiplicativeExpression ) | 
    ( OP_MOD )=> ( OP_MOD multiplicativeExpression ) -> ^( OP_MOD unaryExpression multiplicativeExpression ) | 
    -> unaryExpression ) ;*/
@@ -8483,21 +8479,21 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token OP_MUL147 = null;
-    Token DIV149 = null;
-    Token OP_MOD151 = null;
-    MapCSSParser_unaryExpression_return unaryExpression146 =null;
+    Token OP_MUL145 = null;
+    Token DIV147 = null;
+    Token OP_MOD149 = null;
+    MapCSSParser_unaryExpression_return unaryExpression144 =null;
+
+    MapCSSParser_multiplicativeExpression_return multiplicativeExpression146 =null;
 
     MapCSSParser_multiplicativeExpression_return multiplicativeExpression148 =null;
 
     MapCSSParser_multiplicativeExpression_return multiplicativeExpression150 =null;
 
-    MapCSSParser_multiplicativeExpression_return multiplicativeExpression152 =null;
 
-
-    Object OP_MUL147_tree=null;
-    Object DIV149_tree=null;
-    Object OP_MOD151_tree=null;
+    Object OP_MUL145_tree=null;
+    Object DIV147_tree=null;
+    Object OP_MOD149_tree=null;
     RewriteRuleTokenStream stream_OP_MUL=new RewriteRuleTokenStream(_adaptor,"token OP_MUL");
     RewriteRuleTokenStream stream_OP_MOD=new RewriteRuleTokenStream(_adaptor,"token OP_MOD");
     RewriteRuleTokenStream stream_DIV=new RewriteRuleTokenStream(_adaptor,"token DIV");
@@ -8505,27 +8501,27 @@ class MapCSSParser extends Parser {
     RewriteRuleSubtreeStream stream_multiplicativeExpression=new RewriteRuleSubtreeStream(_adaptor,"rule multiplicativeExpression");
     try {
       /* grammar/MapCSS.g:
-       536:5: ( unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
+       540:5: ( unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
        ( DIV )=> ( DIV multiplicativeExpression ) -> ^( OP_DIV unaryExpression multiplicativeExpression ) | 
        ( OP_MOD )=> ( OP_MOD multiplicativeExpression ) -> ^( OP_MOD unaryExpression multiplicativeExpression ) | 
        -> unaryExpression ) )*/
       /* grammar/MapCSS.g:
-       536:8: unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
+       540:8: unaryExpression ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
        ( DIV )=> ( DIV multiplicativeExpression ) -> ^( OP_DIV unaryExpression multiplicativeExpression ) | 
        ( OP_MOD )=> ( OP_MOD multiplicativeExpression ) -> ^( OP_MOD unaryExpression multiplicativeExpression ) | 
        -> unaryExpression )*/
       {
-      	pushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression5290);
-      	unaryExpression146 = unaryExpression();
+      	pushFollow(FOLLOW_unaryExpression_in_multiplicativeExpression5302);
+      	unaryExpression144 = unaryExpression();
 
       	state.fsp--;
       	if(state.failed) 
       	  return retval;
       	if(state.backtracking == 0) 
-      	  stream_unaryExpression.add(unaryExpression146.tree);
+      	  stream_unaryExpression.add(unaryExpression144.tree);
 
       	/* grammar/MapCSS.g:
-      	 536:24: ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
+      	 540:24: ( ( OP_MUL )=> ( OP_MUL multiplicativeExpression ) -> ^( OP_MUL unaryExpression multiplicativeExpression ) | 
       	 ( DIV )=> ( DIV multiplicativeExpression ) -> ^( OP_DIV unaryExpression multiplicativeExpression ) | 
       	 ( OP_MOD )=> ( OP_MOD multiplicativeExpression ) -> ^( OP_MOD unaryExpression multiplicativeExpression ) | 
       	 -> unaryExpression )*/
@@ -8563,28 +8559,28 @@ class MapCSSParser extends Parser {
       	switch (alt35) {
       	  case 1 :
       	    /* grammar/MapCSS.g:
-      	     537:10: ( OP_MUL )=> ( OP_MUL multiplicativeExpression )*/
+      	     541:10: ( OP_MUL )=> ( OP_MUL multiplicativeExpression )*/
       	    {
       	    	/* grammar/MapCSS.g:
-      	    	 537:22: ( OP_MUL multiplicativeExpression )*/
+      	    	 541:22: ( OP_MUL multiplicativeExpression )*/
       	    	/* grammar/MapCSS.g:
-      	    	 537:23: OP_MUL multiplicativeExpression*/
+      	    	 541:23: OP_MUL multiplicativeExpression*/
       	    	{
-      	    		OP_MUL147 = matchSymbol(input,
-      	    		    OP_MUL,FOLLOW_OP_MUL_in_multiplicativeExpression5310); 
+      	    		OP_MUL145 = matchSymbol(input,
+      	    		    OP_MUL,FOLLOW_OP_MUL_in_multiplicativeExpression5322); 
       	    		if(state.failed) 
       	    		  return retval; 
-      	    		if(state.backtracking == 0) stream_OP_MUL.add(OP_MUL147);
+      	    		if(state.backtracking == 0) stream_OP_MUL.add(OP_MUL145);
 
 
-      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5312);
-      	    		multiplicativeExpression148 = multiplicativeExpression();
+      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5324);
+      	    		multiplicativeExpression146 = multiplicativeExpression();
 
       	    		state.fsp--;
       	    		if(state.failed) 
       	    		  return retval;
       	    		if(state.backtracking == 0) 
-      	    		  stream_multiplicativeExpression.add(multiplicativeExpression148.tree);
+      	    		  stream_multiplicativeExpression.add(multiplicativeExpression146.tree);
 
       	    	}
 
@@ -8602,10 +8598,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 537:56: -> ^( OP_MUL unaryExpression multiplicativeExpression )*/
+      	    	/* 541:56: -> ^( OP_MUL unaryExpression multiplicativeExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     537:59: ^( OP_MUL unaryExpression multiplicativeExpression )*/
+      	    	     541:59: ^( OP_MUL unaryExpression multiplicativeExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8629,28 +8625,28 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 2 :
       	    /* grammar/MapCSS.g:
-      	     538:10: ( DIV )=> ( DIV multiplicativeExpression )*/
+      	     542:10: ( DIV )=> ( DIV multiplicativeExpression )*/
       	    {
       	    	/* grammar/MapCSS.g:
-      	    	 538:19: ( DIV multiplicativeExpression )*/
+      	    	 542:19: ( DIV multiplicativeExpression )*/
       	    	/* grammar/MapCSS.g:
-      	    	 538:20: DIV multiplicativeExpression*/
+      	    	 542:20: DIV multiplicativeExpression*/
       	    	{
-      	    		DIV149 = matchSymbol(input,
-      	    		    DIV,FOLLOW_DIV_in_multiplicativeExpression5341); 
+      	    		DIV147 = matchSymbol(input,
+      	    		    DIV,FOLLOW_DIV_in_multiplicativeExpression5353); 
       	    		if(state.failed) 
       	    		  return retval; 
-      	    		if(state.backtracking == 0) stream_DIV.add(DIV149);
+      	    		if(state.backtracking == 0) stream_DIV.add(DIV147);
 
 
-      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5343);
-      	    		multiplicativeExpression150 = multiplicativeExpression();
+      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5355);
+      	    		multiplicativeExpression148 = multiplicativeExpression();
 
       	    		state.fsp--;
       	    		if(state.failed) 
       	    		  return retval;
       	    		if(state.backtracking == 0) 
-      	    		  stream_multiplicativeExpression.add(multiplicativeExpression150.tree);
+      	    		  stream_multiplicativeExpression.add(multiplicativeExpression148.tree);
 
       	    	}
 
@@ -8668,10 +8664,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 538:50: -> ^( OP_DIV unaryExpression multiplicativeExpression )*/
+      	    	/* 542:50: -> ^( OP_DIV unaryExpression multiplicativeExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     538:53: ^( OP_DIV unaryExpression multiplicativeExpression )*/
+      	    	     542:53: ^( OP_DIV unaryExpression multiplicativeExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8695,28 +8691,28 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 3 :
       	    /* grammar/MapCSS.g:
-      	     539:10: ( OP_MOD )=> ( OP_MOD multiplicativeExpression )*/
+      	     543:10: ( OP_MOD )=> ( OP_MOD multiplicativeExpression )*/
       	    {
       	    	/* grammar/MapCSS.g:
-      	    	 539:22: ( OP_MOD multiplicativeExpression )*/
+      	    	 543:22: ( OP_MOD multiplicativeExpression )*/
       	    	/* grammar/MapCSS.g:
-      	    	 539:23: OP_MOD multiplicativeExpression*/
+      	    	 543:23: OP_MOD multiplicativeExpression*/
       	    	{
-      	    		OP_MOD151 = matchSymbol(input,
-      	    		    OP_MOD,FOLLOW_OP_MOD_in_multiplicativeExpression5372); 
+      	    		OP_MOD149 = matchSymbol(input,
+      	    		    OP_MOD,FOLLOW_OP_MOD_in_multiplicativeExpression5384); 
       	    		if(state.failed) 
       	    		  return retval; 
-      	    		if(state.backtracking == 0) stream_OP_MOD.add(OP_MOD151);
+      	    		if(state.backtracking == 0) stream_OP_MOD.add(OP_MOD149);
 
 
-      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5374);
-      	    		multiplicativeExpression152 = multiplicativeExpression();
+      	    		pushFollow(FOLLOW_multiplicativeExpression_in_multiplicativeExpression5386);
+      	    		multiplicativeExpression150 = multiplicativeExpression();
 
       	    		state.fsp--;
       	    		if(state.failed) 
       	    		  return retval;
       	    		if(state.backtracking == 0) 
-      	    		  stream_multiplicativeExpression.add(multiplicativeExpression152.tree);
+      	    		  stream_multiplicativeExpression.add(multiplicativeExpression150.tree);
 
       	    	}
 
@@ -8734,10 +8730,10 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 539:56: -> ^( OP_MOD unaryExpression multiplicativeExpression )*/
+      	    	/* 543:56: -> ^( OP_MOD unaryExpression multiplicativeExpression )*/
       	    	{
       	    	    /* grammar/MapCSS.g:
-      	    	     539:59: ^( OP_MOD unaryExpression multiplicativeExpression )*/
+      	    	     543:59: ^( OP_MOD unaryExpression multiplicativeExpression )*/
       	    	    {
       	    	    	Object root_1 = _adaptor.nil();
       	    	    	root_1 = _adaptor.becomeRoot(
@@ -8761,7 +8757,7 @@ class MapCSSParser extends Parser {
       	    break;
       	  case 4 :
       	    /* grammar/MapCSS.g:
-      	     540:50: */
+      	     544:50: */
       	    {
       	    	// AST REWRITE
       	    	// elements: unaryExpression
@@ -8776,7 +8772,7 @@ class MapCSSParser extends Parser {
       	    	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
       	    	root_0 = _adaptor.nil();
-      	    	/* 540:50: -> unaryExpression*/
+      	    	/* 544:50: -> unaryExpression*/
       	    	{
       	    	    _adaptor.addChild(root_0, stream_unaryExpression.nextTree());
 
@@ -8818,7 +8814,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "unaryExpression"
   /* grammar/MapCSS.g:
-   544:1: unaryExpression : ( ( '!' )=> '!' primaryExpression -> ^( OP_NOT primaryExpression ) | 
+   548:1: unaryExpression : ( ( '!' )=> '!' primaryExpression -> ^( OP_NOT primaryExpression ) | 
    primaryExpression -> primaryExpression );*/
   MapCSSParser_unaryExpression_return unaryExpression() {
     MapCSSParser_unaryExpression_return retval = new MapCSSParser_unaryExpression_return();
@@ -8827,18 +8823,18 @@ class MapCSSParser extends Parser {
 
     Object root_0 = null;
 
-    Token char_literal153 = null;
-    MapCSSParser_primaryExpression_return primaryExpression154 =null;
+    Token char_literal151 = null;
+    MapCSSParser_primaryExpression_return primaryExpression152 =null;
 
-    MapCSSParser_primaryExpression_return primaryExpression155 =null;
+    MapCSSParser_primaryExpression_return primaryExpression153 =null;
 
 
-    Object char_literal153_tree=null;
+    Object char_literal151_tree=null;
     RewriteRuleTokenStream stream_113=new RewriteRuleTokenStream(_adaptor,"token 113");
     RewriteRuleSubtreeStream stream_primaryExpression=new RewriteRuleSubtreeStream(_adaptor,"rule primaryExpression");
     try {
       /* grammar/MapCSS.g: 
-       545:5: ( ( '!' )=> '!' primaryExpression -> ^( OP_NOT primaryExpression ) | 
+       549:5: ( ( '!' )=> '!' primaryExpression -> ^( OP_NOT primaryExpression ) | 
        primaryExpression -> primaryExpression )*/
       int alt36 = 2;
       int LA36_0 = input.LA(1);
@@ -8869,23 +8865,23 @@ class MapCSSParser extends Parser {
       switch (alt36) {
         case 1 :
           /* grammar/MapCSS.g:
-           545:13: ( '!' )=> '!' primaryExpression*/
+           549:13: ( '!' )=> '!' primaryExpression*/
           {
-          	char_literal153 = matchSymbol(input,
-          	    113,FOLLOW_113_in_unaryExpression5493); 
+          	char_literal151 = matchSymbol(input,
+          	    113,FOLLOW_113_in_unaryExpression5505); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_113.add(char_literal153);
+          	if(state.backtracking == 0) stream_113.add(char_literal151);
 
 
-          	pushFollow(FOLLOW_primaryExpression_in_unaryExpression5495);
-          	primaryExpression154 = primaryExpression();
+          	pushFollow(FOLLOW_primaryExpression_in_unaryExpression5507);
+          	primaryExpression152 = primaryExpression();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_primaryExpression.add(primaryExpression154.tree);
+          	  stream_primaryExpression.add(primaryExpression152.tree);
 
           	// AST REWRITE
           	// elements: primaryExpression
@@ -8900,10 +8896,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 545:45: -> ^( OP_NOT primaryExpression )*/
+          	/* 549:45: -> ^( OP_NOT primaryExpression )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     545:48: ^( OP_NOT primaryExpression )*/
+          	     549:48: ^( OP_NOT primaryExpression )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -8925,16 +8921,16 @@ class MapCSSParser extends Parser {
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           546:13: primaryExpression*/
+           550:13: primaryExpression*/
           {
-          	pushFollow(FOLLOW_primaryExpression_in_unaryExpression5518);
-          	primaryExpression155 = primaryExpression();
+          	pushFollow(FOLLOW_primaryExpression_in_unaryExpression5530);
+          	primaryExpression153 = primaryExpression();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_primaryExpression.add(primaryExpression155.tree);
+          	  stream_primaryExpression.add(primaryExpression153.tree);
 
           	// AST REWRITE
           	// elements: primaryExpression
@@ -8949,7 +8945,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 546:45: -> primaryExpression*/
+          	/* 550:45: -> primaryExpression*/
           	{
           	    _adaptor.addChild(root_0, stream_primaryExpression.nextTree());
 
@@ -8987,7 +8983,7 @@ class MapCSSParser extends Parser {
 
   // $ANTLR start "primaryExpression"
   /* grammar/MapCSS.g:
-   549:1: primaryExpression : ( '(' expr ')' -> expr |f= CSS_IDENT '(' ( args )? ')' -> ^( FUNCTION_CALL[$f] ( args )? ) |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] | 
+   553:1: primaryExpression : ( '(' expr ')' -> expr |f= CSS_IDENT '(' ( args )? ')' -> ^( FUNCTION_CALL[$f] ( args )? ) |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] | 
    quoted | cssident |v= OSM_TAG -> VALUE_KEYWORD[$v] );*/
   MapCSSParser_primaryExpression_return primaryExpression() {
     MapCSSParser_primaryExpression_return retval = new MapCSSParser_primaryExpression_return();
@@ -8998,25 +8994,25 @@ class MapCSSParser extends Parser {
 
     Token f = null;
     Token v = null;
+    Token char_literal154 = null;
     Token char_literal156 = null;
-    Token char_literal158 = null;
+    Token char_literal157 = null;
     Token char_literal159 = null;
-    Token char_literal161 = null;
-    MapCSSParser_expr_return expr157 =null;
+    MapCSSParser_expr_return expr155 =null;
 
-    MapCSSParser_args_return args160 =null;
+    MapCSSParser_args_return args158 =null;
 
-    MapCSSParser_quoted_return quoted162 =null;
+    MapCSSParser_quoted_return quoted160 =null;
 
-    MapCSSParser_cssident_return cssident163 =null;
+    MapCSSParser_cssident_return cssident161 =null;
 
 
     Object f_tree=null;
     Object v_tree=null;
+    Object char_literal154_tree=null;
     Object char_literal156_tree=null;
-    Object char_literal158_tree=null;
+    Object char_literal157_tree=null;
     Object char_literal159_tree=null;
-    Object char_literal161_tree=null;
     RewriteRuleTokenStream stream_CSS_IDENT=new RewriteRuleTokenStream(_adaptor,"token CSS_IDENT");
     RewriteRuleTokenStream stream_116=new RewriteRuleTokenStream(_adaptor,"token 116");
     RewriteRuleTokenStream stream_117=new RewriteRuleTokenStream(_adaptor,"token 117");
@@ -9029,7 +9025,7 @@ class MapCSSParser extends Parser {
     RewriteRuleSubtreeStream stream_expr=new RewriteRuleSubtreeStream(_adaptor,"rule expr");
     try {
       /* grammar/MapCSS.g: 
-       550:5: ( '(' expr ')' -> expr |f= CSS_IDENT '(' ( args )? ')' -> ^( FUNCTION_CALL[$f] ( args )? ) |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] | 
+       554:5: ( '(' expr ')' -> expr |f= CSS_IDENT '(' ( args )? ')' -> ^( FUNCTION_CALL[$f] ( args )? ) |v= POSITIVE_FLOAT -> VALUE_FLOAT[$v] |v= POSITIVE_INT -> VALUE_INT[$v] |v= NEGATIVE_FLOAT -> VALUE_FLOAT[$v] |v= NEGATIVE_INT -> VALUE_INT[$v] | 
        quoted | cssident |v= OSM_TAG -> VALUE_KEYWORD[$v] )*/
       int alt38 = 9;
       switch(input.LA(1)) {
@@ -9114,29 +9110,29 @@ class MapCSSParser extends Parser {
       switch (alt38) {
         case 1 :
           /* grammar/MapCSS.g:
-           550:10: '(' expr ')'*/
+           554:10: '(' expr ')'*/
           {
-          	char_literal156 = matchSymbol(input,
-          	    116,FOLLOW_116_in_primaryExpression5556); 
+          	char_literal154 = matchSymbol(input,
+          	    116,FOLLOW_116_in_primaryExpression5568); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_116.add(char_literal156);
+          	if(state.backtracking == 0) stream_116.add(char_literal154);
 
 
-          	pushFollow(FOLLOW_expr_in_primaryExpression5558);
-          	expr157 = expr();
+          	pushFollow(FOLLOW_expr_in_primaryExpression5570);
+          	expr155 = expr();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0) 
-          	  stream_expr.add(expr157.tree);
+          	  stream_expr.add(expr155.tree);
 
-          	char_literal158 = matchSymbol(input,
-          	    117,FOLLOW_117_in_primaryExpression5560); 
+          	char_literal156 = matchSymbol(input,
+          	    117,FOLLOW_117_in_primaryExpression5572); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_117.add(char_literal158);
+          	if(state.backtracking == 0) stream_117.add(char_literal156);
 
 
           	// AST REWRITE
@@ -9152,7 +9148,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 550:28: -> expr*/
+          	/* 554:28: -> expr*/
           	{
           	    _adaptor.addChild(root_0, stream_expr.nextTree());
 
@@ -9166,24 +9162,24 @@ class MapCSSParser extends Parser {
           break;
         case 2 :
           /* grammar/MapCSS.g:
-           551:10: f= CSS_IDENT '(' ( args )? ')'*/
+           555:10: f= CSS_IDENT '(' ( args )? ')'*/
           {
           	f = matchSymbol(input,
-          	    CSS_IDENT,FOLLOW_CSS_IDENT_in_primaryExpression5582); 
+          	    CSS_IDENT,FOLLOW_CSS_IDENT_in_primaryExpression5594); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_CSS_IDENT.add(f);
 
 
-          	char_literal159 = matchSymbol(input,
-          	    116,FOLLOW_116_in_primaryExpression5584); 
+          	char_literal157 = matchSymbol(input,
+          	    116,FOLLOW_116_in_primaryExpression5596); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_116.add(char_literal159);
+          	if(state.backtracking == 0) stream_116.add(char_literal157);
 
 
           	/* grammar/MapCSS.g:
-          	 551:26: ( args )?*/
+          	 555:26: ( args )?*/
           	int alt37 = 2;
           	int LA37_0 = input.LA(1);
 
@@ -9200,16 +9196,16 @@ class MapCSSParser extends Parser {
           	switch (alt37) {
           	  case 1 :
           	    /* grammar/MapCSS.g:
-          	     551:26: args*/
+          	     555:26: args*/
           	    {
-          	    	pushFollow(FOLLOW_args_in_primaryExpression5586);
-          	    	args160 = args();
+          	    	pushFollow(FOLLOW_args_in_primaryExpression5598);
+          	    	args158 = args();
 
           	    	state.fsp--;
           	    	if(state.failed) 
           	    	  return retval;
           	    	if(state.backtracking == 0) 
-          	    	  stream_args.add(args160.tree);
+          	    	  stream_args.add(args158.tree);
 
           	    }
           	    break;
@@ -9217,11 +9213,11 @@ class MapCSSParser extends Parser {
           	}
 
 
-          	char_literal161 = matchSymbol(input,
-          	    117,FOLLOW_117_in_primaryExpression5589); 
+          	char_literal159 = matchSymbol(input,
+          	    117,FOLLOW_117_in_primaryExpression5601); 
           	if(state.failed) 
           	  return retval; 
-          	if(state.backtracking == 0) stream_117.add(char_literal161);
+          	if(state.backtracking == 0) stream_117.add(char_literal159);
 
 
           	// AST REWRITE
@@ -9237,10 +9233,10 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 551:36: -> ^( FUNCTION_CALL[$f] ( args )? )*/
+          	/* 555:36: -> ^( FUNCTION_CALL[$f] ( args )? )*/
           	{
           	    /* grammar/MapCSS.g:
-          	     551:39: ^( FUNCTION_CALL[$f] ( args )? )*/
+          	     555:39: ^( FUNCTION_CALL[$f] ( args )? )*/
           	    {
           	    	Object root_1 = _adaptor.nil();
           	    	root_1 = _adaptor.becomeRoot(
@@ -9248,7 +9244,7 @@ class MapCSSParser extends Parser {
           	    	, root_1);
 
           	    	/* grammar/MapCSS.g:
-          	    	 551:59: ( args )?*/
+          	    	 555:59: ( args )?*/
           	    	if(stream_args.hasNext()) {
           	    	    _adaptor.addChild(root_1, stream_args.nextTree());
 
@@ -9268,10 +9264,10 @@ class MapCSSParser extends Parser {
           break;
         case 3 :
           /* grammar/MapCSS.g:
-           552:10: v= POSITIVE_FLOAT*/
+           556:10: v= POSITIVE_FLOAT*/
           {
           	v = matchSymbol(input,
-          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_primaryExpression5612); 
+          	    POSITIVE_FLOAT,FOLLOW_POSITIVE_FLOAT_in_primaryExpression5624); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_FLOAT.add(v);
@@ -9290,7 +9286,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 552:28: -> VALUE_FLOAT[$v]*/
+          	/* 556:28: -> VALUE_FLOAT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, v)
@@ -9306,10 +9302,10 @@ class MapCSSParser extends Parser {
           break;
         case 4 :
           /* grammar/MapCSS.g:
-           553:10: v= POSITIVE_INT*/
+           557:10: v= POSITIVE_INT*/
           {
           	v = matchSymbol(input,
-          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_primaryExpression5632); 
+          	    POSITIVE_INT,FOLLOW_POSITIVE_INT_in_primaryExpression5644); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_POSITIVE_INT.add(v);
@@ -9328,7 +9324,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 553:28: -> VALUE_INT[$v]*/
+          	/* 557:28: -> VALUE_INT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, v)
@@ -9344,10 +9340,10 @@ class MapCSSParser extends Parser {
           break;
         case 5 :
           /* grammar/MapCSS.g:
-           554:10: v= NEGATIVE_FLOAT*/
+           558:10: v= NEGATIVE_FLOAT*/
           {
           	v = matchSymbol(input,
-          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5654); 
+          	    NEGATIVE_FLOAT,FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5666); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_FLOAT.add(v);
@@ -9366,7 +9362,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 554:28: -> VALUE_FLOAT[$v]*/
+          	/* 558:28: -> VALUE_FLOAT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_FLOAT, v)
@@ -9382,10 +9378,10 @@ class MapCSSParser extends Parser {
           break;
         case 6 :
           /* grammar/MapCSS.g:
-           555:10: v= NEGATIVE_INT*/
+           559:10: v= NEGATIVE_INT*/
           {
           	v = matchSymbol(input,
-          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_primaryExpression5674); 
+          	    NEGATIVE_INT,FOLLOW_NEGATIVE_INT_in_primaryExpression5686); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_NEGATIVE_INT.add(v);
@@ -9404,7 +9400,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 555:28: -> VALUE_INT[$v]*/
+          	/* 559:28: -> VALUE_INT[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_INT, v)
@@ -9420,46 +9416,46 @@ class MapCSSParser extends Parser {
           break;
         case 7 :
           /* grammar/MapCSS.g:
-           556:10: quoted*/
+           560:10: quoted*/
           {
           	root_0 = _adaptor.nil();
 
 
-          	pushFollow(FOLLOW_quoted_in_primaryExpression5694);
-          	quoted162 = quoted();
+          	pushFollow(FOLLOW_quoted_in_primaryExpression5706);
+          	quoted160 = quoted();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0)
-          	  _adaptor.addChild(root_0, quoted162.tree);
+          	  _adaptor.addChild(root_0, quoted160.tree);
 
           }
           break;
         case 8 :
           /* grammar/MapCSS.g:
-           557:10: cssident*/
+           561:10: cssident*/
           {
           	root_0 = _adaptor.nil();
 
 
-          	pushFollow(FOLLOW_cssident_in_primaryExpression5705);
-          	cssident163 = cssident();
+          	pushFollow(FOLLOW_cssident_in_primaryExpression5717);
+          	cssident161 = cssident();
 
           	state.fsp--;
           	if(state.failed) 
           	  return retval;
           	if(state.backtracking == 0)
-          	  _adaptor.addChild(root_0, cssident163.tree);
+          	  _adaptor.addChild(root_0, cssident161.tree);
 
           }
           break;
         case 9 :
           /* grammar/MapCSS.g:
-           558:10: v= OSM_TAG*/
+           562:10: v= OSM_TAG*/
           {
           	v = matchSymbol(input,
-          	    OSM_TAG,FOLLOW_OSM_TAG_in_primaryExpression5718); 
+          	    OSM_TAG,FOLLOW_OSM_TAG_in_primaryExpression5730); 
           	if(state.failed) 
           	  return retval; 
           	if(state.backtracking == 0) stream_OSM_TAG.add(v);
@@ -9478,7 +9474,7 @@ class MapCSSParser extends Parser {
           	RewriteRuleSubtreeStream stream_retval = new RewriteRuleSubtreeStream(_adaptor,"rule retval",retval!=null?retval.tree:null);
 
           	root_0 = _adaptor.nil();
-          	/* 558:22: -> VALUE_KEYWORD[$v]*/
+          	/* 562:22: -> VALUE_KEYWORD[$v]*/
           	{
           	    _adaptor.addChild(root_0, 
           	    _adaptor.create(VALUE_KEYWORD, v)
@@ -9518,12 +9514,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred1_MapCSS
   void synpred1_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     497:14: ( OP_OR )*/
+     501:14: ( OP_OR )*/
     /* grammar/MapCSS.g:
-     497:15: OP_OR*/
+     501:15: OP_OR*/
     {
     	matchSymbol(input,
-    	    OP_OR,FOLLOW_OP_OR_in_synpred1_MapCSS4531); 
+    	    OP_OR,FOLLOW_OP_OR_in_synpred1_MapCSS4543); 
     	if(state.failed) 
     	  return ;
 
@@ -9535,12 +9531,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred2_MapCSS
   void synpred2_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     504:14: ( OP_AND )*/
+     508:14: ( OP_AND )*/
     /* grammar/MapCSS.g:
-     504:15: OP_AND*/
+     508:15: OP_AND*/
     {
     	matchSymbol(input,
-    	    OP_AND,FOLLOW_OP_AND_in_synpred2_MapCSS4650); 
+    	    OP_AND,FOLLOW_OP_AND_in_synpred2_MapCSS4662); 
     	if(state.failed) 
     	  return ;
 
@@ -9552,12 +9548,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred3_MapCSS
   void synpred3_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     511:14: ( OP_EQ )*/
+     515:14: ( OP_EQ )*/
     /* grammar/MapCSS.g:
-     511:15: OP_EQ*/
+     515:15: OP_EQ*/
     {
     	matchSymbol(input,
-    	    OP_EQ,FOLLOW_OP_EQ_in_synpred3_MapCSS4779); 
+    	    OP_EQ,FOLLOW_OP_EQ_in_synpred3_MapCSS4791); 
     	if(state.failed) 
     	  return ;
 
@@ -9569,12 +9565,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred4_MapCSS
   void synpred4_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     512:14: ( OP_NEQ )*/
+     516:14: ( OP_NEQ )*/
     /* grammar/MapCSS.g:
-     512:15: OP_NEQ*/
+     516:15: OP_NEQ*/
     {
     	matchSymbol(input,
-    	    OP_NEQ,FOLLOW_OP_NEQ_in_synpred4_MapCSS4814); 
+    	    OP_NEQ,FOLLOW_OP_NEQ_in_synpred4_MapCSS4826); 
     	if(state.failed) 
     	  return ;
 
@@ -9586,12 +9582,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred5_MapCSS
   void synpred5_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     519:13: ( OP_LT )*/
+     523:13: ( OP_LT )*/
     /* grammar/MapCSS.g:
-     519:14: OP_LT*/
+     523:14: OP_LT*/
     {
     	matchSymbol(input,
-    	    OP_LT,FOLLOW_OP_LT_in_synpred5_MapCSS4945); 
+    	    OP_LT,FOLLOW_OP_LT_in_synpred5_MapCSS4957); 
     	if(state.failed) 
     	  return ;
 
@@ -9603,12 +9599,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred6_MapCSS
   void synpred6_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     520:13: ( OP_LE )*/
+     524:13: ( OP_LE )*/
     /* grammar/MapCSS.g:
-     520:14: OP_LE*/
+     524:14: OP_LE*/
     {
     	matchSymbol(input,
-    	    OP_LE,FOLLOW_OP_LE_in_synpred6_MapCSS4978); 
+    	    OP_LE,FOLLOW_OP_LE_in_synpred6_MapCSS4990); 
     	if(state.failed) 
     	  return ;
 
@@ -9620,12 +9616,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred7_MapCSS
   void synpred7_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     521:13: ( OP_GT )*/
+     525:13: ( OP_GT )*/
     /* grammar/MapCSS.g:
-     521:14: OP_GT*/
+     525:14: OP_GT*/
     {
     	matchSymbol(input,
-    	    OP_GT,FOLLOW_OP_GT_in_synpred7_MapCSS5011); 
+    	    OP_GT,FOLLOW_OP_GT_in_synpred7_MapCSS5023); 
     	if(state.failed) 
     	  return ;
 
@@ -9637,12 +9633,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred8_MapCSS
   void synpred8_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     522:13: ( OP_GE )*/
+     526:13: ( OP_GE )*/
     /* grammar/MapCSS.g:
-     522:14: OP_GE*/
+     526:14: OP_GE*/
     {
     	matchSymbol(input,
-    	    OP_GE,FOLLOW_OP_GE_in_synpred8_MapCSS5044); 
+    	    OP_GE,FOLLOW_OP_GE_in_synpred8_MapCSS5056); 
     	if(state.failed) 
     	  return ;
 
@@ -9654,12 +9650,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred9_MapCSS
   void synpred9_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     529:14: ( OP_PLUS )*/
+     533:14: ( OP_PLUS )*/
     /* grammar/MapCSS.g:
-     529:15: OP_PLUS*/
+     533:15: OP_PLUS*/
     {
     	matchSymbol(input,
-    	    OP_PLUS,FOLLOW_OP_PLUS_in_synpred9_MapCSS5159); 
+    	    OP_PLUS,FOLLOW_OP_PLUS_in_synpred9_MapCSS5171); 
     	if(state.failed) 
     	  return ;
 
@@ -9671,12 +9667,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred10_MapCSS
   void synpred10_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     530:14: ( '-' )*/
+     534:14: ( '-' )*/
     /* grammar/MapCSS.g:
-     530:15: '-'*/
+     534:15: '-'*/
     {
     	matchSymbol(input,
-    	    119,FOLLOW_119_in_synpred10_MapCSS5193); 
+    	    119,FOLLOW_119_in_synpred10_MapCSS5205); 
     	if(state.failed) 
     	  return ;
 
@@ -9688,12 +9684,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred11_MapCSS
   void synpred11_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     537:10: ( OP_MUL )*/
+     541:10: ( OP_MUL )*/
     /* grammar/MapCSS.g:
-     537:11: OP_MUL*/
+     541:11: OP_MUL*/
     {
     	matchSymbol(input,
-    	    OP_MUL,FOLLOW_OP_MUL_in_synpred11_MapCSS5304); 
+    	    OP_MUL,FOLLOW_OP_MUL_in_synpred11_MapCSS5316); 
     	if(state.failed) 
     	  return ;
 
@@ -9705,12 +9701,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred12_MapCSS
   void synpred12_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     538:10: ( DIV )*/
+     542:10: ( DIV )*/
     /* grammar/MapCSS.g:
-     538:11: DIV*/
+     542:11: DIV*/
     {
     	matchSymbol(input,
-    	    DIV,FOLLOW_DIV_in_synpred12_MapCSS5335); 
+    	    DIV,FOLLOW_DIV_in_synpred12_MapCSS5347); 
     	if(state.failed) 
     	  return ;
 
@@ -9722,12 +9718,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred13_MapCSS
   void synpred13_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     539:10: ( OP_MOD )*/
+     543:10: ( OP_MOD )*/
     /* grammar/MapCSS.g:
-     539:11: OP_MOD*/
+     543:11: OP_MOD*/
     {
     	matchSymbol(input,
-    	    OP_MOD,FOLLOW_OP_MOD_in_synpred13_MapCSS5366); 
+    	    OP_MOD,FOLLOW_OP_MOD_in_synpred13_MapCSS5378); 
     	if(state.failed) 
     	  return ;
 
@@ -9739,12 +9735,12 @@ class MapCSSParser extends Parser {
   // $ANTLR start synpred14_MapCSS
   void synpred14_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     545:13: ( '!' )*/
+     549:13: ( '!' )*/
     /* grammar/MapCSS.g:
-     545:14: '!'*/
+     549:14: '!'*/
     {
     	matchSymbol(input,
-    	    113,FOLLOW_113_in_synpred14_MapCSS5488); 
+    	    113,FOLLOW_113_in_synpred14_MapCSS5500); 
     	if(state.failed) 
     	  return ;
 
@@ -10287,255 +10283,255 @@ class MapCSSParser extends Parser {
 
   static BitSet FOLLOW_OP_MUL_in_type_selector3762 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_LBRACE_in_declaration_block3788 = new BitSet.fromList([0x0000000000000200]);
+  static BitSet FOLLOW_LBRACE_in_declaration_block3796 = new BitSet.fromList([0x0000000000000200]);
 
-  static BitSet FOLLOW_declarations_in_declaration_block3790 = new BitSet.fromList([0x0000000000000000,0x0000000000000800]);
+  static BitSet FOLLOW_declarations_in_declaration_block3798 = new BitSet.fromList([0x0000000000000000,0x0000000000000800]);
 
-  static BitSet FOLLOW_RBRACE_in_declaration_block3792 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_RBRACE_in_declaration_block3800 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_LBRACE_in_declaration_block3806 = new BitSet.fromList([0x0000000000000000,0x0000000000000800]);
+  static BitSet FOLLOW_LBRACE_in_declaration_block3817 = new BitSet.fromList([0x0000000000000000,0x0000000000000800]);
 
-  static BitSet FOLLOW_RBRACE_in_declaration_block3808 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_RBRACE_in_declaration_block3819 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_declaration_in_declarations3838 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
+  static BitSet FOLLOW_declaration_in_declarations3850 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
 
-  static BitSet FOLLOW_SEMICOLON_in_declarations3841 = new BitSet.fromList([0x0000000000000200]);
+  static BitSet FOLLOW_SEMICOLON_in_declarations3853 = new BitSet.fromList([0x0000000000000200]);
 
-  static BitSet FOLLOW_declaration_in_declarations3843 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
+  static BitSet FOLLOW_declaration_in_declarations3855 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
 
-  static BitSet FOLLOW_SEMICOLON_in_declarations3847 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
+  static BitSet FOLLOW_SEMICOLON_in_declarations3859 = new BitSet.fromList([0x0000000000000002,0x0000000000400000]);
 
-  static BitSet FOLLOW_declaration_property_in_declaration3865 = new BitSet.fromList([0x0000000000000100]);
+  static BitSet FOLLOW_declaration_property_in_declaration3877 = new BitSet.fromList([0x0000000000000100]);
 
-  static BitSet FOLLOW_COLON_in_declaration3867 = new BitSet.fromList([0x0000001808488200,0x00000000820600F9]);
+  static BitSet FOLLOW_COLON_in_declaration3879 = new BitSet.fromList([0x0000001808488200,0x00000000820600F9]);
 
-  static BitSet FOLLOW_declaration_value_in_declaration3869 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_declaration_value_in_declaration3881 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_cssident_in_declaration_property3891 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_cssident_in_declaration_property3903 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_single_value_in_declaration_value3903 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_single_value_in_declaration_value3915 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_single_value_in_declaration_value3908 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
+  static BitSet FOLLOW_single_value_in_declaration_value3920 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_118_in_declaration_value3911 = new BitSet.fromList([0x0000001808408200,0x00000000820600F9]);
+  static BitSet FOLLOW_118_in_declaration_value3923 = new BitSet.fromList([0x0000001808408200,0x00000000820600F9]);
 
-  static BitSet FOLLOW_single_value_in_declaration_value3913 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
+  static BitSet FOLLOW_single_value_in_declaration_value3925 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
 
-  static BitSet FOLLOW_118_in_declaration_value3916 = new BitSet.fromList([0x0000001808408200,0x00000000820600F9]);
+  static BitSet FOLLOW_118_in_declaration_value3928 = new BitSet.fromList([0x0000001808408200,0x00000000820600F9]);
 
-  static BitSet FOLLOW_single_value_in_declaration_value3918 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
+  static BitSet FOLLOW_single_value_in_declaration_value3930 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
 
-  static BitSet FOLLOW_EVAL_in_declaration_value3934 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
+  static BitSet FOLLOW_EVAL_in_declaration_value3946 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
 
-  static BitSet FOLLOW_116_in_declaration_value3937 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_116_in_declaration_value3949 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_expr_in_declaration_value3939 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
+  static BitSet FOLLOW_expr_in_declaration_value3951 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
 
-  static BitSet FOLLOW_117_in_declaration_value3941 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_117_in_declaration_value3953 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_num3970 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_INT_in_num3982 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_NEGATIVE_INT_in_num3990 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_INT_in_num4002 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POSITIVE_FLOAT_in_num4010 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_FLOAT_in_num4022 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_NEGATIVE_FLOAT_in_num4028 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_FLOAT_in_num4040 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4053 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4065 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_NEGATIVE_INT_in_single_value4076 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_INT_in_single_value4088 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POSITIVE_FLOAT_in_single_value4099 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_FLOAT_in_single_value4111 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_NEGATIVE_FLOAT_in_single_value4120 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_FLOAT_in_single_value4132 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_INCREMENT_in_single_value4142 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_INCREMENT_in_single_value4154 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POINTS_in_single_value4168 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POINTS_in_single_value4180 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_PIXELS_in_single_value4185 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_PIXELS_in_single_value4197 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_PERCENTAGE_in_single_value4205 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_PERCENTAGE_in_single_value4217 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_URL_in_single_value4220 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_URL_in_single_value4232 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_RGB_in_single_value4235 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
+  static BitSet FOLLOW_RGB_in_single_value4247 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
 
-  static BitSet FOLLOW_116_in_single_value4237 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
+  static BitSet FOLLOW_116_in_single_value4249 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4241 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4253 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_118_in_single_value4243 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
+  static BitSet FOLLOW_118_in_single_value4255 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4247 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4259 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_118_in_single_value4249 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
+  static BitSet FOLLOW_118_in_single_value4261 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4253 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4265 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
 
-  static BitSet FOLLOW_117_in_single_value4255 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_117_in_single_value4267 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_RGBA_in_single_value4298 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
+  static BitSet FOLLOW_RGBA_in_single_value4310 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
 
-  static BitSet FOLLOW_116_in_single_value4300 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
-
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4304 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
-
-  static BitSet FOLLOW_118_in_single_value4306 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
-
-  static BitSet FOLLOW_POSITIVE_INT_in_single_value4310 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
-
-  static BitSet FOLLOW_118_in_single_value4312 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
+  static BitSet FOLLOW_116_in_single_value4312 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
   static BitSet FOLLOW_POSITIVE_INT_in_single_value4316 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_118_in_single_value4318 = new BitSet.fromList([0x0000001800000000,0x00000000000000C0]);
+  static BitSet FOLLOW_118_in_single_value4318 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
-  static BitSet FOLLOW_num_in_single_value4322 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4322 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_117_in_single_value4324 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_118_in_single_value4324 = new BitSet.fromList([0x0000000000000000,0x0000000000000080]);
 
-  static BitSet FOLLOW_HEXCOLOR_in_single_value4359 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_INT_in_single_value4328 = new BitSet.fromList([0x0000000000000000,0x0040000000000000]);
 
-  static BitSet FOLLOW_quoted_in_single_value4384 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_118_in_single_value4330 = new BitSet.fromList([0x0000001800000000,0x00000000000000C0]);
 
-  static BitSet FOLLOW_OSM_TAG_in_single_value4416 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_num_in_single_value4334 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
 
-  static BitSet FOLLOW_cssident_in_single_value4446 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_117_in_single_value4336 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_logicalExpression_in_expr4467 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_HEXCOLOR_in_single_value4371 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_expr_in_args4478 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
+  static BitSet FOLLOW_quoted_in_single_value4396 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_118_in_args4481 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_OSM_TAG_in_single_value4428 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_expr_in_args4483 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
+  static BitSet FOLLOW_cssident_in_single_value4458 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_booleanAndExpression_in_logicalExpression4512 = new BitSet.fromList([0x0800000000000002]);
+  static BitSet FOLLOW_logicalExpression_in_expr4479 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_OR_in_logicalExpression4536 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_expr_in_args4490 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
 
-  static BitSet FOLLOW_logicalExpression_in_logicalExpression4538 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_118_in_args4493 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_equalityExpression_in_booleanAndExpression4631 = new BitSet.fromList([0x0000020000000002]);
+  static BitSet FOLLOW_expr_in_args4495 = new BitSet.fromList([0x0000000000000002,0x0040000000000000]);
 
-  static BitSet FOLLOW_OP_AND_in_booleanAndExpression4655 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_booleanAndExpression_in_logicalExpression4524 = new BitSet.fromList([0x0800000000000002]);
 
-  static BitSet FOLLOW_booleanAndExpression_in_booleanAndExpression4657 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_OR_in_logicalExpression4548 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_relationalExpression_in_equalityExpression4761 = new BitSet.fromList([0x0100200000000002]);
+  static BitSet FOLLOW_logicalExpression_in_logicalExpression4550 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_EQ_in_equalityExpression4785 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_equalityExpression_in_booleanAndExpression4643 = new BitSet.fromList([0x0000020000000002]);
 
-  static BitSet FOLLOW_relationalExpression_in_equalityExpression4788 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_AND_in_booleanAndExpression4667 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_OP_NEQ_in_equalityExpression4819 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_booleanAndExpression_in_booleanAndExpression4669 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_relationalExpression_in_equalityExpression4821 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_relationalExpression_in_equalityExpression4773 = new BitSet.fromList([0x0100200000000002]);
 
-  static BitSet FOLLOW_additiveExpression_in_relationalExpression4927 = new BitSet.fromList([0x0007800000000002]);
+  static BitSet FOLLOW_OP_EQ_in_equalityExpression4797 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_OP_LT_in_relationalExpression4951 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_relationalExpression_in_equalityExpression4800 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_additiveExpression_in_relationalExpression4953 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_NEQ_in_equalityExpression4831 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_OP_LE_in_relationalExpression4984 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_relationalExpression_in_equalityExpression4833 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_additiveExpression_in_relationalExpression4986 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_additiveExpression_in_relationalExpression4939 = new BitSet.fromList([0x0007800000000002]);
 
-  static BitSet FOLLOW_OP_GT_in_relationalExpression5017 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_OP_LT_in_relationalExpression4963 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_additiveExpression_in_relationalExpression5019 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_additiveExpression_in_relationalExpression4965 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_GE_in_relationalExpression5050 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_OP_LE_in_relationalExpression4996 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_additiveExpression_in_relationalExpression5052 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_additiveExpression_in_relationalExpression4998 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_multiplicativeExpression_in_additiveExpression5140 = new BitSet.fromList([0x1000000000000002,0x0080000000000000]);
+  static BitSet FOLLOW_OP_GT_in_relationalExpression5029 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_OP_PLUS_in_additiveExpression5164 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_additiveExpression_in_relationalExpression5031 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_additiveExpression_in_additiveExpression5167 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_GE_in_relationalExpression5062 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_119_in_additiveExpression5198 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_additiveExpression_in_relationalExpression5064 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_additiveExpression_in_additiveExpression5201 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_multiplicativeExpression_in_additiveExpression5152 = new BitSet.fromList([0x1000000000000002,0x0080000000000000]);
 
-  static BitSet FOLLOW_unaryExpression_in_multiplicativeExpression5290 = new BitSet.fromList([0x0060000000004002]);
+  static BitSet FOLLOW_OP_PLUS_in_additiveExpression5176 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_OP_MUL_in_multiplicativeExpression5310 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_additiveExpression_in_additiveExpression5179 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5312 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_119_in_additiveExpression5210 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_DIV_in_multiplicativeExpression5341 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_additiveExpression_in_additiveExpression5213 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5343 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_unaryExpression_in_multiplicativeExpression5302 = new BitSet.fromList([0x0060000000004002]);
 
-  static BitSet FOLLOW_OP_MOD_in_multiplicativeExpression5372 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_OP_MUL_in_multiplicativeExpression5322 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5374 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5324 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_113_in_unaryExpression5493 = new BitSet.fromList([0x0000001800008200,0x00100000020000C1]);
+  static BitSet FOLLOW_DIV_in_multiplicativeExpression5353 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_primaryExpression_in_unaryExpression5495 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5355 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_primaryExpression_in_unaryExpression5518 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_MOD_in_multiplicativeExpression5384 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_116_in_primaryExpression5556 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
+  static BitSet FOLLOW_multiplicativeExpression_in_multiplicativeExpression5386 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_expr_in_primaryExpression5558 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
+  static BitSet FOLLOW_113_in_unaryExpression5505 = new BitSet.fromList([0x0000001800008200,0x00100000020000C1]);
 
-  static BitSet FOLLOW_117_in_primaryExpression5560 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_primaryExpression_in_unaryExpression5507 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_CSS_IDENT_in_primaryExpression5582 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
+  static BitSet FOLLOW_primaryExpression_in_unaryExpression5530 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_116_in_primaryExpression5584 = new BitSet.fromList([0x0000001800008200,0x00320000020000C1]);
+  static BitSet FOLLOW_116_in_primaryExpression5568 = new BitSet.fromList([0x0000001800008200,0x00120000020000C1]);
 
-  static BitSet FOLLOW_args_in_primaryExpression5586 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
+  static BitSet FOLLOW_expr_in_primaryExpression5570 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
 
-  static BitSet FOLLOW_117_in_primaryExpression5589 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_117_in_primaryExpression5572 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_POSITIVE_FLOAT_in_primaryExpression5612 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_CSS_IDENT_in_primaryExpression5594 = new BitSet.fromList([0x0000000000000000,0x0010000000000000]);
 
-  static BitSet FOLLOW_POSITIVE_INT_in_primaryExpression5632 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_116_in_primaryExpression5596 = new BitSet.fromList([0x0000001800008200,0x00320000020000C1]);
 
-  static BitSet FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5654 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_args_in_primaryExpression5598 = new BitSet.fromList([0x0000000000000000,0x0020000000000000]);
 
-  static BitSet FOLLOW_NEGATIVE_INT_in_primaryExpression5674 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_117_in_primaryExpression5601 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_quoted_in_primaryExpression5694 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_FLOAT_in_primaryExpression5624 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_cssident_in_primaryExpression5705 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_POSITIVE_INT_in_primaryExpression5644 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OSM_TAG_in_primaryExpression5718 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5666 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_OR_in_synpred1_MapCSS4531 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_NEGATIVE_INT_in_primaryExpression5686 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_AND_in_synpred2_MapCSS4650 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_quoted_in_primaryExpression5706 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_EQ_in_synpred3_MapCSS4779 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_cssident_in_primaryExpression5717 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_NEQ_in_synpred4_MapCSS4814 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OSM_TAG_in_primaryExpression5730 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_LT_in_synpred5_MapCSS4945 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_OR_in_synpred1_MapCSS4543 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_LE_in_synpred6_MapCSS4978 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_AND_in_synpred2_MapCSS4662 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_GT_in_synpred7_MapCSS5011 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_EQ_in_synpred3_MapCSS4791 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_GE_in_synpred8_MapCSS5044 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_NEQ_in_synpred4_MapCSS4826 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_PLUS_in_synpred9_MapCSS5159 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_LT_in_synpred5_MapCSS4957 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_119_in_synpred10_MapCSS5193 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_LE_in_synpred6_MapCSS4990 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_MUL_in_synpred11_MapCSS5304 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_GT_in_synpred7_MapCSS5023 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_DIV_in_synpred12_MapCSS5335 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_GE_in_synpred8_MapCSS5056 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_OP_MOD_in_synpred13_MapCSS5366 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_OP_PLUS_in_synpred9_MapCSS5171 = new BitSet.fromList([0x0000000000000002]);
 
-  static BitSet FOLLOW_113_in_synpred14_MapCSS5488 = new BitSet.fromList([0x0000000000000002]);
+  static BitSet FOLLOW_119_in_synpred10_MapCSS5205 = new BitSet.fromList([0x0000000000000002]);
+
+  static BitSet FOLLOW_OP_MUL_in_synpred11_MapCSS5316 = new BitSet.fromList([0x0000000000000002]);
+
+  static BitSet FOLLOW_DIV_in_synpred12_MapCSS5347 = new BitSet.fromList([0x0000000000000002]);
+
+  static BitSet FOLLOW_OP_MOD_in_synpred13_MapCSS5378 = new BitSet.fromList([0x0000000000000002]);
+
+  static BitSet FOLLOW_113_in_synpred14_MapCSS5500 = new BitSet.fromList([0x0000000000000002]);
 
 
 

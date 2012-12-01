@@ -429,8 +429,12 @@ type_selector
 	;
 
 declaration_block
-	:  LBRACE declarations RBRACE -> ^(DECLARATION_BLOCK declarations)
-	|  LBRACE RBRACE              -> ^(DECLARATION_BLOCK)
+    /*
+     * we set the token text to '{' in order to keep track of line and 
+     * column informatin. 
+     */
+	:  l=LBRACE declarations RBRACE -> ^(DECLARATION_BLOCK[$l] declarations)
+	|  l=LBRACE RBRACE              -> ^(DECLARATION_BLOCK[$l])
 	;
 
 declarations
