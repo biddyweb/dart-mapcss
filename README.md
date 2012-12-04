@@ -11,7 +11,7 @@ Example style sheets used in editors and renderers of the OSM project can be fou
 
 # MapCSS Workbench
 
-See the [MapCSS Workbench](http://gubaer.github.com/dart-mapcss/web/index.html) in action (**NOTE: currently alpha**).
+See the [MapCSS Workbench](http://gubaer.github.com/dart-mapcss/web/index.html) in action ( **NOTE: currently alpha** ).
 
 # Compatibility 
 
