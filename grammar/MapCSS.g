@@ -132,6 +132,7 @@ RGBA: ('r' | 'R') ('g' | 'G') ('b' | 'B') ('a' | 'A');
 ROLE: ('r' | 'R') ('o' | 'O') ('l' | 'L') ('e' | 'E');
 INDEX: ('i' | 'I') ('n' | 'N') ('d' | 'D') ('e' | 'E') ('x' | 'X');
 EVAL: ('e' | 'E') ('v' | 'V') ('a' | 'A') ('l' | 'L');
+LIST: ('l' | 'L') ('i' | 'I') ('s' | 'S') ('t' | 'T');
 IMPORT: '@' ('i' | 'I') ('m' | 'M') ('p' | 'P') ('o' | 'O')('r' | 'R') ('t' | 'T');
 
 fragment HWS: (' ' | '\t' | '\f');
@@ -452,7 +453,9 @@ declaration_property
 declaration_value
 	: single_value
 	| single_value  ',' single_value (',' single_value)* -> ^(VALUE_LIST single_value*)
-	| EVAL  '(' expr ')'  -> ^(EVAL_CALL expr)					
+	| EVAL  '(' expr ')'  -> ^(EVAL_CALL expr)	
+	| LIST  '(' single_value (',' single_value)* ')' -> 	^(VALUE_LIST single_value*)	
+	| LIST  '(' ')' -> ^(VALUE_LIST)
 	;
  
 

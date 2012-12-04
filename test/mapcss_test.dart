@@ -480,5 +480,29 @@ main() {
        });
      });     
   });  
+  
+  group("list(..) values - ", () {
+    test("list of ints", () {
+      expectParseOK("""
+      node {
+         l: list(1,2,3,3);
+      }
+      """);
+    });
+    test("list of strings", () {
+      expectParseOK("""
+      node {
+         l: list("a","b","c","d");
+      }
+      """);
+    });
+    solo_test("empty list", () {
+      expectParseOK("""
+      node {
+         l: list();
+      }
+      """);
+    });
+  });
  
 }
