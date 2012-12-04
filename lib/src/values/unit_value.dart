@@ -1,6 +1,9 @@
 part of mapcss;
 
-class UnitValue {
+/**
+ * Represents a point,a pixel or a percent value
+ */
+class UnitValue implements Value{
   static const PT = 0;
   static const PX = 1;
   static const PROZENT = 2;

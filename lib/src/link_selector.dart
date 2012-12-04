@@ -6,17 +6,16 @@ abstract class LinkSelector extends AttributeSelector {
   LinkSelector(op, this._rhs) : super(op){
     assert(_rhs != null);
   }
-  get _rhsAsSource =>  (_rhs is num) ? _rhs.toString() : _rhs.toSource();
 }
 
 class RoleSelector extends LinkSelector {
   RoleSelector(Operator op, rhs) : super(op, rhs);
-  toSource() => "[role ${_op.toSource()} ${_rhsAsSource} ]";
+  toSource() => "[role ${_op.toSource()} ${_rhs.toSource()} ]";
 }
   
 class IndexSelector extends LinkSelector {
   IndexSelector(Operator op, rhs) : super(op, rhs) {
-    assert(_rhs is num);
+    assert(_rhs is NumberValue);
   }  
-  toSource() => "[index ${_op.toSource()} ${_rhsAsSource} ]";
+  toSource() => "[index ${_op.toSource()} ${_rhs.toSource()} ]";
 }

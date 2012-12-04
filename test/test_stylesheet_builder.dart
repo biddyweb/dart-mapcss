@@ -109,7 +109,6 @@ main() {
     ss = new Stylesheet.fromString(styles);
     styles = """node[!'my special tag']{}""";
     ss = new Stylesheet.fromString(styles);
-
     styles = """node[!name]{}""";
     ss = new Stylesheet.fromString(styles);    
   });
@@ -177,6 +176,14 @@ way.myclass|z12-[highway='residential'] node {
     var ss = new Stylesheet.fromString(styles);
   });
   
+  test("increment", () {
+    var styles = """node{a: +1;}""";
+    var ss = new Stylesheet.fromString(styles);
+    var v = ss.rules[0].declarationBlock[0].value;
+    expect(v is IncrementValue, true);
+    expect(v.value, 1);
+  });
+  
   
   /* ---------------------------- child combinator --------------------------- */
   group("child combinator", () {
@@ -210,8 +217,8 @@ way.myclass|z12-[highway='residential'] node {
       var rs = ss.rules[0].selectors[0].linkSelectors[0];
       expect(rs  is IndexSelector, true);
       expect(rs.op, Operator.LE);
-      expect(rs.rhs is num, true);
-      expect(rs.rhs, 5);
+      expect(rs.rhs is NumberValue, true);
+      expect(rs.rhs, new NumberValue(5));
     });
    
   });
@@ -285,5 +292,132 @@ way.myclass|z12-[highway='residential'] node {
       expect(s.layerIdSelector,isNotNull);
       expect(s.layerIdSelector.layer, "layer_1");
     });
+  });
+  
+  /* ---------------------------- expressions  --------------------------- */
+  group("expression -", () {
+    group("arithmetic -", () {
+      test("add", () {
+        var ss, styles;
+        styles = """
+        node{
+          e: eval(1 + 2);
+        }
+        """;
+        ss = new Stylesheet.fromString(styles);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v is BinaryExpression, true);
+        expect(v.op, Operator.PLUS);
+        expect(v.lhs, new NumberValue(1));
+        expect(v.rhs, new NumberValue(2));
+      });
+      test("minus", () {
+        var ss, styles;
+        styles = """
+        node{
+          e: eval(1 - 2);
+        }
+        """;
+        ss = new Stylesheet.fromString(styles);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v is BinaryExpression, true);
+        expect(v.op, Operator.MINUS);
+        expect(v.lhs, new NumberValue(1));
+        expect(v.rhs, new NumberValue(2));
+      });
+      test("mult", () {
+        var ss, styles;
+        styles = """
+        node{
+          e: eval(1 * 2);
+        }
+        """;
+        ss = new Stylesheet.fromString(styles);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v is BinaryExpression, true);
+        expect(v.op, Operator.MULT);
+        expect(v.lhs, new NumberValue(1));
+        expect(v.rhs, new NumberValue(2));
+      });
+      test("div", () {
+        var ss, styles;
+        styles = """
+        node{
+          e: eval(1 / 2);
+        }
+        """;
+        ss = new Stylesheet.fromString(styles);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v is BinaryExpression, true);
+        expect(v.op, Operator.DIV);
+        expect(v.lhs, new NumberValue(1));
+        expect(v.rhs, new NumberValue(2));
+      });
+      test("complex", () {
+        var ss, styles;
+        styles = """
+        node{
+          e: eval(1 + 2 + 3 / 4.3 * 7 - (4 + 888));
+        }
+        """;
+        ss = new Stylesheet.fromString(styles);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v is BinaryExpression, true);
+        expect(v.op, Operator.PLUS);
+        expect(v.toSource(), "(1 + (2 + ((3 / (4.3 * 7)) - (4 + 888))))");
+      });      
+    });
+    
+    group("logic -", () {
+      run(stylesheet, expected) {
+        var ss, styles;
+        ss = new Stylesheet.fromString(stylesheet);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v.toSource(), expected);
+      }            
+      test("and", () {
+        run("""node{e: eval(a && b);}""", "(a && b)");
+      });
+      test("or", () {
+        run("""node{e: eval(a || b);}""", "(a || b)");
+      });
+      test("eq", () {
+        run("""node{e: eval(a = b);}""", "(a = b)");
+      });
+      test("neq", () {
+        run("""node{e: eval(a != b);}""", "(a != b)");
+      });
+      test("gt", () {
+        run("""node{e: eval(a > b);}""", "(a > b)");
+      });
+      test("ge", () {
+        run("""node{e: eval(a >= b);}""", "(a >= b)");
+      });
+      test("lt", () {
+        run("""node{e: eval(a < b);}""", "(a < b)");
+      });
+      test("le", () {
+        run("""node{e: eval(a <= b);}""", "(a <= b)");
+      });
+      test("complex", () {
+        run("""node{e: eval((a = b) || (1 < 'lsdf') && z);}""", '((a = b) || ((1 < "lsdf") && z))');
+      });
+    });
+    
+    group("function -", () {
+      run(stylesheet, expected) {
+        var ss, styles;
+        ss = new Stylesheet.fromString(stylesheet);
+        var v = ss.rules[0].declarationBlock[0].value;
+        expect(v.toSource(), expected);
+      }            
+      test("one function", () {
+        run("""node{e: eval(min(1,2));}""", "min(1, 2)");
+      });
+      test("nested function", () {
+        run("""node{e: eval(min( first("a", "b"), second(1,2)));}""", """min(first("a", "b"), second(1, 2))""");
+      });
+    });
+    
   });
 }

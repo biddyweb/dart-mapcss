@@ -1,8 +1,7 @@
 library mapcss;
-import "package:dartlr/dartlr.dart";
-export "package:dartlr/dartlr.dart";
+import "package:dartlr/dartlr_client.dart";
+export "package:dartlr/dartlr_client.dart";
 import "package:unittest/unittest.dart";
-import "dart:io";
 
 part "src/generated/MapCSSParser.dart";
 part "src/generated/MapCSSLexer.dart";
@@ -35,7 +34,14 @@ part "src/selector.dart";
 part "src/link_selector.dart";
 part "src/pseudo_class_selector.dart";
 part "src/layer_id_selector.dart";
+part "src/values/number_value.dart";
+part "src/values/value.dart";
+part "src/expression.dart";
+part "src/values/increment_value.dart";
 
 part "src/test/test_private.dart";
+
+part "src/antlr/tree_iterator.dart";
+part "src/antlr/declaration_checker.dart";
 
 

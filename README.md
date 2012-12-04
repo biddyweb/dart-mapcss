@@ -9,6 +9,10 @@ Example style sheets used in editors and renderers of the OSM project can be fou
 [here](http://code.google.com/p/kothic/source/browse/#hg%2Fsrc%2Fstyles) and 
 [here](http://josm.openstreetmap.de/wiki/Styles).
 
+# MapCSS Workbench
+
+See the [MapCSS Workbench](http://gubaer.github.com/dart-mapcss/web/index.html) in action ( **NOTE: currently alpha** ).
+
 # Compatibility 
 
  - Some editors/renderers accept raw content as declaration values. Sample styles sheet include for instance

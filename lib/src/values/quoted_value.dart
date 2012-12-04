@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * Represents a quoted string in a MapCSS stylesheet
  */
-class QuotedValue {
+class QuotedValue implements Value {
   final String value;
   const QuotedValue(this.value);
   bool operator ==(other) {

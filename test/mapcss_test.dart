@@ -49,7 +49,6 @@ main() {
      expectParseOK("*{}");
      expectParseOK("canvas{}");
      expectParseOK("meta{}");     
-     expectParseNOK("nosuchtype{}");
   });
   
   test("zoom selectors", () {
@@ -143,6 +142,14 @@ main() {
       expectParseOK("node[-mytag]{}");
       expectParseOK("node[my:tag]{}");
       expectParseOK("node[mytag]{}");
+    });
+    solo_test("exists tag - quotes", () {
+      expectParseOK("""node['highway']{}""");
+      expectParseOK("""node[!'highway']{}""");
+      expectParseOK("""node['highway' ?]{}""");
+      expectParseOK("""node["highway"]{}""");
+      expectParseOK("""node[!"highway"]{}""");
+      expectParseOK("""node["highway"?]{}""");
     });
     
     test("not exists tag", () {
@@ -473,11 +480,29 @@ main() {
        });
      });     
   });  
- 
-  solo_test("accept URL values ", () {
-    expectParseOK("""node{
-        p1:abc*dde;
-    }""");
+  
+  group("list(..) values - ", () {
+    test("list of ints", () {
+      expectParseOK("""
+      node {
+         l: list(1,2,3,3);
+      }
+      """);
+    });
+    test("list of strings", () {
+      expectParseOK("""
+      node {
+         l: list("a","b","c","d");
+      }
+      """);
+    });
+    solo_test("empty list", () {
+      expectParseOK("""
+      node {
+         l: list();
+      }
+      """);
+    });
   });
  
 }

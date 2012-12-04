@@ -3,7 +3,7 @@ part of mapcss;
 /**
  * Represents an regular expression value in a MapCSS stylesheet
  */
-class RegExpValue {
+class RegExpValue implements Value {
   final String value;
   const RegExpValue(this.value);
   bool operator ==(other) {

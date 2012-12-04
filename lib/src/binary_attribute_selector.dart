@@ -10,16 +10,15 @@ class BinaryAttributeSelector extends AttributeSelector  implements SubSelector{
   var _lhs;
   var _rhs;
   
-  /// [_attribute] is either a [Ident] or a [Quoted], otherwise an [AssertionError]
+  /// [_lhs] is either a [Ident] or a [Quoted], otherwise an [AssertionError]
   /// is thrown.
-  /// [_value] is either a [num], an [Ident] or a [Quoted], otherwise an 
-  /// [AssertionError] is thrown
+  /// [_rhs] is a [Value] (must not be null)
   
   BinaryAttributeSelector(this._lhs, this._rhs, [op=Operator.EQ]) : super(op){
     assert(_lhs != null);
     assert(_lhs is IdentValue || attribute is QuotedValue);    
     assert(_rhs != null);
-    assert(value is num || value is IdentValue || value is QuotedValue || value is RegExpValue);
+    assert(value is Value);
     assert(_op != null);
   }
   
@@ -29,12 +28,16 @@ class BinaryAttributeSelector extends AttributeSelector  implements SubSelector{
   /// the right hand side. Either a [int], [double], [Ident], or [Quoted]
   get value => _rhs;
   
+  /// synonym for [attribute]
+  get lhs => _lhs;
+  
+  /// synonym for [value]
+  get rhs => _rhs;
+  
   bool operator ==(other) {
     if (other is! BinaryAttributeSelector) return false;
     return _lhs == other._lhs && _rhs == other._rhs && _op == other._op;         
   }     
-  
-  _valueAsString() => value is num ? _rhs.toString() : _rhs.toSource();
-  
-  String toSource() => "[${_lhs.toSource()} ${_op.toSource()} ${_valueAsString()}]";
+    
+  String toSource() => "[${_lhs.toSource()} ${_op.toSource()} ${_rhs.toSource()}]";
 }
