@@ -2,30 +2,8 @@
  * app specific styles
  */
 
-
-.parse-result {
-   padding: 1px;
-   height: 2cm;   
-}
-
-.parse-NOK {
-   border-color: red;
-   border-style: solid;
-   border-width: 1pt;
-   
-   color: red;
-   font-weight: bold;
-   
-   background: #FFBFBF;   
-}
- 
-.parse-OK {
-   border-color: #164316;
-   border-style: solid;
-   border-width: 1pt;
-   
-   color: #164316;
-   font-weight: bold;
-   
-   background: #99CC99;     
-}
+ #editor-frame {
+    border-color: gray;
+    border-width: 1pt;
+    border-style: solid;  
+ }

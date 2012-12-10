@@ -12,7 +12,7 @@
     <script src="js/codemirror.js"></script>
     <link rel="stylesheet" href="css/codemirror.css"/>
     <script src="js/mode/css/css.js"></script>
-    <link rel="stylesheet" href="css/themes/twilight.css"/>
+    <link rel="stylesheet" href="css/themes/mapcss.css"/>
     <link rel="stylesheet" href="css/mapcss_workbench.css"/>
     
        
@@ -29,7 +29,7 @@
           <a class="brand" href="#">MapCSS Workbench (alpha)</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="index.html">Home</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="https://github.com/Gubaer/dart-mapcss">GitHub</a></li>
             </ul>
@@ -39,31 +39,18 @@
     </div>
 
     <div class="container">
-    <textarea id="editor"></textarea>    
+    <div id="editor-frame">
+      <textarea id="editor"></textarea>
+    </div>    
     <div class="btn-group">
-      <button id="btnParse" class="btn">Parse</button>
+      <button id="btnParse" class="btn btn-primary">Parse</button>
     </div>
-    <div id="status" class="parse-result"></div>
-    
+    <div id="status"></div>    
     </div> <!-- /container -->
+    
+    
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script>    
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"),{
-      theme: "twilight",
-      lineNumbers: true,
-      autofocus:  true
-    });
-    editor.setValue(
-        "/*\n"
-      + " * sample MapCSS stylesheet\n"
-      + " */\n"
-      + "way[highway=residential] {\n"
-      + "   line-color: red;\n"
-      + "   line-width: 5pt;\n"
-      + "}\n"
-   );
-    </script>    
     <script type="application/dart" src="dart/mapcss_workbench.dart"></script>
     <script src="https://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
   </body>
