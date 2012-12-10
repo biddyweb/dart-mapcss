@@ -22,7 +22,6 @@ part "src/class_selector.dart";
 part "src/descendant_combinator.dart";
 part "src/child_combinator.dart";
 part "src/parent_combinator.dart";
-part "src/builder.dart";
 
 part "src/values/ident_value.dart";
 part "src/values/quoted_value.dart";
@@ -41,7 +40,5 @@ part "src/values/increment_value.dart";
 
 part "src/test/test_private.dart";
 
-part "src/antlr/tree_iterator.dart";
-part "src/antlr/declaration_checker.dart";
 
 
