@@ -11,25 +11,41 @@ parse(source) {
   );     
   var ret = parser.stylesheet();
   var len = parser.reportedErrors.length;
+  query("#status").classes.removeAll(["alert", "alert-success", "alert-error"]);
   if (len > 0){    
     String msg = parser.reportedErrors.reduce("", (v, e) => "$v\n$e");
     query("#status")
-      ..innerHTML = msg
-      ..classes.add("parse-NOK")
-      ..classes.remove("parse-OK");
-    
+      ..innerHTML = "Failed to parse stylesheet. Error messages:</br>$msg"
+      ..classes.add("alert")
+      ..classes.add("alert-error");    
   }  else {
     query("#status")
-      ..innerHTML = "OK"
-      ..classes.add("parse-OK")
-      ..classes.remove("parse-NOK");
+      ..innerHTML = "Stylessheet sucessfully parsed."
+      ..classes.add("alert")
+      ..classes.add("alert-success");
   }
 }
 
 var editor;
 initEditor() {
   js.scoped(() {
-    editor = js.context.editor;
+    editor = js.$experimentalFunctionProxy(js.context.CodeMirror).fromTextArea(
+        query("#editor"),
+        js.map({          
+          "theme": "mapcss",
+          "lineNumbers": true,
+          "autofocus":  true
+        })
+    );
+    editor.setValue(
+        "/*\n"
+        " * sample MapCSS stylesheet\n"
+        " */\n"
+        "way[highway=residential] {\n"
+        "   line-color: red;\n"
+        "   line-width: 5pt;\n"
+        "}\n"
+   );
     js.retain(editor);
   });
 }

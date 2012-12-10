@@ -10,18 +10,17 @@ authors:
 - Karl Guggisberg <karl.guggisberg@guggis.ch>
  
 dependencies:
-  unittest:
-    sdk: unittest
-    
-  args:
-    sdk:
-      args
-      
+  unittest: any
+  args: any
+  js:
+     # patched js-interop
+     git:
+        url: git://github.com/Gubaer/js-interop
+        ref: function-proxy
+        
   dartlr:
     git: 
       url: git://github.com/tiagomazzutti/dartlr.git
-      #url: git://github.com/Gubaer/dartlr.git
-      #ref: fix-bug-in-syntactic-predicates
           
       
     
