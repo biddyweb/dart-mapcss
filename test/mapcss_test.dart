@@ -1,5 +1,6 @@
 library mapcss_test;
 
+import "package:dartlr/dartlr.dart";
 import "package:unittest/unittest.dart";
 import "package:mapcss/mapcss.dart";
 
@@ -143,7 +144,7 @@ main() {
       expectParseOK("node[my:tag]{}");
       expectParseOK("node[mytag]{}");
     });
-    solo_test("exists tag - quotes", () {
+    test("exists tag - quotes", () {
       expectParseOK("""node['highway']{}""");
       expectParseOK("""node[!'highway']{}""");
       expectParseOK("""node['highway' ?]{}""");
@@ -496,11 +497,19 @@ main() {
       }
       """);
     });
-    solo_test("empty list", () {
+    test("empty list", () {
       expectParseOK("""
       node {
          l: list();
       }
+      """);
+    });
+  });
+  
+  group("unicode names", () {
+    test("- accept an tag name in russian", () {
+      expectParseOK("""
+      node[name!="москва"]{}
       """);
     });
   });

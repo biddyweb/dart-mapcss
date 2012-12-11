@@ -12,12 +12,12 @@ authors:
 dependencies:
   unittest: any
   args: any
-  js:
-     # patched js-interop
-     git:
-        url: git://github.com/Gubaer/js-interop
-        ref: function-proxy
-        
+  js: 
+    git:
+       url: git://github.com/dart-lang/js-interop
+  
   dartlr:
     git: 
       url: git://github.com/tiagomazzutti/dartlr.git
+      
+      

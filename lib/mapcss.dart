@@ -1,6 +1,5 @@
 library mapcss;
 import "package:dartlr/dartlr_client.dart";
-export "package:dartlr/dartlr_client.dart";
 import "package:unittest/unittest.dart";
 
 part "src/generated/MapCSSParser.dart";

@@ -1,4 +1,4 @@
-
+import "package:dartlr/dartlr.dart";
 import "package:mapcss/mapcss.dart";
 import "package:args/args.dart";
 import "dart:io";
@@ -80,8 +80,10 @@ class AstDumper {
    _parseTree(path) {
      assert(path != null);
      ANTLRFileStream stream = new ANTLRFileStream(path);
+     //TraceDebugEventListener listener = new TraceDebugEventListener();
      var parser = new MapCSSParser(
          new CommonTokenStream(new MapCSSLexer(stream))
+         //, listener
      );     
      var ret = parser.stylesheet();
      var len = parser.reportedErrors.length;
@@ -95,7 +97,9 @@ class AstDumper {
    }
    
    dump() {
+     print("parsing ...");
      var tree = _parseTree(grammar);
+     print("parsing done");
      _walk(tree);
    }
 }

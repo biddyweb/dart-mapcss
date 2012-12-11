@@ -41,7 +41,7 @@ grammar MapCSS;
  
 options {
   language = Dart;
-  output=AST;
+  output=AST; 
 }
 
 tokens {
@@ -121,6 +121,11 @@ tokens {
 }
 
 @parser::members {
+	var errors = [];
+	reportError(e, [st=null]) {
+	   errors.add(e);
+	   super.reportError(e,st);
+	}
 }
 
 fragment EBACKSLASH: '\\\\';
@@ -155,7 +160,7 @@ fragment NMSTART: 'a'..'z' | 'A'..'Z' | '_' | NONASCII;
 fragment NMCHAR: 'a'..'z' | 'A'..'Z' | '_' | '-' | NONASCII;
 
 /* helpers */
-fragment NCOMPONENT: (CHAR | '_') (CHAR | DIGIT | '_' | '-')*;
+fragment NCOMPONENT: (NONASCII | CHAR | '_') (NONASCII | CHAR | DIGIT | '_' | '-')*;
 fragment TAGSEPARATOR: (':') | ('.');
 
 /* context specific lexer for identifiers. Recognizes CSS idents and OSM tag names */
@@ -327,7 +332,7 @@ rule
 	;
   
 selector
-	: simple_selector                     -> simple_selector
+	: s1=simple_selector                     -> simple_selector
 	| simple_selector simple_selector     -> ^(DESCENDANT_COMBINATOR simple_selector+)
 	| simple_selector '>' link_selector*  simple_selector -> ^(CHILD_COMBINATOR simple_selector+ link_selector*)
 	| simple_selector '<' simple_selector -> ^(PARENT_COMBINATOR simple_selector+)
@@ -336,7 +341,7 @@ selector
 link_selector
 	: LBRACKET ROLE binary_operator predicate_primitive RBRACKET  -> ^(ROLE_SELECTOR binary_operator predicate_primitive)
 	| LBRACKET INDEX op=int_operator v=POSITIVE_INT RBRACKET   -> ^(INDEX_SELECTOR int_operator VALUE_INT[v])
-	;
+	;	
 
 layer_id_selector
 	: '::' k=CSS_IDENT -> LAYER_ID_SELECTOR[$k]
@@ -352,6 +357,12 @@ simple_selector
 	: type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?
 	     -> ^(SIMPLE_SELECTOR type_selector class_selector? zoom_selector? attribute_selector* pseudo_class_selector* layer_id_selector?)
 	;
+	catch [e] {
+	   print("simple selector catch");
+	   print(e);
+	   throw e;
+	}
+	
 
 zoom_selector
 	: v=RANGE -> ^(ZOOM_SELECTOR VALUE_INT[_zoomLower($v)] VALUE_INT[_zoomUpper($v)])

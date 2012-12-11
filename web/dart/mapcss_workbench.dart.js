@@ -232,7 +232,7 @@ $$.ConstantMap = {"":"Object;length?,_jsObject,_lib0_keys?",
 },
  forEach$1: function(f) {
   var t1 = this._lib0_keys;
-  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.ConstantMap_forEach_anon(this, f));
+  $.getInterceptor$JSArray(t1).forEach$1(t1, new $.ConstantMap_forEach_anon(f, this));
 },
  get$keys: function() {
   return this._lib0_keys;
@@ -1112,7 +1112,7 @@ $$._HashMapImpl = {"":"Object;_keys?,_values,_loadLimit,_numberOfEntries,_number
   t1 = {};
   list = $.List_List(this.get$length());
   t1.i_10 = 0;
-  this.forEach$1(new $._HashMapImpl_keys_anon(list, t1));
+  this.forEach$1(new $._HashMapImpl_keys_anon(t1, list));
   return list;
 },
  get$values: function() {
@@ -1120,7 +1120,7 @@ $$._HashMapImpl = {"":"Object;_keys?,_values,_loadLimit,_numberOfEntries,_number
   t1 = {};
   list = $.List_List(this.get$length());
   t1.i_1 = 0;
-  this.forEach$1(new $._HashMapImpl_values_anon(list, t1));
+  this.forEach$1(new $._HashMapImpl_values_anon(t1, list));
   return list;
 },
  containsKey$1: function(key) {
@@ -1294,6 +1294,9 @@ $$.Object = {"":";",
  },
  maybeCloseWorker$0: function() {
   return this.noSuchMethod$1($.createInvocationMirror("maybeCloseWorker", "maybeCloseWorker$0", 0, [], []));
+ },
+ append$1: function($0) {
+  return this.noSuchMethod$1($.createInvocationMirror("append", "append$1", 0, [$0], []));
  },
  getToken$1: function($0) {
   return this.noSuchMethod$1($.createInvocationMirror("getToken", "getToken$1", 0, [$0], []));
@@ -2237,6 +2240,9 @@ $$.Object = {"":";",
  set$tokenStartIndex: function($0) {
   return this.noSuchMethod$1($.createInvocationMirror("tokenStartIndex=", "tokenStartIndex=$1", 2, [$0], []));
  },
+ set$id: function($0) {
+  return this.noSuchMethod$1($.createInvocationMirror("id=", "id=$1", 2, [$0], []));
+ },
  set$type: function($0) {
   return this.noSuchMethod$1($.createInvocationMirror("type=", "type=$1", 2, [$0], []));
  },
@@ -2309,6 +2315,9 @@ $$.DoubleLinkedQueueEntry = {"":"Object;_previous=,_next=,_element?",
   this._previous = p;
   p.set$_next(this);
   n.set$_previous(this);
+},
+ append$1: function(e) {
+  $.DoubleLinkedQueueEntry$(e)._link$2(this, this._next);
 },
  prepend$1: function(e) {
   $.DoubleLinkedQueueEntry$(e)._link$2(this._previous, this);
@@ -4346,7 +4355,7 @@ $$._Manager = {"":"Object;nextIsolateId=,currentManagerId?,nextManagerId,current
 }
 };
 
-$$._IsolateContext = {"":"Object;id?,ports?,isolateStatics",
+$$._IsolateContext = {"":"Object;id=,ports?,isolateStatics",
  initGlobals$0: function() {
   $initGlobals(this);
 },
@@ -4468,6 +4477,9 @@ $$._MainManagerStub = {"":"Object;",
  get$id: function() {
   return 0;
 },
+ set$id: function(i) {
+  throw $.$$throw($.UnimplementedError$(null));
+},
  postMessage$1: function(msg) {
   $globalThis.postMessage(msg);
 }
@@ -4492,7 +4504,7 @@ $$._BaseSendPort = {"":"Object;_lib4_isolateId?",
 
 $$._NativeJsSendPort = {"":"_BaseSendPort;_lib4_receivePort?,_lib4_isolateId",
  send$2: function(message, replyTo) {
-  $._waitForPendingPorts([message, replyTo], new $._NativeJsSendPort_send_anon(this, replyTo, message));
+  $._waitForPendingPorts([message, replyTo], new $._NativeJsSendPort_send_anon(replyTo, this, message));
 },
  operator$eq$1: function(other) {
   return typeof other === 'object' && other !== null && !!other.is$_NativeJsSendPort && $.eqB(this._lib4_receivePort, other._lib4_receivePort);
@@ -4506,7 +4518,7 @@ $$._NativeJsSendPort = {"":"_BaseSendPort;_lib4_receivePort?,_lib4_isolateId",
 
 $$._WorkerSendPort = {"":"_BaseSendPort;_workerId?,_receivePortId,_lib4_isolateId",
  send$2: function(message, replyTo) {
-  $._waitForPendingPorts([message, replyTo], new $._WorkerSendPort_send_anon(replyTo, this, message));
+  $._waitForPendingPorts([message, replyTo], new $._WorkerSendPort_send_anon(replyTo, message, this));
 },
  operator$eq$1: function(other) {
   var t1;
@@ -4774,7 +4786,7 @@ $$._Copier = {"":"_MessageTraverser0;",
     return t2;
   t1.copy_10 = $.Map_Map();
   $.indexSet(this._lib4_visited, map, t1.copy_10);
-  map.forEach$1(new $._Copier_visitMap_anon(this, t1));
+  map.forEach$1(new $._Copier_visitMap_anon(t1, this));
   return t1.copy_10;
 }
 };
@@ -4989,7 +5001,7 @@ $$._Timer = {"":"Object;_once,_handle",
   this._handle = $._window().setInterval$2(new $.anon5(this, callback), milliSeconds);
 },
  _Timer$2: function(milliSeconds, callback) {
-  this._handle = $._window().setTimeout$2(new $.anon4(callback, this), milliSeconds);
+  this._handle = $._window().setTimeout$2(new $.anon4(this, callback), milliSeconds);
 }
 };
 
@@ -5650,7 +5662,7 @@ $$._JsonStringifier = {"":"Object;sb?,seen",
     t3 = $.getInterceptor$JSArray(t2);
     t3.add$1(t2, "{");
     t1.first_10 = true;
-    object.forEach$1(new $._JsonStringifier_stringifyJsonValue_anon(t1, this));
+    object.forEach$1(new $._JsonStringifier_stringifyJsonValue_anon(this, t1));
     t3.add$1(t2, "}");
     t2 = this.seen;
     if (0 >= t2.length)
@@ -5744,7 +5756,7 @@ $$._JsonStringifier = {"":"Object;sb?,seen",
                                       t3 = $.getInterceptor$JSArray(t2);
                                       t3.add$1(t2, "{");
                                       t1.first_10 = true;
-                                      object.forEach$1(new $._JsonStringifier_stringifyJsonValue_anon(t1, this));
+                                      object.forEach$1(new $._JsonStringifier_stringifyJsonValue_anon(this, t1));
                                       t3.add$1(t2, "}");
                                       t2 = this.seen;
                                       if (0 >= t2.length)
@@ -5803,7 +5815,7 @@ $$.AudioContextEvents = {"":"Events;_ptr",
 $$.ScriptProcessorNodeEvents = {"":"Events;_ptr"
 };
 
-$$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output",
+$$.MapCSSParser = {"":"Parser;dfas,_adaptor,errors,_input,state,_reportedErros,_output",
  get$treeAdaptor: function() {
   return this._adaptor;
 },
@@ -5813,8 +5825,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
  get$recognizerClassName: function() {
   return "MapCSSParser";
 },
+ reportError$2: function(e, st) {
+  this.errors.push(e);
+  $.BaseRecognizer.prototype.reportError$2.call(this, e, st);
+},
+ reportError$1: function(e) {
+  return this.reportError$2(e, null);
+},
  stylesheet$0: function(exception) {
-  var retval, t1, root_0, EOF2, entry1, stream_EOF, stream_entry, alt1, LA1_0, root_1, re, st, t2;
+  var retval, t1, root_0, EOF2, entry1, stream_EOF, stream_entry, alt1, LA1_0, root_1, re, st, t2, t3;
   retval = $.MapCSSParser_stylesheet_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -5888,10 +5907,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -5900,7 +5922,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  entry$0: function(exception) {
-  var retval, t1, root_0, rule3, import_statement4, alt2, LA2_0, nvae, re, st, t2;
+  var retval, t1, root_0, rule3, import_statement4, alt2, LA2_0, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_entry_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -5965,10 +5987,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -5977,7 +6002,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  rule$0: function(exception) {
-  var retval, t1, root_0, char_literal6, char_literal8, selector5, selector7, declaration_block9, stream_119, stream_selector, stream_declaration_block, alt3, LA3_0, LA3_1, alt4, LA4_0, root_1, re, st, t2;
+  var retval, t1, root_0, char_literal6, char_literal8, selector5, selector7, declaration_block9, stream_119, stream_selector, stream_declaration_block, alt3, LA3_0, LA3_1, alt4, LA4_0, root_1, re, st, t2, t3;
   retval = $.MapCSSParser_rule_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -6108,10 +6133,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6120,21 +6148,21 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  selector$0: function(exception) {
-  var retval, t1, root_0, char_literal14, char_literal18, simple_selector10, simple_selector11, simple_selector12, simple_selector13, link_selector15, simple_selector16, simple_selector17, simple_selector19, stream_OP_GT, stream_OP_LT, stream_simple_selector, stream_link_selector, alt6, root_1, alt5, LA5_0, root_10, root_11, re, st, t2;
+  var retval, t1, root_0, char_literal13, char_literal17, s1, simple_selector10, simple_selector11, simple_selector12, link_selector14, simple_selector15, simple_selector16, simple_selector18, stream_OP_GT, stream_OP_LT, stream_simple_selector, stream_link_selector, alt6, root_1, alt5, LA5_0, root_10, root_11, re, st, t2, t3;
   retval = $.MapCSSParser_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  char_literal14 = null;
-  char_literal18 = null;
+  char_literal13 = null;
+  char_literal17 = null;
+  s1 = null;
   simple_selector10 = null;
   simple_selector11 = null;
   simple_selector12 = null;
-  simple_selector13 = null;
-  link_selector15 = null;
+  link_selector14 = null;
+  simple_selector15 = null;
   simple_selector16 = null;
-  simple_selector17 = null;
-  simple_selector19 = null;
+  simple_selector18 = null;
   stream_OP_GT = $.RewriteRuleTokenStream$(this._adaptor, "token OP_GT", null);
   stream_OP_LT = $.RewriteRuleTokenStream$(this._adaptor, "token OP_LT", null);
   stream_simple_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule simple_selector", null);
@@ -6144,8 +6172,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     alt6 = $.index(this.dfas, "dfa6").predict$1(this.get$input());
     switch (alt6) {
       case 1:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2775());
-        simple_selector10 = this.simple_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2777());
+        s1 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6155,7 +6183,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector10.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, s1.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6169,7 +6197,20 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2804());
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2806());
+        simple_selector10 = this.simple_selector$0();
+        t1 = this.state;
+        t1.set$fsp($.sub(t1.get$fsp(), 1));
+        t1 = this.state;
+        if (t1.get$failed() === true) {
+          t1 = retval;
+          return t1;
+        }
+        if ($.eqB(t1.get$backtracking(), 0)) {
+          t1 = stream_simple_selector;
+          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector10.get$tree());
+        }
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2808());
         simple_selector11 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
@@ -6181,19 +6222,6 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
           $.getInterceptor$JSArray(t1).add$1(t1, simple_selector11.get$tree());
-        }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2806());
-        simple_selector12 = this.simple_selector$0();
-        t1 = this.state;
-        t1.set$fsp($.sub(t1.get$fsp(), 1));
-        t1 = this.state;
-        if (t1.get$failed() === true) {
-          t1 = retval;
-          return t1;
-        }
-        if ($.eqB(t1.get$backtracking(), 0)) {
-          t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector12.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6215,8 +6243,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2824());
-        simple_selector13 = this.simple_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2826());
+        simple_selector12 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6226,9 +6254,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector13.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector12.get$tree());
         }
-        char_literal14 = this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_selector2826());
+        char_literal13 = this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_selector2828());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6236,7 +6264,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_GT;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal14);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal13);
         }
         $loop5$1:
           do {
@@ -6246,8 +6274,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
               alt5 = 1;
             switch (alt5) {
               case 1:
-                this.pushFollow$1($.get$MapCSSParser_FOLLOW_link_selector_in_selector2828());
-                link_selector15 = this.link_selector$0();
+                this.pushFollow$1($.get$MapCSSParser_FOLLOW_link_selector_in_selector2830());
+                link_selector14 = this.link_selector$0();
                 t1 = this.state;
                 t1.set$fsp($.sub(t1.get$fsp(), 1));
                 t1 = this.state;
@@ -6257,15 +6285,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
                 }
                 if ($.eqB(t1.get$backtracking(), 0)) {
                   t1 = stream_link_selector;
-                  $.getInterceptor$JSArray(t1).add$1(t1, link_selector15.get$tree());
+                  $.getInterceptor$JSArray(t1).add$1(t1, link_selector14.get$tree());
                 }
                 break;
               default:
                 break $loop5$1;
             }
           } while (true);
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2832());
-        simple_selector16 = this.simple_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2834());
+        simple_selector15 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6275,7 +6303,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector16.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector15.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6300,8 +6328,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2849());
-        simple_selector17 = this.simple_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2851());
+        simple_selector16 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6311,9 +6339,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector17.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector16.get$tree());
         }
-        char_literal18 = this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_selector2851());
+        char_literal17 = this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_selector2853());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6321,10 +6349,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_LT;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal18);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal17);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2853());
-        simple_selector19 = this.simple_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_simple_selector_in_selector2855());
+        simple_selector18 = this.simple_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6334,7 +6362,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_simple_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector19.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, simple_selector18.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6368,10 +6396,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6380,21 +6411,21 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  link_selector$0: function(exception) {
-  var retval, t1, root_0, v, LBRACKET20, ROLE21, RBRACKET24, LBRACKET25, INDEX26, RBRACKET27, op, binary_operator22, predicate_primitive23, stream_LBRACKET, stream_INDEX, stream_POSITIVE_INT, stream_ROLE, stream_RBRACKET, stream_int_operator, stream_predicate_primitive, stream_binary_operator, alt7, LA7_0, LA7_1, nvae, nvae0, root_1, t2, root_10, re, st;
+  var retval, t1, root_0, v, LBRACKET19, ROLE20, RBRACKET23, LBRACKET24, INDEX25, RBRACKET26, op, binary_operator21, predicate_primitive22, stream_LBRACKET, stream_INDEX, stream_POSITIVE_INT, stream_ROLE, stream_RBRACKET, stream_int_operator, stream_predicate_primitive, stream_binary_operator, alt7, LA7_0, LA7_1, nvae, nvae0, root_1, t2, root_10, re, st, t3;
   retval = $.MapCSSParser_link_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   v = null;
-  LBRACKET20 = null;
-  ROLE21 = null;
-  RBRACKET24 = null;
-  LBRACKET25 = null;
-  INDEX26 = null;
-  RBRACKET27 = null;
+  LBRACKET19 = null;
+  ROLE20 = null;
+  RBRACKET23 = null;
+  LBRACKET24 = null;
+  INDEX25 = null;
+  RBRACKET26 = null;
   op = null;
-  binary_operator22 = null;
-  predicate_primitive23 = null;
+  binary_operator21 = null;
+  predicate_primitive22 = null;
   stream_LBRACKET = $.RewriteRuleTokenStream$(this._adaptor, "token LBRACKET", null);
   stream_INDEX = $.RewriteRuleTokenStream$(this._adaptor, "token INDEX", null);
   stream_POSITIVE_INT = $.RewriteRuleTokenStream$(this._adaptor, "token POSITIVE_INT", null);
@@ -6432,7 +6463,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt7) {
       case 1:
-        LBRACKET20 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2873());
+        LBRACKET19 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2875());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6440,9 +6471,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_LBRACKET;
-          $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET20);
+          $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET19);
         }
-        ROLE21 = this.matchSymbol$3(this.get$input(), 84, $.get$MapCSSParser_FOLLOW_ROLE_in_link_selector2875());
+        ROLE20 = this.matchSymbol$3(this.get$input(), 84, $.get$MapCSSParser_FOLLOW_ROLE_in_link_selector2877());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6450,10 +6481,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_ROLE;
-          $.getInterceptor$JSArray(t1).add$1(t1, ROLE21);
+          $.getInterceptor$JSArray(t1).add$1(t1, ROLE20);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_binary_operator_in_link_selector2877());
-        binary_operator22 = this.binary_operator$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_binary_operator_in_link_selector2879());
+        binary_operator21 = this.binary_operator$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6463,10 +6494,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_binary_operator;
-          $.getInterceptor$JSArray(t1).add$1(t1, binary_operator22.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, binary_operator21.get$tree());
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2879());
-        predicate_primitive23 = this.predicate_primitive$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2881());
+        predicate_primitive22 = this.predicate_primitive$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6476,9 +6507,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_primitive;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive23.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive22.get$tree());
         }
-        RBRACKET24 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2881());
+        RBRACKET23 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2883());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6486,7 +6517,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RBRACKET;
-          $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET24);
+          $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET23);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6505,7 +6536,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        LBRACKET25 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2897());
+        LBRACKET24 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2899());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6513,9 +6544,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_LBRACKET;
-          $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET25);
+          $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET24);
         }
-        INDEX26 = this.matchSymbol$3(this.get$input(), 28, $.get$MapCSSParser_FOLLOW_INDEX_in_link_selector2899());
+        INDEX25 = this.matchSymbol$3(this.get$input(), 28, $.get$MapCSSParser_FOLLOW_INDEX_in_link_selector2901());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6523,9 +6554,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_INDEX;
-          $.getInterceptor$JSArray(t1).add$1(t1, INDEX26);
+          $.getInterceptor$JSArray(t1).add$1(t1, INDEX25);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_int_operator_in_link_selector2903());
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_int_operator_in_link_selector2905());
         op = this.int_operator$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
@@ -6538,7 +6569,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_int_operator;
           $.getInterceptor$JSArray(t1).add$1(t1, op.get$tree());
         }
-        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2907());
+        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2909());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6548,7 +6579,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, v);
         }
-        RBRACKET27 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2909());
+        RBRACKET26 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2911());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -6556,7 +6587,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RBRACKET;
-          $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET27);
+          $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET26);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -6588,10 +6619,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6600,17 +6634,17 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  layer_id_selector$0: function(exception) {
-  var retval, t1, root_0, k, string_literal28, stream_CSS_IDENT, stream_123, re, st, t2;
+  var retval, t1, root_0, k, string_literal27, stream_CSS_IDENT, stream_123, re, st, t2, t3;
   retval = $.MapCSSParser_layer_id_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   k = null;
-  string_literal28 = null;
+  string_literal27 = null;
   stream_CSS_IDENT = $.RewriteRuleTokenStream$(this._adaptor, "token CSS_IDENT", null);
   stream_123 = $.RewriteRuleTokenStream$(this._adaptor, "token 123", null);
   try {
-    string_literal28 = this.matchSymbol$3(this.get$input(), 123, $.get$MapCSSParser_FOLLOW_123_in_layer_id_selector2933());
+    string_literal27 = this.matchSymbol$3(this.get$input(), 123, $.get$MapCSSParser_FOLLOW_123_in_layer_id_selector2936());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6618,9 +6652,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_123;
-      $.getInterceptor$JSArray(t1).add$1(t1, string_literal28);
+      $.getInterceptor$JSArray(t1).add$1(t1, string_literal27);
     }
-    k = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2937());
+    k = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2940());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6653,10 +6687,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6665,15 +6702,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  int_operator$0: function(exception) {
-  var retval, t1, root_0, set29, mse, re, st, t2;
+  var retval, t1, root_0, set28, mse, re, st, t2, t3;
   retval = $.MapCSSParser_int_operator_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  set29 = null;
+  set28 = null;
   try {
     root_0 = this._adaptor.nil$0();
-    set29 = this.get$input().LT$1(1);
+    set28 = this.get$input().LT$1(1);
     if (!$.eqB(this.get$input().LA$1(1), 46))
       t1 = $.geB(this.get$input().LA$1(1), 48) && $.leB(this.get$input().LA$1(1), 51) || $.eqB(this.get$input().LA$1(1), 57);
     else
@@ -6682,7 +6719,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       this.get$input().consume$0();
       if ($.eqB(this.state.get$backtracking(), 0)) {
         t1 = this._adaptor;
-        t1.addChild$2(root_0, t1.createTreeNode$1(set29));
+        t1.addChild$2(root_0, t1.createTreeNode$1(set28));
       }
       this.state.set$errorRecovery(false);
       this.state.set$failed(false);
@@ -6707,10 +6744,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6719,17 +6759,17 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  import_statement$0: function(exception) {
-  var retval, t1, root_0, id, IMPORT30, URL31, char_literal32, char_literal33, char_literal34, url, stream_CSS_IDENT, stream_117, stream_IMPORT, stream_SEMICOLON, stream_URL, stream_118, stream_quoted, root_1, t2, re, st;
+  var retval, t1, root_0, id, IMPORT29, URL30, char_literal31, char_literal32, char_literal33, url, stream_CSS_IDENT, stream_117, stream_IMPORT, stream_SEMICOLON, stream_URL, stream_118, stream_quoted, root_1, t2, re, st, t3;
   retval = $.MapCSSParser_import_statement_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   id = null;
-  IMPORT30 = null;
-  URL31 = null;
+  IMPORT29 = null;
+  URL30 = null;
+  char_literal31 = null;
   char_literal32 = null;
   char_literal33 = null;
-  char_literal34 = null;
   url = null;
   stream_CSS_IDENT = $.RewriteRuleTokenStream$(this._adaptor, "token CSS_IDENT", null);
   stream_117 = $.RewriteRuleTokenStream$(this._adaptor, "token 117", null);
@@ -6739,7 +6779,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   stream_118 = $.RewriteRuleTokenStream$(this._adaptor, "token 118", null);
   stream_quoted = $.RewriteRuleSubtreeStream$(this._adaptor, "rule quoted", null);
   try {
-    IMPORT30 = this.matchSymbol$3(this.get$input(), 26, $.get$MapCSSParser_FOLLOW_IMPORT_in_import_statement2981());
+    IMPORT29 = this.matchSymbol$3(this.get$input(), 26, $.get$MapCSSParser_FOLLOW_IMPORT_in_import_statement2984());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6747,9 +6787,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_IMPORT;
-      $.getInterceptor$JSArray(t1).add$1(t1, IMPORT30);
+      $.getInterceptor$JSArray(t1).add$1(t1, IMPORT29);
     }
-    URL31 = this.matchSymbol$3(this.get$input(), 96, $.get$MapCSSParser_FOLLOW_URL_in_import_statement2983());
+    URL30 = this.matchSymbol$3(this.get$input(), 96, $.get$MapCSSParser_FOLLOW_URL_in_import_statement2986());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6757,9 +6797,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_URL;
-      $.getInterceptor$JSArray(t1).add$1(t1, URL31);
+      $.getInterceptor$JSArray(t1).add$1(t1, URL30);
     }
-    char_literal32 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_import_statement2985());
+    char_literal31 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_import_statement2988());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6767,9 +6807,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_117;
-      $.getInterceptor$JSArray(t1).add$1(t1, char_literal32);
+      $.getInterceptor$JSArray(t1).add$1(t1, char_literal31);
     }
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_import_statement2989());
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_import_statement2992());
     url = this.quoted$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
@@ -6782,7 +6822,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       t1 = stream_quoted;
       $.getInterceptor$JSArray(t1).add$1(t1, url.get$tree());
     }
-    char_literal33 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_import_statement2991());
+    char_literal32 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_import_statement2994());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6790,9 +6830,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_118;
-      $.getInterceptor$JSArray(t1).add$1(t1, char_literal33);
+      $.getInterceptor$JSArray(t1).add$1(t1, char_literal32);
     }
-    id = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2995());
+    id = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2998());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6802,7 +6842,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       t1 = stream_CSS_IDENT;
       $.getInterceptor$JSArray(t1).add$1(t1, id);
     }
-    char_literal34 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_import_statement2997());
+    char_literal33 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_import_statement3000());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -6810,7 +6850,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_SEMICOLON;
-      $.getInterceptor$JSArray(t1).add$1(t1, char_literal34);
+      $.getInterceptor$JSArray(t1).add$1(t1, char_literal33);
     }
     if ($.eqB(this.state.get$backtracking(), 0)) {
       t1 = root_0;
@@ -6841,10 +6881,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -6853,17 +6896,17 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  simple_selector$0: function(exception) {
-  var retval, t1, root_0, type_selector35, class_selector36, zoom_selector37, attribute_selector38, pseudo_class_selector39, layer_id_selector40, stream_attribute_selector, stream_type_selector, stream_pseudo_class_selector, stream_zoom_selector, stream_layer_id_selector, stream_class_selector, alt8, LA8_0, alt9, LA9_0, alt10, LA10_0, alt11, LA11_0, alt12, LA12_0, root_1, re, st, t2;
+  var retval, t1, root_0, type_selector34, class_selector35, zoom_selector36, attribute_selector37, pseudo_class_selector38, layer_id_selector39, stream_attribute_selector, stream_type_selector, stream_pseudo_class_selector, stream_zoom_selector, stream_layer_id_selector, stream_class_selector, alt8, LA8_0, alt9, LA9_0, alt10, LA10_0, alt11, LA11_0, alt12, LA12_0, root_1, e;
   retval = $.MapCSSParser_simple_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  type_selector35 = null;
-  class_selector36 = null;
-  zoom_selector37 = null;
-  attribute_selector38 = null;
-  pseudo_class_selector39 = null;
-  layer_id_selector40 = null;
+  type_selector34 = null;
+  class_selector35 = null;
+  zoom_selector36 = null;
+  attribute_selector37 = null;
+  pseudo_class_selector38 = null;
+  layer_id_selector39 = null;
   stream_attribute_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule attribute_selector", null);
   stream_type_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule type_selector", null);
   stream_pseudo_class_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule pseudo_class_selector", null);
@@ -6871,8 +6914,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   stream_layer_id_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule layer_id_selector", null);
   stream_class_selector = $.RewriteRuleSubtreeStream$(this._adaptor, "rule class_selector", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_type_selector_in_simple_selector3020());
-    type_selector35 = this.type_selector$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_type_selector_in_simple_selector3023());
+    type_selector34 = this.type_selector$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -6882,7 +6925,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_type_selector;
-      $.getInterceptor$JSArray(t1).add$1(t1, type_selector35.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, type_selector34.get$tree());
     }
     alt8 = 2;
     LA8_0 = this.get$input().LA$1(1);
@@ -6890,8 +6933,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       alt8 = 1;
     switch (alt8) {
       case 1:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_class_selector_in_simple_selector3022());
-        class_selector36 = this.class_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_class_selector_in_simple_selector3025());
+        class_selector35 = this.class_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6901,7 +6944,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_class_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, class_selector36.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, class_selector35.get$tree());
         }
         break;
     }
@@ -6911,8 +6954,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       alt9 = 1;
     switch (alt9) {
       case 1:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3025());
-        zoom_selector37 = this.zoom_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3028());
+        zoom_selector36 = this.zoom_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6922,7 +6965,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_zoom_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, zoom_selector37.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, zoom_selector36.get$tree());
         }
         break;
     }
@@ -6934,8 +6977,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           alt10 = 1;
         switch (alt10) {
           case 1:
-            this.pushFollow$1($.get$MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3028());
-            attribute_selector38 = this.attribute_selector$0();
+            this.pushFollow$1($.get$MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3031());
+            attribute_selector37 = this.attribute_selector$0();
             t1 = this.state;
             t1.set$fsp($.sub(t1.get$fsp(), 1));
             t1 = this.state;
@@ -6945,7 +6988,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_attribute_selector;
-              $.getInterceptor$JSArray(t1).add$1(t1, attribute_selector38.get$tree());
+              $.getInterceptor$JSArray(t1).add$1(t1, attribute_selector37.get$tree());
             }
             break;
           default:
@@ -6960,8 +7003,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           alt11 = 1;
         switch (alt11) {
           case 1:
-            this.pushFollow$1($.get$MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3031());
-            pseudo_class_selector39 = this.pseudo_class_selector$0();
+            this.pushFollow$1($.get$MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3034());
+            pseudo_class_selector38 = this.pseudo_class_selector$0();
             t1 = this.state;
             t1.set$fsp($.sub(t1.get$fsp(), 1));
             t1 = this.state;
@@ -6971,7 +7014,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_pseudo_class_selector;
-              $.getInterceptor$JSArray(t1).add$1(t1, pseudo_class_selector39.get$tree());
+              $.getInterceptor$JSArray(t1).add$1(t1, pseudo_class_selector38.get$tree());
             }
             break;
           default:
@@ -6984,8 +7027,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       alt12 = 1;
     switch (alt12) {
       case 1:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3034());
-        layer_id_selector40 = this.layer_id_selector$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3037());
+        layer_id_selector39 = this.layer_id_selector$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -6995,7 +7038,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_layer_id_selector;
-          $.getInterceptor$JSArray(t1).add$1(t1, layer_id_selector40.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, layer_id_selector39.get$tree());
         }
         break;
     }
@@ -7037,22 +7080,17 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
   } catch (exception) {
     t1 = $.unwrapException(exception);
-    if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
-      re = t1;
-      st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
-      this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
-    } else
-      throw exception;
+    e = t1;
+    $.print("simple selector catch");
+    $.print(e);
+    throw $.$$throw(e);
   }
  finally {
   }
   return retval;
 },
  zoom_selector$0: function(exception) {
-  var retval, t1, root_0, v, stream_RANGE, root_1, t2, re, st;
+  var retval, t1, root_0, v, stream_RANGE, root_1, t2, re, st, t3;
   retval = $.MapCSSParser_zoom_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -7060,7 +7098,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   v = null;
   stream_RANGE = $.RewriteRuleTokenStream$(this._adaptor, "token RANGE", null);
   try {
-    v = this.matchSymbol$3(this.get$input(), 75, $.get$MapCSSParser_FOLLOW_RANGE_in_zoom_selector3077());
+    v = this.matchSymbol$3(this.get$input(), 75, $.get$MapCSSParser_FOLLOW_RANGE_in_zoom_selector3089());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -7099,10 +7137,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -7111,7 +7152,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  quoted$0: function(exception) {
-  var retval, t1, root_0, v, stream_SQUOTED_STRING, stream_DQUOTED_STRING, alt13, LA13_0, nvae, re, st, t2;
+  var retval, t1, root_0, v, stream_SQUOTED_STRING, stream_DQUOTED_STRING, alt13, LA13_0, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_quoted_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -7137,7 +7178,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt13) {
       case 1:
-        v = this.matchSymbol$3(this.get$input(), 15, $.get$MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3102());
+        v = this.matchSymbol$3(this.get$input(), 15, $.get$MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3114());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7160,7 +7201,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        v = this.matchSymbol$3(this.get$input(), 90, $.get$MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3116());
+        v = this.matchSymbol$3(this.get$input(), 90, $.get$MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3128());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7195,10 +7236,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -7207,7 +7251,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  cssident$0: function(exception) {
-  var retval, t1, root_0, v, stream_CSS_IDENT, re, st, t2;
+  var retval, t1, root_0, v, stream_CSS_IDENT, re, st, t2, t3;
   retval = $.MapCSSParser_cssident_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -7215,7 +7259,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   v = null;
   stream_CSS_IDENT = $.RewriteRuleTokenStream$(this._adaptor, "token CSS_IDENT", null);
   try {
-    v = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3138());
+    v = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3150());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -7248,10 +7292,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -7260,19 +7307,19 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  attribute_selector$0: function(exception) {
-  var retval, t1, root_0, LBRACKET41, RBRACKET43, predicate42, stream_LBRACKET, stream_RBRACKET, stream_predicate, root_1, t2, re, st;
+  var retval, t1, root_0, LBRACKET40, RBRACKET42, predicate41, stream_LBRACKET, stream_RBRACKET, stream_predicate, root_1, t2, re, st, t3;
   retval = $.MapCSSParser_attribute_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  LBRACKET41 = null;
-  RBRACKET43 = null;
-  predicate42 = null;
+  LBRACKET40 = null;
+  RBRACKET42 = null;
+  predicate41 = null;
   stream_LBRACKET = $.RewriteRuleTokenStream$(this._adaptor, "token LBRACKET", null);
   stream_RBRACKET = $.RewriteRuleTokenStream$(this._adaptor, "token RBRACKET", null);
   stream_predicate = $.RewriteRuleSubtreeStream$(this._adaptor, "rule predicate", null);
   try {
-    LBRACKET41 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3157());
+    LBRACKET40 = this.matchSymbol$3(this.get$input(), 32, $.get$MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3169());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -7280,10 +7327,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_LBRACKET;
-      $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET41);
+      $.getInterceptor$JSArray(t1).add$1(t1, LBRACKET40);
     }
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_in_attribute_selector3160());
-    predicate42 = this.predicate$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_in_attribute_selector3172());
+    predicate41 = this.predicate$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -7293,9 +7340,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_predicate;
-      $.getInterceptor$JSArray(t1).add$1(t1, predicate42.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, predicate41.get$tree());
     }
-    RBRACKET43 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3162());
+    RBRACKET42 = this.matchSymbol$3(this.get$input(), 77, $.get$MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3174());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -7303,7 +7350,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_RBRACKET;
-      $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET43);
+      $.getInterceptor$JSArray(t1).add$1(t1, RBRACKET42);
     }
     if ($.eqB(this.state.get$backtracking(), 0)) {
       t1 = root_0;
@@ -7331,10 +7378,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -7343,31 +7393,31 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  predicate$0: function(exception) {
-  var retval, t1, root_0, p, OP_MATCH51, char_literal53, char_literal56, char_literal57, char_literal60, char_literal61, char_literal63, predicate_ident45, quoted46, predicate_primitive47, binary_operator48, predicate_primitive49, predicate_ident50, rhs_match52, predicate_ident54, predicate_ident55, quoted58, quoted59, quoted62, stream_CSS_IDENT, stream_117, stream_114, stream_124, stream_OP_MATCH, stream_118, stream_predicate_primitive, stream_rhs_match, stream_quoted, stream_predicate_ident, stream_binary_operator, alt15, nvae, nvae0, nvae1, nvae2, LA15_6, nvae3, nvae4, re, st, t2;
+  var retval, t1, root_0, p, OP_MATCH50, char_literal52, char_literal55, char_literal56, char_literal59, char_literal60, char_literal62, predicate_ident44, quoted45, predicate_primitive46, binary_operator47, predicate_primitive48, predicate_ident49, rhs_match51, predicate_ident53, predicate_ident54, quoted57, quoted58, quoted61, stream_CSS_IDENT, stream_117, stream_114, stream_124, stream_OP_MATCH, stream_118, stream_predicate_primitive, stream_rhs_match, stream_quoted, stream_predicate_ident, stream_binary_operator, alt15, nvae, nvae0, nvae1, nvae2, LA15_6, nvae3, nvae4, re, st, t2, t3;
   retval = $.MapCSSParser_predicate_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   p = null;
-  OP_MATCH51 = null;
-  char_literal53 = null;
+  OP_MATCH50 = null;
+  char_literal52 = null;
+  char_literal55 = null;
   char_literal56 = null;
-  char_literal57 = null;
+  char_literal59 = null;
   char_literal60 = null;
-  char_literal61 = null;
-  char_literal63 = null;
-  predicate_ident45 = null;
-  quoted46 = null;
-  predicate_primitive47 = null;
-  binary_operator48 = null;
-  predicate_primitive49 = null;
-  predicate_ident50 = null;
-  rhs_match52 = null;
+  char_literal62 = null;
+  predicate_ident44 = null;
+  quoted45 = null;
+  predicate_primitive46 = null;
+  binary_operator47 = null;
+  predicate_primitive48 = null;
+  predicate_ident49 = null;
+  rhs_match51 = null;
+  predicate_ident53 = null;
   predicate_ident54 = null;
-  predicate_ident55 = null;
+  quoted57 = null;
   quoted58 = null;
-  quoted59 = null;
-  quoted62 = null;
+  quoted61 = null;
   stream_CSS_IDENT = $.RewriteRuleTokenStream$(this._adaptor, "token CSS_IDENT", null);
   stream_117 = $.RewriteRuleTokenStream$(this._adaptor, "token 117", null);
   stream_114 = $.RewriteRuleTokenStream$(this._adaptor, "token 114", null);
@@ -7544,8 +7594,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt15) {
       case 1:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3228());
-        predicate_ident45 = this.predicate_ident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3240());
+        predicate_ident44 = this.predicate_ident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7555,7 +7605,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_ident;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident45.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident44.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7571,8 +7621,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3259());
-        quoted46 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3271());
+        quoted45 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7582,7 +7632,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_quoted;
-          $.getInterceptor$JSArray(t1).add$1(t1, quoted46.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, quoted45.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7598,8 +7648,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3294());
-        predicate_primitive47 = this.predicate_primitive$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3306());
+        predicate_primitive46 = this.predicate_primitive$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7609,10 +7659,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_primitive;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive47.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive46.get$tree());
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_binary_operator_in_predicate3296());
-        binary_operator48 = this.binary_operator$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_binary_operator_in_predicate3308());
+        binary_operator47 = this.binary_operator$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7622,10 +7672,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_binary_operator;
-          $.getInterceptor$JSArray(t1).add$1(t1, binary_operator48.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, binary_operator47.get$tree());
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3298());
-        predicate_primitive49 = this.predicate_primitive$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3310());
+        predicate_primitive48 = this.predicate_primitive$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7635,7 +7685,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_primitive;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive49.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_primitive48.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7654,8 +7704,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3314());
-        predicate_ident50 = this.predicate_ident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3326());
+        predicate_ident49 = this.predicate_ident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7665,9 +7715,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_ident;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident50.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident49.get$tree());
         }
-        OP_MATCH51 = this.matchSymbol$3(this.get$input(), 52, $.get$MapCSSParser_FOLLOW_OP_MATCH_in_predicate3316());
+        OP_MATCH50 = this.matchSymbol$3(this.get$input(), 52, $.get$MapCSSParser_FOLLOW_OP_MATCH_in_predicate3328());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7675,10 +7725,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_MATCH;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_MATCH51);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_MATCH50);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_rhs_match_in_predicate3318());
-        rhs_match52 = this.rhs_match$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_rhs_match_in_predicate3330());
+        rhs_match51 = this.rhs_match$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7688,7 +7738,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_rhs_match;
-          $.getInterceptor$JSArray(t1).add$1(t1, rhs_match52.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, rhs_match51.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7704,7 +7754,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 5:
-        char_literal53 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_predicate3334());
+        char_literal52 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_predicate3346());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7712,10 +7762,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_114;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal53);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal52);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3336());
-        predicate_ident54 = this.predicate_ident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3348());
+        predicate_ident53 = this.predicate_ident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7725,7 +7775,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_ident;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident54.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident53.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7741,8 +7791,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 6:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3363());
-        predicate_ident55 = this.predicate_ident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3375());
+        predicate_ident54 = this.predicate_ident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7752,9 +7802,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_predicate_ident;
-          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident55.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, predicate_ident54.get$tree());
         }
-        char_literal56 = this.matchSymbol$3(this.get$input(), 124, $.get$MapCSSParser_FOLLOW_124_in_predicate3365());
+        char_literal55 = this.matchSymbol$3(this.get$input(), 124, $.get$MapCSSParser_FOLLOW_124_in_predicate3377());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7762,7 +7812,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_124;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal56);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal55);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7778,7 +7828,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 7:
-        char_literal57 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_predicate3392());
+        char_literal56 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_predicate3404());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7786,10 +7836,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_114;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal57);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal56);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3394());
-        quoted58 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3406());
+        quoted57 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7799,7 +7849,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_quoted;
-          $.getInterceptor$JSArray(t1).add$1(t1, quoted58.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, quoted57.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7815,8 +7865,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 8:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3425());
-        quoted59 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3437());
+        quoted58 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7826,9 +7876,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_quoted;
-          $.getInterceptor$JSArray(t1).add$1(t1, quoted59.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, quoted58.get$tree());
         }
-        char_literal60 = this.matchSymbol$3(this.get$input(), 124, $.get$MapCSSParser_FOLLOW_124_in_predicate3427());
+        char_literal59 = this.matchSymbol$3(this.get$input(), 124, $.get$MapCSSParser_FOLLOW_124_in_predicate3439());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7836,7 +7886,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_124;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal60);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal59);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7852,7 +7902,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 9:
-        p = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3460());
+        p = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3472());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7862,7 +7912,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_CSS_IDENT;
           $.getInterceptor$JSArray(t1).add$1(t1, p);
         }
-        char_literal61 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_predicate3462());
+        char_literal60 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_predicate3474());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7870,10 +7920,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal61);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal60);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3464());
-        quoted62 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate3476());
+        quoted61 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7883,9 +7933,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_quoted;
-          $.getInterceptor$JSArray(t1).add$1(t1, quoted62.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, quoted61.get$tree());
         }
-        char_literal63 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_predicate3466());
+        char_literal62 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_predicate3478());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -7893,7 +7943,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal63);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal62);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -7921,10 +7971,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -7933,13 +7986,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  predicate_ident$0: function(exception) {
-  var retval, t1, root_0, k, cssident64, stream_OSM_TAG, alt16, LA16_0, nvae, re, st, t2;
+  var retval, t1, root_0, k, cssident63, stream_OSM_TAG, alt16, LA16_0, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_predicate_ident_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   k = null;
-  cssident64 = null;
+  cssident63 = null;
   stream_OSM_TAG = $.RewriteRuleTokenStream$(this._adaptor, "token OSM_TAG", null);
   try {
     alt16 = 2;
@@ -7960,8 +8013,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     switch (alt16) {
       case 1:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_predicate_ident3495());
-        cssident64 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_predicate_ident3507());
+        cssident63 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -7970,10 +8023,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, cssident64.get$tree());
+          this._adaptor.addChild$2(root_0, cssident63.get$tree());
         break;
       case 2:
-        k = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3502());
+        k = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3514());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8008,10 +8061,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8020,14 +8076,14 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  predicate_primitive$0: function(exception) {
-  var retval, t1, root_0, num65, predicate_ident66, quoted67, alt17, nvae, re, st, t2;
+  var retval, t1, root_0, num64, predicate_ident65, quoted66, alt17, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_predicate_primitive_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  num65 = null;
-  predicate_ident66 = null;
-  quoted67 = null;
+  num64 = null;
+  predicate_ident65 = null;
+  quoted66 = null;
   try {
     alt17 = 3;
     switch (this.get$input().LA$1(1)) {
@@ -8057,8 +8113,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     switch (alt17) {
       case 1:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_num_in_predicate_primitive3521());
-        num65 = this.num$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_num_in_predicate_primitive3533());
+        num64 = this.num$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8067,12 +8123,12 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, num65.get$tree());
+          this._adaptor.addChild$2(root_0, num64.get$tree());
         break;
       case 2:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3527());
-        predicate_ident66 = this.predicate_ident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3539());
+        predicate_ident65 = this.predicate_ident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8081,12 +8137,12 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, predicate_ident66.get$tree());
+          this._adaptor.addChild$2(root_0, predicate_ident65.get$tree());
         break;
       case 3:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate_primitive3532());
-        quoted67 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_predicate_primitive3544());
+        quoted66 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8095,7 +8151,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, quoted67.get$tree());
+          this._adaptor.addChild$2(root_0, quoted66.get$tree());
         break;
     }
     t1 = this.get$input().LT$1(-1);
@@ -8110,10 +8166,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8122,13 +8181,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  rhs_match$0: function(exception) {
-  var retval, t1, root_0, r, quoted68, stream_REGEXP, alt18, LA18_0, nvae, re, st, t2;
+  var retval, t1, root_0, r, quoted67, stream_REGEXP, alt18, LA18_0, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_rhs_match_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   r = null;
-  quoted68 = null;
+  quoted67 = null;
   stream_REGEXP = $.RewriteRuleTokenStream$(this._adaptor, "token REGEXP", null);
   try {
     alt18 = 2;
@@ -8149,8 +8208,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     switch (alt18) {
       case 1:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_rhs_match3544());
-        quoted68 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_rhs_match3556());
+        quoted67 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8159,10 +8218,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, quoted68.get$tree());
+          this._adaptor.addChild$2(root_0, quoted67.get$tree());
         break;
       case 2:
-        r = this.matchSymbol$3(this.get$input(), 78, $.get$MapCSSParser_FOLLOW_REGEXP_in_rhs_match3551());
+        r = this.matchSymbol$3(this.get$input(), 78, $.get$MapCSSParser_FOLLOW_REGEXP_in_rhs_match3563());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8197,10 +8256,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8209,15 +8271,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  binary_operator$0: function(exception) {
-  var retval, t1, root_0, set69, mse, re, st, t2;
+  var retval, t1, root_0, set68, mse, re, st, t2, t3;
   retval = $.MapCSSParser_binary_operator_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  set69 = null;
+  set68 = null;
   try {
     root_0 = this._adaptor.nil$0();
-    set69 = this.get$input().LT$1(1);
+    set68 = this.get$input().LT$1(1);
     if (!$.eqB(this.get$input().LA$1(1), 43))
       if (!($.geB(this.get$input().LA$1(1), 45) && $.leB(this.get$input().LA$1(1), 46)))
         if (!($.geB(this.get$input().LA$1(1), 48) && $.leB(this.get$input().LA$1(1), 51)))
@@ -8235,7 +8297,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       this.get$input().consume$0();
       if ($.eqB(this.state.get$backtracking(), 0)) {
         t1 = this._adaptor;
-        t1.addChild$2(root_0, t1.createTreeNode$1(set69));
+        t1.addChild$2(root_0, t1.createTreeNode$1(set68));
       }
       this.state.set$errorRecovery(false);
       this.state.set$failed(false);
@@ -8260,10 +8322,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8272,15 +8337,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  class_selector$0: function(exception) {
-  var retval, t1, root_0, string_literal70, char_literal72, cssident71, cssident73, stream_115, stream_121, stream_cssident, alt19, LA19_0, nvae, root_1, t2, root_10, re, st;
+  var retval, t1, root_0, string_literal69, char_literal71, cssident70, cssident72, stream_115, stream_121, stream_cssident, alt19, LA19_0, nvae, root_1, t2, root_10, re, st, t3;
   retval = $.MapCSSParser_class_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  string_literal70 = null;
-  char_literal72 = null;
-  cssident71 = null;
-  cssident73 = null;
+  string_literal69 = null;
+  char_literal71 = null;
+  cssident70 = null;
+  cssident72 = null;
   stream_115 = $.RewriteRuleTokenStream$(this._adaptor, "token 115", null);
   stream_121 = $.RewriteRuleTokenStream$(this._adaptor, "token 121", null);
   stream_cssident = $.RewriteRuleSubtreeStream$(this._adaptor, "rule cssident", null);
@@ -8302,7 +8367,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt19) {
       case 1:
-        string_literal70 = this.matchSymbol$3(this.get$input(), 115, $.get$MapCSSParser_FOLLOW_115_in_class_selector3649());
+        string_literal69 = this.matchSymbol$3(this.get$input(), 115, $.get$MapCSSParser_FOLLOW_115_in_class_selector3661());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8310,10 +8375,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_115;
-          $.getInterceptor$JSArray(t1).add$1(t1, string_literal70);
+          $.getInterceptor$JSArray(t1).add$1(t1, string_literal69);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_class_selector3652());
-        cssident71 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_class_selector3664());
+        cssident70 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8323,7 +8388,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_cssident;
-          $.getInterceptor$JSArray(t1).add$1(t1, cssident71.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, cssident70.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8343,7 +8408,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        char_literal72 = this.matchSymbol$3(this.get$input(), 121, $.get$MapCSSParser_FOLLOW_121_in_class_selector3669());
+        char_literal71 = this.matchSymbol$3(this.get$input(), 121, $.get$MapCSSParser_FOLLOW_121_in_class_selector3681());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8351,10 +8416,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_121;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal72);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal71);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_class_selector3672());
-        cssident73 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_class_selector3684());
+        cssident72 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8364,7 +8429,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_cssident;
-          $.getInterceptor$JSArray(t1).add$1(t1, cssident73.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, cssident72.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8396,10 +8461,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8408,17 +8476,17 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  pseudo_class_selector$0: function(exception) {
-  var retval, t1, root_0, string_literal74, string_literal76, char_literal78, cssident75, cssident77, cssident79, stream_COLON, stream_116, stream_122, stream_cssident, alt20, nvae, root_1, t2, root_10, root_11, re, st;
+  var retval, t1, root_0, string_literal73, string_literal75, char_literal77, cssident74, cssident76, cssident78, stream_COLON, stream_116, stream_122, stream_cssident, alt20, nvae, root_1, t2, root_10, root_11, re, st, t3;
   retval = $.MapCSSParser_pseudo_class_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  string_literal74 = null;
-  string_literal76 = null;
-  char_literal78 = null;
-  cssident75 = null;
-  cssident77 = null;
-  cssident79 = null;
+  string_literal73 = null;
+  string_literal75 = null;
+  char_literal77 = null;
+  cssident74 = null;
+  cssident76 = null;
+  cssident78 = null;
   stream_COLON = $.RewriteRuleTokenStream$(this._adaptor, "token COLON", null);
   stream_116 = $.RewriteRuleTokenStream$(this._adaptor, "token 116", null);
   stream_122 = $.RewriteRuleTokenStream$(this._adaptor, "token 122", null);
@@ -8446,7 +8514,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt20) {
       case 1:
-        string_literal74 = this.matchSymbol$3(this.get$input(), 122, $.get$MapCSSParser_FOLLOW_122_in_pseudo_class_selector3701());
+        string_literal73 = this.matchSymbol$3(this.get$input(), 122, $.get$MapCSSParser_FOLLOW_122_in_pseudo_class_selector3713());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8454,10 +8522,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_122;
-          $.getInterceptor$JSArray(t1).add$1(t1, string_literal74);
+          $.getInterceptor$JSArray(t1).add$1(t1, string_literal73);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3703());
-        cssident75 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3715());
+        cssident74 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8467,7 +8535,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_cssident;
-          $.getInterceptor$JSArray(t1).add$1(t1, cssident75.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, cssident74.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8487,7 +8555,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        string_literal76 = this.matchSymbol$3(this.get$input(), 116, $.get$MapCSSParser_FOLLOW_116_in_pseudo_class_selector3724());
+        string_literal75 = this.matchSymbol$3(this.get$input(), 116, $.get$MapCSSParser_FOLLOW_116_in_pseudo_class_selector3736());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8495,10 +8563,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_116;
-          $.getInterceptor$JSArray(t1).add$1(t1, string_literal76);
+          $.getInterceptor$JSArray(t1).add$1(t1, string_literal75);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3726());
-        cssident77 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3738());
+        cssident76 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8508,7 +8576,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_cssident;
-          $.getInterceptor$JSArray(t1).add$1(t1, cssident77.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, cssident76.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8528,7 +8596,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        char_literal78 = this.matchSymbol$3(this.get$input(), 8, $.get$MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3743());
+        char_literal77 = this.matchSymbol$3(this.get$input(), 8, $.get$MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3755());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8536,10 +8604,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_COLON;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal78);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal77);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3745());
-        cssident79 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3757());
+        cssident78 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8549,7 +8617,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_cssident;
-          $.getInterceptor$JSArray(t1).add$1(t1, cssident79.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, cssident78.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8581,10 +8649,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8593,7 +8664,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  type_selector$0: function(exception) {
-  var retval, t1, root_0, v, stream_OP_MUL, stream_CSS_IDENT, alt21, LA21_0, nvae, re, st, t2;
+  var retval, t1, root_0, v, stream_OP_MUL, stream_CSS_IDENT, alt21, LA21_0, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_type_selector_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -8619,7 +8690,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt21) {
       case 1:
-        v = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3780());
+        v = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3792());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8642,7 +8713,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        v = this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_type_selector3798());
+        v = this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_type_selector3810());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8677,10 +8748,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8689,15 +8763,15 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  declaration_block$0: function(exception) {
-  var retval, t1, root_0, l, RBRACE81, RBRACE82, declarations80, stream_RBRACE, stream_LBRACE, stream_declarations, alt22, LA22_0, LA22_1, nvae, nvae0, root_1, t2, root_10, re, st;
+  var retval, t1, root_0, l, RBRACE80, RBRACE81, declarations79, stream_RBRACE, stream_LBRACE, stream_declarations, alt22, LA22_0, LA22_1, nvae, nvae0, root_1, t2, root_10, re, st, t3;
   retval = $.MapCSSParser_declaration_block_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   l = null;
+  RBRACE80 = null;
   RBRACE81 = null;
-  RBRACE82 = null;
-  declarations80 = null;
+  declarations79 = null;
   stream_RBRACE = $.RewriteRuleTokenStream$(this._adaptor, "token RBRACE", null);
   stream_LBRACE = $.RewriteRuleTokenStream$(this._adaptor, "token LBRACE", null);
   stream_declarations = $.RewriteRuleSubtreeStream$(this._adaptor, "rule declarations", null);
@@ -8730,7 +8804,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt22) {
       case 1:
-        l = this.matchSymbol$3(this.get$input(), 31, $.get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3832());
+        l = this.matchSymbol$3(this.get$input(), 31, $.get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3844());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8740,8 +8814,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_LBRACE;
           $.getInterceptor$JSArray(t1).add$1(t1, l);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_declarations_in_declaration_block3834());
-        declarations80 = this.declarations$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_declarations_in_declaration_block3846());
+        declarations79 = this.declarations$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -8751,9 +8825,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_declarations;
-          $.getInterceptor$JSArray(t1).add$1(t1, declarations80.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, declarations79.get$tree());
         }
-        RBRACE81 = this.matchSymbol$3(this.get$input(), 76, $.get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3836());
+        RBRACE80 = this.matchSymbol$3(this.get$input(), 76, $.get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3848());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8761,7 +8835,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RBRACE;
-          $.getInterceptor$JSArray(t1).add$1(t1, RBRACE81);
+          $.getInterceptor$JSArray(t1).add$1(t1, RBRACE80);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8779,7 +8853,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        l = this.matchSymbol$3(this.get$input(), 31, $.get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3853());
+        l = this.matchSymbol$3(this.get$input(), 31, $.get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3865());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8789,7 +8863,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_LBRACE;
           $.getInterceptor$JSArray(t1).add$1(t1, l);
         }
-        RBRACE82 = this.matchSymbol$3(this.get$input(), 76, $.get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3855());
+        RBRACE81 = this.matchSymbol$3(this.get$input(), 76, $.get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3867());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -8797,7 +8871,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RBRACE;
-          $.getInterceptor$JSArray(t1).add$1(t1, RBRACE82);
+          $.getInterceptor$JSArray(t1).add$1(t1, RBRACE81);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -8826,10 +8900,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8838,20 +8915,20 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  declarations$0: function(exception) {
-  var retval, t1, root_0, SEMICOLON84, char_literal86, declaration83, declaration85, stream_SEMICOLON, stream_declaration, alt23, LA23_0, LA23_1, alt24, LA24_0, re, st, t2;
+  var retval, t1, root_0, SEMICOLON83, char_literal85, declaration82, declaration84, stream_SEMICOLON, stream_declaration, alt23, LA23_0, LA23_1, alt24, LA24_0, re, st, t2, t3;
   retval = $.MapCSSParser_declarations_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  SEMICOLON84 = null;
-  char_literal86 = null;
-  declaration83 = null;
-  declaration85 = null;
+  SEMICOLON83 = null;
+  char_literal85 = null;
+  declaration82 = null;
+  declaration84 = null;
   stream_SEMICOLON = $.RewriteRuleTokenStream$(this._adaptor, "token SEMICOLON", null);
   stream_declaration = $.RewriteRuleSubtreeStream$(this._adaptor, "rule declaration", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_in_declarations3886());
-    declaration83 = this.declaration$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_in_declarations3898());
+    declaration82 = this.declaration$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -8861,7 +8938,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_declaration;
-      $.getInterceptor$JSArray(t1).add$1(t1, declaration83.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, declaration82.get$tree());
     }
     $loop23$0:
       do {
@@ -8874,7 +8951,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         switch (alt23) {
           case 1:
-            SEMICOLON84 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3889());
+            SEMICOLON83 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3901());
             t1 = this.state;
             if (t1.get$failed() === true) {
               t1 = retval;
@@ -8882,10 +8959,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_SEMICOLON;
-              $.getInterceptor$JSArray(t1).add$1(t1, SEMICOLON84);
+              $.getInterceptor$JSArray(t1).add$1(t1, SEMICOLON83);
             }
-            this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_in_declarations3891());
-            declaration85 = this.declaration$0();
+            this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_in_declarations3903());
+            declaration84 = this.declaration$0();
             t1 = this.state;
             t1.set$fsp($.sub(t1.get$fsp(), 1));
             t1 = this.state;
@@ -8895,7 +8972,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_declaration;
-              $.getInterceptor$JSArray(t1).add$1(t1, declaration85.get$tree());
+              $.getInterceptor$JSArray(t1).add$1(t1, declaration84.get$tree());
             }
             break;
           default:
@@ -8910,7 +8987,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           alt24 = 1;
         switch (alt24) {
           case 1:
-            char_literal86 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3895());
+            char_literal85 = this.matchSymbol$3(this.get$input(), 87, $.get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3907());
             t1 = this.state;
             if (t1.get$failed() === true) {
               t1 = retval;
@@ -8918,7 +8995,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_SEMICOLON;
-              $.getInterceptor$JSArray(t1).add$1(t1, char_literal86);
+              $.getInterceptor$JSArray(t1).add$1(t1, char_literal85);
             }
             break;
           default:
@@ -8949,10 +9026,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -8961,20 +9041,20 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  declaration$0: function(exception) {
-  var retval, t1, root_0, COLON88, declaration_property87, declaration_value89, stream_COLON, stream_declaration_property, stream_declaration_value, root_1, t2, re, st;
+  var retval, t1, root_0, COLON87, declaration_property86, declaration_value88, stream_COLON, stream_declaration_property, stream_declaration_value, root_1, t2, re, st, t3;
   retval = $.MapCSSParser_declaration_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  COLON88 = null;
-  declaration_property87 = null;
-  declaration_value89 = null;
+  COLON87 = null;
+  declaration_property86 = null;
+  declaration_value88 = null;
   stream_COLON = $.RewriteRuleTokenStream$(this._adaptor, "token COLON", null);
   stream_declaration_property = $.RewriteRuleSubtreeStream$(this._adaptor, "rule declaration_property", null);
   stream_declaration_value = $.RewriteRuleSubtreeStream$(this._adaptor, "rule declaration_value", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_property_in_declaration3913());
-    declaration_property87 = this.declaration_property$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_property_in_declaration3925());
+    declaration_property86 = this.declaration_property$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -8984,9 +9064,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_declaration_property;
-      $.getInterceptor$JSArray(t1).add$1(t1, declaration_property87.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, declaration_property86.get$tree());
     }
-    COLON88 = this.matchSymbol$3(this.get$input(), 8, $.get$MapCSSParser_FOLLOW_COLON_in_declaration3915());
+    COLON87 = this.matchSymbol$3(this.get$input(), 8, $.get$MapCSSParser_FOLLOW_COLON_in_declaration3927());
     t1 = this.state;
     if (t1.get$failed() === true) {
       t1 = retval;
@@ -8994,10 +9074,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_COLON;
-      $.getInterceptor$JSArray(t1).add$1(t1, COLON88);
+      $.getInterceptor$JSArray(t1).add$1(t1, COLON87);
     }
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_value_in_declaration3917());
-    declaration_value89 = this.declaration_value$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_declaration_value_in_declaration3929());
+    declaration_value88 = this.declaration_value$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -9007,7 +9087,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_declaration_value;
-      $.getInterceptor$JSArray(t1).add$1(t1, declaration_value89.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, declaration_value88.get$tree());
     }
     if ($.eqB(this.state.get$backtracking(), 0)) {
       t1 = root_0;
@@ -9036,10 +9116,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -9048,16 +9131,16 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  declaration_property$0: function(exception) {
-  var retval, t1, root_0, cssident90, re, st, t2;
+  var retval, t1, root_0, cssident89, re, st, t2, t3;
   retval = $.MapCSSParser_declaration_property_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  cssident90 = null;
+  cssident89 = null;
   try {
     root_0 = this._adaptor.nil$0();
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_declaration_property3939());
-    cssident90 = this.cssident$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_declaration_property3951());
+    cssident89 = this.cssident$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -9066,7 +9149,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       return t1;
     }
     if ($.eqB(t1.get$backtracking(), 0))
-      this._adaptor.addChild$2(root_0, cssident90.get$tree());
+      this._adaptor.addChild$2(root_0, cssident89.get$tree());
     t1 = this.get$input().LT$1(-1);
     retval.set$stop(t1);
     if ($.eqB(this.state.get$backtracking(), 0)) {
@@ -9079,10 +9162,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -9091,30 +9177,30 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  declaration_value$0: function(exception) {
-  var retval, t1, root_0, char_literal93, char_literal95, EVAL97, char_literal98, char_literal100, LIST101, char_literal102, char_literal104, char_literal106, LIST107, char_literal108, char_literal109, single_value91, single_value92, single_value94, single_value96, expr99, single_value103, single_value105, stream_117, stream_EVAL, stream_LIST, stream_118, stream_119, stream_single_value, stream_expr, alt27, LA27_1, nvae, LA27_2, nvae0, LA27_3, nvae1, LA27_4, nvae2, LA27_5, nvae3, LA27_6, nvae4, LA27_7, nvae5, LA27_8, nvae6, LA27_9, nvae7, LA27_10, LA27_21, LA27_24, LA27_28, LA27_30, LA27_32, LA27_34, LA27_36, nvae8, nvae9, nvae10, nvae11, nvae12, nvae13, nvae14, nvae15, LA27_11, LA27_22, LA27_25, LA27_29, LA27_31, LA27_33, LA27_35, LA27_38, LA27_42, nvae16, nvae17, LA27_39, LA27_420, nvae18, nvae19, LA27_40, LA27_421, nvae20, nvae21, LA27_41, LA27_422, nvae22, nvae23, nvae24, nvae25, nvae26, nvae27, nvae28, nvae29, nvae30, nvae31, LA27_12, nvae32, LA27_13, nvae33, LA27_14, nvae34, LA27_15, nvae35, LA27_16, nvae36, LA27_18, LA27_23, nvae37, nvae38, nvae39, alt25, LA25_0, root_1, root_10, t2, alt26, LA26_0, root_11, root_12, re, st;
+  var retval, t1, root_0, char_literal92, char_literal94, EVAL96, char_literal97, char_literal99, LIST100, char_literal101, char_literal103, char_literal105, LIST106, char_literal107, char_literal108, single_value90, single_value91, single_value93, single_value95, expr98, single_value102, single_value104, stream_117, stream_EVAL, stream_LIST, stream_118, stream_119, stream_single_value, stream_expr, alt27, LA27_1, nvae, LA27_2, nvae0, LA27_3, nvae1, LA27_4, nvae2, LA27_5, nvae3, LA27_6, nvae4, LA27_7, nvae5, LA27_8, nvae6, LA27_9, nvae7, LA27_10, LA27_21, LA27_24, LA27_28, LA27_30, LA27_32, LA27_34, LA27_36, nvae8, nvae9, nvae10, nvae11, nvae12, nvae13, nvae14, nvae15, LA27_11, LA27_22, LA27_25, LA27_29, LA27_31, LA27_33, LA27_35, LA27_38, LA27_42, nvae16, nvae17, LA27_39, LA27_420, nvae18, nvae19, LA27_40, LA27_421, nvae20, nvae21, LA27_41, LA27_422, nvae22, nvae23, nvae24, nvae25, nvae26, nvae27, nvae28, nvae29, nvae30, nvae31, LA27_12, nvae32, LA27_13, nvae33, LA27_14, nvae34, LA27_15, nvae35, LA27_16, nvae36, LA27_18, LA27_23, nvae37, nvae38, nvae39, alt25, LA25_0, root_1, root_10, t2, alt26, LA26_0, root_11, root_12, re, st, t3;
   retval = $.MapCSSParser_declaration_value_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  char_literal93 = null;
-  char_literal95 = null;
-  EVAL97 = null;
-  char_literal98 = null;
-  char_literal100 = null;
-  LIST101 = null;
-  char_literal102 = null;
-  char_literal104 = null;
-  char_literal106 = null;
-  LIST107 = null;
+  char_literal92 = null;
+  char_literal94 = null;
+  EVAL96 = null;
+  char_literal97 = null;
+  char_literal99 = null;
+  LIST100 = null;
+  char_literal101 = null;
+  char_literal103 = null;
+  char_literal105 = null;
+  LIST106 = null;
+  char_literal107 = null;
   char_literal108 = null;
-  char_literal109 = null;
+  single_value90 = null;
   single_value91 = null;
-  single_value92 = null;
-  single_value94 = null;
-  single_value96 = null;
-  expr99 = null;
-  single_value103 = null;
-  single_value105 = null;
+  single_value93 = null;
+  single_value95 = null;
+  expr98 = null;
+  single_value102 = null;
+  single_value104 = null;
   stream_117 = $.RewriteRuleTokenStream$(this._adaptor, "token 117", null);
   stream_EVAL = $.RewriteRuleTokenStream$(this._adaptor, "token EVAL", null);
   stream_LIST = $.RewriteRuleTokenStream$(this._adaptor, "token LIST", null);
@@ -9705,8 +9791,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     switch (alt27) {
       case 1:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3951());
-        single_value91 = this.single_value$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3963());
+        single_value90 = this.single_value$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -9715,11 +9801,11 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, single_value91.get$tree());
+          this._adaptor.addChild$2(root_0, single_value90.get$tree());
         break;
       case 2:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3956());
-        single_value92 = this.single_value$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3968());
+        single_value91 = this.single_value$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -9729,9 +9815,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_single_value;
-          $.getInterceptor$JSArray(t1).add$1(t1, single_value92.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, single_value91.get$tree());
         }
-        char_literal93 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value3959());
+        char_literal92 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value3971());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9739,10 +9825,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal93);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal92);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3961());
-        single_value94 = this.single_value$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3973());
+        single_value93 = this.single_value$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -9752,7 +9838,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_single_value;
-          $.getInterceptor$JSArray(t1).add$1(t1, single_value94.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, single_value93.get$tree());
         }
         $loop25$1:
           do {
@@ -9762,7 +9848,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
               alt25 = 1;
             switch (alt25) {
               case 1:
-                char_literal95 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value3964());
+                char_literal94 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value3976());
                 t1 = this.state;
                 if (t1.get$failed() === true) {
                   t1 = retval;
@@ -9770,10 +9856,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
                 }
                 if ($.eqB(t1.get$backtracking(), 0)) {
                   t1 = stream_119;
-                  $.getInterceptor$JSArray(t1).add$1(t1, char_literal95);
+                  $.getInterceptor$JSArray(t1).add$1(t1, char_literal94);
                 }
-                this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3966());
-                single_value96 = this.single_value$0();
+                this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value3978());
+                single_value95 = this.single_value$0();
                 t1 = this.state;
                 t1.set$fsp($.sub(t1.get$fsp(), 1));
                 t1 = this.state;
@@ -9783,7 +9869,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
                 }
                 if ($.eqB(t1.get$backtracking(), 0)) {
                   t1 = stream_single_value;
-                  $.getInterceptor$JSArray(t1).add$1(t1, single_value96.get$tree());
+                  $.getInterceptor$JSArray(t1).add$1(t1, single_value95.get$tree());
                 }
                 break;
               default:
@@ -9808,7 +9894,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        EVAL97 = this.matchSymbol$3(this.get$input(), 19, $.get$MapCSSParser_FOLLOW_EVAL_in_declaration_value3982());
+        EVAL96 = this.matchSymbol$3(this.get$input(), 19, $.get$MapCSSParser_FOLLOW_EVAL_in_declaration_value3994());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9816,9 +9902,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_EVAL;
-          $.getInterceptor$JSArray(t1).add$1(t1, EVAL97);
+          $.getInterceptor$JSArray(t1).add$1(t1, EVAL96);
         }
-        char_literal98 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value3985());
+        char_literal97 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value3997());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9826,10 +9912,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal98);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal97);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_declaration_value3987());
-        expr99 = this.expr$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_declaration_value3999());
+        expr98 = this.expr$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -9839,9 +9925,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_expr;
-          $.getInterceptor$JSArray(t1).add$1(t1, expr99.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, expr98.get$tree());
         }
-        char_literal100 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value3989());
+        char_literal99 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value4001());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9849,7 +9935,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal100);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal99);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -9867,7 +9953,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        LIST101 = this.matchSymbol$3(this.get$input(), 33, $.get$MapCSSParser_FOLLOW_LIST_in_declaration_value4004());
+        LIST100 = this.matchSymbol$3(this.get$input(), 33, $.get$MapCSSParser_FOLLOW_LIST_in_declaration_value4016());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9875,9 +9961,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_LIST;
-          $.getInterceptor$JSArray(t1).add$1(t1, LIST101);
+          $.getInterceptor$JSArray(t1).add$1(t1, LIST100);
         }
-        char_literal102 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value4007());
+        char_literal101 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value4019());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9885,10 +9971,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal102);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal101);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value4009());
-        single_value103 = this.single_value$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value4021());
+        single_value102 = this.single_value$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -9898,7 +9984,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_single_value;
-          $.getInterceptor$JSArray(t1).add$1(t1, single_value103.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, single_value102.get$tree());
         }
         $loop26$1:
           do {
@@ -9908,7 +9994,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
               alt26 = 1;
             switch (alt26) {
               case 1:
-                char_literal104 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value4012());
+                char_literal103 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_declaration_value4024());
                 t1 = this.state;
                 if (t1.get$failed() === true) {
                   t1 = retval;
@@ -9916,10 +10002,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
                 }
                 if ($.eqB(t1.get$backtracking(), 0)) {
                   t1 = stream_119;
-                  $.getInterceptor$JSArray(t1).add$1(t1, char_literal104);
+                  $.getInterceptor$JSArray(t1).add$1(t1, char_literal103);
                 }
-                this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value4014());
-                single_value105 = this.single_value$0();
+                this.pushFollow$1($.get$MapCSSParser_FOLLOW_single_value_in_declaration_value4026());
+                single_value104 = this.single_value$0();
                 t1 = this.state;
                 t1.set$fsp($.sub(t1.get$fsp(), 1));
                 t1 = this.state;
@@ -9929,14 +10015,14 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
                 }
                 if ($.eqB(t1.get$backtracking(), 0)) {
                   t1 = stream_single_value;
-                  $.getInterceptor$JSArray(t1).add$1(t1, single_value105.get$tree());
+                  $.getInterceptor$JSArray(t1).add$1(t1, single_value104.get$tree());
                 }
                 break;
               default:
                 break $loop26$1;
             }
           } while (true);
-        char_literal106 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value4018());
+        char_literal105 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value4030());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9944,7 +10030,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal106);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal105);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -9964,7 +10050,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 5:
-        LIST107 = this.matchSymbol$3(this.get$input(), 33, $.get$MapCSSParser_FOLLOW_LIST_in_declaration_value4034());
+        LIST106 = this.matchSymbol$3(this.get$input(), 33, $.get$MapCSSParser_FOLLOW_LIST_in_declaration_value4046());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9972,9 +10058,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_LIST;
-          $.getInterceptor$JSArray(t1).add$1(t1, LIST107);
+          $.getInterceptor$JSArray(t1).add$1(t1, LIST106);
         }
-        char_literal108 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value4037());
+        char_literal107 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_declaration_value4049());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9982,9 +10068,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal108);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal107);
         }
-        char_literal109 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value4039());
+        char_literal108 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_declaration_value4051());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -9992,7 +10078,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal109);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal108);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -10021,10 +10107,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -10033,7 +10122,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  num$0: function(exception) {
-  var retval, t1, root_0, n, stream_POSITIVE_FLOAT, stream_POSITIVE_INT, stream_NEGATIVE_FLOAT, stream_NEGATIVE_INT, alt28, nvae, re, st, t2;
+  var retval, t1, root_0, n, stream_POSITIVE_FLOAT, stream_POSITIVE_INT, stream_NEGATIVE_FLOAT, stream_NEGATIVE_INT, alt28, nvae, re, st, t2, t3;
   retval = $.MapCSSParser_num_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -10069,7 +10158,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt28) {
       case 1:
-        n = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_num4060());
+        n = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_num4072());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10092,7 +10181,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        n = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4080());
+        n = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4092());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10115,7 +10204,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        n = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4100());
+        n = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4112());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10138,7 +10227,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        n = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4118());
+        n = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4130());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10173,10 +10262,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -10185,7 +10277,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  single_value$0: function(exception) {
-  var retval, t1, root_0, v, r, g, b, c, k, URL110, RGB111, char_literal112, char_literal113, char_literal114, char_literal115, RGBA116, char_literal117, char_literal118, char_literal119, char_literal120, char_literal121, a, quoted122, cssident123, stream_117, stream_INCREMENT, stream_PIXELS, stream_NEGATIVE_FLOAT, stream_POINTS, stream_RGB, stream_118, stream_119, stream_RGBA, stream_POSITIVE_INT, stream_POSITIVE_FLOAT, stream_NEGATIVE_INT, stream_OSM_TAG, stream_PERCENTAGE, stream_URL, stream_HEXCOLOR, stream_num, stream_quoted, alt29, nvae, root_1, t2, root_10, t3, root_11, re, st;
+  var retval, t1, root_0, v, r, g, b, c, k, URL109, RGB110, char_literal111, char_literal112, char_literal113, char_literal114, RGBA115, char_literal116, char_literal117, char_literal118, char_literal119, char_literal120, a, quoted121, cssident122, stream_117, stream_INCREMENT, stream_PIXELS, stream_NEGATIVE_FLOAT, stream_POINTS, stream_RGB, stream_118, stream_119, stream_RGBA, stream_POSITIVE_INT, stream_POSITIVE_FLOAT, stream_NEGATIVE_INT, stream_OSM_TAG, stream_PERCENTAGE, stream_URL, stream_HEXCOLOR, stream_num, stream_quoted, alt29, nvae, root_1, t2, root_10, t3, root_11, re, st;
   retval = $.MapCSSParser_single_value_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
@@ -10196,21 +10288,21 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   b = null;
   c = null;
   k = null;
-  URL110 = null;
-  RGB111 = null;
+  URL109 = null;
+  RGB110 = null;
+  char_literal111 = null;
   char_literal112 = null;
   char_literal113 = null;
   char_literal114 = null;
-  char_literal115 = null;
-  RGBA116 = null;
+  RGBA115 = null;
+  char_literal116 = null;
   char_literal117 = null;
   char_literal118 = null;
   char_literal119 = null;
   char_literal120 = null;
-  char_literal121 = null;
   a = null;
-  quoted122 = null;
-  cssident123 = null;
+  quoted121 = null;
+  cssident122 = null;
   stream_117 = $.RewriteRuleTokenStream$(this._adaptor, "token 117", null);
   stream_INCREMENT = $.RewriteRuleTokenStream$(this._adaptor, "token INCREMENT", null);
   stream_PIXELS = $.RewriteRuleTokenStream$(this._adaptor, "token PIXELS", null);
@@ -10289,7 +10381,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt29) {
       case 1:
-        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4143());
+        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4155());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10312,7 +10404,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        v = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4166());
+        v = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4178());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10335,7 +10427,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        v = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4189());
+        v = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4201());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10358,7 +10450,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        v = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4210());
+        v = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4222());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10381,7 +10473,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 5:
-        v = this.matchSymbol$3(this.get$input(), 27, $.get$MapCSSParser_FOLLOW_INCREMENT_in_single_value4232());
+        v = this.matchSymbol$3(this.get$input(), 27, $.get$MapCSSParser_FOLLOW_INCREMENT_in_single_value4244());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10404,7 +10496,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 6:
-        v = this.matchSymbol$3(this.get$input(), 70, $.get$MapCSSParser_FOLLOW_POINTS_in_single_value4258());
+        v = this.matchSymbol$3(this.get$input(), 70, $.get$MapCSSParser_FOLLOW_POINTS_in_single_value4270());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10427,7 +10519,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 7:
-        v = this.matchSymbol$3(this.get$input(), 69, $.get$MapCSSParser_FOLLOW_PIXELS_in_single_value4275());
+        v = this.matchSymbol$3(this.get$input(), 69, $.get$MapCSSParser_FOLLOW_PIXELS_in_single_value4287());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10450,7 +10542,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 8:
-        v = this.matchSymbol$3(this.get$input(), 68, $.get$MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4295());
+        v = this.matchSymbol$3(this.get$input(), 68, $.get$MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4307());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10473,7 +10565,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 9:
-        URL110 = this.matchSymbol$3(this.get$input(), 96, $.get$MapCSSParser_FOLLOW_URL_in_single_value4310());
+        URL109 = this.matchSymbol$3(this.get$input(), 96, $.get$MapCSSParser_FOLLOW_URL_in_single_value4322());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10481,7 +10573,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_URL;
-          $.getInterceptor$JSArray(t1).add$1(t1, URL110);
+          $.getInterceptor$JSArray(t1).add$1(t1, URL109);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -10490,13 +10582,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           $.RewriteRuleSubtreeStream$(t1, "rule retval", !(retval == null) ? retval.get$tree() : null);
           root_0 = this._adaptor.nil$0();
           t1 = this._adaptor;
-          t1.addChild$2(root_0, t1.create$2(110, $._extractUrl(URL110)));
+          t1.addChild$2(root_0, t1.create$2(110, $._extractUrl(URL109)));
           t1 = root_0;
           retval.set$tree(t1);
         }
         break;
       case 10:
-        RGB111 = this.matchSymbol$3(this.get$input(), 82, $.get$MapCSSParser_FOLLOW_RGB_in_single_value4325());
+        RGB110 = this.matchSymbol$3(this.get$input(), 82, $.get$MapCSSParser_FOLLOW_RGB_in_single_value4337());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10504,9 +10596,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RGB;
-          $.getInterceptor$JSArray(t1).add$1(t1, RGB111);
+          $.getInterceptor$JSArray(t1).add$1(t1, RGB110);
         }
-        char_literal112 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_single_value4327());
+        char_literal111 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_single_value4339());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10514,9 +10606,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal112);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal111);
         }
-        r = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4331());
+        r = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4343());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10526,7 +10618,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, r);
         }
-        char_literal113 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4333());
+        char_literal112 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4345());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10534,9 +10626,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal113);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal112);
         }
-        g = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4337());
+        g = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4349());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10546,7 +10638,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, g);
         }
-        char_literal114 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4339());
+        char_literal113 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4351());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10554,9 +10646,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal114);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal113);
         }
-        b = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4343());
+        b = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4355());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10566,7 +10658,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, b);
         }
-        char_literal115 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_single_value4345());
+        char_literal114 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_single_value4357());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10574,7 +10666,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal115);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal114);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -10597,7 +10689,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 11:
-        RGBA116 = this.matchSymbol$3(this.get$input(), 83, $.get$MapCSSParser_FOLLOW_RGBA_in_single_value4388());
+        RGBA115 = this.matchSymbol$3(this.get$input(), 83, $.get$MapCSSParser_FOLLOW_RGBA_in_single_value4400());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10605,9 +10697,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_RGBA;
-          $.getInterceptor$JSArray(t1).add$1(t1, RGBA116);
+          $.getInterceptor$JSArray(t1).add$1(t1, RGBA115);
         }
-        char_literal117 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_single_value4390());
+        char_literal116 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_single_value4402());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10615,9 +10707,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal117);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal116);
         }
-        r = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4394());
+        r = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4406());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10627,7 +10719,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, r);
         }
-        char_literal118 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4396());
+        char_literal117 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4408());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10635,9 +10727,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal118);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal117);
         }
-        g = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4400());
+        g = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4412());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10647,7 +10739,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, g);
         }
-        char_literal119 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4402());
+        char_literal118 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4414());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10655,9 +10747,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal119);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal118);
         }
-        b = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4406());
+        b = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4418());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10667,7 +10759,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_POSITIVE_INT;
           $.getInterceptor$JSArray(t1).add$1(t1, b);
         }
-        char_literal120 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4408());
+        char_literal119 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_single_value4420());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10675,9 +10767,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_119;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal120);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal119);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_num_in_single_value4412());
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_num_in_single_value4424());
         a = this.num$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
@@ -10690,7 +10782,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_num;
           $.getInterceptor$JSArray(t1).add$1(t1, a.get$tree());
         }
-        char_literal121 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_single_value4414());
+        char_literal120 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_single_value4426());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10698,7 +10790,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal121);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal120);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -10724,7 +10816,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 12:
-        c = this.matchSymbol$3(this.get$input(), 22, $.get$MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4449());
+        c = this.matchSymbol$3(this.get$input(), 22, $.get$MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4461());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10755,8 +10847,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 13:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_single_value4474());
-        quoted122 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_single_value4486());
+        quoted121 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -10766,7 +10858,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_quoted;
-          $.getInterceptor$JSArray(t1).add$1(t1, quoted122.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, quoted121.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -10776,13 +10868,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           root_0 = this._adaptor.nil$0();
           t1 = this._adaptor;
           t2 = root_0;
-          t1.addChild$2(t2, t1.create$2(106, !(quoted122 == null) ? this.get$input().toTokenString$2(quoted122.get$start(), quoted122.get$stop()) : null));
+          t1.addChild$2(t2, t1.create$2(106, !(quoted121 == null) ? this.get$input().toTokenString$2(quoted121.get$start(), quoted121.get$stop()) : null));
           t1 = root_0;
           retval.set$tree(t1);
         }
         break;
       case 14:
-        k = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_single_value4506());
+        k = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_single_value4518());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -10806,8 +10898,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         break;
       case 15:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_single_value4536());
-        cssident123 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_single_value4548());
+        cssident122 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -10816,7 +10908,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, cssident123.get$tree());
+          this._adaptor.addChild$2(root_0, cssident122.get$tree());
         break;
     }
     t1 = this.get$input().LT$1(-1);
@@ -10831,10 +10923,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -10843,16 +10938,16 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  expr$0: function(exception) {
-  var retval, t1, root_0, logicalExpression124, re, st, t2;
+  var retval, t1, root_0, logicalExpression123, re, st, t2, t3;
   retval = $.MapCSSParser_expr_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  logicalExpression124 = null;
+  logicalExpression123 = null;
   try {
     root_0 = this._adaptor.nil$0();
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_logicalExpression_in_expr4557());
-    logicalExpression124 = this.logicalExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_logicalExpression_in_expr4569());
+    logicalExpression123 = this.logicalExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -10861,7 +10956,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
       return t1;
     }
     if ($.eqB(t1.get$backtracking(), 0))
-      this._adaptor.addChild$2(root_0, logicalExpression124.get$tree());
+      this._adaptor.addChild$2(root_0, logicalExpression123.get$tree());
     t1 = this.get$input().LT$1(-1);
     retval.set$stop(t1);
     if ($.eqB(this.state.get$backtracking(), 0)) {
@@ -10874,10 +10969,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -10886,19 +10984,19 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  args$0: function(exception) {
-  var retval, t1, root_0, char_literal126, expr125, expr127, stream_119, stream_expr, alt30, LA30_0, re, st, t2;
+  var retval, t1, root_0, char_literal125, expr124, expr126, stream_119, stream_expr, alt30, LA30_0, re, st, t2, t3;
   retval = $.MapCSSParser_args_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  char_literal126 = null;
-  expr125 = null;
-  expr127 = null;
+  char_literal125 = null;
+  expr124 = null;
+  expr126 = null;
   stream_119 = $.RewriteRuleTokenStream$(this._adaptor, "token 119", null);
   stream_expr = $.RewriteRuleSubtreeStream$(this._adaptor, "rule expr", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_args4568());
-    expr125 = this.expr$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_args4580());
+    expr124 = this.expr$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -10908,7 +11006,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_expr;
-      $.getInterceptor$JSArray(t1).add$1(t1, expr125.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, expr124.get$tree());
     }
     $loop30$0:
       do {
@@ -10918,7 +11016,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           alt30 = 1;
         switch (alt30) {
           case 1:
-            char_literal126 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_args4571());
+            char_literal125 = this.matchSymbol$3(this.get$input(), 119, $.get$MapCSSParser_FOLLOW_119_in_args4583());
             t1 = this.state;
             if (t1.get$failed() === true) {
               t1 = retval;
@@ -10926,10 +11024,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_119;
-              $.getInterceptor$JSArray(t1).add$1(t1, char_literal126);
+              $.getInterceptor$JSArray(t1).add$1(t1, char_literal125);
             }
-            this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_args4573());
-            expr127 = this.expr$0();
+            this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_args4585());
+            expr126 = this.expr$0();
             t1 = this.state;
             t1.set$fsp($.sub(t1.get$fsp(), 1));
             t1 = this.state;
@@ -10939,7 +11037,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_expr;
-              $.getInterceptor$JSArray(t1).add$1(t1, expr127.get$tree());
+              $.getInterceptor$JSArray(t1).add$1(t1, expr126.get$tree());
             }
             break;
           default:
@@ -10972,10 +11070,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -10984,20 +11085,20 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  logicalExpression$0: function(exception) {
-  var retval, t1, root_0, OP_OR129, booleanAndExpression128, logicalExpression130, stream_OP_OR, stream_booleanAndExpression, stream_logicalExpression, alt31, LA31_0, nvae, root_1, re, st, t2;
+  var retval, t1, root_0, OP_OR128, booleanAndExpression127, logicalExpression129, stream_OP_OR, stream_booleanAndExpression, stream_logicalExpression, alt31, LA31_0, nvae, root_1, re, st, t2, t3;
   retval = $.MapCSSParser_logicalExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_OR129 = null;
-  booleanAndExpression128 = null;
-  logicalExpression130 = null;
+  OP_OR128 = null;
+  booleanAndExpression127 = null;
+  logicalExpression129 = null;
   stream_OP_OR = $.RewriteRuleTokenStream$(this._adaptor, "token OP_OR", null);
   stream_booleanAndExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule booleanAndExpression", null);
   stream_logicalExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule logicalExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4602());
-    booleanAndExpression128 = this.booleanAndExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4614());
+    booleanAndExpression127 = this.booleanAndExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11007,7 +11108,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_booleanAndExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, booleanAndExpression128.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, booleanAndExpression127.get$tree());
     }
     alt31 = 2;
     LA31_0 = this.get$input().LA$1(1);
@@ -11026,7 +11127,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt31) {
       case 1:
-        OP_OR129 = this.matchSymbol$3(this.get$input(), 60, $.get$MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4626());
+        OP_OR128 = this.matchSymbol$3(this.get$input(), 60, $.get$MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4638());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11034,10 +11135,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_OR;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_OR129);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_OR128);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4628());
-        logicalExpression130 = this.logicalExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4640());
+        logicalExpression129 = this.logicalExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11047,7 +11148,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_logicalExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, logicalExpression130.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, logicalExpression129.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11089,10 +11190,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -11101,20 +11205,20 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  booleanAndExpression$0: function(exception) {
-  var retval, t1, root_0, OP_AND132, equalityExpression131, booleanAndExpression133, stream_OP_AND, stream_booleanAndExpression, stream_equalityExpression, alt32, LA32_0, nvae, root_1, re, st, t2;
+  var retval, t1, root_0, OP_AND131, equalityExpression130, booleanAndExpression132, stream_OP_AND, stream_booleanAndExpression, stream_equalityExpression, alt32, LA32_0, nvae, root_1, re, st, t2, t3;
   retval = $.MapCSSParser_booleanAndExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_AND132 = null;
-  equalityExpression131 = null;
-  booleanAndExpression133 = null;
+  OP_AND131 = null;
+  equalityExpression130 = null;
+  booleanAndExpression132 = null;
   stream_OP_AND = $.RewriteRuleTokenStream$(this._adaptor, "token OP_AND", null);
   stream_booleanAndExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule booleanAndExpression", null);
   stream_equalityExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule equalityExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4721());
-    equalityExpression131 = this.equalityExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4733());
+    equalityExpression130 = this.equalityExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11124,7 +11228,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_equalityExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, equalityExpression131.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, equalityExpression130.get$tree());
     }
     alt32 = 2;
     LA32_0 = this.get$input().LA$1(1);
@@ -11149,7 +11253,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt32) {
       case 1:
-        OP_AND132 = this.matchSymbol$3(this.get$input(), 42, $.get$MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4745());
+        OP_AND131 = this.matchSymbol$3(this.get$input(), 42, $.get$MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4757());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11157,10 +11261,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_AND;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_AND132);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_AND131);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4747());
-        booleanAndExpression133 = this.booleanAndExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4759());
+        booleanAndExpression132 = this.booleanAndExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11170,7 +11274,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_booleanAndExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, booleanAndExpression133.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, booleanAndExpression132.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11212,10 +11316,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -11224,22 +11331,22 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  equalityExpression$0: function(exception) {
-  var retval, t1, root_0, OP_EQ135, OP_NEQ137, relationalExpression134, relationalExpression136, relationalExpression138, stream_OP_EQ, stream_OP_NEQ, stream_relationalExpression, alt33, LA33_0, nvae, root_1, root_10, re, st, t2;
+  var retval, t1, root_0, OP_EQ134, OP_NEQ136, relationalExpression133, relationalExpression135, relationalExpression137, stream_OP_EQ, stream_OP_NEQ, stream_relationalExpression, alt33, LA33_0, nvae, root_1, root_10, re, st, t2, t3;
   retval = $.MapCSSParser_equalityExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_EQ135 = null;
-  OP_NEQ137 = null;
-  relationalExpression134 = null;
-  relationalExpression136 = null;
-  relationalExpression138 = null;
+  OP_EQ134 = null;
+  OP_NEQ136 = null;
+  relationalExpression133 = null;
+  relationalExpression135 = null;
+  relationalExpression137 = null;
   stream_OP_EQ = $.RewriteRuleTokenStream$(this._adaptor, "token OP_EQ", null);
   stream_OP_NEQ = $.RewriteRuleTokenStream$(this._adaptor, "token OP_NEQ", null);
   stream_relationalExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule relationalExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4851());
-    relationalExpression134 = this.relationalExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4863());
+    relationalExpression133 = this.relationalExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11249,7 +11356,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_relationalExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression134.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression133.get$tree());
     }
     alt33 = 3;
     LA33_0 = this.get$input().LA$1(1);
@@ -11279,7 +11386,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt33) {
       case 1:
-        OP_EQ135 = this.matchSymbol$3(this.get$input(), 46, $.get$MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4875());
+        OP_EQ134 = this.matchSymbol$3(this.get$input(), 46, $.get$MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4887());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11287,10 +11394,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_EQ;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_EQ135);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_EQ134);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4878());
-        relationalExpression136 = this.relationalExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4890());
+        relationalExpression135 = this.relationalExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11300,7 +11407,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_relationalExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression136.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression135.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11321,7 +11428,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        OP_NEQ137 = this.matchSymbol$3(this.get$input(), 57, $.get$MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4909());
+        OP_NEQ136 = this.matchSymbol$3(this.get$input(), 57, $.get$MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4921());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11329,10 +11436,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_NEQ;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_NEQ137);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_NEQ136);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4911());
-        relationalExpression138 = this.relationalExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4923());
+        relationalExpression137 = this.relationalExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11342,7 +11449,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_relationalExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression138.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, relationalExpression137.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11387,10 +11494,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -11399,28 +11509,28 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  relationalExpression$0: function(exception) {
-  var retval, t1, root_0, OP_LT140, OP_LE142, OP_GT144, OP_GE146, additiveExpression139, additiveExpression141, additiveExpression143, additiveExpression145, additiveExpression147, stream_OP_GT, stream_OP_LE, stream_OP_LT, stream_OP_GE, stream_additiveExpression, alt34, LA34_0, nvae, root_1, root_10, root_11, root_12, re, st, t2;
+  var retval, t1, root_0, OP_LT139, OP_LE141, OP_GT143, OP_GE145, additiveExpression138, additiveExpression140, additiveExpression142, additiveExpression144, additiveExpression146, stream_OP_GT, stream_OP_LE, stream_OP_LT, stream_OP_GE, stream_additiveExpression, alt34, LA34_0, nvae, root_1, root_10, root_11, root_12, re, st, t2, t3;
   retval = $.MapCSSParser_relationalExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_LT140 = null;
-  OP_LE142 = null;
-  OP_GT144 = null;
-  OP_GE146 = null;
-  additiveExpression139 = null;
-  additiveExpression141 = null;
-  additiveExpression143 = null;
-  additiveExpression145 = null;
-  additiveExpression147 = null;
+  OP_LT139 = null;
+  OP_LE141 = null;
+  OP_GT143 = null;
+  OP_GE145 = null;
+  additiveExpression138 = null;
+  additiveExpression140 = null;
+  additiveExpression142 = null;
+  additiveExpression144 = null;
+  additiveExpression146 = null;
   stream_OP_GT = $.RewriteRuleTokenStream$(this._adaptor, "token OP_GT", null);
   stream_OP_LE = $.RewriteRuleTokenStream$(this._adaptor, "token OP_LE", null);
   stream_OP_LT = $.RewriteRuleTokenStream$(this._adaptor, "token OP_LT", null);
   stream_OP_GE = $.RewriteRuleTokenStream$(this._adaptor, "token OP_GE", null);
   stream_additiveExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule additiveExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5017());
-    additiveExpression139 = this.additiveExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5029());
+    additiveExpression138 = this.additiveExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11430,7 +11540,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_additiveExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression139.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression138.get$tree());
     }
     alt34 = 5;
     LA34_0 = this.get$input().LA$1(1);
@@ -11470,7 +11580,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt34) {
       case 1:
-        OP_LT140 = this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5041());
+        OP_LT139 = this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5053());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11478,10 +11588,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_LT;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_LT140);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_LT139);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5043());
-        additiveExpression141 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5055());
+        additiveExpression140 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11491,7 +11601,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression141.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression140.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11512,7 +11622,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        OP_LE142 = this.matchSymbol$3(this.get$input(), 50, $.get$MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5074());
+        OP_LE141 = this.matchSymbol$3(this.get$input(), 50, $.get$MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5086());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11520,10 +11630,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_LE;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_LE142);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_LE141);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5076());
-        additiveExpression143 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5088());
+        additiveExpression142 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11533,7 +11643,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression143.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression142.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11554,7 +11664,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        OP_GT144 = this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5107());
+        OP_GT143 = this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5119());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11562,10 +11672,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_GT;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_GT144);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_GT143);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5109());
-        additiveExpression145 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5121());
+        additiveExpression144 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11575,7 +11685,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression145.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression144.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11596,7 +11706,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        OP_GE146 = this.matchSymbol$3(this.get$input(), 48, $.get$MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5140());
+        OP_GE145 = this.matchSymbol$3(this.get$input(), 48, $.get$MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5152());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11604,10 +11714,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_GE;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_GE146);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_GE145);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5142());
-        additiveExpression147 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5154());
+        additiveExpression146 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11617,7 +11727,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression147.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression146.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11662,10 +11772,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -11674,23 +11787,23 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  additiveExpression$0: function(exception) {
-  var retval, t1, root_0, OP_PLUS149, char_literal151, multiplicativeExpression148, additiveExpression150, additiveExpression152, stream_OP_PLUS, stream_120, stream_additiveExpression, stream_multiplicativeExpression, alt35, LA35_0, nvae, root_1, root_10, t2, re, st;
+  var retval, t1, root_0, OP_PLUS148, char_literal150, multiplicativeExpression147, additiveExpression149, additiveExpression151, stream_OP_PLUS, stream_120, stream_additiveExpression, stream_multiplicativeExpression, alt35, LA35_0, nvae, root_1, root_10, t2, re, st, t3;
   retval = $.MapCSSParser_additiveExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_PLUS149 = null;
-  char_literal151 = null;
-  multiplicativeExpression148 = null;
-  additiveExpression150 = null;
-  additiveExpression152 = null;
+  OP_PLUS148 = null;
+  char_literal150 = null;
+  multiplicativeExpression147 = null;
+  additiveExpression149 = null;
+  additiveExpression151 = null;
   stream_OP_PLUS = $.RewriteRuleTokenStream$(this._adaptor, "token OP_PLUS", null);
   stream_120 = $.RewriteRuleTokenStream$(this._adaptor, "token 120", null);
   stream_additiveExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule additiveExpression", null);
   stream_multiplicativeExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule multiplicativeExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5230());
-    multiplicativeExpression148 = this.multiplicativeExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5242());
+    multiplicativeExpression147 = this.multiplicativeExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11700,7 +11813,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_multiplicativeExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression148.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression147.get$tree());
     }
     alt35 = 3;
     LA35_0 = this.get$input().LA$1(1);
@@ -11739,7 +11852,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt35) {
       case 1:
-        OP_PLUS149 = this.matchSymbol$3(this.get$input(), 61, $.get$MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5254());
+        OP_PLUS148 = this.matchSymbol$3(this.get$input(), 61, $.get$MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5266());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11747,10 +11860,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_PLUS;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_PLUS149);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_PLUS148);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5257());
-        additiveExpression150 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5269());
+        additiveExpression149 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11760,7 +11873,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression150.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression149.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11778,7 +11891,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        char_literal151 = this.matchSymbol$3(this.get$input(), 120, $.get$MapCSSParser_FOLLOW_120_in_additiveExpression5288());
+        char_literal150 = this.matchSymbol$3(this.get$input(), 120, $.get$MapCSSParser_FOLLOW_120_in_additiveExpression5300());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11786,10 +11899,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_120;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal151);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal150);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5291());
-        additiveExpression152 = this.additiveExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5303());
+        additiveExpression151 = this.additiveExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11799,7 +11912,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_additiveExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression152.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, additiveExpression151.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11842,10 +11955,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -11854,26 +11970,26 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  multiplicativeExpression$0: function(exception) {
-  var retval, t1, root_0, OP_MUL154, DIV156, OP_MOD158, unaryExpression153, multiplicativeExpression155, multiplicativeExpression157, multiplicativeExpression159, stream_OP_MUL, stream_OP_MOD, stream_DIV, stream_unaryExpression, stream_multiplicativeExpression, alt36, LA36_0, nvae, root_1, root_10, t2, root_11, re, st;
+  var retval, t1, root_0, OP_MUL153, DIV155, OP_MOD157, unaryExpression152, multiplicativeExpression154, multiplicativeExpression156, multiplicativeExpression158, stream_OP_MUL, stream_OP_MOD, stream_DIV, stream_unaryExpression, stream_multiplicativeExpression, alt36, LA36_0, nvae, root_1, root_10, t2, root_11, re, st, t3;
   retval = $.MapCSSParser_multiplicativeExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  OP_MUL154 = null;
-  DIV156 = null;
-  OP_MOD158 = null;
-  unaryExpression153 = null;
-  multiplicativeExpression155 = null;
-  multiplicativeExpression157 = null;
-  multiplicativeExpression159 = null;
+  OP_MUL153 = null;
+  DIV155 = null;
+  OP_MOD157 = null;
+  unaryExpression152 = null;
+  multiplicativeExpression154 = null;
+  multiplicativeExpression156 = null;
+  multiplicativeExpression158 = null;
   stream_OP_MUL = $.RewriteRuleTokenStream$(this._adaptor, "token OP_MUL", null);
   stream_OP_MOD = $.RewriteRuleTokenStream$(this._adaptor, "token OP_MOD", null);
   stream_DIV = $.RewriteRuleTokenStream$(this._adaptor, "token DIV", null);
   stream_unaryExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule unaryExpression", null);
   stream_multiplicativeExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule multiplicativeExpression", null);
   try {
-    this.pushFollow$1($.get$MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5380());
-    unaryExpression153 = this.unaryExpression$0();
+    this.pushFollow$1($.get$MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5392());
+    unaryExpression152 = this.unaryExpression$0();
     t1 = this.state;
     t1.set$fsp($.sub(t1.get$fsp(), 1));
     t1 = this.state;
@@ -11883,7 +11999,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     if ($.eqB(t1.get$backtracking(), 0)) {
       t1 = stream_unaryExpression;
-      $.getInterceptor$JSArray(t1).add$1(t1, unaryExpression153.get$tree());
+      $.getInterceptor$JSArray(t1).add$1(t1, unaryExpression152.get$tree());
     }
     alt36 = 4;
     LA36_0 = this.get$input().LA$1(1);
@@ -11924,7 +12040,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt36) {
       case 1:
-        OP_MUL154 = this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5400());
+        OP_MUL153 = this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5412());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11932,10 +12048,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_MUL;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_MUL154);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_MUL153);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5402());
-        multiplicativeExpression155 = this.multiplicativeExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5414());
+        multiplicativeExpression154 = this.multiplicativeExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11945,7 +12061,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_multiplicativeExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression155.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression154.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -11963,7 +12079,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        DIV156 = this.matchSymbol$3(this.get$input(), 14, $.get$MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5431());
+        DIV155 = this.matchSymbol$3(this.get$input(), 14, $.get$MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5443());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -11971,10 +12087,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_DIV;
-          $.getInterceptor$JSArray(t1).add$1(t1, DIV156);
+          $.getInterceptor$JSArray(t1).add$1(t1, DIV155);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5433());
-        multiplicativeExpression157 = this.multiplicativeExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5445());
+        multiplicativeExpression156 = this.multiplicativeExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -11984,7 +12100,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_multiplicativeExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression157.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression156.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12003,7 +12119,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        OP_MOD158 = this.matchSymbol$3(this.get$input(), 54, $.get$MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5462());
+        OP_MOD157 = this.matchSymbol$3(this.get$input(), 54, $.get$MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5474());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12011,10 +12127,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_OP_MOD;
-          $.getInterceptor$JSArray(t1).add$1(t1, OP_MOD158);
+          $.getInterceptor$JSArray(t1).add$1(t1, OP_MOD157);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5464());
-        multiplicativeExpression159 = this.multiplicativeExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5476());
+        multiplicativeExpression158 = this.multiplicativeExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12024,7 +12140,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_multiplicativeExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression159.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, multiplicativeExpression158.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12066,10 +12182,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -12078,14 +12197,14 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  unaryExpression$0: function(exception) {
-  var retval, t1, root_0, char_literal160, primaryExpression161, primaryExpression162, stream_114, stream_primaryExpression, alt37, LA37_0, nvae, root_1, t2, re, st;
+  var retval, t1, root_0, char_literal159, primaryExpression160, primaryExpression161, stream_114, stream_primaryExpression, alt37, LA37_0, nvae, root_1, t2, re, st, t3;
   retval = $.MapCSSParser_unaryExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
-  char_literal160 = null;
+  char_literal159 = null;
+  primaryExpression160 = null;
   primaryExpression161 = null;
-  primaryExpression162 = null;
   stream_114 = $.RewriteRuleTokenStream$(this._adaptor, "token 114", null);
   stream_primaryExpression = $.RewriteRuleSubtreeStream$(this._adaptor, "rule primaryExpression", null);
   try {
@@ -12121,7 +12240,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt37) {
       case 1:
-        char_literal160 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_unaryExpression5583());
+        char_literal159 = this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_unaryExpression5595());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12129,10 +12248,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_114;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal160);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal159);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5585());
-        primaryExpression161 = this.primaryExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5597());
+        primaryExpression160 = this.primaryExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12142,7 +12261,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_primaryExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, primaryExpression161.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, primaryExpression160.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12160,8 +12279,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5608());
-        primaryExpression162 = this.primaryExpression$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5620());
+        primaryExpression161 = this.primaryExpression$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12171,7 +12290,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_primaryExpression;
-          $.getInterceptor$JSArray(t1).add$1(t1, primaryExpression162.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, primaryExpression161.get$tree());
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12197,10 +12316,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -12209,21 +12331,21 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  primaryExpression$0: function(exception) {
-  var retval, t1, root_0, f, v, char_literal163, char_literal165, char_literal166, char_literal168, expr164, args167, quoted169, cssident170, stream_CSS_IDENT, stream_117, stream_POSITIVE_INT, stream_POSITIVE_FLOAT, stream_NEGATIVE_INT, stream_NEGATIVE_FLOAT, stream_OSM_TAG, stream_118, stream_args, stream_expr, alt39, LA39_2, nvae, nvae0, alt38, LA38_0, root_1, re, st, t2;
+  var retval, t1, root_0, f, v, char_literal162, char_literal164, char_literal165, char_literal167, expr163, args166, quoted168, cssident169, stream_CSS_IDENT, stream_117, stream_POSITIVE_INT, stream_POSITIVE_FLOAT, stream_NEGATIVE_INT, stream_NEGATIVE_FLOAT, stream_OSM_TAG, stream_118, stream_args, stream_expr, alt39, LA39_2, nvae, nvae0, alt38, LA38_0, root_1, re, st, t2, t3;
   retval = $.MapCSSParser_primaryExpression_return$();
   t1 = this.get$input().LT$1(1);
   retval.set$start(t1);
   root_0 = null;
   f = null;
   v = null;
-  char_literal163 = null;
+  char_literal162 = null;
+  char_literal164 = null;
   char_literal165 = null;
-  char_literal166 = null;
-  char_literal168 = null;
-  expr164 = null;
-  args167 = null;
-  quoted169 = null;
-  cssident170 = null;
+  char_literal167 = null;
+  expr163 = null;
+  args166 = null;
+  quoted168 = null;
+  cssident169 = null;
   stream_CSS_IDENT = $.RewriteRuleTokenStream$(this._adaptor, "token CSS_IDENT", null);
   stream_117 = $.RewriteRuleTokenStream$(this._adaptor, "token 117", null);
   stream_POSITIVE_INT = $.RewriteRuleTokenStream$(this._adaptor, "token POSITIVE_INT", null);
@@ -12310,7 +12432,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     }
     switch (alt39) {
       case 1:
-        char_literal163 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_primaryExpression5646());
+        char_literal162 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_primaryExpression5658());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12318,10 +12440,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal163);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal162);
         }
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_primaryExpression5648());
-        expr164 = this.expr$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_expr_in_primaryExpression5660());
+        expr163 = this.expr$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12331,9 +12453,9 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_expr;
-          $.getInterceptor$JSArray(t1).add$1(t1, expr164.get$tree());
+          $.getInterceptor$JSArray(t1).add$1(t1, expr163.get$tree());
         }
-        char_literal165 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_primaryExpression5650());
+        char_literal164 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_primaryExpression5662());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12341,7 +12463,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal165);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal164);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12355,7 +12477,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 2:
-        f = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5672());
+        f = this.matchSymbol$3(this.get$input(), 9, $.get$MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5684());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12365,7 +12487,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           t1 = stream_CSS_IDENT;
           $.getInterceptor$JSArray(t1).add$1(t1, f);
         }
-        char_literal166 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_primaryExpression5674());
+        char_literal165 = this.matchSymbol$3(this.get$input(), 117, $.get$MapCSSParser_FOLLOW_117_in_primaryExpression5686());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12373,7 +12495,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_117;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal166);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal165);
         }
         alt38 = 2;
         LA38_0 = this.get$input().LA$1(1);
@@ -12394,8 +12516,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           alt38 = 1;
         switch (alt38) {
           case 1:
-            this.pushFollow$1($.get$MapCSSParser_FOLLOW_args_in_primaryExpression5676());
-            args167 = this.args$0();
+            this.pushFollow$1($.get$MapCSSParser_FOLLOW_args_in_primaryExpression5688());
+            args166 = this.args$0();
             t1 = this.state;
             t1.set$fsp($.sub(t1.get$fsp(), 1));
             t1 = this.state;
@@ -12405,11 +12527,11 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
             }
             if ($.eqB(t1.get$backtracking(), 0)) {
               t1 = stream_args;
-              $.getInterceptor$JSArray(t1).add$1(t1, args167.get$tree());
+              $.getInterceptor$JSArray(t1).add$1(t1, args166.get$tree());
             }
             break;
         }
-        char_literal168 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_primaryExpression5679());
+        char_literal167 = this.matchSymbol$3(this.get$input(), 118, $.get$MapCSSParser_FOLLOW_118_in_primaryExpression5691());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12417,7 +12539,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         if ($.eqB(t1.get$backtracking(), 0)) {
           t1 = stream_118;
-          $.getInterceptor$JSArray(t1).add$1(t1, char_literal168);
+          $.getInterceptor$JSArray(t1).add$1(t1, char_literal167);
         }
         if ($.eqB(this.state.get$backtracking(), 0)) {
           t1 = root_0;
@@ -12437,7 +12559,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 3:
-        v = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5702());
+        v = this.matchSymbol$3(this.get$input(), 71, $.get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5714());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12460,7 +12582,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 4:
-        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5722());
+        v = this.matchSymbol$3(this.get$input(), 72, $.get$MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5734());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12483,7 +12605,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 5:
-        v = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5744());
+        v = this.matchSymbol$3(this.get$input(), 36, $.get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5756());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12506,7 +12628,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         }
         break;
       case 6:
-        v = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5764());
+        v = this.matchSymbol$3(this.get$input(), 37, $.get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5776());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12530,8 +12652,8 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
         break;
       case 7:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_primaryExpression5784());
-        quoted169 = this.quoted$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_quoted_in_primaryExpression5796());
+        quoted168 = this.quoted$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12540,12 +12662,12 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, quoted169.get$tree());
+          this._adaptor.addChild$2(root_0, quoted168.get$tree());
         break;
       case 8:
         root_0 = this._adaptor.nil$0();
-        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_primaryExpression5795());
-        cssident170 = this.cssident$0();
+        this.pushFollow$1($.get$MapCSSParser_FOLLOW_cssident_in_primaryExpression5807());
+        cssident169 = this.cssident$0();
         t1 = this.state;
         t1.set$fsp($.sub(t1.get$fsp(), 1));
         t1 = this.state;
@@ -12554,10 +12676,10 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
           return t1;
         }
         if ($.eqB(t1.get$backtracking(), 0))
-          this._adaptor.addChild$2(root_0, cssident170.get$tree());
+          this._adaptor.addChild$2(root_0, cssident169.get$tree());
         break;
       case 9:
-        v = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5808());
+        v = this.matchSymbol$3(this.get$input(), 65, $.get$MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5820());
         t1 = this.state;
         if (t1.get$failed() === true) {
           t1 = retval;
@@ -12592,10 +12714,13 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
     if (typeof t1 === 'object' && t1 !== null && !!t1.is$RecognitionException) {
       re = t1;
       st = $.getTraceFromException(exception);
-      this.reportError$2(re, st);
+      t2 = re;
+      t3 = st;
+      this.errors.push(t2);
+      $.BaseRecognizer.prototype.reportError$2.call(this, t2, t3);
       this.recover$2(re, this.get$input());
-      t2 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
-      retval.set$tree(t2);
+      t3 = this._adaptor.errorNode$4(this.get$input(), retval.get$start(), this.get$input().LT$1(-1), re);
+      retval.set$tree(t3);
     } else
       throw exception;
   }
@@ -12604,72 +12729,72 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
   return retval;
 },
  synpred1_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 60, $.get$MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4621());
+  this.matchSymbol$3(this.get$input(), 60, $.get$MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4633());
   if (this.state.get$failed() === true)
     return;
 },
  synpred2_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 42, $.get$MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4740());
+  this.matchSymbol$3(this.get$input(), 42, $.get$MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4752());
   if (this.state.get$failed() === true)
     return;
 },
  synpred3_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 46, $.get$MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4869());
+  this.matchSymbol$3(this.get$input(), 46, $.get$MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4881());
   if (this.state.get$failed() === true)
     return;
 },
  synpred4_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 57, $.get$MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4904());
+  this.matchSymbol$3(this.get$input(), 57, $.get$MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4916());
   if (this.state.get$failed() === true)
     return;
 },
  synpred5_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5035());
+  this.matchSymbol$3(this.get$input(), 51, $.get$MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5047());
   if (this.state.get$failed() === true)
     return;
 },
  synpred6_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 50, $.get$MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5068());
+  this.matchSymbol$3(this.get$input(), 50, $.get$MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5080());
   if (this.state.get$failed() === true)
     return;
 },
  synpred7_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5101());
+  this.matchSymbol$3(this.get$input(), 49, $.get$MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5113());
   if (this.state.get$failed() === true)
     return;
 },
  synpred8_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 48, $.get$MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5134());
+  this.matchSymbol$3(this.get$input(), 48, $.get$MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5146());
   if (this.state.get$failed() === true)
     return;
 },
  synpred9_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 61, $.get$MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5249());
+  this.matchSymbol$3(this.get$input(), 61, $.get$MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5261());
   if (this.state.get$failed() === true)
     return;
 },
  synpred10_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 120, $.get$MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5283());
+  this.matchSymbol$3(this.get$input(), 120, $.get$MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5295());
   if (this.state.get$failed() === true)
     return;
 },
  synpred11_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5394());
+  this.matchSymbol$3(this.get$input(), 55, $.get$MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5406());
   if (this.state.get$failed() === true)
     return;
 },
  synpred12_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 14, $.get$MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5425());
+  this.matchSymbol$3(this.get$input(), 14, $.get$MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5437());
   if (this.state.get$failed() === true)
     return;
 },
  synpred13_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 54, $.get$MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5456());
+  this.matchSymbol$3(this.get$input(), 54, $.get$MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5468());
   if (this.state.get$failed() === true)
     return;
 },
  synpred14_MapCSS_fragment$0: function() {
-  this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5578());
+  this.matchSymbol$3(this.get$input(), 114, $.get$MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5590());
   if (this.state.get$failed() === true)
     return;
 },
@@ -13018,7 +13143,7 @@ $$.MapCSSParser = {"":"Parser;dfas,_adaptor,_input,state,_reportedErros,_output"
 
 $$.DFA_MapCSSParser_6 = {"":"DFA;_eot,_eof,_min,_max,_accept,_special,_transition,_decisionNumber,_recognizer",
  get$description: function() {
-  return "329:1: selector : ( simple_selector -> simple_selector | simple_selector simple_selector -> ^( DESCENDANT_COMBINATOR ( simple_selector )+ ) | \nsimple_selector '>' ( link_selector )* simple_selector -> ^( CHILD_COMBINATOR ( simple_selector )+ ( link_selector )* ) | \nsimple_selector '<' simple_selector -> ^( PARENT_COMBINATOR ( simple_selector )+ ) ); ";
+  return "334:1: selector : (s1= simple_selector -> simple_selector | simple_selector simple_selector -> ^( DESCENDANT_COMBINATOR ( simple_selector )+ ) | \nsimple_selector '>' ( link_selector )* simple_selector -> ^( CHILD_COMBINATOR ( simple_selector )+ ( link_selector )* ) | \nsimple_selector '<' simple_selector -> ^( PARENT_COMBINATOR ( simple_selector )+ ) ); ";
 },
  DFA_MapCSSParser_6$1: function(recognizer) {
   this.set$decisionNumber(6);
@@ -16660,7 +16785,7 @@ $$.MapCSSLexer = {"":"Lexer;isOsmTagAllowed,isInDeclarationBlock,dfas,_input,sta
 
 $$.DFA_MapCSSLexer_27 = {"":"DFA;_eot,_eof,_min,_max,_accept,_special,_transition,_decisionNumber,_recognizer",
  get$description: function() {
-  return "269:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) ";
+  return "274:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) ";
 },
  DFA_MapCSSLexer_27$1: function(recognizer) {
   this.set$decisionNumber(27);
@@ -17211,7 +17336,7 @@ $$.BitSet = {"":"Object;bits?",
       throw $.ioore(i);
     t7 = t3[i];
     if (t7 !== (t7 | 0))
-      return this.orInPlace$1$bailout(6, t3, i, a, t5, t7);
+      return this.orInPlace$1$bailout(6, t3, a, i, t5, t7);
     t3[i] = (t7 | t5) >>> 0;
   }
 },
@@ -17246,8 +17371,8 @@ $$.BitSet = {"":"Object;bits?",
     case 6:
       t6 = env4;
       t3 = env3;
-      a = env2;
-      i = env1;
+      i = env2;
+      a = env1;
       t1 = env0;
       break;
   }
@@ -18303,12 +18428,12 @@ $$.CommonTokenStream = {"":"BufferedTokenStream;_channel,_tokenSource,_tokens,_l
   for (n = 1; n < k; i = i0) {
     i0 = this._skipOffTokenChannels$1(i + 1);
     if (i0 !== (i0 | 0))
-      return this.LT$1$bailout(3, i0, k, n);
+      return this.LT$1$bailout(3, k, n, i0);
     ++n;
   }
   t1 = this._range;
   if (typeof t1 !== 'number')
-    return this.LT$1$bailout(4, t1, i);
+    return this.LT$1$bailout(4, i, t1);
   if (i > t1)
     this._range = i;
   t1 = this._tokens;
@@ -18327,13 +18452,13 @@ $$.CommonTokenStream = {"":"BufferedTokenStream;_channel,_tokenSource,_tokens,_l
       k = env0;
       break;
     case 3:
-      n = env2;
-      k = env1;
-      i0 = env0;
+      i0 = env2;
+      n = env1;
+      k = env0;
       break;
     case 4:
-      i = env1;
-      t1 = env0;
+      t1 = env1;
+      i = env0;
       break;
   }
   switch (state0) {
@@ -20175,7 +20300,7 @@ $$.Proxy = {"":"Object;_port?,_lib1_id?",
 
 $$._FunctionProxy = {"":"Proxy;_call,_port,_lib1_id",
  _FunctionProxy$_internal$2: function(port, id) {
-  this._call = new $.anon0(id, port);
+  this._call = new $.anon0(port, id);
   $.indexSet($.get$_FunctionProxy__map(), this._call, this);
 }
 };
@@ -20257,20 +20382,14 @@ $$._ProxiedObjectTable = {"":"Object;_name,_nextId,_deletedCount,_registry?,_por
 
 $$.main_anon = {"":"Closure;",
  call$1: function(event$) {
-  $.scoped(new $.main__anon());
+  return $.onParse();
 }
 };
 
-$$.main__anon = {"":"Closure;",
- call$0: function() {
-  $.parse($.editor.getValue$0());
-}
-};
-
-$$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":"Closure;values_3,copies_2",
+$$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":"Closure;copies_3,values_2",
  call$1: function(value) {
   var t1, t3, length$, i, t2;
-  t1 = this.values_3;
+  t1 = this.values_2;
   if (typeof t1 !== 'string' && (typeof t1 !== 'object' || t1 === null || t1.constructor !== Array && !t1.is$JavaScriptIndexingBehavior()))
     return this.call$1$bailout0(1, value, t1);
   t3 = $.getInterceptor$JSStringJSArray(t1);
@@ -20281,7 +20400,7 @@ $$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":"Closure;values
       return i;
   }
   t3.add$1(t1, value);
-  t1 = this.copies_2;
+  t1 = this.copies_3;
   $.getInterceptor$JSArray(t1).add$1(t1, null);
   return length$;
 },
@@ -20299,7 +20418,7 @@ $$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":"Closure;values
   }
   switch (state0) {
     case 0:
-      t1 = this.values_3;
+      t1 = this.values_2;
     case 1:
       state0 = 0;
       length$ = $.getInterceptor$JSStringJSArray(t1).get$length(t1);
@@ -20312,7 +20431,7 @@ $$._convertDartToNative_PrepareForStructuredClone_findSlot = {"":"Closure;values
           return i;
       }
       $.getInterceptor$JSArray(t1).add$1(t1, value);
-      t1 = this.copies_2;
+      t1 = this.copies_3;
       $.getInterceptor$JSArray(t1).add$1(t1, null);
       return length$;
   }
@@ -20336,7 +20455,7 @@ $$._convertDartToNative_PrepareForStructuredClone_cleanupSlots = {"":"Closure;",
 }
 };
 
-$$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;readSlot_8,findSlot_7,writeSlot_6",
+$$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;findSlot_8,writeSlot_7,readSlot_6",
  call$1: function(e) {
   var t1, slot, t2, length$, copy, t3, i, element, elementCopy, copy0, j, t4;
   t1 = {};
@@ -20365,13 +20484,13 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;readSlot_8
   if (typeof e === 'object' && e !== null && e.is$ArrayBufferView())
     return e;
   if (typeof e === 'object' && e !== null && e.is$Map()) {
-    slot = this.findSlot_7.call$1(e);
-    t1.copy_1 = this.readSlot_8.call$1(slot);
+    slot = this.findSlot_8.call$1(e);
+    t1.copy_1 = this.readSlot_6.call$1(slot);
     t2 = t1.copy_1;
     if (!(t2 == null))
       return t2;
     t1.copy_1 = {};
-    this.writeSlot_6.call$2(slot, t1.copy_1);
+    this.writeSlot_7.call$2(slot, t1.copy_1);
     e.forEach$1(new $._convertDartToNative_PrepareForStructuredClone_walk_anon(this, t1));
     return t1.copy_1;
   }
@@ -20379,18 +20498,18 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;readSlot_8
     if (typeof e !== 'object' || e === null || (e.constructor !== Array || !!e.immutable$list) && !e.is$JavaScriptIndexingBehavior())
       return this.call$1$bailout(1, e);
     length$ = e.length;
-    slot = this.findSlot_7.call$1(e);
-    t2 = this.readSlot_8;
+    slot = this.findSlot_8.call$1(e);
+    t2 = this.readSlot_6;
     copy = t2.call$1(slot);
     if (!(copy == null)) {
       if (true === copy) {
         copy = new Array(length$);
-        this.writeSlot_6.call$2(slot, copy);
+        this.writeSlot_7.call$2(slot, copy);
       }
       return copy;
     }
     t1 = e instanceof Array && !!!(e.immutable$list);
-    t3 = this.writeSlot_6;
+    t3 = this.writeSlot_7;
     if (t1) {
       t3.call$2(slot, true);
       for (i = 0; i < length$; ++i) {
@@ -20500,13 +20619,13 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;readSlot_8
       if (typeof e === 'object' && e !== null && e.is$ArrayBufferView())
         return e;
       if (typeof e === 'object' && e !== null && e.is$Map()) {
-        slot = this.findSlot_7.call$1(e);
-        t1.copy_1 = this.readSlot_8.call$1(slot);
+        slot = this.findSlot_8.call$1(e);
+        t1.copy_1 = this.readSlot_6.call$1(slot);
         t2 = t1.copy_1;
         if (!(t2 == null))
           return t2;
         t1.copy_1 = {};
-        this.writeSlot_6.call$2(slot, t1.copy_1);
+        this.writeSlot_7.call$2(slot, t1.copy_1);
         e.forEach$1(new $._convertDartToNative_PrepareForStructuredClone_walk_anon(this, t1));
         return t1.copy_1;
       }
@@ -20520,18 +20639,18 @@ $$._convertDartToNative_PrepareForStructuredClone_walk = {"":"Closure;readSlot_8
             length$ = $.getInterceptor$JSStringJSArray(e).get$length(e);
           case 2:
             state0 = 0;
-            slot = this.findSlot_7.call$1(e);
-            t3 = this.readSlot_8;
+            slot = this.findSlot_8.call$1(e);
+            t3 = this.readSlot_6;
             copy = t3.call$1(slot);
             if (!(copy == null)) {
               if (true === copy) {
                 copy = new Array(length$);
-                this.writeSlot_6.call$2(slot, copy);
+                this.writeSlot_7.call$2(slot, copy);
               }
               return copy;
             }
             t1 = e instanceof Array && !!!(e.immutable$list);
-            t2 = this.writeSlot_6;
+            t2 = this.writeSlot_7;
           case 3:
             if (state0 === 3 || state0 === 0 && t1)
               switch (state0) {
@@ -20594,17 +20713,17 @@ $$._convertDartToNative_PrepareForStructuredClone_walk_anon = {"":"Closure;walk_
 }
 };
 
-$$.Maps__emitMap_anon = {"":"Closure;result_3,box_0,visiting_2",
+$$.Maps__emitMap_anon = {"":"Closure;box_0,visiting_3,result_2",
  call$2: function(k, v) {
   var t1, t2;
   t1 = this.box_0;
   if (t1.first_1 !== true) {
-    t2 = this.result_3;
+    t2 = this.result_2;
     $.getInterceptor$JSArray(t2).add$1(t2, ", ");
   }
   t1.first_1 = false;
-  t1 = this.result_3;
-  t2 = this.visiting_2;
+  t1 = this.result_2;
+  t2 = this.visiting_3;
   $.Collections__emitObject(k, t1, t2);
   $.getInterceptor$JSArray(t1).add$1(t1, ": ");
   $.Collections__emitObject(v, t1, t2);
@@ -20662,9 +20781,45 @@ $$.NoSuchMethodError_toString_anon = {"":"Closure;box_0",
 
 $$.initEditor_anon = {"":"Closure;",
  call$0: function() {
-  $.editor = $.$$experimentalFunctionProxy($.context().get$CodeMirror()).fromTextArea$2($.query("#editor"), $.map($.makeLiteralMap(["theme", "mapcss", "lineNumbers", true, "autofocus", true])));
-  $.editor.setValue$1("/*\n * sample MapCSS stylesheet\n */\nway[highway=residential] {\n   line-color: red;\n   line-width: 5pt;\n}\n");
+  var te = $.Element_Element$tag("textarea");
+  te.set$id("editor");
+  $.query("#editor-frame").append$1(te);
+  $.editor = $.$$experimentalFunctionProxy($.context().get$CodeMirror()).fromTextArea$2(te, $.map($.makeLiteralMap(["theme", "mapcss", "lineNumbers", true, "autofocus", true])));
+  $.editor.setValue$1("/*\n* sample MapCSS stylesheet\n*/\nway[highway=residential] {\n  line-color: red;\n  line-width: 5pt;\n}\n");
   $.retain($.editor);
+}
+};
+
+$$.onParse_anon = {"":"Closure;",
+ call$0: function() {
+  var parser, t1, t2, t3;
+  parser = $.MapCSSParser$($.CommonTokenStream$($.MapCSSLexer$($.ANTLRStringStream$($.editor.getValue$0()))));
+  parser.stylesheet$0();
+  $.query("#status").get$classes().removeAll$1(["alert", "alert-success", "alert-error"]);
+  t1 = parser.errors;
+  if ($.CTC0.get$isEmpty(t1) !== true) {
+    t2 = "Failed to parse stylesheet. Error messages:</br>" + ("<ul>\n      " + $.S($.CTC0.reduce$2(t1, "", new $.onParse__format())) + "\n      </ul>      \n      ");
+    t3 = $.query("#status");
+    t3.set$innerHTML(t2);
+    t2 = t3.get$classes();
+    $.getInterceptor$JSArray(t2).add$1(t2, "alert");
+    t3 = t3.get$classes();
+    $.getInterceptor$JSArray(t3).add$1(t3, "alert-error");
+  } else {
+    t1 = $.query("#status");
+    t1.set$innerHTML("Stylessheet sucessfully parsed.");
+    t2 = t1.get$classes();
+    $.getInterceptor$JSArray(t2).add$1(t2, "alert");
+    t1 = t1.get$classes();
+    $.getInterceptor$JSArray(t1).add$1(t1, "alert-success");
+  }
+}
+};
+
+$$.onParse__format = {"":"Closure;",
+ call$2: function(v, e) {
+  var msg = typeof e === 'object' && e !== null && !!e.is$UnwantedTokenException ? $.formatUnwantedTokenException(e) : "            <li>\n        <span data-row=\"" + $.S(e.get$line()) + "\" data-column=\"" + $.S(e.get$charPositionInLine()) + "\" class=\"parse-error-position\">(" + $.S(e.get$line()) + ", " + $.S(e.get$charPositionInLine()) + ")</span>\n        <span class=\"parser-error-text\">" + $.S($.getInterceptor(e).toString$0(e)) + "</span>\n        </li>\n        ";
+  return $.S(v) + "\n" + $.S(msg);
 }
 };
 
@@ -20747,7 +20902,7 @@ $$._LinkedHashMapImpl_values_anon = {"":"Closure;box_0,list_2",
 }
 };
 
-$$._HashMapImpl_values_anon = {"":"Closure;list_2,box_0",
+$$._HashMapImpl_values_anon = {"":"Closure;box_0,list_2",
  call$2: function(key, value) {
   var t1, t2, t3;
   t1 = this.list_2;
@@ -20776,7 +20931,7 @@ $$._LinkedHashMapImpl_keys_anon = {"":"Closure;box_0,list_2",
 }
 };
 
-$$._HashMapImpl_keys_anon = {"":"Closure;list_2,box_0",
+$$._HashMapImpl_keys_anon = {"":"Closure;box_0,list_2",
  call$2: function(key, value) {
   var t1, t2, t3;
   t1 = this.list_2;
@@ -20794,7 +20949,7 @@ $$._RemoteSendPortSync__call_anon = {"":"Closure;box_0",
 }
 };
 
-$$._JsonStringifier_stringifyJsonValue_anon = {"":"Closure;box_0,this_2",
+$$._JsonStringifier_stringifyJsonValue_anon = {"":"Closure;this_2,box_0",
  call$2: function(key, value) {
   var t1, t2, t3;
   t1 = this.box_0;
@@ -20847,9 +21002,9 @@ $$.ConstantMap_values_anon = {"":"Closure;result_1,this_0",
 }
 };
 
-$$.ConstantMap_forEach_anon = {"":"Closure;this_1,f_0",
+$$.ConstantMap_forEach_anon = {"":"Closure;f_1,this_0",
  call$1: function(key) {
-  return this.f_0.call$2(key, $.index(this.this_1, key));
+  return this.f_1.call$2(key, $.index(this.this_0, key));
 }
 };
 
@@ -20885,7 +21040,7 @@ $$.FilteredElementList_removeRange_anon = {"":"Closure;",
 }
 };
 
-$$.anon0 = {"":"Closure;id_1,port_0",
+$$.anon0 = {"":"Closure;port_1,id_0",
  call$4: function(arg0, arg1, arg2, arg3) {
   var t1, t2, t3, t4, args, message, result;
   t1 = $ === arg0;
@@ -20911,8 +21066,8 @@ $$.anon0 = {"":"Closure;id_1,port_0",
     args = [arg0, arg1];
   else
     args = t1 ? [arg0] : [];
-  message = [this.id_1, "", "apply", $.CTC0.map$1(args, $._serialize)];
-  result = this.port_0.callSync$1(message);
+  message = [this.id_0, "", "apply", $.CTC0.map$1(args, $._serialize)];
+  result = this.port_1.callSync$1(message);
   if ($.eqB($.index(result, 0), "throws"))
     throw $.$$throw($.index(result, 1));
   return $._deserialize($.index(result, 1));
@@ -20953,12 +21108,6 @@ $$._initialize_anon0 = {"":"Closure;",
 $$._HashSetImpl_addAll_anon = {"":"Closure;this_0",
  call$1: function(value) {
   $.indexSet(this.this_0.get$_backingMap(), value, value);
-}
-};
-
-$$.parse_anon = {"":"Closure;",
- call$2: function(v, e) {
-  return $.S(v) + "\n" + $.S(e);
 }
 };
 
@@ -21295,13 +21444,13 @@ $$._BaseSendPort_call_anon = {"":"Closure;completer_1,port_0",
 }
 };
 
-$$._WorkerSendPort_send_anon = {"":"Closure;replyTo_2,this_1,message_0",
+$$._WorkerSendPort_send_anon = {"":"Closure;replyTo_2,message_1,this_0",
  call$0: function() {
   var t1, t2, workerMessage, t3;
-  t1 = this.this_1;
+  t1 = this.this_0;
   t2 = this.replyTo_2;
   t1._checkReplyTo$1(t2);
-  workerMessage = $._serializeMessage($.makeLiteralMap(["command", "message", "port", t1, "msg", this.message_0, "replyTo", t2]));
+  workerMessage = $._serializeMessage($.makeLiteralMap(["command", "message", "port", t1, "msg", this.message_1, "replyTo", t2]));
   t2 = $._globalState().get$isWorker() === true;
   t3 = $._globalState;
   if (t2)
@@ -21317,23 +21466,23 @@ $$._waitForPendingPorts_anon = {"":"Closure;callback_0",
 }
 };
 
-$$.Futures_wait_anon = {"":"Closure;pos_5,result_4,completer_3,values_2,box_0",
+$$.Futures_wait_anon = {"":"Closure;box_0,values_5,pos_4,result_3,completer_2",
  call$1: function(value) {
   var t1, t2, remaining;
-  t1 = this.values_2;
-  $.indexSet(t1, this.pos_5, value);
+  t1 = this.values_5;
+  $.indexSet(t1, this.pos_4, value);
   t2 = this.box_0;
   remaining = $.sub(t2.remaining_1, 1);
   t2.remaining_1 = remaining;
-  if ($.eqB(remaining, 0) && this.result_4.get$isComplete() !== true)
-    this.completer_3.complete$1(t1);
+  if ($.eqB(remaining, 0) && this.result_3.get$isComplete() !== true)
+    this.completer_2.complete$1(t1);
 }
 };
 
-$$.Futures_wait_anon0 = {"":"Closure;result_8,completer_7,future_6",
+$$.Futures_wait_anon0 = {"":"Closure;future_8,result_7,completer_6",
  call$1: function(exception) {
-  if (this.result_8.get$isComplete() !== true)
-    this.completer_7.completeException$2(exception, this.future_6.get$stackTrace());
+  if (this.result_7.get$isComplete() !== true)
+    this.completer_6.completeException$2(exception, this.future_8.get$stackTrace());
   return true;
 }
 };
@@ -21350,12 +21499,12 @@ $$._PendingSendPortFinder_visitList_anon = {"":"Closure;this_0",
 }
 };
 
-$$._NativeJsSendPort_send_anon = {"":"Closure;this_5,replyTo_4,message_3",
+$$._NativeJsSendPort_send_anon = {"":"Closure;replyTo_5,this_4,message_3",
  call$0: function() {
   var t1, t2, t3, isolate, shouldSerialize, msg;
   t1 = {};
-  t2 = this.this_5;
-  t3 = this.replyTo_4;
+  t2 = this.this_4;
+  t3 = this.replyTo_5;
   t2._checkReplyTo$1(t3);
   isolate = $.index($._globalState().get$isolates(), t2.get$_lib4_isolateId());
   if (isolate == null)
@@ -21370,16 +21519,16 @@ $$._NativeJsSendPort_send_anon = {"":"Closure;this_5,replyTo_4,message_3",
     t1.msg_1 = $._serializeMessage(t1.msg_1);
     t1.reply_2 = $._serializeMessage(t1.reply_2);
   }
-  $._globalState().get$topEventLoop().enqueue$3(isolate, new $._NativeJsSendPort_send__anon(t2, shouldSerialize, t1), "receive " + $.S(msg));
+  $._globalState().get$topEventLoop().enqueue$3(isolate, new $._NativeJsSendPort_send__anon(t1, shouldSerialize, t2), "receive " + $.S(msg));
 }
 };
 
-$$._NativeJsSendPort_send__anon = {"":"Closure;this_7,shouldSerialize_6,box_0",
+$$._NativeJsSendPort_send__anon = {"":"Closure;box_0,shouldSerialize_7,this_6",
  call$0: function() {
   var t1, t2;
-  t1 = this.this_7;
+  t1 = this.this_6;
   if (!(t1.get$_lib4_receivePort().get$_lib4_callback() == null)) {
-    if (this.shouldSerialize_6 === true) {
+    if (this.shouldSerialize_7 === true) {
       t2 = this.box_0;
       t2.msg_1 = $._deserializeMessage(t2.msg_1);
       t2.reply_2 = $._deserializeMessage(t2.reply_2);
@@ -21391,7 +21540,7 @@ $$._NativeJsSendPort_send__anon = {"":"Closure;this_7,shouldSerialize_6,box_0",
 }
 };
 
-$$._Copier_visitMap_anon = {"":"Closure;this_2,box_0",
+$$._Copier_visitMap_anon = {"":"Closure;box_0,this_2",
  call$2: function(key, val) {
   var t1, t2;
   t1 = this.box_0.copy_10;
@@ -21408,9 +21557,9 @@ $$._EventLoop__runHelper_next = {"":"Closure;this_0",
 }
 };
 
-$$.anon4 = {"":"Closure;callback_1,this_0",
+$$.anon4 = {"":"Closure;this_1,callback_0",
  call$0: function() {
-  return this.callback_1.call$1(this.this_0);
+  return this.callback_0.call$1(this.this_1);
 }
 };
 
@@ -21446,16 +21595,20 @@ $.sub = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a - b : $.sub$slow(a, b);
 };
 
-$.MapCSSParser_declaration_value_return$ = function() {
-  return new $.MapCSSParser_declaration_value_return(null, null, null, null);
-};
-
 $.mul = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a * b : $.mul$slow(a, b);
 };
 
 $.gt = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a > b : $.gt$slow(a, b);
+};
+
+$.ge = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? a >= b : $.ge$slow(a, b);
+};
+
+$.lt = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? a < b : $.lt$slow(a, b);
 };
 
 $.gtB = function(a, b) {
@@ -21511,10 +21664,6 @@ $.add$slow = function(a, b) {
   return a.operator$add$1(b);
 };
 
-$.lt = function(a, b) {
-  return typeof a === 'number' && typeof b === 'number' ? a < b : $.lt$slow(a, b);
-};
-
 $.eq = function(a, b) {
   if (a == null)
     return b == null;
@@ -21535,12 +21684,6 @@ $.eqB = function(a, b) {
     if (!!a.operator$eq$1)
       return a.operator$eq$1(b) === true;
   return a === b;
-};
-
-$.mul$slow = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return a * b;
-  return a.operator$mul$1(b);
 };
 
 $.gt$slow = function(a, b) {
@@ -21567,20 +21710,10 @@ $.and = function(a, b) {
   return a.operator$and$1(b);
 };
 
-$.shr = function(a, b) {
-  if ($.checkNumbers(a, b)) {
-    if (b < 0)
-      throw $.$$throw($.ArgumentError$(b));
-    if (a > 0) {
-      if (b > 31)
-        return 0;
-      return a >>> b;
-    }
-    if (b > 31)
-      b = 31;
-    return (a >> b) >>> 0;
-  }
-  return a.operator$shr$1(b);
+$.mul$slow = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return a * b;
+  return a.operator$mul$1(b);
 };
 
 $.index$slow = function(a, index) {
@@ -21659,6 +21792,22 @@ $.checkNum = function(value) {
   return value;
 };
 
+$.shr = function(a, b) {
+  if ($.checkNumbers(a, b)) {
+    if (b < 0)
+      throw $.$$throw($.ArgumentError$(b));
+    if (a > 0) {
+      if (b > 31)
+        return 0;
+      return a >>> b;
+    }
+    if (b > 31)
+      b = 31;
+    return (a >> b) >>> 0;
+  }
+  return a.operator$shr$1(b);
+};
+
 $.checkString = function(value) {
   if (!(typeof value === 'string'))
     throw $.$$throw($.ArgumentError$(value));
@@ -21720,14 +21869,6 @@ $.unwrapException = function(ex) {
   return ex;
 };
 
-$.getTraceFromException = function(exception) {
-  return $.StackTrace$(exception.stack);
-};
-
-$.le = function(a, b) {
-  return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b);
-};
-
 $.makeLiteralMap = function(keyValuePairs) {
   var iterator, result;
   iterator = $.CTC0.iterator$0(keyValuePairs);
@@ -21762,57 +21903,18 @@ $.convertDartClosureToJS = function(closure, arity) {
   return function$;
 };
 
+$.Exception_Exception = function(message) {
+  return $._ExceptionImplementation$(message);
+};
+
 $.leB = function(a, b) {
   return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b) === true;
 };
 
-$.stringLastIndexOfUnchecked = function(receiver, element, start) {
-  return receiver.lastIndexOf(element, start);
-};
-
-$.MapCSSParser_args_return$ = function() {
-  return new $.MapCSSParser_args_return(null, null, null, null);
-};
-
-$.ge = function(a, b) {
-  return typeof a === 'number' && typeof b === 'number' ? a >= b : $.ge$slow(a, b);
-};
-
-$.sub$slow = function(a, b) {
+$.le$slow = function(a, b) {
   if ($.checkNumbers(a, b))
-    return a - b;
-  return a.operator$sub$1(b);
-};
-
-$.or = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return (a | b) >>> 0;
-  return a.operator$or$1(b);
-};
-
-$.MapCSSParser_unaryExpression_return$ = function() {
-  return new $.MapCSSParser_unaryExpression_return(null, null, null, null);
-};
-
-$.MapCSSParser_multiplicativeExpression_return$ = function() {
-  return new $.MapCSSParser_multiplicativeExpression_return(null, null, null, null);
-};
-
-$.propertyTypeCastError = function(value, property) {
-  var actualType, t1;
-  actualType = $.Primitives_objectTypeName(value);
-  t1 = $.getInterceptor$JSString(property);
-  throw $.$$throw($.CastErrorImplementation$(actualType, t1.substring$2(property, 3, t1.get$length(property))));
-};
-
-$.propertyTypeCast = function(value, property) {
-  if (value == null || !!value[property])
-    return value;
-  $.propertyTypeCastError(value, property);
-};
-
-$.HttpRequestEvents$ = function(_ptr) {
-  return new $.HttpRequestEvents(_ptr);
+    return a <= b;
+  return a.operator$le$1(b);
 };
 
 $.shl = function(a, b) {
@@ -21826,71 +21928,59 @@ $.shl = function(a, b) {
   return a.operator$shl$1(b);
 };
 
-$.MapCSSParser_equalityExpression_return$ = function() {
-  return new $.MapCSSParser_equalityExpression_return(null, null, null, null);
-};
-
-$.MapCSSParser_primaryExpression_return$ = function() {
-  return new $.MapCSSParser_primaryExpression_return(null, null, null, null);
-};
-
-$.MapCSSParser_relationalExpression_return$ = function() {
-  return new $.MapCSSParser_relationalExpression_return(null, null, null, null);
-};
-
-$.le$slow = function(a, b) {
+$.sub$slow = function(a, b) {
   if ($.checkNumbers(a, b))
-    return a <= b;
-  return a.operator$le$1(b);
+    return a - b;
+  return a.operator$sub$1(b);
 };
 
-$.MapCSSParser_logicalExpression_return$ = function() {
-  return new $.MapCSSParser_logicalExpression_return(null, null, null, null);
+$.xor = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return (a ^ b) >>> 0;
+  return a.operator$xor$1(b);
 };
 
-$.MapCSSParser_additiveExpression_return$ = function() {
-  return new $.MapCSSParser_additiveExpression_return(null, null, null, null);
+$.propertyTypeCast = function(value, property) {
+  if (value == null || !!value[property])
+    return value;
+  $.propertyTypeCastError(value, property);
 };
 
-$.DFA_MapCSSParser_6$ = function(recognizer) {
-  var t1 = new $.DFA_MapCSSParser_6(null, null, null, null, null, null, null, null, recognizer);
-  t1.DFA_MapCSSParser_6$1(recognizer);
-  return t1;
+$.HttpRequestEvents$ = function(_ptr) {
+  return new $.HttpRequestEvents(_ptr);
 };
 
-$.MapCSSParser_booleanAndExpression_return$ = function() {
-  return new $.MapCSSParser_booleanAndExpression_return(null, null, null, null);
+$.or = function(a, b) {
+  if ($.checkNumbers(a, b))
+    return (a | b) >>> 0;
+  return a.operator$or$1(b);
 };
 
-$.Futures_wait = function(futures) {
-  var t1, completer, result, values, i, future;
-  t1 = {};
-  if (typeof futures !== 'string' && (typeof futures !== 'object' || futures === null || futures.constructor !== Array && !futures.is$JavaScriptIndexingBehavior()))
-    return $.Futures_wait$bailout(1, futures, t1);
-  if ($.getInterceptor$JSStringJSArray(futures).get$isEmpty(futures) === true)
-    return $.Future_Future$immediate($.CTC13);
-  completer = $.Completer_Completer();
-  result = completer.get$future();
-  t1.remaining_1 = futures.length;
-  values = $.List_List(futures.length);
-  for (i = 0; i < futures.length; ++i) {
-    future = futures[i];
-    future.then$1(new $.Futures_wait_anon(i, result, completer, values, t1));
-    future.handleException$1(new $.Futures_wait_anon0(result, completer, future));
-  }
-  return result;
+$.propertyTypeCastError = function(value, property) {
+  var actualType, t1;
+  actualType = $.Primitives_objectTypeName(value);
+  t1 = $.getInterceptor$JSString(property);
+  throw $.$$throw($.CastErrorImplementation$(actualType, t1.substring$2(property, 3, t1.get$length(property))));
+};
+
+$.stringLastIndexOfUnchecked = function(receiver, element, start) {
+  return receiver.lastIndexOf(element, start);
+};
+
+$.getTraceFromException = function(exception) {
+  return $.StackTrace$(exception.stack);
+};
+
+$.createInvocationMirror = function(name$, internalName, type, arguments$, argumentNames) {
+  return $.JSInvocationMirror$(name$, internalName, type, arguments$, argumentNames);
+};
+
+$.le = function(a, b) {
+  return typeof a === 'number' && typeof b === 'number' ? a <= b : $.le$slow(a, b);
 };
 
 $.throwCyclicInit = function(staticName) {
   throw $.$$throw($.RuntimeError$("Cyclic initialization for static " + $.S(staticName)));
-};
-
-$.MapCSSParser_expr_return$ = function() {
-  return new $.MapCSSParser_expr_return(null, null, null, null);
-};
-
-$.MapCSSParser_num_return$ = function() {
-  return new $.MapCSSParser_num_return(null, null, null, null);
 };
 
 $.typeNameInSafari = function(obj) {
@@ -21916,50 +22006,6 @@ $.typeNameInSafari = function(obj) {
   if (name$ === "RealtimeAnalyserNode")
     return "AnalyserNode";
   return name$;
-};
-
-$.constructorNameFallback = function(object) {
-  var constructor$, name$, t1, string;
-  if (object == null)
-    return "Null";
-  constructor$ = object.constructor;
-  if (typeof(constructor$) === "function") {
-    name$ = constructor$.name;
-    if (typeof name$ === 'string')
-      t1 = !(name$ === "") && !(name$ === "Object") && !(name$ === "Function.prototype");
-    else
-      t1 = false;
-    if (t1)
-      return name$;
-  }
-  string = Object.prototype.toString.call(object);
-  return string.substring(8, string.length - 1);
-};
-
-$.MapCSSParser_single_value_return$ = function() {
-  return new $.MapCSSParser_single_value_return(null, null, null, null);
-};
-
-$._ElementCssClassSet$ = function(_element) {
-  return new $._ElementCssClassSet(_element);
-};
-
-$.HttpRequestUploadEvents$ = function(_ptr) {
-  return new $.HttpRequestUploadEvents(_ptr);
-};
-
-$.getTypeNameOf = function(obj) {
-  if ($._getTypeNameOf == null)
-    $._getTypeNameOf = $.getFunctionForTypeNameOf();
-  return $._getTypeNameOf.call$1(obj);
-};
-
-$.toStringForNativeObject = function(obj) {
-  return "Instance of " + $.getTypeNameOf(obj);
-};
-
-$.hashCodeForNativeObject = function(object) {
-  return $.Primitives_objectHashCode(object);
 };
 
 $.typeNameInIE = function(obj) {
@@ -21998,13 +22044,79 @@ $.typeNameInIE = function(obj) {
   return name$;
 };
 
-$._dynamicMetadata = function(table) {
-  $dynamicMetadata = table;
+$.constructorNameFallback = function(object) {
+  var constructor$, name$, t1, string;
+  if (object == null)
+    return "Null";
+  constructor$ = object.constructor;
+  if (typeof(constructor$) === "function") {
+    name$ = constructor$.name;
+    if (typeof name$ === 'string')
+      t1 = !(name$ === "") && !(name$ === "Object") && !(name$ === "Function.prototype");
+    else
+      t1 = false;
+    if (t1)
+      return name$;
+  }
+  string = Object.prototype.toString.call(object);
+  return string.substring(8, string.length - 1);
 };
 
-$.dynamicSetMetadata = function(inputTable) {
-  var t1 = $.buildDynamicMetadata(inputTable);
-  $._dynamicMetadata(t1);
+$.typeNameInFirefox = function(obj) {
+  var name$ = $.constructorNameFallback(obj);
+  if (name$ === "Window")
+    return "DOMWindow";
+  if (name$ === "CSS2Properties")
+    return "CSSStyleDeclaration";
+  if (name$ === "DataTransfer")
+    return "Clipboard";
+  if (name$ === "DragEvent")
+    return "MouseEvent";
+  if (name$ === "GeoGeolocation")
+    return "Geolocation";
+  if (name$ === "MouseScrollEvent")
+    return "WheelEvent";
+  if (name$ === "OfflineResourceList")
+    return "DOMApplicationCache";
+  if (name$ === "WorkerMessageEvent")
+    return "MessageEvent";
+  if (name$ === "XMLDocument")
+    return "Document";
+  return name$;
+};
+
+$.Logger_Logger = function(name$) {
+  var t1, dot, parent$, thisName, res;
+  t1 = $.getInterceptor$JSString(name$);
+  if (t1.startsWith$1(name$, ".") === true)
+    throw $.$$throw($.ArgumentError$("name shouldn't start with a '.'"));
+  if ($.Logger__loggers == null)
+    $.Logger__loggers = $.makeLiteralMap([]);
+  if ($.Logger__loggers.containsKey$1(name$) === true)
+    return $.index($.Logger__loggers, name$);
+  dot = t1.lastIndexOf$1(name$, ".");
+  if ($.eqB(dot, -1)) {
+    parent$ = !$.eqB(name$, "") ? $.Logger_Logger("") : null;
+    thisName = name$;
+  } else {
+    parent$ = $.Logger_Logger(t1.substring$2(name$, 0, dot));
+    thisName = t1.substring$1(name$, $.add(dot, 1));
+  }
+  res = $.Logger$_internal(thisName, parent$);
+  $.indexSet($.Logger__loggers, name$, res);
+  return res;
+};
+
+$.Logger$_internal = function(name$, parent$) {
+  var t1 = new $.Logger(name$, parent$, null, $.Map_Map(), null);
+  t1.Logger$_internal$2(name$, parent$);
+  return t1;
+};
+
+$.DFA_MapCSSParser_6$ = function(recognizer) {
+  var t1 = new $.DFA_MapCSSParser_6(null, null, null, null, null, null, null, null, recognizer);
+  t1.DFA_MapCSSParser_6$1(recognizer);
+  return t1;
 };
 
 $.getFunctionForTypeNameOf = function() {
@@ -22025,6 +22137,108 @@ $.getFunctionForTypeNameOf = function() {
     return $.constructorNameFallback;
 };
 
+$.typeNameInChrome = function(obj) {
+  var name$ = obj.constructor.name;
+  if (name$ === "Window")
+    return "DOMWindow";
+  if (name$ === "CanvasPixelArray")
+    return "Uint8ClampedArray";
+  if (name$ === "WebKitMutationObserver")
+    return "MutationObserver";
+  if (name$ === "AudioChannelMerger")
+    return "ChannelMergerNode";
+  if (name$ === "AudioChannelSplitter")
+    return "ChannelSplitterNode";
+  if (name$ === "AudioGainNode")
+    return "GainNode";
+  if (name$ === "AudioPannerNode")
+    return "PannerNode";
+  if (name$ === "JavaScriptAudioNode")
+    return "ScriptProcessorNode";
+  if (name$ === "Oscillator")
+    return "OscillatorNode";
+  if (name$ === "RealtimeAnalyserNode")
+    return "AnalyserNode";
+  return name$;
+};
+
+$.getTypeNameOf = function(obj) {
+  if ($._getTypeNameOf == null)
+    $._getTypeNameOf = $.getFunctionForTypeNameOf();
+  return $._getTypeNameOf.call$1(obj);
+};
+
+$.toStringForNativeObject = function(obj) {
+  return "Instance of " + $.getTypeNameOf(obj);
+};
+
+$.hashCodeForNativeObject = function(object) {
+  return $.Primitives_objectHashCode(object);
+};
+
+$.HttpRequestUploadEvents$ = function(_ptr) {
+  return new $.HttpRequestUploadEvents(_ptr);
+};
+
+$.dynamicFunction = function(name$) {
+  var f, methods, dartMethod, bind;
+  f = Object.prototype[name$];
+  if (!(f == null) && !!f.methods)
+    return f.methods;
+  methods = {};
+  dartMethod = Object.getPrototypeOf($.CTC12)[name$];
+  if (!(dartMethod == null))
+    methods["Object"] = dartMethod;
+  bind = function() {return $.dynamicBind.call$4(this, name$, methods, Array.prototype.slice.call(arguments));};
+  bind.methods = methods;
+  $.defineProperty(Object.prototype, name$, bind);
+  return methods;
+};
+
+$.defineProperty = function(obj, property, value) {
+  Object.defineProperty(obj, property,
+      {value: value, enumerable: false, writable: true, configurable: true});
+};
+
+$.typeNameInOpera = function(obj) {
+  var name$ = $.constructorNameFallback(obj);
+  if (name$ === "Window")
+    return "DOMWindow";
+  return name$;
+};
+
+$._dynamicMetadata0 = function() {
+  if (typeof($dynamicMetadata) === "undefined") {
+    var t1 = [];
+    $._dynamicMetadata(t1);
+  }
+  return $dynamicMetadata;
+};
+
+$._dynamicMetadata = function(table) {
+  $dynamicMetadata = table;
+};
+
+$.buildDynamicMetadata = function(inputTable) {
+  var result, i, tag, tags, set, tagNames, j;
+  result = [];
+  for (i = 0; i < inputTable.length; ++i) {
+    tag = inputTable[i][0];
+    tags = inputTable[i][1];
+    set = {};
+    tagNames = tags.split("|");
+    for (j = 0; j < tagNames.length; ++j)
+      set[tagNames[j]] = true;
+    result.push($.MetaInfo$(tag, tags, set));
+  }
+  return result;
+};
+
+$.dynamicSetMetadata = function(inputTable) {
+  var t1 = $.buildDynamicMetadata(inputTable);
+  $._dynamicMetadata(t1);
+};
+
 $.regExpExec = function(regExp, str) {
   var result = $.regExpGetNative(regExp).exec(str);
   if (result == null)
@@ -22039,6 +22253,10 @@ $.regExpTest = function(regExp, str) {
 $.regExpGetNative = function(regExp) {
   var r = regExp._re;
   return r == null ? regExp._re = $.regExpMakeNative(regExp, false) : r;
+};
+
+$.Logger_root = function() {
+  return $.Logger_Logger("");
 };
 
 $.regExpMakeNative = function(regExp, global, exception) {
@@ -22071,93 +22289,6 @@ $.regExpMakeNative = function(regExp, global, exception) {
     throw $.$$throw($.IllegalJSRegExpException$(pattern, String(e)));
   }
 
-};
-
-$.defineProperty = function(obj, property, value) {
-  Object.defineProperty(obj, property,
-      {value: value, enumerable: false, writable: true, configurable: true});
-};
-
-$.dynamicBind = function(obj, name$, methods, arguments$) {
-  var tag, method, i, entry, proto;
-  tag = $.getTypeNameOf(obj);
-  method = methods[tag];
-  if (method == null && !($._dynamicMetadata0() == null))
-    for (i = 0; i < $._dynamicMetadata0().length; ++i) {
-      entry = $._dynamicMetadata0()[i];
-      if (entry.get$_set()[tag]) {
-        method = methods[entry.get$_tag()];
-        if (!(method == null))
-          break;
-      }
-    }
-  if (method == null)
-    method = methods["Object"];
-  proto = Object.getPrototypeOf(obj);
-  if (method == null)
-    method = function () {if (Object.getPrototypeOf(this) === proto) {throw new TypeError(name$ + " is not a function");} else {return Object.prototype[name$].apply(this, arguments);}};
-  if (!proto.hasOwnProperty(name$))
-    $.defineProperty(proto, name$, method);
-  return method.apply(obj, arguments$);
-};
-
-$.typeNameInChrome = function(obj) {
-  var name$ = obj.constructor.name;
-  if (name$ === "Window")
-    return "DOMWindow";
-  if (name$ === "CanvasPixelArray")
-    return "Uint8ClampedArray";
-  if (name$ === "WebKitMutationObserver")
-    return "MutationObserver";
-  if (name$ === "AudioChannelMerger")
-    return "ChannelMergerNode";
-  if (name$ === "AudioChannelSplitter")
-    return "ChannelSplitterNode";
-  if (name$ === "AudioGainNode")
-    return "GainNode";
-  if (name$ === "AudioPannerNode")
-    return "PannerNode";
-  if (name$ === "JavaScriptAudioNode")
-    return "ScriptProcessorNode";
-  if (name$ === "Oscillator")
-    return "OscillatorNode";
-  if (name$ === "RealtimeAnalyserNode")
-    return "AnalyserNode";
-  return name$;
-};
-
-$._CompleterImpl$ = function() {
-  return new $._CompleterImpl($._FutureImpl$());
-};
-
-$.typeNameInOpera = function(obj) {
-  var name$ = $.constructorNameFallback(obj);
-  if (name$ === "Window")
-    return "DOMWindow";
-  return name$;
-};
-
-$.typeNameInFirefox = function(obj) {
-  var name$ = $.constructorNameFallback(obj);
-  if (name$ === "Window")
-    return "DOMWindow";
-  if (name$ === "CSS2Properties")
-    return "CSSStyleDeclaration";
-  if (name$ === "DataTransfer")
-    return "Clipboard";
-  if (name$ === "DragEvent")
-    return "MouseEvent";
-  if (name$ === "GeoGeolocation")
-    return "Geolocation";
-  if (name$ === "MouseScrollEvent")
-    return "WheelEvent";
-  if (name$ === "OfflineResourceList")
-    return "DOMApplicationCache";
-  if (name$ === "WorkerMessageEvent")
-    return "MessageEvent";
-  if (name$ === "XMLDocument")
-    return "Document";
-  return name$;
 };
 
 $.allMatchesInStringUnchecked = function(needle, haystack) {
@@ -22195,14 +22326,6 @@ $.stringContainsUnchecked = function(receiver, other, startIndex) {
 
 $.stringReplaceJS = function(receiver, replacer, to) {
   return receiver.replace(replacer, to.replace('$', '$$$$'));
-};
-
-$._dynamicMetadata0 = function() {
-  if (typeof($dynamicMetadata) === "undefined") {
-    var t1 = [];
-    $._dynamicMetadata(t1);
-  }
-  return $dynamicMetadata;
 };
 
 $.stringReplaceAllUnchecked = function(receiver, from, to) {
@@ -22249,121 +22372,72 @@ $.stringJoinUnchecked = function(array, separator) {
   return array.join(separator);
 };
 
-$.dynamicFunction = function(name$) {
-  var f, methods, dartMethod, bind;
-  f = Object.prototype[name$];
-  if (!(f == null) && !!f.methods)
-    return f.methods;
-  methods = {};
-  dartMethod = Object.getPrototypeOf($.CTC12)[name$];
-  if (!(dartMethod == null))
-    methods["Object"] = dartMethod;
-  bind = function() {return $.dynamicBind.call$4(this, name$, methods, Array.prototype.slice.call(arguments));};
-  bind.methods = methods;
-  $.defineProperty(Object.prototype, name$, bind);
-  return methods;
+$.BitSet$ = function(nbits) {
+  var t1 = new $.BitSet(null);
+  t1.BitSet$1(nbits);
+  return t1;
 };
 
-$.buildDynamicMetadata = function(inputTable) {
-  var result, i, tag, tags, set, tagNames, j;
-  result = [];
-  for (i = 0; i < inputTable.length; ++i) {
-    tag = inputTable[i][0];
-    tags = inputTable[i][1];
-    set = {};
-    tagNames = tags.split("|");
-    for (j = 0; j < tagNames.length; ++j)
-      set[tagNames[j]] = true;
-    result.push($.MetaInfo$(tag, tags, set));
-  }
-  return result;
+$._JsDeserializer$ = function() {
+  return new $._JsDeserializer(null);
 };
 
-$._FutureImpl$ = function() {
-  return new $._FutureImpl(false, null, null, null, false, false, [], [], []);
-};
-
-$._FutureImpl__FutureImpl$immediate = function(value) {
-  var res = $._FutureImpl$();
-  res._setValue$1(value);
-  return res;
+$.BitSet$fromList = function(bits) {
+  return new $.BitSet(bits);
 };
 
 $.IDBDatabaseEvents$ = function(_ptr) {
   return new $.IDBDatabaseEvents(_ptr);
 };
 
-$.FutureAlreadyCompleteException$ = function() {
-  return new $.FutureAlreadyCompleteException();
-};
-
-$.createInvocationMirror = function(name$, internalName, type, arguments$, argumentNames) {
-  return $.JSInvocationMirror$(name$, internalName, type, arguments$, argumentNames);
-};
-
-$.FutureUnhandledException$ = function(source, stackTrace) {
-  return new $.FutureUnhandledException(source, stackTrace);
-};
-
-$.xor = function(a, b) {
-  if ($.checkNumbers(a, b))
-    return (a ^ b) >>> 0;
-  return a.operator$xor$1(b);
-};
-
-$._FrozenCssClassSet$ = function() {
-  return new $._FrozenCssClassSet();
-};
-
-$._ReceivePortImpl$ = function() {
-  var t1 = $._ReceivePortImpl__nextFreeId;
-  $._ReceivePortImpl__nextFreeId = $.add(t1, 1);
-  t1 = new $._ReceivePortImpl(t1, null);
-  t1._ReceivePortImpl$0();
-  return t1;
-};
-
-$._PendingSendPortFinder$ = function() {
-  var t1 = $._MessageTraverserVisitedMap$0();
-  t1 = new $._PendingSendPortFinder([], t1);
-  t1._PendingSendPortFinder$0();
-  return t1;
+$.dynamicBind = function(obj, name$, methods, arguments$) {
+  var tag, method, i, entry, proto;
+  tag = $.getTypeNameOf(obj);
+  method = methods[tag];
+  if (method == null && !($._dynamicMetadata0() == null))
+    for (i = 0; i < $._dynamicMetadata0().length; ++i) {
+      entry = $._dynamicMetadata0()[i];
+      if (entry.get$_set()[tag]) {
+        method = methods[entry.get$_tag()];
+        if (!(method == null))
+          break;
+      }
+    }
+  if (method == null)
+    method = methods["Object"];
+  proto = Object.getPrototypeOf(obj);
+  if (method == null)
+    method = function () {if (Object.getPrototypeOf(this) === proto) {throw new TypeError(name$ + " is not a function");} else {return Object.prototype[name$].apply(this, arguments);}};
+  if (!proto.hasOwnProperty(name$))
+    $.defineProperty(proto, name$, method);
+  return method.apply(obj, arguments$);
 };
 
 $.print = function(object) {
-  $.Primitives_printString(object);
+  if (typeof object === 'string')
+    $.Primitives_printString(object);
+  else
+    $.Primitives_printString($.getInterceptor(object).toString$0(object));
 };
 
-$.RewriteRuleTokenStream$ = function(adaptor, elementDescription, elements) {
-  var t1 = new $.RewriteRuleTokenStream(0, null, null, false, elementDescription, adaptor);
-  t1.RewriteRuleElementStream$3(adaptor, elementDescription, elements);
+$.FormatException$ = function(message) {
+  return new $.FormatException(message);
+};
+
+$._IsolateContext$ = function() {
+  var t1 = new $._IsolateContext(null, null, null);
+  t1._IsolateContext$0();
   return t1;
 };
 
-$.IllegalJSRegExpException$ = function(_pattern, _errmsg) {
-  return new $.IllegalJSRegExpException(_pattern, _errmsg);
-};
-
-$._AllMatchesIterable$ = function(_re, _str) {
-  return new $._AllMatchesIterable(_re, _str);
-};
-
-$.RewriteRuleSubtreeStream$ = function(adaptor, elementDescription, e) {
-  var t1 = new $.RewriteRuleSubtreeStream(0, null, null, false, elementDescription, adaptor);
-  t1.RewriteRuleElementStream$3(adaptor, elementDescription, e);
+$._Manager$ = function() {
+  var t1 = new $._Manager(0, 0, 1, null, null, null, null, null, null, null, null, null);
+  t1._Manager$0();
   return t1;
 };
 
-$._AllMatchesIterator$ = function(re, _str) {
-  return new $._AllMatchesIterator($.JSSyntaxRegExp__globalVersionOf(re), _str, null, false);
-};
-
-$._MatchImplementation$ = function(pattern, str, start, end, _groups) {
-  return new $._MatchImplementation(pattern, str, start, end, _groups);
-};
-
-$.JSInvocationMirror$ = function(memberName, _internalName, _kind, _arguments, _namedArgumentNames) {
-  return new $.JSInvocationMirror(memberName, _internalName, _kind, _arguments, _namedArgumentNames, null);
+$._EventLoop$ = function() {
+  return new $._EventLoop($.Queue_Queue());
 };
 
 $.CommonErrorNode$ = function(input, start, stop$, trappedException) {
@@ -22374,46 +22448,16 @@ $.CommonErrorNode$ = function(input, start, stop$, trappedException) {
   return t1;
 };
 
-$._DOMWindowCrossFrame$ = function(_window) {
-  return new $._DOMWindowCrossFrame(_window);
-};
-
-$._DOMWindowCrossFrame__createSafe = function(w) {
-  var t1 = $.window();
-  if (w == null ? t1 == null : w === t1)
-    return w;
-  else
-    return $._DOMWindowCrossFrame$(w);
-};
-
-$.parse = function(source) {
-  var parser, t1, len, t2, t3;
-  parser = $.MapCSSParser$($.CommonTokenStream$($.MapCSSLexer$($.ANTLRStringStream$(source))));
-  parser.stylesheet$0();
-  t1 = parser.get$reportedErrors();
-  len = $.getInterceptor$JSStringJSArray(t1).get$length(t1);
-  $.query("#status").get$classes().removeAll$1(["alert", "alert-success", "alert-error"]);
-  if ($.gtB(len, 0)) {
-    t1 = parser.get$reportedErrors();
-    t2 = "Failed to parse stylesheet. Error messages:</br>" + $.S($.getInterceptor$JSArray(t1).reduce$2(t1, "", new $.parse_anon()));
-    t3 = $.query("#status");
-    t3.set$innerHTML(t2);
-    t2 = t3.get$classes();
-    $.getInterceptor$JSArray(t2).add$1(t2, "alert");
-    t3 = t3.get$classes();
-    $.getInterceptor$JSArray(t3).add$1(t3, "alert-error");
-  } else {
-    t1 = $.query("#status");
-    t1.set$innerHTML("Stylessheet sucessfully parsed.");
-    t2 = t1.get$classes();
-    $.getInterceptor$JSArray(t2).add$1(t2, "alert");
-    t1 = t1.get$classes();
-    $.getInterceptor$JSArray(t1).add$1(t1, "alert-success");
-  }
+$.CommonTreeAdaptor$ = function() {
+  return new $.CommonTreeAdaptor(null, 1);
 };
 
 $.initEditor = function() {
   $.scoped(new $.initEditor_anon());
+};
+
+$.onParse = function() {
+  $.scoped(new $.onParse_anon());
 };
 
 $.main = function() {
@@ -22422,16 +22466,64 @@ $.main = function() {
   $.getInterceptor$JSArray(t1).add$1(t1, new $.main_anon());
 };
 
+$.formatUnwantedTokenException = function(e) {
+  var t1, t2, sb, t3, t4, t5;
+  t1 = e.expecting;
+  if ($.geB(t1, 0)) {
+    if (t1 !== (t1 | 0))
+      throw $.iae(t1);
+    if (t1 < 0 || t1 >= $.CTC8.length)
+      throw $.ioore(t1);
+  }
+  t2 = e.token;
+  if (t2 == null)
+    ;
+  else {
+    t2 = t2.get$type();
+    if (t2 !== (t2 | 0))
+      throw $.iae(t2);
+    if (t2 < 0 || t2 >= $.CTC8.length)
+      throw $.ioore(t2);
+  }
+  sb = $.StringBuffer_StringBuffer("");
+  t2 = $.getInterceptor$JSArray(sb);
+  t2.add$1(sb, "<li>");
+  t2.add$1(sb, "<span data-row=\"" + $.S(e.line) + "\" data-column=\"" + $.S(e.charPositionInLine) + "\" class=\"parse-error-position\">(" + $.S(e.line) + ", " + $.S(e.charPositionInLine) + ")</span>");
+  t2.add$1(sb, "<span class=\"parser-error-text\">");
+  t3 = e.token;
+  if (t3 == null)
+    t2.add$1(sb, "Unexpected token");
+  else {
+    t4 = "Unexpected token, got '" + $.S(t3.get$text()) + "' of type ";
+    t5 = e.token.get$type();
+    if (t5 !== (t5 | 0))
+      throw $.iae(t5);
+    if (t5 < 0 || t5 >= $.CTC8.length)
+      throw $.ioore(t5);
+    t2.add$1(sb, t4 + $.S($.CTC8[t5]));
+  }
+  if ($.geB(t1, 0)) {
+    if (t1 !== (t1 | 0))
+      throw $.iae(t1);
+    if (t1 < 0 || t1 >= $.CTC8.length)
+      throw $.ioore(t1);
+    t2.add$1(sb, "expected " + $.S($.CTC8[t1]));
+  }
+  t2.add$1(sb, "</span>");
+  t2.add$1(sb, "</li>");
+  return t2.toString$0(sb);
+};
+
 $.window = function() {
   return window;
 };
 
-$.FutureNotCompleteException$ = function() {
-  return new $.FutureNotCompleteException();
-};
-
 $.document = function() {
   return document;
+};
+
+$.JSInvocationMirror$ = function(memberName, _internalName, _kind, _arguments, _namedArgumentNames) {
+  return new $.JSInvocationMirror(memberName, _internalName, _kind, _arguments, _namedArgumentNames, null);
 };
 
 $.query = function(selector) {
@@ -22442,23 +22534,21 @@ $.queryAll = function(selector) {
   return $.document().queryAll$1(selector);
 };
 
-$.CommonToken$ = function(type, _text) {
-  return new $.CommonToken(type, null, -1, 0, null, null, _text, -1, null, null);
-};
-
 $._getNewIsolateId = function() {
   if (!window.$dart$isolate$counter)
     window.$dart$isolate$counter = 1;
   return window.$dart$isolate$counter++;
 };
 
-$.CommonToken$fromCharStream = function(inputStream, type, channel, start, stop$) {
-  return new $.CommonToken(type, null, -1, channel, inputStream, null, null, -1, start, stop$);
+$._Timer$ = function(milliSeconds, callback) {
+  var t1 = new $._Timer(true, null);
+  t1._Timer$2(milliSeconds, callback);
+  return t1;
 };
 
-$.CommonToken$fromToken = function(oldToken) {
-  var t1 = new $.CommonToken(null, null, -1, 0, null, null, null, -1, null, null);
-  t1.CommonToken$fromToken$1(oldToken);
+$._Timer$repeating = function(milliSeconds, callback) {
+  var t1 = new $._Timer(false, null);
+  t1._Timer$repeating$2(milliSeconds, callback);
   return t1;
 };
 
@@ -22466,18 +22556,24 @@ $.IDBOpenDBRequestEvents$ = function(_ptr) {
   return new $.IDBOpenDBRequestEvents(_ptr);
 };
 
-$._JsVisitedMap$ = function() {
-  return new $._JsVisitedMap(null);
-};
-
 $.IDBRequestEvents$ = function(_ptr) {
   return new $.IDBRequestEvents(_ptr);
 };
 
-$.MismatchedTokenException$ = function(expecting, input) {
-  var t1 = new $.MismatchedTokenException(expecting, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
+$.MapCSSParser_entry_return$ = function() {
+  return new $.MapCSSParser_entry_return(null, null, null, null);
+};
+
+$.MapCSSParser_stylesheet_return$ = function() {
+  return new $.MapCSSParser_stylesheet_return(null, null, null, null);
+};
+
+$.MapCSSParser_rule_return$ = function() {
+  return new $.MapCSSParser_rule_return(null, null, null, null);
+};
+
+$.MapCSSParser_selector_return$ = function() {
+  return new $.MapCSSParser_selector_return(null, null, null, null);
 };
 
 $.IDBTransactionEvents$ = function(_ptr) {
@@ -22497,32 +22593,126 @@ $._browserPrefix = function() {
   return $._cachedBrowserPrefix;
 };
 
-$.MismatchedRangeException$ = function(a, b, input) {
-  var t1 = new $.MismatchedRangeException(a, b, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
+$.MapCSSParser_link_selector_return$ = function() {
+  return new $.MapCSSParser_link_selector_return(null, null, null, null);
 };
 
-$._ExceptionImplementation$ = function(message) {
-  return new $._ExceptionImplementation(message);
+$.Queue_Queue = function() {
+  return $.DoubleLinkedQueue$();
+};
+
+$.MapCSSParser_int_operator_return$ = function() {
+  return new $.MapCSSParser_int_operator_return(null, null, null, null);
 };
 
 $.IDBVersionChangeRequestEvents$ = function(_ptr) {
   return new $.IDBVersionChangeRequestEvents(_ptr);
 };
 
+$.MapCSSParser_import_statement_return$ = function() {
+  return new $.MapCSSParser_import_statement_return(null, null, null, null);
+};
+
+$.MapCSSParser_layer_id_selector_return$ = function() {
+  return new $.MapCSSParser_layer_id_selector_return(null, null, null, null);
+};
+
+$.MapCSSParser_simple_selector_return$ = function() {
+  return new $.MapCSSParser_simple_selector_return(null, null, null, null);
+};
+
+$.MapCSSParser_zoom_selector_return$ = function() {
+  return new $.MapCSSParser_zoom_selector_return(null, null, null, null);
+};
+
+$._MainManagerStub$ = function() {
+  return new $._MainManagerStub();
+};
+
 $.InputElementEvents$ = function(_ptr) {
   return new $.InputElementEvents(_ptr);
 };
 
-$._JsDeserializer$0 = function() {
-  return new $._JsDeserializer0(null);
+$.MapCSSParser_quoted_return$ = function() {
+  return new $.MapCSSParser_quoted_return(null, null, null, null);
 };
 
-$.DFA_MapCSSLexer_36$ = function(recognizer) {
-  var t1 = new $.DFA_MapCSSLexer_36(null, null, null, null, null, null, null, null, recognizer);
-  t1.DFA_MapCSSLexer_36$1(recognizer);
+$.MapCSSParser_cssident_return$ = function() {
+  return new $.MapCSSParser_cssident_return(null, null, null, null);
+};
+
+$._IsolateEvent$ = function(isolate, fn, message) {
+  return new $._IsolateEvent(isolate, fn, message);
+};
+
+$.MapCSSParser_attribute_selector_return$ = function() {
+  return new $.MapCSSParser_attribute_selector_return(null, null, null, null);
+};
+
+$._JsSerializer$0 = function() {
+  var t1 = new $._JsSerializer0(0, $._MessageTraverserVisitedMap$0());
+  t1._JsSerializer$0();
   return t1;
+};
+
+$.MapCSSParser_predicate_return$ = function() {
+  return new $.MapCSSParser_predicate_return(null, null, null, null);
+};
+
+$.MapCSSParser_predicate_ident_return$ = function() {
+  return new $.MapCSSParser_predicate_ident_return(null, null, null, null);
+};
+
+$.MapCSSParser_predicate_primitive_return$ = function() {
+  return new $.MapCSSParser_predicate_primitive_return(null, null, null, null);
+};
+
+$.MapCSSParser_rhs_match_return$ = function() {
+  return new $.MapCSSParser_rhs_match_return(null, null, null, null);
+};
+
+$.MapCSSParser_binary_operator_return$ = function() {
+  return new $.MapCSSParser_binary_operator_return(null, null, null, null);
+};
+
+$._NativeJsSendPort$ = function(_receivePort, isolateId) {
+  return new $._NativeJsSendPort(_receivePort, isolateId);
+};
+
+$.MapCSSParser_class_selector_return$ = function() {
+  return new $.MapCSSParser_class_selector_return(null, null, null, null);
+};
+
+$.MapCSSParser_pseudo_class_selector_return$ = function() {
+  return new $.MapCSSParser_pseudo_class_selector_return(null, null, null, null);
+};
+
+$.MapCSSParser_declaration_block_return$ = function() {
+  return new $.MapCSSParser_declaration_block_return(null, null, null, null);
+};
+
+$.MapCSSParser_declarations_return$ = function() {
+  return new $.MapCSSParser_declarations_return(null, null, null, null);
+};
+
+$.MapCSSParser_declaration_return$ = function() {
+  return new $.MapCSSParser_declaration_return(null, null, null, null);
+};
+
+$.MapCSSParser_declaration_property_return$ = function() {
+  return new $.MapCSSParser_declaration_property_return(null, null, null, null);
+};
+
+$.MapCSSParser_type_selector_return$ = function() {
+  return new $.MapCSSParser_type_selector_return(null, null, null, null);
+};
+
+$.MapCSSParser_declaration_value_return$ = function() {
+  return new $.MapCSSParser_declaration_value_return(null, null, null, null);
+};
+
+$.MapCSSParser_num_return$ = function() {
+  return new $.MapCSSParser_num_return(null, null, null, null);
 };
 
 $.DFA_MapCSSLexer_27$ = function(recognizer) {
@@ -22531,590 +22721,84 @@ $.DFA_MapCSSLexer_27$ = function(recognizer) {
   return t1;
 };
 
-$.CommonTree$ = function(node) {
-  var t1 = new $.CommonTree(null, -1, -1, null, null, null, null, -1, null, null);
-  t1.BaseTree$2$charPos$node(-1, node);
-  t1.CommonTree$1(node);
-  return t1;
+$.MapCSSParser_single_value_return$ = function() {
+  return new $.MapCSSParser_single_value_return(null, null, null, null);
 };
 
 $.EventListenerList$ = function(_ptr, _type) {
   return new $.EventListenerList(_ptr, _type);
 };
 
-$.DoubleLinkedQueue$ = function() {
-  var t1 = new $.DoubleLinkedQueue(null);
-  t1.DoubleLinkedQueue$0();
+$.MapCSSParser_args_return$ = function() {
+  return new $.MapCSSParser_args_return(null, null, null, null);
+};
+
+$.MapCSSParser_expr_return$ = function() {
+  return new $.MapCSSParser_expr_return(null, null, null, null);
+};
+
+$.MapCSSParser_logicalExpression_return$ = function() {
+  return new $.MapCSSParser_logicalExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_booleanAndExpression_return$ = function() {
+  return new $.MapCSSParser_booleanAndExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_equalityExpression_return$ = function() {
+  return new $.MapCSSParser_equalityExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_relationalExpression_return$ = function() {
+  return new $.MapCSSParser_relationalExpression_return(null, null, null, null);
+};
+
+$.DFA_MapCSSLexer_36$ = function(recognizer) {
+  var t1 = new $.DFA_MapCSSLexer_36(null, null, null, null, null, null, null, null, recognizer);
+  t1.DFA_MapCSSLexer_36$1(recognizer);
   return t1;
 };
 
-$.CommonTree$fromToken = function(_token) {
-  var t1 = new $.CommonTree(_token, -1, -1, null, null, null, null, -1, null, null);
-  t1.BaseTree$2$charPos$node(-1, null);
+$.MapCSSParser_additiveExpression_return$ = function() {
+  return new $.MapCSSParser_additiveExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_multiplicativeExpression_return$ = function() {
+  return new $.MapCSSParser_multiplicativeExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_unaryExpression_return$ = function() {
+  return new $.MapCSSParser_unaryExpression_return(null, null, null, null);
+};
+
+$.MapCSSParser_primaryExpression_return$ = function() {
+  return new $.MapCSSParser_primaryExpression_return(null, null, null, null);
+};
+
+$._JsCopier$ = function() {
+  var t1 = new $._JsCopier($._MessageTraverserVisitedMap$0());
+  t1._JsCopier$0();
   return t1;
 };
 
-$._DoubleLinkedQueueIterator$ = function(_sentinel) {
-  var t1 = new $._DoubleLinkedQueueIterator(_sentinel, null);
-  t1._DoubleLinkedQueueIterator$1(_sentinel);
+$._WorkerSendPort$ = function(_workerId, isolateId, _receivePortId) {
+  return new $._WorkerSendPort(_workerId, _receivePortId, isolateId);
+};
+
+$.Completer_Completer = function() {
+  return $._CompleterImpl$();
+};
+
+$._MessageTraverserVisitedMap$0 = function() {
+  return new $._MessageTraverserVisitedMap0();
+};
+
+$._ReceivePortImpl$ = function() {
+  var t1 = $._ReceivePortImpl__nextFreeId;
+  $._ReceivePortImpl__nextFreeId = $.add(t1, 1);
+  t1 = new $._ReceivePortImpl(t1, null);
+  t1._ReceivePortImpl$0();
   return t1;
-};
-
-$._DoubleLinkedQueueEntrySentinel$ = function() {
-  var t1 = new $._DoubleLinkedQueueEntrySentinel(null, null, null);
-  t1.DoubleLinkedQueueEntry$1(null);
-  t1._DoubleLinkedQueueEntrySentinel$0();
-  return t1;
-};
-
-$.MismatchedSetException$ = function(expecting, input) {
-  var t1 = new $.MismatchedSetException(expecting, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
-};
-
-$.DoubleLinkedQueueEntry$ = function(e) {
-  var t1 = new $.DoubleLinkedQueueEntry(null, null, null);
-  t1.DoubleLinkedQueueEntry$1(e);
-  return t1;
-};
-
-$.NoViableAltException$ = function(grammarDecisionDescription, decisionNumber, stateNumber, input) {
-  var t1 = new $.NoViableAltException(grammarDecisionDescription, decisionNumber, stateNumber, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
-};
-
-$.CharStreamState$ = function() {
-  return new $.CharStreamState(null, null, null);
-};
-
-$.double_parse = function(source) {
-  return $.Primitives_parseDouble(source);
-};
-
-$.MetaInfo$ = function(_tag, _tags, _set) {
-  return new $.MetaInfo(_tag, _tags, _set);
-};
-
-$._AttributeClassSet$ = function(_element) {
-  return new $._AttributeClassSet(_element);
-};
-
-$._FunctionProxy$_internal = function(port, id) {
-  var t1 = new $._FunctionProxy(null, port, id);
-  t1._FunctionProxy$_internal$2(port, id);
-  return t1;
-};
-
-$.Proxy_Proxy$_json = function(data) {
-  if ($.eqB($._depth(), 0))
-    throw $.$$throw("Cannot create Proxy out of scope.");
-  return $._deserialize($._jsPortConvert.callSync$1($.Proxy__serializeDataTree(data)));
-};
-
-$.Proxy__serializeDataTree = function(data) {
-  var entries, t1, t2;
-  if (typeof data === 'object' && data !== null && data.is$Map()) {
-    entries = $.List_List(null);
-    for (t1 = data.get$keys(), t1 = $.getInterceptor$JSArray(t1).iterator$0(t1); t1.get$hasNext() === true;) {
-      t2 = t1.next$0();
-      entries.push([t2, $.Proxy__serializeDataTree(data.operator$index$1(t2))]);
-    }
-    return ["map", entries];
-  } else if (typeof data === 'object' && data !== null && (data.constructor === Array || data.is$List()))
-    return ["list", $.getInterceptor$JSArray(data).map$1(data, new $.Proxy__serializeDataTree_anon())];
-  else
-    return ["simple", $._serialize(data)];
-};
-
-$.Proxy$_internal = function(_port, _id) {
-  return new $.Proxy(_port, _id);
-};
-
-$.Proxy__forward = function(receiver, member, kind, args) {
-  var result;
-  if ($.eqB($._depth(), 0))
-    throw $.$$throw("Cannot access a JavaScript proxy out of scope.");
-  result = receiver._port.callSync$1([receiver._lib1_id, member, kind, $.getInterceptor$JSArray(args).map$1(args, $._serialize)]);
-  switch ($.index(result, 0)) {
-    case "return":
-      return $._deserialize($.index(result, 1));
-    case "throws":
-      throw $.$$throw($._deserialize($.index(result, 1)));
-    case "none":
-      throw $.$$throw($.NoSuchMethodError$(receiver, member, args, $.makeLiteralMap([]), null));
-    default:
-      throw $.$$throw("Invalid return value");
-  }
-};
-
-$._ChildrenElementList$_wrap = function(element) {
-  return new $._ChildrenElementList(element, element.children);
-};
-
-$.MediaStreamEvents$ = function(_ptr) {
-  return new $.MediaStreamEvents(_ptr);
-};
-
-$.StackOverflowError$ = function() {
-  return new $.StackOverflowError();
-};
-
-$.Set_Set = function() {
-  return $._HashSetImpl$();
-};
-
-$.CastErrorImplementation$ = function(actualType, expectedType) {
-  return new $.CastErrorImplementation(actualType, expectedType);
-};
-
-$.EarlyExitException$ = function(decisionNumber, input) {
-  var t1 = new $.EarlyExitException(decisionNumber, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
-};
-
-$.Future_Future$immediate = function(value) {
-  return $._FutureImpl__FutureImpl$immediate(value);
-};
-
-$.RuntimeError$ = function(message) {
-  return new $.RuntimeError(message);
-};
-
-$._dispatchEvent = function(receiver, message) {
-  var event$ = $.CustomEvent_CustomEvent(receiver, false, false, $.JSON_stringify(message));
-  $.window().$dom_dispatchEvent$1(event$);
-};
-
-$.LocalWindowEvents$ = function(_ptr) {
-  return new $.LocalWindowEvents(_ptr);
-};
-
-$.FilteredElementList$ = function(node) {
-  return new $.FilteredElementList(node, node.get$nodes());
-};
-
-$.ElementEvents$ = function(_ptr) {
-  return new $.ElementEvents(_ptr);
-};
-
-$._convertNativeToDart_Window = function(win) {
-  return $._DOMWindowCrossFrame__createSafe(win);
-};
-
-$._convertNativeToDart_SerializedScriptValue = function(object) {
-  return $._convertNativeToDart_AcceptStructuredClone(object, true);
-};
-
-$._convertDartToNative_PrepareForStructuredClone = function(value) {
-  var values, copies, t1, t2, t3, t4, copy;
-  values = [];
-  copies = [];
-  t1 = new $._convertDartToNative_PrepareForStructuredClone_findSlot(values, copies);
-  t2 = new $._convertDartToNative_PrepareForStructuredClone_readSlot(copies);
-  t3 = new $._convertDartToNative_PrepareForStructuredClone_writeSlot(copies);
-  t4 = new $._convertDartToNative_PrepareForStructuredClone_cleanupSlots();
-  copy = new $._convertDartToNative_PrepareForStructuredClone_walk(t2, t1, t3).call$1(value);
-  t4.call$0();
-  return copy;
-};
-
-$._convertNativeToDart_AcceptStructuredClone = function(object, mustCopy) {
-  var values, copies, t1;
-  values = [];
-  copies = [];
-  t1 = new $._convertNativeToDart_AcceptStructuredClone_findSlot(copies, values);
-  return new $._convertNativeToDart_AcceptStructuredClone_walk(new $._convertNativeToDart_AcceptStructuredClone_readSlot(copies), t1, mustCopy, new $._convertNativeToDart_AcceptStructuredClone_writeSlot(copies)).call$1(object);
-};
-
-$._callInIsolate = function(isolate, function$) {
-  isolate.eval$1(function$);
-  $._globalState().get$topEventLoop().run$0();
-};
-
-$._currentIsolate = function() {
-  return $._globalState().get$currentContext();
-};
-
-$.startRootIsolate = function(entry) {
-  var t1, rootContext;
-  t1 = $._Manager$();
-  $._globalState0(t1);
-  if ($._globalState().get$isWorker() === true)
-    return;
-  rootContext = $._IsolateContext$();
-  $._globalState().set$rootContext(rootContext);
-  $globals = rootContext.isolateStatics;
-  $static_init();
-  $._globalState().set$currentContext(rootContext);
-  if (!($._window() == null))
-    rootContext.eval$1(new $.startRootIsolate_anon());
-  rootContext.eval$1(entry);
-  $._globalState().get$topEventLoop().run$0();
-};
-
-$._globalState = function() {
-  return $globalState;
-};
-
-$._globalState0 = function(val) {
-  $globalState = val;
-};
-
-$.Events$ = function(_ptr) {
-  return new $.Events(_ptr);
-};
-
-$._serializeMessage = function(message) {
-  if ($._globalState().get$needSerialization() === true)
-    return $._JsSerializer$0().traverse$1(message);
-  else
-    return $._JsCopier$().traverse$1(message);
-};
-
-$._Device_userAgent = function() {
-  return $.window().get$navigator().get$userAgent();
-};
-
-$._Device_isOpera = function() {
-  var t1 = $._Device_userAgent();
-  return $.getInterceptor$JSString(t1).contains$2(t1, "Opera", 0);
-};
-
-$._Device_isIE = function() {
-  var t1, t2;
-  if ($._Device_isOpera() !== true) {
-    t1 = $._Device_userAgent();
-    t2 = $.getInterceptor$JSString(t1).contains$2(t1, "MSIE", 0) === true;
-    t1 = t2;
-  } else
-    t1 = false;
-  return t1;
-};
-
-$._deserializeMessage = function(message) {
-  if ($._globalState().get$needSerialization() === true)
-    return $._JsDeserializer$0().deserialize$1(message);
-  else
-    return message;
-};
-
-$._Device_isFirefox = function() {
-  var t1 = $._Device_userAgent();
-  return $.getInterceptor$JSString(t1).contains$2(t1, "Firefox", 0);
-};
-
-$.ElementInstanceEvents$ = function(_ptr) {
-  return new $.ElementInstanceEvents(_ptr);
-};
-
-$._window = function() {
-  return typeof window != "undefined" ? window : null;
-};
-
-$._timerFactory = function(millis, callback, repeating) {
-  return repeating === true ? $._Timer$repeating(millis, callback) : $._Timer$(millis, callback);
-};
-
-$._waitForPendingPorts = function(message, callback) {
-  var finder = $._PendingSendPortFinder$();
-  finder.traverse$1(message);
-  $.Futures_wait(finder.ports).then$1(new $._waitForPendingPorts_anon(callback));
-};
-
-$._FrozenElementList$_wrap = function(_nodeList) {
-  return new $._FrozenElementList(_nodeList);
-};
-
-$.LinkedHashMap_LinkedHashMap = function() {
-  return $._LinkedHashMapImpl$();
-};
-
-$.max = function(a, b) {
-  if (typeof a === 'number') {
-    if (typeof b === 'number') {
-      if (a > b)
-        return a;
-      if (a < b)
-        return b;
-      if (typeof b === 'number') {
-        if (typeof a === 'number')
-          if (a === 0)
-            return a + b;
-        if ($.CTC6.get$isNaN(b) === true)
-          return b;
-        return a;
-      }
-      if (b === 0 && $.CTC1.get$isNegative(a) === true)
-        return b;
-      return a;
-    }
-    throw $.$$throw($.ArgumentError$(b));
-  }
-  throw $.$$throw($.ArgumentError$(a));
-};
-
-$._LinkedHashMapImpl$ = function() {
-  var t1 = new $._LinkedHashMapImpl(null, null);
-  t1._LinkedHashMapImpl$0();
-  return t1;
-};
-
-$._KeyValuePair$ = function(key, value) {
-  return new $._KeyValuePair(key, value);
-};
-
-$._ChildNodeListLazy$ = function(_this) {
-  return new $._ChildNodeListLazy(_this);
-};
-
-$.AbstractWorkerEvents$ = function(_ptr) {
-  return new $.AbstractWorkerEvents(_ptr);
-};
-
-$.FailedPredicateException$ = function(input, ruleName, predicateText) {
-  var t1 = new $.FailedPredicateException(ruleName, predicateText, input, null, null, null, null, null, null, null);
-  t1.RecognitionException$1(input);
-  return t1;
-};
-
-$.min = function(a, b) {
-  if (typeof a === 'number') {
-    if (typeof b === 'number') {
-      if (a > b)
-        return b;
-      if (a < b)
-        return a;
-      if (typeof b === 'number') {
-        if (typeof a === 'number')
-          if (a === 0)
-            return (a + b) * a * b;
-        if (a === 0 && $.CTC6.get$isNegative(b) === true || $.CTC6.get$isNaN(b) === true)
-          return b;
-        return a;
-      }
-      return a;
-    }
-    throw $.$$throw($.ArgumentError$(b));
-  }
-  throw $.$$throw($.ArgumentError$(a));
-};
-
-$.StackTrace$ = function(stack) {
-  return new $.StackTrace(stack);
-};
-
-$._FrozenElementListIterator$ = function(_list) {
-  return new $._FrozenElementListIterator(_list, 0);
-};
-
-$.BatteryManagerEvents$ = function(_ptr) {
-  return new $.BatteryManagerEvents(_ptr);
-};
-
-$.MediaElementEvents$ = function(_ptr) {
-  return new $.MediaElementEvents(_ptr);
-};
-
-$.BodyElementEvents$ = function(_ptr) {
-  return new $.BodyElementEvents(_ptr);
-};
-
-$.MediaStreamTrackEvents$ = function(_ptr) {
-  return new $.MediaStreamTrackEvents(_ptr);
-};
-
-$._ElementAttributeMap$ = function(_element) {
-  return new $._ElementAttributeMap(_element);
-};
-
-$.MediaStreamTrackListEvents$ = function(_ptr) {
-  return new $.MediaStreamTrackListEvents(_ptr);
-};
-
-$.MessagePortEvents$ = function(_ptr) {
-  return new $.MessagePortEvents(_ptr);
-};
-
-$.RewriteEmptyStreamException$ = function(elementDescription) {
-  return new $.RewriteEmptyStreamException(elementDescription);
-};
-
-$.RewriteCardinalityException$ = function(message) {
-  return new $.RewriteCardinalityException(message);
-};
-
-$.NoSuchMethodError$ = function(_receiver, _memberName, _arguments, _namedArguments, existingArgumentNames) {
-  return new $.NoSuchMethodError(_receiver, _memberName, _arguments, _namedArguments, existingArgumentNames);
-};
-
-$._zoomLower = function(v) {
-  var s, re;
-  s = v.get$text();
-  re = $.RegExp_RegExp("^\\|z(\\d+)", false, false);
-  if (re.hasMatch$1(s) === true)
-    return $.index(re.firstMatch$1(s), 1);
-  if ($.RegExp_RegExp("^|z\\-\\d+", false, false).hasMatch$1(s) === true)
-    return "0";
-};
-
-$._unquote = function(v) {
-  var s, t1, matches, sb, t2, i, cur, t3, u, prev;
-  s = typeof v === 'object' && v !== null && !!v.is$Token ? v.get$text() : v;
-  t1 = $.getInterceptor$JSString(s).replaceFirst$2(s, $.RegExp_RegExp("^[\"']", false, false), "");
-  t1 = $.getInterceptor$JSString(t1).replaceFirst$2(t1, $.RegExp_RegExp("[\"']$", false, false), "");
-  t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\\"", false, false), "\"");
-  t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\'", false, false), "'");
-  s = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\\\\\", false, false), "\\");
-  t1 = $.RegExp_RegExp("\\\\u[a-fA-F0-9][a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]", false, false);
-  matches = $.List_List$from($.getInterceptor$JSString(t1).allMatches$1(t1, s));
-  if ($.CTC0.get$isEmpty(matches) !== true) {
-    sb = $.StringBuffer_StringBuffer("");
-    for (t1 = $.getInterceptor$JSArray(sb), t2 = $.getInterceptor$JSString(s), i = 0; i < matches.length; ++i) {
-      cur = matches[i];
-      t3 = cur.group$1(0);
-      u = $.String_String$fromCharCodes([$.int_parse("0x" + $.S($.getInterceptor$JSString(t3).substring$1(t3, 2)))]);
-      if (i === 0) {
-        if ($.gtB(cur.get$start(), 0))
-          t1.add$1(sb, t2.substring$2(s, 0, cur.get$start()));
-        t1.add$1(sb, u);
-      } else {
-        t3 = i - 1;
-        if (t3 < 0 || t3 >= matches.length)
-          throw $.ioore(t3);
-        prev = matches[t3];
-        if (!$.eqB(prev.get$end(), cur.get$start()))
-          t1.add$1(sb, t2.substring$2(s, prev.get$end(), cur.get$start()));
-        t1.add$1(sb, u);
-      }
-    }
-    t2 = $.CTC0.get$last(matches).get$end();
-    t3 = $.getInterceptor$JSStringJSArray(s);
-    if ($.ltB(t2, t3.get$length(s)))
-      t1.add$1(sb, t3.substring$1(s, $.CTC0.get$last(matches).get$end()));
-    s = $.getInterceptor(sb).toString$0(sb);
-  }
-  return s;
-};
-
-$._blue = function(c) {
-  var t1, t2;
-  if (typeof c === 'object' && c !== null && !!c.is$Token)
-    c = c.get$text();
-  t1 = $.getInterceptor$JSStringJSArray(c);
-  if ($.eqB(t1.get$length(c), 4)) {
-    t2 = $.int_parse("0x" + $.S(t1.substring$1(c, 3)));
-    return $.getInterceptor(t2).toString$0(t2);
-  } else {
-    t2 = $.int_parse("0x" + $.S(t1.substring$1(c, 5)));
-    return $.getInterceptor(t2).toString$0(t2);
-  }
-};
-
-$._green = function(c) {
-  var t1, t2;
-  if (typeof c === 'object' && c !== null && !!c.is$Token)
-    c = c.get$text();
-  t1 = $.getInterceptor$JSStringJSArray(c);
-  if ($.eqB(t1.get$length(c), 4)) {
-    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 2, 3)));
-    return $.getInterceptor(t2).toString$0(t2);
-  } else {
-    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 3, 5)));
-    return $.getInterceptor(t2).toString$0(t2);
-  }
-};
-
-$._red = function(c) {
-  var t1, t2;
-  if (typeof c === 'object' && c !== null && !!c.is$Token)
-    c = c.get$text();
-  t1 = $.getInterceptor$JSStringJSArray(c);
-  if ($.eqB(t1.get$length(c), 4)) {
-    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 1, 2)));
-    return $.getInterceptor(t2).toString$0(t2);
-  } else {
-    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 1, 3)));
-    return $.getInterceptor(t2).toString$0(t2);
-  }
-};
-
-$._zoomUpper = function(v) {
-  var s, re;
-  s = v.get$text();
-  re = $.RegExp_RegExp("^\\|z\\d+\\-(\\d+)", false, false);
-  if (re.hasMatch$1(s) === true)
-    return $.index(re.firstMatch$1(s), 1);
-  if ($.RegExp_RegExp("^|z\\d+\\-", false, false).hasMatch$1(s) === true)
-    return "-1";
-};
-
-$.LoggerEvents$ = function(_logger) {
-  return new $.LoggerEvents(_logger);
-};
-
-$._extractUrl = function(v) {
-  var t1;
-  if (typeof v === 'object' && v !== null && !!v.is$Token)
-    v = v.get$text();
-  t1 = $.getInterceptor$JSString(v).replaceFirst$2(v, $.RegExp_RegExp("^\\s*url\\s*\\(\\s*['\"]\\s*", true, false), "");
-  return $.getInterceptor$JSString(t1).replaceFirst$2(t1, $.RegExp_RegExp("[\"']\\s*\\)$", true, false), "");
-};
-
-$._HashSetImpl$ = function() {
-  var t1 = new $._HashSetImpl(null);
-  t1._HashSetImpl$0();
-  return t1;
-};
-
-$.LogRecord$ = function(level, message, loggerName, time, exception, exceptionText) {
-  var t1, t2;
-  t1 = time == null ? $.Date_Date$now() : time;
-  t2 = $.LogRecord__nextNumber;
-  $.LogRecord__nextNumber = $.add(t2, 1);
-  return new $.LogRecord(level, message, loggerName, t1, t2, exception, exceptionText);
-};
-
-$._DateImpl$fromMillisecondsSinceEpoch = function(millisecondsSinceEpoch, isUtc) {
-  var t1 = new $._DateImpl(millisecondsSinceEpoch, isUtc);
-  t1._DateImpl$fromMillisecondsSinceEpoch$2(millisecondsSinceEpoch, isUtc);
-  return t1;
-};
-
-$._DateImpl$now = function() {
-  var t1 = new $._DateImpl($.Primitives_dateNow(), false);
-  t1._DateImpl$now$0();
-  return t1;
-};
-
-$._HashSetIterator$ = function(set_) {
-  var t1 = new $._HashSetIterator(set_._backingMap._keys, -1);
-  t1._HashSetIterator$1(set_);
-  return t1;
-};
-
-$.NotificationEvents$ = function(_ptr) {
-  return new $.NotificationEvents(_ptr);
-};
-
-$.ANTLRStringStream$ = function(input) {
-  var t1 = new $.ANTLRStringStream(null, null, 0, 1, 0, 0, null, null, null);
-  t1.ANTLRStringStream$1(input);
-  return t1;
-};
-
-$.PeerConnection00Events$ = function(_ptr) {
-  return new $.PeerConnection00Events(_ptr);
-};
-
-$.RTCDataChannelEvents$ = function(_ptr) {
-  return new $.RTCDataChannelEvents(_ptr);
-};
-
-$.RTCPeerConnectionEvents$ = function(_ptr) {
-  return new $.RTCPeerConnectionEvents(_ptr);
 };
 
 $.UnwantedTokenException$ = function(expecting, input) {
@@ -23123,417 +22807,36 @@ $.UnwantedTokenException$ = function(expecting, input) {
   return t1;
 };
 
-$.MissingTokenException$ = function(inserted, expecting, input) {
-  var t1 = new $.MissingTokenException(inserted, expecting, input, null, null, null, null, null, null, null);
+$.MismatchedTokenException$ = function(expecting, input) {
+  var t1 = new $.MismatchedTokenException(expecting, input, null, null, null, null, null, null, null);
   t1.RecognitionException$1(input);
   return t1;
 };
 
-$.AudioContextEvents$ = function(_ptr) {
-  return new $.AudioContextEvents(_ptr);
+$._PendingSendPortFinder$ = function() {
+  var t1 = $._MessageTraverserVisitedMap$0();
+  t1 = new $._PendingSendPortFinder([], t1);
+  t1._PendingSendPortFinder$0();
+  return t1;
 };
 
-$._inject = function(code) {
-  var script, t1;
-  script = $.ScriptElement_ScriptElement();
-  script.set$type("text/javascript");
-  script.set$innerHTML(code);
-  t1 = $.document().get$body().get$nodes();
-  $.getInterceptor$JSArray(t1).add$1(t1, script);
-};
-
-$._initialize = function(exception) {
-  var t1;
-  if (!($._jsPortSync == null))
-    return;
-  try {
-    $._jsPortSync = $.window().lookupPort$1("dart-js-context");
-  } catch (exception) {
-    $.unwrapException(exception);
+$.Futures_wait = function(futures) {
+  var t1, completer, result, values, i, future;
+  t1 = {};
+  if (typeof futures !== 'string' && (typeof futures !== 'object' || futures === null || futures.constructor !== Array && !futures.is$JavaScriptIndexingBehavior()))
+    return $.Futures_wait$bailout(1, futures, t1);
+  if ($.getInterceptor$JSStringJSArray(futures).get$isEmpty(futures) === true)
+    return $.Future_Future$immediate($.CTC13);
+  completer = $.Completer_Completer();
+  result = completer.get$future();
+  t1.remaining_1 = futures.length;
+  values = $.List_List(futures.length);
+  for (i = 0; i < futures.length; ++i) {
+    future = futures[i];
+    future.then$1(new $.Futures_wait_anon(t1, values, i, result, completer));
+    future.handleException$1(new $.Futures_wait_anon0(future, result, completer));
   }
-
-  if ($._jsPortSync == null) {
-    $._inject("(function() {\n  // Proxy support for js.dart.\n\n  var globalContext = window;\n\n  // Table for local objects and functions that are proxied.\n  function ProxiedObjectTable() {\n    // Name for debugging.\n    this.name = 'js-ref';\n\n    // Table from IDs to JS objects.\n    this.map = {};\n\n    // Generator for new IDs.\n    this._nextId = 0;\n\n    // Counter for deleted proxies.\n    this._deletedCount = 0;\n\n    // Flag for one-time initialization.\n    this._initialized = false;\n\n    // Ports for managing communication to proxies.\n    this.port = new ReceivePortSync();\n    this.sendPort = this.port.toSendPort();\n\n    // Set of IDs that are global.\n    // These will not be freed on an exitScope().\n    this.globalIds = {};\n\n    // Stack of scoped handles.\n    this.handleStack = [];\n\n    // Stack of active scopes where each value is represented by the size of\n    // the handleStack at the beginning of the scope.  When an active scope\n    // is popped, the handleStack is restored to where it was when the\n    // scope was entered.\n    this.scopeIndices = [];\n  }\n\n  // Number of valid IDs.  This is the number of objects (global and local)\n  // kept alive by this table.\n  ProxiedObjectTable.prototype.count = function () {\n    return Object.keys(this.map).length;\n  }\n\n  // Number of total IDs ever allocated.\n  ProxiedObjectTable.prototype.total = function () {\n    return this.count() + this._deletedCount;\n  }\n\n  // Adds an object to the table and return an ID for serialization.\n  ProxiedObjectTable.prototype.add = function (obj) {\n    if (this.scopeIndices.length == 0) {\n      throw \"Cannot allocate a proxy outside of a scope.\";\n    }\n    // TODO(vsm): Cache refs for each obj?\n    var ref = this.name + '-' + this._nextId++;\n    this.handleStack.push(ref);\n    this.map[ref] = obj;\n    return ref;\n  }\n\n  ProxiedObjectTable.prototype._initializeOnce = function () {\n    if (!this._initialized) {\n      this._initialize();\n      this._initialized = true;\n    }\n  }\n\n  // Enters a new scope for this table.\n  ProxiedObjectTable.prototype.enterScope = function() {\n    this._initializeOnce();\n    this.scopeIndices.push(this.handleStack.length);\n  }\n\n  // Invalidates all non-global IDs in the current scope and\n  // exit the current scope.\n  ProxiedObjectTable.prototype.exitScope = function() {\n    var start = this.scopeIndices.pop();\n    for (var i = start; i < this.handleStack.length; ++i) {\n      var key = this.handleStack[i];\n      if (!this.globalIds.hasOwnProperty(key)) {\n        delete this.map[this.handleStack[i]];\n        this._deletedCount++;\n      }\n    }\n    this.handleStack = this.handleStack.splice(0, start);\n  }\n\n  // Makes this ID globally scope.  It must be explicitly invalidated.\n  ProxiedObjectTable.prototype.globalize = function(id) {\n    this.globalIds[id] = true;\n  }\n\n  // Invalidates this ID, potentially freeing its corresponding object.\n  ProxiedObjectTable.prototype.invalidate = function(id) {\n    var old = this.get(id);\n    delete this.globalIds[id];\n    delete this.map[id];\n    this._deletedCount++;\n    return old;\n  }\n\n  // Gets the object or function corresponding to this ID.\n  ProxiedObjectTable.prototype.get = function (id) {\n    if (!this.map.hasOwnProperty(id)) {\n      throw 'Proxy ' + id + ' has been invalidated.'\n    }\n    return this.map[id];\n  }\n\n  ProxiedObjectTable.prototype._initialize = function () {\n    // Configure this table's port to forward methods, getters, and setters\n    // from the remote proxy to the local object.\n    var table = this;\n\n    this.port.receive(function (message) {\n      // TODO(vsm): Support a mechanism to register a handler here.\n      try {\n        var receiver = table.get(message[0]);\n        var member = message[1];\n        var kind = message[2];\n        var args = message[3].map(deserialize);\n        if (kind == 'get') {\n          // Getter.\n          var field = member;\n          if (field in receiver && args.length == 0) {\n            return [ 'return', serialize(receiver[field]) ];\n          }\n        } else if (kind == 'set') {\n          // Setter.\n          var field = member;\n          if (args.length == 1) {\n            return [ 'return', serialize(receiver[field] = args[0]) ];\n          }\n        } else if (kind == 'apply') {\n          // Direct function invocation.\n          // TODO(vsm): Should we capture _this_ automatically?\n          return [ 'return', serialize(receiver.apply(null, args)) ];\n        } else if (member == '[]' && args.length == 1) {\n          // Index getter.\n          return [ 'return', serialize(receiver[args[0]]) ];\n        } else if (member == '[]=' && args.length == 2) {\n          // Index setter.\n          return [ 'return', serialize(receiver[args[0]] = args[1]) ];\n        } else {\n          var f = receiver[member];\n          if (f) {\n            var result = f.apply(receiver, args);\n            return [ 'return', serialize(result) ];\n          }\n        }\n        return [ 'none' ];\n      } catch (e) {\n        return [ 'throws', e.toString() ];\n      }\n    });\n  }\n\n  // Singleton for local proxied objects.\n  var proxiedObjectTable = new ProxiedObjectTable();\n\n  // DOM element serialization code.\n  var _localNextElementId = 0;\n  var _DART_ID = 'data-dart_id';\n  var _DART_TEMPORARY_ATTACHED = 'data-dart_temporary_attached';\n\n  function serializeElement(e) {\n    // TODO(vsm): Use an isolate-specific id.\n    var id;\n    if (e.hasAttribute(_DART_ID)) {\n      id = e.getAttribute(_DART_ID);\n    } else {\n      id = (_localNextElementId++).toString();\n      e.setAttribute(_DART_ID, id);\n    }\n    if (e !== document.documentElement) {\n      // Element must be attached to DOM to be retrieve in js part.\n      // Attach top unattached parent to avoid detaching parent of \"e\" when\n      // appending \"e\" directly to document. We keep count of elements\n      // temporarily attached to prevent detaching top unattached parent to\n      // early. This count is equals to the length of _DART_TEMPORARY_ATTACHED\n      // attribute. There could be other elements to serialize having the same\n      // top unattached parent.\n      var top = e;\n      while (true) {\n        if (top.hasAttribute(_DART_TEMPORARY_ATTACHED)) {\n          var oldValue = top.getAttribute(_DART_TEMPORARY_ATTACHED);\n          var newValue = oldValue + \"a\";\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, newValue);\n          break;\n        }\n        if (top.parentNode == null) {\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, \"a\");\n          document.documentElement.appendChild(top);\n          break;\n        }\n        if (top.parentNode === document.documentElement) {\n          // e was already attached to dom\n          break;\n        }\n        top = top.parentNode;\n      }\n    }\n    return id;\n  }\n\n  function deserializeElement(id) {\n    // TODO(vsm): Clear the attribute.\n    var list = document.querySelectorAll('[' + _DART_ID + '=\"' + id + '\"]');\n\n    if (list.length > 1) throw 'Non unique ID: ' + id;\n    if (list.length == 0) {\n      throw 'Element must be attached to the document: ' + id;\n    }\n    var e = list[0];\n    if (e !== document.documentElement) {\n      // detach temporary attached element\n      var top = e;\n      while (true) {\n        if (top.hasAttribute(_DART_TEMPORARY_ATTACHED)) {\n          var oldValue = top.getAttribute(_DART_TEMPORARY_ATTACHED);\n          var newValue = oldValue.substring(1);\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, newValue);\n          // detach top only if no more elements have to be unserialized\n          if (top.getAttribute(_DART_TEMPORARY_ATTACHED).length === 0) {\n            top.removeAttribute(_DART_TEMPORARY_ATTACHED);\n            document.documentElement.removeChild(top);\n          }\n          break;\n        }\n        if (top.parentNode === document.documentElement) {\n          // e was already attached to dom\n          break;\n        }\n        top = top.parentNode;\n      }\n    }\n    return e;\n  }\n\n\n  // Type for remote proxies to Dart objects.\n  function DartProxy(id, sendPort) {\n    this.id = id;\n    this.port = sendPort;\n  }\n\n  // Serializes JS types to SendPortSync format:\n  // - primitives -> primitives\n  // - sendport -> sendport\n  // - DOM element -> [ 'domref', element-id ]\n  // - Function -> [ 'funcref', function-id, sendport ]\n  // - Object -> [ 'objref', object-id, sendport ]\n  function serialize(message) {\n    if (message == null) {\n      return null;  // Convert undefined to null.\n    } else if (typeof(message) == 'string' ||\n               typeof(message) == 'number' ||\n               typeof(message) == 'boolean') {\n      // Primitives are passed directly through.\n      return message;\n    } else if (message instanceof SendPortSync) {\n      // Non-proxied objects are serialized.\n      return message;\n    } else if (message instanceof Element &&\n        (message.ownerDocument == null || message.ownerDocument == document)) {\n      return [ 'domref', serializeElement(message) ];\n    } else if (typeof(message) == 'function') {\n      if ('_dart_id' in message) {\n        // Remote function proxy.\n        var remoteId = message._dart_id;\n        var remoteSendPort = message._dart_port;\n        return [ 'funcref', remoteId, remoteSendPort ];\n      } else {\n        // Local function proxy.\n        return [ 'funcref',\n                 proxiedObjectTable.add(message),\n                 proxiedObjectTable.sendPort ];\n      }\n    } else if (message instanceof DartProxy) {\n      // Remote object proxy.\n      return [ 'objref', message.id, message.port ];\n    } else {\n      // Local object proxy.\n      return [ 'objref',\n               proxiedObjectTable.add(message),\n               proxiedObjectTable.sendPort ];\n    }\n  }\n\n  function deserialize(message) {\n    if (message == null) {\n      return null;  // Convert undefined to null.\n    } else if (typeof(message) == 'string' ||\n               typeof(message) == 'number' ||\n               typeof(message) == 'boolean') {\n      // Primitives are passed directly through.\n      return message;\n    } else if (message instanceof SendPortSync) {\n      // Serialized type.\n      return message;\n    }\n    var tag = message[0];\n    switch (tag) {\n      case 'funcref': return deserializeFunction(message);\n      case 'objref': return deserializeObject(message);\n      case 'domref': return deserializeElement(message[1]);\n    }\n    throw 'Unsupported serialized data: ' + message;\n  }\n\n  // Create a local function that forwards to the remote function.\n  function deserializeFunction(message) {\n    var id = message[1];\n    var port = message[2];\n    // TODO(vsm): Add a more robust check for a local SendPortSync.\n    if (\"receivePort\" in port) {\n      // Local function.\n      return proxiedObjectTable.get(id);\n    } else {\n      // Remote function.  Forward to its port.\n      var f = function () {\n        var depth = enterScope();\n        try {\n          var args = Array.prototype.slice.apply(arguments).map(serialize);\n          var result = port.callSync([id, '#call', args]);\n          if (result[0] == 'throws') throw deserialize(result[1]);\n          return deserialize(result[1]);\n        } finally {\n          exitScope(depth);\n        }\n      };\n      // Cache the remote id and port.\n      f._dart_id = id;\n      f._dart_port = port;\n      return f;\n    }\n  }\n\n  // Creates a DartProxy to forwards to the remote object.\n  function deserializeObject(message) {\n    var id = message[1];\n    var port = message[2];\n    // TODO(vsm): Add a more robust check for a local SendPortSync.\n    if (\"receivePort\" in port) {\n      // Local object.\n      return proxiedObjectTable.get(id);\n    } else {\n      // Remote object.\n      return new DartProxy(id, port);\n    }\n  }\n\n  // Instantiate a Date with arguments.\n  function instantiateDate(args) {\n    // 7 arguments because the longest constructor is : new Date(year, month,\n    // day, hour, minute, second, millisecond)\n    if (args.length === 0) {\n      return new Date();\n    } else if (args.length === 1) {\n      return new Date(args[0]);\n    } else if (args.length === 2) {\n      return new Date(args[0], args[1]);\n    } else if (args.length === 3) {\n      return new Date(args[0], args[1], args[2]);\n    } else if (args.length === 4) {\n      return new Date(args[0], args[1], args[2], args[3]);\n    } else if (args.length === 5) {\n      return new Date(args[0], args[1], args[2], args[3], args[4]);\n    } else if (args.length === 6) {\n      return new Date(args[0], args[1], args[2], args[3], args[4], args[5]);\n    } else if (args.length === 7) {\n      return new Date(args[0], args[1], args[2], args[3], args[4], args[5],\n                     args[6]);\n    }\n    return null;\n  }\n\n  // Remote handler to construct a new JavaScript object given its\n  // serialized constructor and arguments.\n  function construct(args) {\n    args = args.map(deserialize);\n    var constructor = args[0];\n    args = Array.prototype.slice.call(args, 1);\n\n    var ret = null;\n    // Date can only be instantiated with the new operator.\n    if (constructor === Date) {\n      ret = instantiateDate(args);\n    } else {\n      // Dummy Type with correct constructor.\n      var Type = function(){};\n      Type.prototype = constructor.prototype;\n  \n      // Create a new instance\n      var instance = new Type();\n  \n      // Call the original constructor.\n      ret = constructor.apply(instance, args);\n      ret = Object(ret) === ret ? ret : instance;\n    }\n    return serialize(ret);\n  }\n\n  // Remote handler to return the top-level JavaScript context.\n  function context(data) {\n    return serialize(globalContext);\n  }\n\n  // Remote handler for debugging.\n  function debug() {\n    var live = proxiedObjectTable.count();\n    var total = proxiedObjectTable.total();\n    return 'JS objects Live : ' + live +\n           ' (out of ' + total + ' ever allocated).';\n  }\n\n  // Return true if two JavaScript proxies are equal (==).\n  function proxyEquals(args) {\n    return deserialize(args[0]) == deserialize(args[1]);\n  }\n\n  // Return true if a JavaScript proxy is instance of a given type (instanceof).\n  function proxyInstanceof(args) {\n    return deserialize(args[0]) instanceof deserialize(args[1]);\n  }\n\n  function proxyConvert(args) {\n    return serialize(deserializeDataTree(args));\n  }\n\n  function deserializeDataTree(data) {\n    var type = data[0];\n    var value = data[1];\n    if (type === 'map') {\n      var obj = {};\n      for (var i = 0; i < value.length; i++) {\n        obj[value[i][0]] = deserializeDataTree(value[i][1]);\n      }\n      return obj;\n    } else if (type === 'list') {\n      var list = [];\n      for (var i = 0; i < value.length; i++) {\n        list.push(deserializeDataTree(value[i]));\n      }\n      return list;\n    } else /* 'simple' */ {\n      return deserialize(value);\n    }\n  }\n\n  function makeGlobalPort(name, f) {\n    var port = new ReceivePortSync();\n    port.receive(f);\n    window.registerPort(name, port.toSendPort());\n  }\n\n  // Enters a new scope in the JavaScript context.\n  function enterJavaScriptScope() {\n    proxiedObjectTable.enterScope();\n  }\n\n  // Enters a new scope in both the JavaScript and Dart context.\n  var _dartEnterScopePort = null;\n  function enterScope() {\n    enterJavaScriptScope();\n    if (!_dartEnterScopePort) {\n      _dartEnterScopePort = window.lookupPort('js-dart-enter-scope');\n    }\n    return _dartEnterScopePort.callSync([]);\n  }\n\n  // Exits the current scope (and invalidate local IDs) in the JavaScript\n  // context.\n  function exitJavaScriptScope() {\n    proxiedObjectTable.exitScope();\n  }\n\n  // Exits the current scope in both the JavaScript and Dart context.\n  var _dartExitScopePort = null;\n  function exitScope(depth) {\n    exitJavaScriptScope();\n    if (!_dartExitScopePort) {\n      _dartExitScopePort = window.lookupPort('js-dart-exit-scope');\n    }\n    return _dartExitScopePort.callSync([ depth ]);\n  }\n\n  makeGlobalPort('dart-js-context', context);\n  makeGlobalPort('dart-js-create', construct);\n  makeGlobalPort('dart-js-debug', debug);\n  makeGlobalPort('dart-js-equals', proxyEquals);\n  makeGlobalPort('dart-js-instanceof', proxyInstanceof);\n  makeGlobalPort('dart-js-convert', proxyConvert);\n  makeGlobalPort('dart-js-enter-scope', enterJavaScriptScope);\n  makeGlobalPort('dart-js-exit-scope', exitJavaScriptScope);\n  makeGlobalPort('dart-js-globalize', function(data) {\n    if (data[0] == \"objref\") return proxiedObjectTable.globalize(data[1]);\n    // TODO(vsm): Do we ever need to globalize functions?\n    throw 'Illegal type: ' + data[0];\n  });\n  makeGlobalPort('dart-js-invalidate', function(data) {\n    if (data[0] == \"objref\") return proxiedObjectTable.invalidate(data[1]);\n    // TODO(vsm): Do we ever need to globalize functions?\n    throw 'Illegal type: ' + data[0];\n  });\n})();\n");
-    $._jsPortSync = $.window().lookupPort$1("dart-js-context");
-  }
-  $._jsPortCreate = $.window().lookupPort$1("dart-js-create");
-  $._jsPortDebug = $.window().lookupPort$1("dart-js-debug");
-  $._jsPortEquals = $.window().lookupPort$1("dart-js-equals");
-  $._jsPortInstanceof = $.window().lookupPort$1("dart-js-instanceof");
-  $._jsPortConvert = $.window().lookupPort$1("dart-js-convert");
-  $._jsEnterJavaScriptScope = $.window().lookupPort$1("dart-js-enter-scope");
-  $._jsExitJavaScriptScope = $.window().lookupPort$1("dart-js-exit-scope");
-  $._jsGlobalize = $.window().lookupPort$1("dart-js-globalize");
-  $._jsInvalidate = $.window().lookupPort$1("dart-js-invalidate");
-  t1 = $.ReceivePortSync$();
-  t1.receive$1(new $._initialize_anon());
-  $._dartEnterDartScope = t1;
-  t1 = $.ReceivePortSync$();
-  t1.receive$1(new $._initialize_anon0());
-  $._dartExitDartScope = t1;
-  $.window().registerPort$2("js-dart-enter-scope", $._dartEnterDartScope.toSendPort$0());
-  $.window().registerPort$2("js-dart-exit-scope", $._dartExitDartScope.toSendPort$0());
-};
-
-$._depth = function() {
-  var t1 = $.get$_proxiedObjectTable().get$_scopeIndices();
-  return $.getInterceptor$JSStringJSArray(t1).get$length(t1);
-};
-
-$.context = function() {
-  if ($.eqB($._depth(), 0))
-    throw $.$$throw("Cannot get JavaScript context out of scope.");
-  return $._deserialize($._jsPortSync.callSync$1([]));
-};
-
-$.scoped = function(f) {
-  var depth, t1;
-  depth = $._enterScope();
-  try {
-    t1 = f.call$0();
-    return t1;
-  } finally {
-    $._exitScope(depth);
-  }
-};
-
-$._enterScope = function() {
-  $._initialize();
-  $.get$_proxiedObjectTable().enterScope$0();
-  $._jsEnterJavaScriptScope.callSync$1([]);
-  var t1 = $.get$_proxiedObjectTable().get$_scopeIndices();
-  return $.getInterceptor$JSStringJSArray(t1).get$length(t1);
-};
-
-$._exitScope = function(depth) {
-  $._jsExitJavaScriptScope.callSync$1([]);
-  $.get$_proxiedObjectTable().exitScope$0();
-};
-
-$.ScriptProcessorNodeEvents$ = function(_ptr) {
-  return new $.ScriptProcessorNodeEvents(_ptr);
-};
-
-$.retain = function(proxy) {
-  $._jsGlobalize.callSync$1($._serialize(proxy));
-  return proxy;
-};
-
-$.map = function(data) {
-  return $.Proxy_Proxy$_json(data);
-};
-
-$.$$experimentalFunctionProxy = function(f) {
-  if (f == null)
-    throw $.$$throw($.ArgumentError$("f must not be null"));
-  if ($.get$_FunctionProxy__map().containsKey$1(f) !== true)
-    throw $.$$throw($.ArgumentError$("f doesn't represent a JavaScript function. Failed to lookup proxy object."));
-  return $.index($.get$_FunctionProxy__map(), f);
-};
-
-$._deserialize = function(message) {
-  var t1, t2;
-  t1 = new $._deserialize_deserializeFunction();
-  t2 = new $._deserialize_deserializeObject();
-  if (message == null)
-    return;
-  else if (typeof message === 'string' || typeof message === 'number' || typeof message === 'boolean')
-    return message;
-  else if (typeof message === 'object' && message !== null && !!message.is$SendPortSync)
-    return message;
-  switch ($.index(message, 0)) {
-    case "funcref":
-      return t1.call$1(message);
-    case "objref":
-      return t2.call$1(message);
-    case "domref":
-      return $._deserializeElement($.index(message, 1));
-  }
-  throw $.$$throw("Unsupported serialized data: " + $.S(message));
-};
-
-$.UnsupportedError$ = function(message) {
-  return new $.UnsupportedError(message);
-};
-
-$.Error_safeToString = function(object) {
-  var t1;
-  if (typeof object === 'number' && Math.floor(object) === object || typeof object === 'number' || typeof object === 'boolean' || null == object)
-    return $.getInterceptor(object).toString$0(object);
-  if (typeof object === 'string') {
-    t1 = $.CTC2.replaceAll$2(object, "\\", "\\\\");
-    t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\n", "\\n");
-    t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\r", "\\r");
-    return "\"" + $.S($.getInterceptor$JSString(t1).replaceAll$2(t1, "\"", "\\\"")) + "\"";
-  }
-  return $.Primitives_objectToString(object);
-};
-
-$._deserializeElement = function(id) {
-  var list, t1, e, top$, oldValue, newValue, t2;
-  list = $.queryAll("[data-dart_id=\"" + $.S(id) + "\"]");
-  t1 = $.getInterceptor$JSStringJSArray(list);
-  if ($.gtB(t1.get$length(list), 1))
-    throw $.$$throw("Non unique ID: " + $.S(id));
-  if ($.eqB(t1.get$length(list), 0))
-    throw $.$$throw("Only elements attached to document can be serialized: " + $.S(id));
-  e = $.index(list, 0);
-  t1 = $.document().get$documentElement();
-  if (!(e == null ? t1 == null : e === t1))
-    for (top$ = e; true;) {
-      if (top$.get$attributes().containsKey$1("data-dart_temporary_attached") === true) {
-        oldValue = $.index(top$.get$attributes(), "data-dart_temporary_attached");
-        newValue = $.getInterceptor$JSString(oldValue).substring$1(oldValue, 1);
-        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", newValue);
-        t1 = $.index(top$.get$attributes(), "data-dart_temporary_attached");
-        if ($.eqB($.getInterceptor$JSStringJSArray(t1).get$length(t1), 0)) {
-          top$.get$attributes().remove$1("data-dart_temporary_attached");
-          top$.remove$0();
-        }
-        break;
-      }
-      t1 = top$.get$parent();
-      t2 = $.document().get$documentElement();
-      if (t1 == null ? t2 == null : t1 === t2)
-        break;
-      top$ = top$.get$parent();
-    }
-  return e;
-};
-
-$._serializeElement = function(e) {
-  var id, t1, top$, oldValue, newValue, t2;
-  if (e.get$attributes().containsKey$1("data-dart_id") === true)
-    id = $.index(e.get$attributes(), "data-dart_id");
-  else {
-    t1 = $._localNextElementId;
-    $._localNextElementId = $.add(t1, 1);
-    id = "dart-" + $.S(t1);
-    $.indexSet(e.get$attributes(), "data-dart_id", id);
-  }
-  t1 = $.document().get$documentElement();
-  if (!(e == null ? t1 == null : e === t1))
-    for (top$ = e; true;) {
-      if (top$.get$attributes().containsKey$1("data-dart_temporary_attached") === true) {
-        oldValue = $.index(top$.get$attributes(), "data-dart_temporary_attached");
-        newValue = $.getInterceptor$JSString(oldValue).concat$1(oldValue, "a");
-        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", newValue);
-        break;
-      }
-      if (top$.get$parent() == null) {
-        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", "a");
-        t1 = $.document().get$documentElement().get$elements();
-        $.getInterceptor$JSArray(t1).add$1(t1, top$);
-        break;
-      }
-      t1 = top$.get$parent();
-      t2 = $.document().get$documentElement();
-      if (t1 == null ? t2 == null : t1 === t2)
-        break;
-      top$ = top$.get$parent();
-    }
-  return id;
-};
-
-$.String_String$fromCharCodes = function(charCodes) {
-  var charCodes0;
-  if (!$.isJsArray(charCodes)) {
-    if (!(typeof charCodes === 'object' && charCodes !== null && (charCodes.constructor === Array || charCodes.is$List())))
-      throw $.$$throw($.ArgumentError$(charCodes));
-    charCodes0 = $.List_List$from(charCodes);
-    charCodes = charCodes0;
-  }
-  return $.Primitives_stringFromCharCodes(charCodes);
-};
-
-$._serialize = function(message) {
-  var t1, proxy;
-  if (message == null)
-    return;
-  else if (typeof message === 'string' || typeof message === 'number' || typeof message === 'boolean')
-    return message;
-  else if (typeof message === 'object' && message !== null && !!message.is$SendPortSync)
-    return message;
-  else {
-    if (typeof message === 'object' && message !== null && message.is$Element()) {
-      t1 = message.ownerDocument;
-      t1 = t1 == null || $.eqB(t1, $.document());
-    } else
-      t1 = false;
-    if (t1)
-      return ["domref", $._serializeElement(message)];
-    else if (typeof message === 'object' && message !== null && !!message.is$Callback)
-      return message.get$_serialized();
-    else if (typeof message === 'function' || typeof message === 'object' && message !== null && !!message.is$Function)
-      if ($.get$_FunctionProxy__map().containsKey$1(message) === true) {
-        proxy = $.index($.get$_FunctionProxy__map(), message);
-        return ["funcref", proxy.get$_lib1_id(), proxy.get$_port()];
-      } else
-        throw $.$$throw("A function must be converted to a Callback before it can be serialized.");
-    else if (typeof message === 'object' && message !== null && !!message.is$Proxy)
-      return ["objref", message._lib1_id, message._port];
-    else {
-      t1 = $.get$_proxiedObjectTable();
-      return ["objref", $.getInterceptor$JSArray(t1).add$1(t1, message), $.get$_proxiedObjectTable().get$sendPort()];
-    }
-  }
-};
-
-$.List_List = function(length$) {
-  return $.Primitives_newList(length$);
-};
-
-$.List_List$from = function(other) {
-  var list, t1;
-  list = $.List_List(null);
-  for (t1 = $.getInterceptor$JSArray(other).iterator$0(other); t1.get$hasNext() === true;)
-    list.push(t1.next$0());
-  return list;
-};
-
-$.SharedWorkerContextEvents$ = function(_ptr) {
-  return new $.SharedWorkerContextEvents(_ptr);
-};
-
-$.Map_Map = function() {
-  return $._HashMapImpl$();
-};
-
-$.ListIterator$ = function(list) {
-  return new $.ListIterator(0, list);
-};
-
-$.UnimplementedError$ = function(message) {
-  return new $.UnimplementedError(message);
-};
-
-$.RegExp_RegExp = function(pattern, ignoreCase, multiLine) {
-  return $.JSSyntaxRegExp$(pattern, ignoreCase, multiLine);
-};
-
-$._Collections_contains = function(iterable, element) {
-  var t1;
-  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
-    if ($.eqB(t1.next$0(), element))
-      return true;
-  return false;
-};
-
-$._Collections_map = function(source, destination, f) {
-  var t1;
-  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;)
-    destination.push(f.call$1(t1.next$0()));
-  return destination;
-};
-
-$._Collections_filter = function(source, destination, f) {
-  var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (f.call$1(t2) === true)
-      destination.push(t2);
-  }
-  return destination;
-};
-
-$.FixedSizeListIterator$ = function(array) {
-  return new $.FixedSizeListIterator($.getInterceptor$JSStringJSArray(array).get$length(array), array, 0);
-};
-
-$.int_parse = function(source) {
-  return $.Primitives_parseInt(source);
-};
-
-$.StateError$ = function(message) {
-  return new $.StateError(message);
-};
-
-$.SpeechRecognitionEvents$ = function(_ptr) {
-  return new $.SpeechRecognitionEvents(_ptr);
-};
-
-$.Collections_forEach = function(iterable, f) {
-  var t1;
-  for (t1 = $.CTC0.iterator$0(iterable); t1.get$hasNext() === true;)
-    f.call$1(t1.next$0());
-};
-
-$.Collections_map = function(source, destination, f) {
-  var t1;
-  for (t1 = $.CTC0.iterator$0(source); t1.get$hasNext() === true;)
-    destination.push(f.call$1(t1.next$0()));
-  return destination;
-};
-
-$.Collections_reduce = function(iterable, initialValue, combine) {
-  var t1;
-  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
-    initialValue = combine.call$2(initialValue, t1.next$0());
-  return initialValue;
-};
-
-$.Collections_filter = function(source, destination, f) {
-  var t1, t2;
-  for (t1 = $.CTC0.iterator$0(source); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (f.call$1(t2) === true)
-      destination.push(t2);
-  }
-  return destination;
-};
-
-$.Collections_collectionToString = function(c) {
-  var result = $.StringBuffer_StringBuffer("");
-  $.Collections__emitCollection(c, result, $.List_List(null));
-  return $.getInterceptor(result).toString$0(result);
-};
-
-$.Collections__emitCollection = function(c, result, visiting) {
-  var t1, isList, t2, t3, first, t4;
-  t1 = $.getInterceptor$JSArray(visiting);
-  t1.add$1(visiting, c);
-  isList = typeof c === 'object' && c !== null && (c.constructor === Array || c.is$List());
-  t2 = $.getInterceptor$JSArray(result);
-  t2.add$1(result, isList ? "[" : "{");
-  for (t3 = $.getInterceptor$JSArray(c).iterator$0(c), first = true; t3.get$hasNext() === true; first = false) {
-    t4 = t3.next$0();
-    if (!first)
-      t2.add$1(result, ", ");
-    $.Collections__emitObject(t4, result, visiting);
-  }
-  t2.add$1(result, isList ? "]" : "}");
-  t1.removeLast$0(visiting);
-};
-
-$.Collections__emitObject = function(o, result, visiting) {
-  var t1;
-  if (typeof o === 'object' && o !== null && (o.constructor === Array || o.is$Collection()))
-    if ($.Collections__containsRef(visiting, o)) {
-      t1 = $.getInterceptor$JSArray(result);
-      t1.add$1(result, typeof o === 'object' && o !== null && (o.constructor === Array || o.is$List()) ? "[...]" : "{...}");
-    } else
-      $.Collections__emitCollection(o, result, visiting);
-  else if (typeof o === 'object' && o !== null && o.is$Map())
-    if ($.Collections__containsRef(visiting, o))
-      $.getInterceptor$JSArray(result).add$1(result, "{...}");
-    else
-      $.Maps__emitMap(o, result, visiting);
-  else
-    $.getInterceptor$JSArray(result).add$1(result, o);
-};
-
-$.Collections__containsRef = function(c, ref) {
-  var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(c).iterator$0(c); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (t2 == null ? ref == null : t2 === ref)
-      return true;
-  }
-  return false;
-};
-
-$.ArgumentError$ = function(message) {
-  return new $.ArgumentError(message);
+  return result;
 };
 
 $._ProxiedObjectTable$ = function() {
@@ -23545,6 +22848,10 @@ $._ProxiedObjectTable$ = function() {
   t4 = new $._ProxiedObjectTable("dart-ref", 0, 0, t1, t2, $.Set_Set(), t3, t4);
   t4._ProxiedObjectTable$0();
   return t4;
+};
+
+$.double_parse = function(source) {
+  return $.Primitives_parseDouble(source);
 };
 
 $.ReceivePortSync$ = function() {
@@ -23559,6 +22866,10 @@ $.ReceivePortSync__isolateId = function() {
   return $.ReceivePortSync__cachedIsolateId;
 };
 
+$.ReceivePortSync__getListenerName = function(isolateId, portId) {
+  return "dart-port-" + $.S(isolateId) + "-" + $.S(portId);
+};
+
 $.ReceivePortSync__lookup = function(isolateId, portId) {
   if ($.eqB(isolateId, $.ReceivePortSync__isolateId()))
     return $.index($.ReceivePortSync__portMap, portId).toSendPort$0();
@@ -23566,266 +22877,20 @@ $.ReceivePortSync__lookup = function(isolateId, portId) {
     return $._RemoteSendPortSync$(isolateId, portId);
 };
 
-$.ReceivePortSync__getListenerName = function(isolateId, portId) {
-  return "dart-port-" + $.S(isolateId) + "-" + $.S(portId);
+$.MetaInfo$ = function(_tag, _tags, _set) {
+  return new $.MetaInfo(_tag, _tags, _set);
 };
 
-$.Primitives_objectHashCode = function(object) {
-  var hash = object.$identityHash;
-  if (hash == null) {
-    hash = $.add($.Primitives_hashCodeSeed, 1);
-    $.Primitives_hashCodeSeed = hash;
-    object.$identityHash = hash;
-  }
-  return hash;
+$._AttributeClassSet$ = function(_element) {
+  return new $._AttributeClassSet(_element);
 };
 
-$.Primitives_parseDouble = function(string) {
-  var result;
-  $.checkString(string);
-  if (!/^\s*(?:NaN|[+-]?(?:Infinity|(?:\.\d+|\d+(?:\.\d+)?)(?:[eE][+-]?\d+)?))\s*$/.test(string))
-    throw $.$$throw($.FormatException$(string));
-  result = parseFloat(string);
-  if ($.CTC1.get$isNaN(result) === true && !$.eqB(string, "NaN"))
-    throw $.$$throw($.FormatException$(string));
-  return result;
-};
-
-$.Primitives_parseInt = function(string) {
-  var match, base, result;
-  $.checkString(string);
-  match = /^\s*[+-]?(?:0(x)[a-f0-9]+|\d+)\s*$/i.exec(string);
-  if (match == null)
-    throw $.$$throw($.FormatException$(string));
-  base = !($.index(match, 1) == null) ? 16 : 10;
-  result = parseInt(string, base);
-  if ($.CTC1.get$isNaN(result) === true)
-    throw $.$$throw($.FormatException$(string));
-  return result;
-};
-
-$.Primitives_objectTypeName = function(object) {
-  var name$, decompiled, t1;
-  name$ = $.constructorNameFallback(object);
-  if ($.eqB(name$, "Object")) {
-    decompiled = String(object.constructor).match(/^\s*function\s*(\S*)\s*\(/)[1];
-    if (typeof decompiled === 'string')
-      name$ = decompiled;
-  }
-  t1 = $.getInterceptor$JSString(name$);
-  return t1.charCodeAt$1(name$, 0) === 36 ? t1.substring$1(name$, 1) : name$;
-};
-
-$.Primitives_objectToString = function(object) {
-  return "Instance of '" + $.S($.Primitives_objectTypeName(object)) + "'";
-};
-
-$.Primitives_newList = function(length$) {
-  var result;
-  if (length$ == null)
-    return new Array();
-  if (!(typeof length$ === 'number' && Math.floor(length$) === length$) || length$ < 0)
-    throw $.$$throw($.ArgumentError$(length$));
-  result = new Array(length$);
-  result.fixed$length = true;
-  return result;
-};
-
-$.Primitives_dateNow = function() {
-  return Date.now();
-};
-
-$.Primitives__fromCharCodeApply = function(array) {
-  var end, t1, i, result, subarray, t2;
-  end = $.getInterceptor$JSStringJSArray(array).get$length(array);
-  if (typeof end !== 'number')
-    return $.Primitives__fromCharCodeApply$bailout(1, array, end);
-  for (t1 = end <= 500, i = 0, result = ""; i < end; i += 500) {
-    if (t1)
-      subarray = array;
-    else {
-      t2 = i + 500;
-      if (t2 < end)
-        ;
-      else
-        t2 = end;
-      subarray = array.slice(i, t2);
-    }
-    result = result + String.fromCharCode.apply(null, subarray);
-  }
-  return result;
-};
-
-$.Primitives_stringFromCodePoints = function(codePoints) {
-  var a, t1, t2;
-  a = [];
-  for (t1 = $.getInterceptor$JSArray(codePoints).iterator$0(codePoints); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (!(typeof t2 === 'number' && Math.floor(t2) === t2))
-      throw $.$$throw($.ArgumentError$(t2));
-    if (t2 <= 65535)
-      a.push(t2);
-    else if (t2 <= 1114111) {
-      a.push(55296 + ($.shr(t2 - 65536, 10) & 1023));
-      a.push(56320 + (t2 & 1023));
-    } else
-      throw $.$$throw($.ArgumentError$(t2));
-  }
-  return $.Primitives__fromCharCodeApply(a);
-};
-
-$.Primitives_stringFromCharCodes = function(charCodes) {
-  var t1, t2;
-  for (t1 = $.getInterceptor$JSArray(charCodes).iterator$0(charCodes); t1.get$hasNext() === true;) {
-    t2 = t1.next$0();
-    if (!(typeof t2 === 'number' && Math.floor(t2) === t2))
-      throw $.$$throw($.ArgumentError$(t2));
-    if (t2 < 0)
-      throw $.$$throw($.ArgumentError$(t2));
-    if (t2 > 65535)
-      return $.Primitives_stringFromCodePoints(charCodes);
-  }
-  return $.Primitives__fromCharCodeApply(charCodes);
-};
-
-$.TextTrackEvents$ = function(_ptr) {
-  return new $.TextTrackEvents(_ptr);
-};
-
-$.Primitives_getSeconds = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCSeconds() + 0) : ($.Primitives_lazyAsJsDate(receiver).getSeconds() + 0);
-};
-
-$.Primitives_getMilliseconds = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCMilliseconds() + 0) : ($.Primitives_lazyAsJsDate(receiver).getMilliseconds() + 0);
-};
-
-$.Primitives_lazyAsJsDate = function(receiver) {
-  if (receiver.date === (void 0))
-    receiver.date = new Date(receiver.millisecondsSinceEpoch);
-  return receiver.date;
-};
-
-$.Primitives_getYear = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCFullYear() + 0) : ($.Primitives_lazyAsJsDate(receiver).getFullYear() + 0);
-};
-
-$.Primitives_getHours = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCHours() + 0) : ($.Primitives_lazyAsJsDate(receiver).getHours() + 0);
-};
-
-$.Primitives_printString = function(string) {
-  if ("\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n" === string)
-    $.Primitives_mirrorsEnabled = true;
-  else if (typeof dartPrint == "function") {
-    dartPrint(string);
-    return;
-  }
-  if (typeof window == "object") {
-    if (typeof console == "object")
-      console.log(string);
-    return;
-  }
-  if (typeof print == "function") {
-    print(string);
-    return;
-  }
-  throw 'Unable to print message: ' + String(string);
+$._CompleterImpl$ = function() {
+  return new $._CompleterImpl($._FutureImpl$());
 };
 
 $.RangeError$value = function(value) {
   return new $.RangeError("value " + $.S(value));
-};
-
-$.Primitives_getMinutes = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCMinutes() + 0) : ($.Primitives_lazyAsJsDate(receiver).getMinutes() + 0);
-};
-
-$.TextTrackCueEvents$ = function(_ptr) {
-  return new $.TextTrackCueEvents(_ptr);
-};
-
-$.Primitives_getDay = function(receiver) {
-  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCDate() + 0) : ($.Primitives_lazyAsJsDate(receiver).getDate() + 0);
-};
-
-$.Maps_mapToString = function(m) {
-  var result = $.StringBuffer_StringBuffer("");
-  $.Maps__emitMap(m, result, $.List_List(null));
-  return $.getInterceptor(result).toString$0(result);
-};
-
-$.Maps__emitMap = function(m, result, visiting) {
-  var t1, t2, t3;
-  t1 = {};
-  t2 = $.getInterceptor$JSArray(visiting);
-  t2.add$1(visiting, m);
-  t3 = $.getInterceptor$JSArray(result);
-  t3.add$1(result, "{");
-  t1.first_1 = true;
-  $.getInterceptor$JSArray(m).forEach$1(m, new $.Maps__emitMap_anon(result, t1, visiting));
-  t3.add$1(result, "}");
-  t2.removeLast$0(visiting);
-};
-
-$.StringBuffer_StringBuffer = function(content$) {
-  return $._StringBufferImpl$(content$);
-};
-
-$.Primitives_getMonth = function(receiver) {
-  return receiver.isUtc === true ? $.Primitives_lazyAsJsDate(receiver).getUTCMonth() + 1 : $.Primitives_lazyAsJsDate(receiver).getMonth() + 1;
-};
-
-$._StringBufferImpl$ = function(content$) {
-  var t1 = new $._StringBufferImpl(null, null);
-  t1._StringBufferImpl$1(content$);
-  return t1;
-};
-
-$.TextTrackListEvents$ = function(_ptr) {
-  return new $.TextTrackListEvents(_ptr);
-};
-
-$.Strings_join = function(strings, separator) {
-  $.checkNull(strings);
-  return $.stringJoinUnchecked($.Strings__toJsStringArray(strings), separator);
-};
-
-$.Strings__toJsStringArray = function(strings) {
-  var length$, i, string, array;
-  if (typeof strings !== 'string' && (typeof strings !== 'object' || strings === null || strings.constructor !== Array && !strings.is$JavaScriptIndexingBehavior()))
-    return $.Strings__toJsStringArray$bailout(1, strings);
-  $.checkNull(strings);
-  length$ = strings.length;
-  if ($.isJsArray(strings)) {
-    for (i = 0; i < length$; ++i) {
-      if (i >= strings.length)
-        throw $.ioore(i);
-      string = strings[i];
-      if (!(typeof string === 'string'))
-        throw $.$$throw($.ArgumentError$(string));
-    }
-    array = strings;
-  } else {
-    array = $.List_List(length$);
-    for (i = 0; i < length$; ++i) {
-      if (i >= strings.length)
-        throw $.ioore(i);
-      string = strings[i];
-      if (!(typeof string === 'string'))
-        throw $.$$throw($.ArgumentError$(string));
-      array[i] = string;
-    }
-  }
-  return array;
-};
-
-$.Element_Element$tag = function(tag) {
-  return document.createElement(tag);
-};
-
-$.CustomEvent_CustomEvent = function(type, canBubble, cancelable, detail) {
-  return $._CustomEventFactoryProvider_createCustomEvent(type, canBubble, cancelable, detail);
 };
 
 $.Arrays_copy = function(src, srcStart, dst, dstStart, count) {
@@ -23908,8 +22973,18 @@ $.Arrays_lastIndexOf = function(a, element, startIndex) {
   return -1;
 };
 
-$.DOMApplicationCacheEvents$ = function(_ptr) {
-  return new $.DOMApplicationCacheEvents(_ptr);
+$._FutureImpl$ = function() {
+  return new $._FutureImpl(false, null, null, null, false, false, [], [], []);
+};
+
+$._FutureImpl__FutureImpl$immediate = function(value) {
+  var res = $._FutureImpl$();
+  res._setValue$1(value);
+  return res;
+};
+
+$.MediaStreamEvents$ = function(_ptr) {
+  return new $.MediaStreamEvents(_ptr);
 };
 
 $.JSSyntaxRegExp$ = function(pattern, ignoreCase, multiLine) {
@@ -23925,18 +23000,228 @@ $.JSSyntaxRegExp__globalVersionOf = function(other) {
   return re;
 };
 
+$.StackOverflowError$ = function() {
+  return new $.StackOverflowError();
+};
+
 $.StringMatch$ = function(start, str, pattern) {
   return new $.StringMatch(start, str, pattern);
 };
 
-$.RewriteEarlyExitException$ = function(elementDescription) {
-  return new $.RewriteEarlyExitException(elementDescription);
+$.Set_Set = function() {
+  return $._HashSetImpl$();
 };
 
-$.CommonTokenStream$ = function(tokenSource) {
-  var t1 = new $.CommonTokenStream(0, tokenSource, null, null, -1, -1);
-  t1.BufferedTokenStream$1(tokenSource);
-  return t1;
+$.CastErrorImplementation$ = function(actualType, expectedType) {
+  return new $.CastErrorImplementation(actualType, expectedType);
+};
+
+$.Future_Future$immediate = function(value) {
+  return $._FutureImpl__FutureImpl$immediate(value);
+};
+
+$.FutureAlreadyCompleteException$ = function() {
+  return new $.FutureAlreadyCompleteException();
+};
+
+$.FutureUnhandledException$ = function(source, stackTrace) {
+  return new $.FutureUnhandledException(source, stackTrace);
+};
+
+$.Primitives_objectHashCode = function(object) {
+  var hash = object.$identityHash;
+  if (hash == null) {
+    hash = $.add($.Primitives_hashCodeSeed, 1);
+    $.Primitives_hashCodeSeed = hash;
+    object.$identityHash = hash;
+  }
+  return hash;
+};
+
+$.Primitives_printString = function(string) {
+  if ("\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n" === string)
+    $.Primitives_mirrorsEnabled = true;
+  else if (typeof dartPrint == "function") {
+    dartPrint(string);
+    return;
+  }
+  if (typeof window == "object") {
+    if (typeof console == "object")
+      console.log(string);
+    return;
+  }
+  if (typeof print == "function") {
+    print(string);
+    return;
+  }
+  throw 'Unable to print message: ' + String(string);
+};
+
+$.Primitives_parseInt = function(string) {
+  var match, base, result;
+  $.checkString(string);
+  match = /^\s*[+-]?(?:0(x)[a-f0-9]+|\d+)\s*$/i.exec(string);
+  if (match == null)
+    throw $.$$throw($.FormatException$(string));
+  base = !($.index(match, 1) == null) ? 16 : 10;
+  result = parseInt(string, base);
+  if ($.CTC1.get$isNaN(result) === true)
+    throw $.$$throw($.FormatException$(string));
+  return result;
+};
+
+$.Primitives_parseDouble = function(string) {
+  var result;
+  $.checkString(string);
+  if (!/^\s*(?:NaN|[+-]?(?:Infinity|(?:\.\d+|\d+(?:\.\d+)?)(?:[eE][+-]?\d+)?))\s*$/.test(string))
+    throw $.$$throw($.FormatException$(string));
+  result = parseFloat(string);
+  if ($.CTC1.get$isNaN(result) === true && !$.eqB(string, "NaN"))
+    throw $.$$throw($.FormatException$(string));
+  return result;
+};
+
+$.FutureNotCompleteException$ = function() {
+  return new $.FutureNotCompleteException();
+};
+
+$.Primitives_objectTypeName = function(object) {
+  var name$, decompiled, t1;
+  name$ = $.constructorNameFallback(object);
+  if ($.eqB(name$, "Object")) {
+    decompiled = String(object.constructor).match(/^\s*function\s*(\S*)\s*\(/)[1];
+    if (typeof decompiled === 'string')
+      name$ = decompiled;
+  }
+  t1 = $.getInterceptor$JSString(name$);
+  return t1.charCodeAt$1(name$, 0) === 36 ? t1.substring$1(name$, 1) : name$;
+};
+
+$.Primitives_objectToString = function(object) {
+  return "Instance of '" + $.S($.Primitives_objectTypeName(object)) + "'";
+};
+
+$.Primitives_newList = function(length$) {
+  var result;
+  if (length$ == null)
+    return new Array();
+  if (!(typeof length$ === 'number' && Math.floor(length$) === length$) || length$ < 0)
+    throw $.$$throw($.ArgumentError$(length$));
+  result = new Array(length$);
+  result.fixed$length = true;
+  return result;
+};
+
+$.RuntimeError$ = function(message) {
+  return new $.RuntimeError(message);
+};
+
+$.Primitives__fromCharCodeApply = function(array) {
+  var end, t1, i, result, subarray, t2;
+  end = $.getInterceptor$JSStringJSArray(array).get$length(array);
+  if (typeof end !== 'number')
+    return $.Primitives__fromCharCodeApply$bailout(1, array, end);
+  for (t1 = end <= 500, i = 0, result = ""; i < end; i += 500) {
+    if (t1)
+      subarray = array;
+    else {
+      t2 = i + 500;
+      if (t2 < end)
+        ;
+      else
+        t2 = end;
+      subarray = array.slice(i, t2);
+    }
+    result = result + String.fromCharCode.apply(null, subarray);
+  }
+  return result;
+};
+
+$._dispatchEvent = function(receiver, message) {
+  var event$ = $.CustomEvent_CustomEvent(receiver, false, false, $.JSON_stringify(message));
+  $.window().$dom_dispatchEvent$1(event$);
+};
+
+$.Primitives_stringFromCharCodes = function(charCodes) {
+  var t1, t2;
+  for (t1 = $.getInterceptor$JSArray(charCodes).iterator$0(charCodes); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (!(typeof t2 === 'number' && Math.floor(t2) === t2))
+      throw $.$$throw($.ArgumentError$(t2));
+    if (t2 < 0)
+      throw $.$$throw($.ArgumentError$(t2));
+    if (t2 > 65535)
+      return $.Primitives_stringFromCodePoints(charCodes);
+  }
+  return $.Primitives__fromCharCodeApply(charCodes);
+};
+
+$.Primitives_stringFromCodePoints = function(codePoints) {
+  var a, t1, t2;
+  a = [];
+  for (t1 = $.getInterceptor$JSArray(codePoints).iterator$0(codePoints); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (!(typeof t2 === 'number' && Math.floor(t2) === t2))
+      throw $.$$throw($.ArgumentError$(t2));
+    if (t2 <= 65535)
+      a.push(t2);
+    else if (t2 <= 1114111) {
+      a.push(55296 + ($.shr(t2 - 65536, 10) & 1023));
+      a.push(56320 + (t2 & 1023));
+    } else
+      throw $.$$throw($.ArgumentError$(t2));
+  }
+  return $.Primitives__fromCharCodeApply(a);
+};
+
+$.Primitives_lazyAsJsDate = function(receiver) {
+  if (receiver.date === (void 0))
+    receiver.date = new Date(receiver.millisecondsSinceEpoch);
+  return receiver.date;
+};
+
+$.Primitives_getYear = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCFullYear() + 0) : ($.Primitives_lazyAsJsDate(receiver).getFullYear() + 0);
+};
+
+$.Primitives_getMonth = function(receiver) {
+  return receiver.isUtc === true ? $.Primitives_lazyAsJsDate(receiver).getUTCMonth() + 1 : $.Primitives_lazyAsJsDate(receiver).getMonth() + 1;
+};
+
+$.Primitives_getDay = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCDate() + 0) : ($.Primitives_lazyAsJsDate(receiver).getDate() + 0);
+};
+
+$.LocalWindowEvents$ = function(_ptr) {
+  return new $.LocalWindowEvents(_ptr);
+};
+
+$.Primitives_getHours = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCHours() + 0) : ($.Primitives_lazyAsJsDate(receiver).getHours() + 0);
+};
+
+$.Primitives_getSeconds = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCSeconds() + 0) : ($.Primitives_lazyAsJsDate(receiver).getSeconds() + 0);
+};
+
+$.Primitives_getMilliseconds = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCMilliseconds() + 0) : ($.Primitives_lazyAsJsDate(receiver).getMilliseconds() + 0);
+};
+
+$.Primitives_getMinutes = function(receiver) {
+  return receiver.isUtc === true ? ($.Primitives_lazyAsJsDate(receiver).getUTCMinutes() + 0) : ($.Primitives_lazyAsJsDate(receiver).getMinutes() + 0);
+};
+
+$.Primitives_dateNow = function() {
+  return Date.now();
+};
+
+$.ElementEvents$ = function(_ptr) {
+  return new $.ElementEvents(_ptr);
+};
+
+$._convertNativeToDart_Window = function(win) {
+  return $._DOMWindowCrossFrame__createSafe(win);
 };
 
 $._Lists_indexOf = function(a, element, startIndex, endIndex) {
@@ -24009,27 +23294,125 @@ $._Lists_getRange = function(a, start, length$, accumulator) {
   return accumulator;
 };
 
-$.MapCSSParser$ = function(input) {
-  var t1, t2;
-  t1 = $.RecognizerSharedState$();
-  t2 = new $.MapCSSParser(null, null, input, t1, null, "");
-  t2.BaseRecognizer$1(t1);
-  t2.MapCSSParser$1(input);
-  return t2;
+$._JsVisitedMap$ = function() {
+  return new $._JsVisitedMap(null);
 };
 
-$.JSON_stringify = function(object) {
-  return $._JsonStringifier_stringify(object);
+$._convertNativeToDart_SerializedScriptValue = function(object) {
+  return $._convertNativeToDart_AcceptStructuredClone(object, true);
+};
+
+$._convertDartToNative_PrepareForStructuredClone = function(value) {
+  var values, copies, t1, t2, t3, t4, copy;
+  values = [];
+  copies = [];
+  t1 = new $._convertDartToNative_PrepareForStructuredClone_findSlot(copies, values);
+  t2 = new $._convertDartToNative_PrepareForStructuredClone_readSlot(copies);
+  t3 = new $._convertDartToNative_PrepareForStructuredClone_writeSlot(copies);
+  t4 = new $._convertDartToNative_PrepareForStructuredClone_cleanupSlots();
+  copy = new $._convertDartToNative_PrepareForStructuredClone_walk(t1, t3, t2).call$1(value);
+  t4.call$0();
+  return copy;
+};
+
+$._convertNativeToDart_AcceptStructuredClone = function(object, mustCopy) {
+  var values, copies, t1;
+  values = [];
+  copies = [];
+  t1 = new $._convertNativeToDart_AcceptStructuredClone_findSlot(copies, values);
+  return new $._convertNativeToDart_AcceptStructuredClone_walk(new $._convertNativeToDart_AcceptStructuredClone_readSlot(copies), t1, mustCopy, new $._convertNativeToDart_AcceptStructuredClone_writeSlot(copies)).call$1(object);
+};
+
+$._ExceptionImplementation$ = function(message) {
+  return new $._ExceptionImplementation(message);
+};
+
+$._JsDeserializer$0 = function() {
+  return new $._JsDeserializer0(null);
+};
+
+$._callInIsolate = function(isolate, function$) {
+  isolate.eval$1(function$);
+  $._globalState().get$topEventLoop().run$0();
+};
+
+$._currentIsolate = function() {
+  return $._globalState().get$currentContext();
+};
+
+$.startRootIsolate = function(entry) {
+  var t1, rootContext;
+  t1 = $._Manager$();
+  $._globalState0(t1);
+  if ($._globalState().get$isWorker() === true)
+    return;
+  rootContext = $._IsolateContext$();
+  $._globalState().set$rootContext(rootContext);
+  $globals = rootContext.isolateStatics;
+  $static_init();
+  $._globalState().set$currentContext(rootContext);
+  if (!($._window() == null))
+    rootContext.eval$1(new $.startRootIsolate_anon());
+  rootContext.eval$1(entry);
+  $._globalState().get$topEventLoop().run$0();
+};
+
+$._globalState = function() {
+  return $globalState;
+};
+
+$._globalState0 = function(val) {
+  $globalState = val;
 };
 
 $.JSON_parse = function(json) {
   return $._JsonParser$(json).parseToplevel$0();
 };
 
+$.JSON_stringify = function(object) {
+  return $._JsonStringifier_stringify(object);
+};
+
+$.Events$ = function(_ptr) {
+  return new $.Events(_ptr);
+};
+
+$._serializeMessage = function(message) {
+  if ($._globalState().get$needSerialization() === true)
+    return $._JsSerializer$0().traverse$1(message);
+  else
+    return $._JsCopier$().traverse$1(message);
+};
+
+$._deserializeMessage = function(message) {
+  if ($._globalState().get$needSerialization() === true)
+    return $._JsDeserializer$0().deserialize$1(message);
+  else
+    return message;
+};
+
 $._CustomEventFactoryProvider_createCustomEvent = function(type, canBubble, cancelable, detail) {
   var e = $.document().$dom_createEvent$1("CustomEvent");
   e.$dom_initCustomEvent$4(type, canBubble, cancelable, detail);
   return e;
+};
+
+$._waitForPendingPorts = function(message, callback) {
+  var finder = $._PendingSendPortFinder$();
+  finder.traverse$1(message);
+  $.Futures_wait(finder.ports).then$1(new $._waitForPendingPorts_anon(callback));
+};
+
+$.ElementInstanceEvents$ = function(_ptr) {
+  return new $.ElementInstanceEvents(_ptr);
+};
+
+$._window = function() {
+  return typeof window != "undefined" ? window : null;
+};
+
+$._timerFactory = function(millis, callback, repeating) {
+  return repeating === true ? $._Timer$repeating(millis, callback) : $._Timer$(millis, callback);
 };
 
 $._JsonStringifier$ = function(sb) {
@@ -24127,6 +23510,48 @@ $._JsonStringifier_escape = function(sb, s) {
   t1.add$1(sb, needsEscape ? $.String_String$fromCharCodes(charCodes) : s);
 };
 
+$.StringBuffer_StringBuffer = function(content$) {
+  return $._StringBufferImpl$(content$);
+};
+
+$._ChildNodeListLazy$ = function(_this) {
+  return new $._ChildNodeListLazy(_this);
+};
+
+$.max = function(a, b) {
+  if (typeof a === 'number') {
+    if (typeof b === 'number') {
+      if (a > b)
+        return a;
+      if (a < b)
+        return b;
+      if (typeof b === 'number') {
+        if (typeof a === 'number')
+          if (a === 0)
+            return a + b;
+        if ($.CTC6.get$isNaN(b) === true)
+          return b;
+        return a;
+      }
+      if (b === 0 && $.CTC1.get$isNegative(a) === true)
+        return b;
+      return a;
+    }
+    throw $.$$throw($.ArgumentError$(b));
+  }
+  throw $.$$throw($.ArgumentError$(a));
+};
+
+$.DoubleLinkedQueue$ = function() {
+  var t1 = new $.DoubleLinkedQueue(null);
+  t1.DoubleLinkedQueue$0();
+  return t1;
+};
+
+$.LinkedHashMap_LinkedHashMap = function() {
+  return $._LinkedHashMapImpl$();
+};
+
 $.JsonUnsupportedObjectError$ = function(unsupportedObject) {
   return new $.JsonUnsupportedObjectError(unsupportedObject, null);
 };
@@ -24135,12 +23560,75 @@ $.JsonUnsupportedObjectError$withCause = function(unsupportedObject, cause) {
   return new $.JsonUnsupportedObjectError(unsupportedObject, cause);
 };
 
-$.DedicatedWorkerContextEvents$ = function(_ptr) {
-  return new $.DedicatedWorkerContextEvents(_ptr);
+$._LinkedHashMapImpl$ = function() {
+  var t1 = new $._LinkedHashMapImpl(null, null);
+  t1._LinkedHashMapImpl$0();
+  return t1;
 };
 
-$.WorkerContextEvents$ = function(_ptr) {
-  return new $.WorkerContextEvents(_ptr);
+$._DoubleLinkedQueueEntrySentinel$ = function() {
+  var t1 = new $._DoubleLinkedQueueEntrySentinel(null, null, null);
+  t1.DoubleLinkedQueueEntry$1(null);
+  t1._DoubleLinkedQueueEntrySentinel$0();
+  return t1;
+};
+
+$._KeyValuePair$ = function(key, value) {
+  return new $._KeyValuePair(key, value);
+};
+
+$._DoubleLinkedQueueIterator$ = function(_sentinel) {
+  var t1 = new $._DoubleLinkedQueueIterator(_sentinel, null);
+  t1._DoubleLinkedQueueIterator$1(_sentinel);
+  return t1;
+};
+
+$.DoubleLinkedQueueEntry$ = function(e) {
+  var t1 = new $.DoubleLinkedQueueEntry(null, null, null);
+  t1.DoubleLinkedQueueEntry$1(e);
+  return t1;
+};
+
+$.AbstractWorkerEvents$ = function(_ptr) {
+  return new $.AbstractWorkerEvents(_ptr);
+};
+
+$.StackTrace$ = function(stack) {
+  return new $.StackTrace(stack);
+};
+
+$.min = function(a, b) {
+  if (typeof a === 'number') {
+    if (typeof b === 'number') {
+      if (a > b)
+        return b;
+      if (a < b)
+        return a;
+      if (typeof b === 'number') {
+        if (typeof a === 'number')
+          if (a === 0)
+            return (a + b) * a * b;
+        if (a === 0 && $.CTC6.get$isNegative(b) === true || $.CTC6.get$isNaN(b) === true)
+          return b;
+        return a;
+      }
+      return a;
+    }
+    throw $.$$throw($.ArgumentError$(b));
+  }
+  throw $.$$throw($.ArgumentError$(a));
+};
+
+$.BatteryManagerEvents$ = function(_ptr) {
+  return new $.BatteryManagerEvents(_ptr);
+};
+
+$.MediaElementEvents$ = function(_ptr) {
+  return new $.MediaElementEvents(_ptr);
+};
+
+$.BodyElementEvents$ = function(_ptr) {
+  return new $.BodyElementEvents(_ptr);
 };
 
 $._JsonParser$ = function(json) {
@@ -24149,21 +23637,63 @@ $._JsonParser$ = function(json) {
   return t1;
 };
 
-$.MapCSSLexer$ = function(input) {
-  var t1, t2;
-  t1 = $.RecognizerSharedState$();
-  t2 = new $.MapCSSLexer(false, false, null, input, t1, null, "");
-  t2.BaseRecognizer$1(t1);
-  t2.MapCSSLexer$1(input);
-  return t2;
+$._StringBufferImpl$ = function(content$) {
+  var t1 = new $._StringBufferImpl(null, null);
+  t1._StringBufferImpl$1(content$);
+  return t1;
 };
 
-$._JsSerializer$ = function() {
-  return new $._JsSerializer(0, $._MessageTraverserVisitedMap$());
+$.Strings__toJsStringArray = function(strings) {
+  var length$, i, string, array;
+  if (typeof strings !== 'string' && (typeof strings !== 'object' || strings === null || strings.constructor !== Array && !strings.is$JavaScriptIndexingBehavior()))
+    return $.Strings__toJsStringArray$bailout(1, strings);
+  $.checkNull(strings);
+  length$ = strings.length;
+  if ($.isJsArray(strings)) {
+    for (i = 0; i < length$; ++i) {
+      if (i >= strings.length)
+        throw $.ioore(i);
+      string = strings[i];
+      if (!(typeof string === 'string'))
+        throw $.$$throw($.ArgumentError$(string));
+    }
+    array = strings;
+  } else {
+    array = $.List_List(length$);
+    for (i = 0; i < length$; ++i) {
+      if (i >= strings.length)
+        throw $.ioore(i);
+      string = strings[i];
+      if (!(typeof string === 'string'))
+        throw $.$$throw($.ArgumentError$(string));
+      array[i] = string;
+    }
+  }
+  return array;
+};
+
+$.Proxy$_internal = function(_port, _id) {
+  return new $.Proxy(_port, _id);
+};
+
+$.MediaStreamTrackEvents$ = function(_ptr) {
+  return new $.MediaStreamTrackEvents(_ptr);
+};
+
+$._ElementAttributeMap$ = function(_element) {
+  return new $._ElementAttributeMap(_element);
+};
+
+$.MediaStreamTrackListEvents$ = function(_ptr) {
+  return new $.MediaStreamTrackListEvents(_ptr);
 };
 
 $._JsSendPortSync$ = function(_id) {
   return new $._JsSendPortSync(_id);
+};
+
+$._JsSerializer$ = function() {
+  return new $._JsSerializer(0, $._MessageTraverserVisitedMap$());
 };
 
 $._LocalSendPortSync$_internal = function(_receivePort) {
@@ -24188,40 +23718,961 @@ $._RemoteSendPortSync__call = function(isolateId, portId, message) {
   return t1.result_1;
 };
 
+$.Proxy__forward = function(receiver, member, kind, args) {
+  var result;
+  if ($.eqB($._depth(), 0))
+    throw $.$$throw("Cannot access a JavaScript proxy out of scope.");
+  result = receiver._port.callSync$1([receiver._lib1_id, member, kind, $.getInterceptor$JSArray(args).map$1(args, $._serialize)]);
+  switch ($.index(result, 0)) {
+    case "return":
+      return $._deserialize($.index(result, 1));
+    case "throws":
+      throw $.$$throw($._deserialize($.index(result, 1)));
+    case "none":
+      throw $.$$throw($.NoSuchMethodError$(receiver, member, args, $.makeLiteralMap([]), null));
+    default:
+      throw $.$$throw("Invalid return value");
+  }
+};
+
+$.MessagePortEvents$ = function(_ptr) {
+  return new $.MessagePortEvents(_ptr);
+};
+
 $._MessageTraverserVisitedMap$ = function() {
   return new $._MessageTraverserVisitedMap();
 };
 
-$._JsDeserializer$ = function() {
-  return new $._JsDeserializer(null);
+$.Strings_join = function(strings, separator) {
+  $.checkNull(strings);
+  return $.stringJoinUnchecked($.Strings__toJsStringArray(strings), separator);
+};
+
+$._FunctionProxy$_internal = function(port, id) {
+  var t1 = new $._FunctionProxy(null, port, id);
+  t1._FunctionProxy$_internal$2(port, id);
+  return t1;
+};
+
+$.Proxy__serializeDataTree = function(data) {
+  var entries, t1, t2;
+  if (typeof data === 'object' && data !== null && data.is$Map()) {
+    entries = $.List_List(null);
+    for (t1 = data.get$keys(), t1 = $.getInterceptor$JSArray(t1).iterator$0(t1); t1.get$hasNext() === true;) {
+      t2 = t1.next$0();
+      entries.push([t2, $.Proxy__serializeDataTree(data.operator$index$1(t2))]);
+    }
+    return ["map", entries];
+  } else if (typeof data === 'object' && data !== null && (data.constructor === Array || data.is$List()))
+    return ["list", $.getInterceptor$JSArray(data).map$1(data, new $.Proxy__serializeDataTree_anon())];
+  else
+    return ["simple", $._serialize(data)];
+};
+
+$._zoomLower = function(v) {
+  var s, re;
+  s = v.get$text();
+  re = $.RegExp_RegExp("^\\|z(\\d+)", false, false);
+  if (re.hasMatch$1(s) === true)
+    return $.index(re.firstMatch$1(s), 1);
+  if ($.RegExp_RegExp("^|z\\-\\d+", false, false).hasMatch$1(s) === true)
+    return "0";
+};
+
+$._green = function(c) {
+  var t1, t2;
+  if (typeof c === 'object' && c !== null && !!c.is$Token)
+    c = c.get$text();
+  t1 = $.getInterceptor$JSStringJSArray(c);
+  if ($.eqB(t1.get$length(c), 4)) {
+    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 2, 3)));
+    return $.getInterceptor(t2).toString$0(t2);
+  } else {
+    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 3, 5)));
+    return $.getInterceptor(t2).toString$0(t2);
+  }
+};
+
+$._red = function(c) {
+  var t1, t2;
+  if (typeof c === 'object' && c !== null && !!c.is$Token)
+    c = c.get$text();
+  t1 = $.getInterceptor$JSStringJSArray(c);
+  if ($.eqB(t1.get$length(c), 4)) {
+    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 1, 2)));
+    return $.getInterceptor(t2).toString$0(t2);
+  } else {
+    t2 = $.int_parse("0x" + $.S(t1.substring$2(c, 1, 3)));
+    return $.getInterceptor(t2).toString$0(t2);
+  }
+};
+
+$.NoSuchMethodError$ = function(_receiver, _memberName, _arguments, _namedArguments, existingArgumentNames) {
+  return new $.NoSuchMethodError(_receiver, _memberName, _arguments, _namedArguments, existingArgumentNames);
+};
+
+$.CommonToken$ = function(type, _text) {
+  return new $.CommonToken(type, null, -1, 0, null, null, _text, -1, null, null);
+};
+
+$.CommonToken$fromToken = function(oldToken) {
+  var t1 = new $.CommonToken(null, null, -1, 0, null, null, null, -1, null, null);
+  t1.CommonToken$fromToken$1(oldToken);
+  return t1;
+};
+
+$._extractUrl = function(v) {
+  var t1;
+  if (typeof v === 'object' && v !== null && !!v.is$Token)
+    v = v.get$text();
+  t1 = $.getInterceptor$JSString(v).replaceFirst$2(v, $.RegExp_RegExp("^\\s*url\\s*\\(\\s*['\"]\\s*", true, false), "");
+  return $.getInterceptor$JSString(t1).replaceFirst$2(t1, $.RegExp_RegExp("[\"']\\s*\\)$", true, false), "");
+};
+
+$.CommonToken$fromCharStream = function(inputStream, type, channel, start, stop$) {
+  return new $.CommonToken(type, null, -1, channel, inputStream, null, null, -1, start, stop$);
+};
+
+$.MismatchedRangeException$ = function(a, b, input) {
+  var t1 = new $.MismatchedRangeException(a, b, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$._zoomUpper = function(v) {
+  var s, re;
+  s = v.get$text();
+  re = $.RegExp_RegExp("^\\|z\\d+\\-(\\d+)", false, false);
+  if (re.hasMatch$1(s) === true)
+    return $.index(re.firstMatch$1(s), 1);
+  if ($.RegExp_RegExp("^|z\\d+\\-", false, false).hasMatch$1(s) === true)
+    return "-1";
+};
+
+$._unquote = function(v) {
+  var s, t1, matches, sb, t2, i, cur, t3, u, prev;
+  s = typeof v === 'object' && v !== null && !!v.is$Token ? v.get$text() : v;
+  t1 = $.getInterceptor$JSString(s).replaceFirst$2(s, $.RegExp_RegExp("^[\"']", false, false), "");
+  t1 = $.getInterceptor$JSString(t1).replaceFirst$2(t1, $.RegExp_RegExp("[\"']$", false, false), "");
+  t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\\"", false, false), "\"");
+  t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\'", false, false), "'");
+  s = $.getInterceptor$JSString(t1).replaceAll$2(t1, $.RegExp_RegExp("\\\\\\\\", false, false), "\\");
+  t1 = $.RegExp_RegExp("\\\\u[a-fA-F0-9][a-fA-F0-9][a-fA-F0-9][a-fA-F0-9]", false, false);
+  matches = $.List_List$from($.getInterceptor$JSString(t1).allMatches$1(t1, s));
+  if ($.CTC0.get$isEmpty(matches) !== true) {
+    sb = $.StringBuffer_StringBuffer("");
+    for (t1 = $.getInterceptor$JSArray(sb), t2 = $.getInterceptor$JSString(s), i = 0; i < matches.length; ++i) {
+      cur = matches[i];
+      t3 = cur.group$1(0);
+      u = $.String_String$fromCharCodes([$.int_parse("0x" + $.S($.getInterceptor$JSString(t3).substring$1(t3, 2)))]);
+      if (i === 0) {
+        if ($.gtB(cur.get$start(), 0))
+          t1.add$1(sb, t2.substring$2(s, 0, cur.get$start()));
+        t1.add$1(sb, u);
+      } else {
+        t3 = i - 1;
+        if (t3 < 0 || t3 >= matches.length)
+          throw $.ioore(t3);
+        prev = matches[t3];
+        if (!$.eqB(prev.get$end(), cur.get$start()))
+          t1.add$1(sb, t2.substring$2(s, prev.get$end(), cur.get$start()));
+        t1.add$1(sb, u);
+      }
+    }
+    t2 = $.CTC0.get$last(matches).get$end();
+    t3 = $.getInterceptor$JSStringJSArray(s);
+    if ($.ltB(t2, t3.get$length(s)))
+      t1.add$1(sb, t3.substring$1(s, $.CTC0.get$last(matches).get$end()));
+    s = $.getInterceptor(sb).toString$0(sb);
+  }
+  return s;
+};
+
+$._blue = function(c) {
+  var t1, t2;
+  if (typeof c === 'object' && c !== null && !!c.is$Token)
+    c = c.get$text();
+  t1 = $.getInterceptor$JSStringJSArray(c);
+  if ($.eqB(t1.get$length(c), 4)) {
+    t2 = $.int_parse("0x" + $.S(t1.substring$1(c, 3)));
+    return $.getInterceptor(t2).toString$0(t2);
+  } else {
+    t2 = $.int_parse("0x" + $.S(t1.substring$1(c, 5)));
+    return $.getInterceptor(t2).toString$0(t2);
+  }
+};
+
+$._HashSetImpl$ = function() {
+  var t1 = new $._HashSetImpl(null);
+  t1._HashSetImpl$0();
+  return t1;
+};
+
+$.Proxy_Proxy$_json = function(data) {
+  if ($.eqB($._depth(), 0))
+    throw $.$$throw("Cannot create Proxy out of scope.");
+  return $._deserialize($._jsPortConvert.callSync$1($.Proxy__serializeDataTree(data)));
+};
+
+$._HashSetIterator$ = function(set_) {
+  var t1 = new $._HashSetIterator(set_._backingMap._keys, -1);
+  t1._HashSetIterator$1(set_);
+  return t1;
+};
+
+$.NotificationEvents$ = function(_ptr) {
+  return new $.NotificationEvents(_ptr);
+};
+
+$.LoggerEvents$ = function(_logger) {
+  return new $.LoggerEvents(_logger);
+};
+
+$.LogRecord$ = function(level, message, loggerName, time, exception, exceptionText) {
+  var t1, t2;
+  t1 = time == null ? $.Date_Date$now() : time;
+  t2 = $.LogRecord__nextNumber;
+  $.LogRecord__nextNumber = $.add(t2, 1);
+  return new $.LogRecord(level, message, loggerName, t1, t2, exception, exceptionText);
+};
+
+$.PeerConnection00Events$ = function(_ptr) {
+  return new $.PeerConnection00Events(_ptr);
+};
+
+$._ChildrenElementList$_wrap = function(element) {
+  return new $._ChildrenElementList(element, element.children);
+};
+
+$.RTCDataChannelEvents$ = function(_ptr) {
+  return new $.RTCDataChannelEvents(_ptr);
+};
+
+$._ElementCssClassSet$ = function(_element) {
+  return new $._ElementCssClassSet(_element);
+};
+
+$.RTCPeerConnectionEvents$ = function(_ptr) {
+  return new $.RTCPeerConnectionEvents(_ptr);
+};
+
+$._FrozenCssClassSet$ = function() {
+  return new $._FrozenCssClassSet();
+};
+
+$.FilteredElementList$ = function(node) {
+  return new $.FilteredElementList(node, node.get$nodes());
+};
+
+$.AudioContextEvents$ = function(_ptr) {
+  return new $.AudioContextEvents(_ptr);
+};
+
+$.RewriteRuleTokenStream$ = function(adaptor, elementDescription, elements) {
+  var t1 = new $.RewriteRuleTokenStream(0, null, null, false, elementDescription, adaptor);
+  t1.RewriteRuleElementStream$3(adaptor, elementDescription, elements);
+  return t1;
+};
+
+$.RewriteRuleSubtreeStream$ = function(adaptor, elementDescription, e) {
+  var t1 = new $.RewriteRuleSubtreeStream(0, null, null, false, elementDescription, adaptor);
+  t1.RewriteRuleElementStream$3(adaptor, elementDescription, e);
+  return t1;
+};
+
+$._inject = function(code) {
+  var script, t1;
+  script = $.ScriptElement_ScriptElement();
+  script.set$type("text/javascript");
+  script.set$innerHTML(code);
+  t1 = $.document().get$body().get$nodes();
+  $.getInterceptor$JSArray(t1).add$1(t1, script);
+};
+
+$.RewriteCardinalityException$ = function(message) {
+  return new $.RewriteCardinalityException(message);
+};
+
+$._Device_userAgent = function() {
+  return $.window().get$navigator().get$userAgent();
+};
+
+$._Device_isOpera = function() {
+  var t1 = $._Device_userAgent();
+  return $.getInterceptor$JSString(t1).contains$2(t1, "Opera", 0);
+};
+
+$._Device_isIE = function() {
+  var t1, t2;
+  if ($._Device_isOpera() !== true) {
+    t1 = $._Device_userAgent();
+    t2 = $.getInterceptor$JSString(t1).contains$2(t1, "MSIE", 0) === true;
+    t1 = t2;
+  } else
+    t1 = false;
+  return t1;
+};
+
+$._Device_isFirefox = function() {
+  var t1 = $._Device_userAgent();
+  return $.getInterceptor$JSString(t1).contains$2(t1, "Firefox", 0);
+};
+
+$.RewriteEmptyStreamException$ = function(elementDescription) {
+  return new $.RewriteEmptyStreamException(elementDescription);
+};
+
+$._initialize = function(exception) {
+  var t1;
+  if (!($._jsPortSync == null))
+    return;
+  try {
+    $._jsPortSync = $.window().lookupPort$1("dart-js-context");
+  } catch (exception) {
+    $.unwrapException(exception);
+  }
+
+  if ($._jsPortSync == null) {
+    $._inject("(function() {\n  // Proxy support for js.dart.\n\n  var globalContext = window;\n\n  // Table for local objects and functions that are proxied.\n  function ProxiedObjectTable() {\n    // Name for debugging.\n    this.name = 'js-ref';\n\n    // Table from IDs to JS objects.\n    this.map = {};\n\n    // Generator for new IDs.\n    this._nextId = 0;\n\n    // Counter for deleted proxies.\n    this._deletedCount = 0;\n\n    // Flag for one-time initialization.\n    this._initialized = false;\n\n    // Ports for managing communication to proxies.\n    this.port = new ReceivePortSync();\n    this.sendPort = this.port.toSendPort();\n\n    // Set of IDs that are global.\n    // These will not be freed on an exitScope().\n    this.globalIds = {};\n\n    // Stack of scoped handles.\n    this.handleStack = [];\n\n    // Stack of active scopes where each value is represented by the size of\n    // the handleStack at the beginning of the scope.  When an active scope\n    // is popped, the handleStack is restored to where it was when the\n    // scope was entered.\n    this.scopeIndices = [];\n  }\n\n  // Number of valid IDs.  This is the number of objects (global and local)\n  // kept alive by this table.\n  ProxiedObjectTable.prototype.count = function () {\n    return Object.keys(this.map).length;\n  }\n\n  // Number of total IDs ever allocated.\n  ProxiedObjectTable.prototype.total = function () {\n    return this.count() + this._deletedCount;\n  }\n\n  // Adds an object to the table and return an ID for serialization.\n  ProxiedObjectTable.prototype.add = function (obj) {\n    if (this.scopeIndices.length == 0) {\n      throw \"Cannot allocate a proxy outside of a scope.\";\n    }\n    // TODO(vsm): Cache refs for each obj?\n    var ref = this.name + '-' + this._nextId++;\n    this.handleStack.push(ref);\n    this.map[ref] = obj;\n    return ref;\n  }\n\n  ProxiedObjectTable.prototype._initializeOnce = function () {\n    if (!this._initialized) {\n      this._initialize();\n      this._initialized = true;\n    }\n  }\n\n  // Enters a new scope for this table.\n  ProxiedObjectTable.prototype.enterScope = function() {\n    this._initializeOnce();\n    this.scopeIndices.push(this.handleStack.length);\n  }\n\n  // Invalidates all non-global IDs in the current scope and\n  // exit the current scope.\n  ProxiedObjectTable.prototype.exitScope = function() {\n    var start = this.scopeIndices.pop();\n    for (var i = start; i < this.handleStack.length; ++i) {\n      var key = this.handleStack[i];\n      if (!this.globalIds.hasOwnProperty(key)) {\n        delete this.map[this.handleStack[i]];\n        this._deletedCount++;\n      }\n    }\n    this.handleStack = this.handleStack.splice(0, start);\n  }\n\n  // Makes this ID globally scope.  It must be explicitly invalidated.\n  ProxiedObjectTable.prototype.globalize = function(id) {\n    this.globalIds[id] = true;\n  }\n\n  // Invalidates this ID, potentially freeing its corresponding object.\n  ProxiedObjectTable.prototype.invalidate = function(id) {\n    var old = this.get(id);\n    delete this.globalIds[id];\n    delete this.map[id];\n    this._deletedCount++;\n    return old;\n  }\n\n  // Gets the object or function corresponding to this ID.\n  ProxiedObjectTable.prototype.get = function (id) {\n    if (!this.map.hasOwnProperty(id)) {\n      throw 'Proxy ' + id + ' has been invalidated.'\n    }\n    return this.map[id];\n  }\n\n  ProxiedObjectTable.prototype._initialize = function () {\n    // Configure this table's port to forward methods, getters, and setters\n    // from the remote proxy to the local object.\n    var table = this;\n\n    this.port.receive(function (message) {\n      // TODO(vsm): Support a mechanism to register a handler here.\n      try {\n        var receiver = table.get(message[0]);\n        var member = message[1];\n        var kind = message[2];\n        var args = message[3].map(deserialize);\n        if (kind == 'get') {\n          // Getter.\n          var field = member;\n          if (field in receiver && args.length == 0) {\n            return [ 'return', serialize(receiver[field]) ];\n          }\n        } else if (kind == 'set') {\n          // Setter.\n          var field = member;\n          if (args.length == 1) {\n            return [ 'return', serialize(receiver[field] = args[0]) ];\n          }\n        } else if (kind == 'apply') {\n          // Direct function invocation.\n          // TODO(vsm): Should we capture _this_ automatically?\n          return [ 'return', serialize(receiver.apply(null, args)) ];\n        } else if (member == '[]' && args.length == 1) {\n          // Index getter.\n          return [ 'return', serialize(receiver[args[0]]) ];\n        } else if (member == '[]=' && args.length == 2) {\n          // Index setter.\n          return [ 'return', serialize(receiver[args[0]] = args[1]) ];\n        } else {\n          var f = receiver[member];\n          if (f) {\n            var result = f.apply(receiver, args);\n            return [ 'return', serialize(result) ];\n          }\n        }\n        return [ 'none' ];\n      } catch (e) {\n        return [ 'throws', e.toString() ];\n      }\n    });\n  }\n\n  // Singleton for local proxied objects.\n  var proxiedObjectTable = new ProxiedObjectTable();\n\n  // DOM element serialization code.\n  var _localNextElementId = 0;\n  var _DART_ID = 'data-dart_id';\n  var _DART_TEMPORARY_ATTACHED = 'data-dart_temporary_attached';\n\n  function serializeElement(e) {\n    // TODO(vsm): Use an isolate-specific id.\n    var id;\n    if (e.hasAttribute(_DART_ID)) {\n      id = e.getAttribute(_DART_ID);\n    } else {\n      id = (_localNextElementId++).toString();\n      e.setAttribute(_DART_ID, id);\n    }\n    if (e !== document.documentElement) {\n      // Element must be attached to DOM to be retrieve in js part.\n      // Attach top unattached parent to avoid detaching parent of \"e\" when\n      // appending \"e\" directly to document. We keep count of elements\n      // temporarily attached to prevent detaching top unattached parent to\n      // early. This count is equals to the length of _DART_TEMPORARY_ATTACHED\n      // attribute. There could be other elements to serialize having the same\n      // top unattached parent.\n      var top = e;\n      while (true) {\n        if (top.hasAttribute(_DART_TEMPORARY_ATTACHED)) {\n          var oldValue = top.getAttribute(_DART_TEMPORARY_ATTACHED);\n          var newValue = oldValue + \"a\";\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, newValue);\n          break;\n        }\n        if (top.parentNode == null) {\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, \"a\");\n          document.documentElement.appendChild(top);\n          break;\n        }\n        if (top.parentNode === document.documentElement) {\n          // e was already attached to dom\n          break;\n        }\n        top = top.parentNode;\n      }\n    }\n    return id;\n  }\n\n  function deserializeElement(id) {\n    // TODO(vsm): Clear the attribute.\n    var list = document.querySelectorAll('[' + _DART_ID + '=\"' + id + '\"]');\n\n    if (list.length > 1) throw 'Non unique ID: ' + id;\n    if (list.length == 0) {\n      throw 'Element must be attached to the document: ' + id;\n    }\n    var e = list[0];\n    if (e !== document.documentElement) {\n      // detach temporary attached element\n      var top = e;\n      while (true) {\n        if (top.hasAttribute(_DART_TEMPORARY_ATTACHED)) {\n          var oldValue = top.getAttribute(_DART_TEMPORARY_ATTACHED);\n          var newValue = oldValue.substring(1);\n          top.setAttribute(_DART_TEMPORARY_ATTACHED, newValue);\n          // detach top only if no more elements have to be unserialized\n          if (top.getAttribute(_DART_TEMPORARY_ATTACHED).length === 0) {\n            top.removeAttribute(_DART_TEMPORARY_ATTACHED);\n            document.documentElement.removeChild(top);\n          }\n          break;\n        }\n        if (top.parentNode === document.documentElement) {\n          // e was already attached to dom\n          break;\n        }\n        top = top.parentNode;\n      }\n    }\n    return e;\n  }\n\n\n  // Type for remote proxies to Dart objects.\n  function DartProxy(id, sendPort) {\n    this.id = id;\n    this.port = sendPort;\n  }\n\n  // Serializes JS types to SendPortSync format:\n  // - primitives -> primitives\n  // - sendport -> sendport\n  // - DOM element -> [ 'domref', element-id ]\n  // - Function -> [ 'funcref', function-id, sendport ]\n  // - Object -> [ 'objref', object-id, sendport ]\n  function serialize(message) {\n    if (message == null) {\n      return null;  // Convert undefined to null.\n    } else if (typeof(message) == 'string' ||\n               typeof(message) == 'number' ||\n               typeof(message) == 'boolean') {\n      // Primitives are passed directly through.\n      return message;\n    } else if (message instanceof SendPortSync) {\n      // Non-proxied objects are serialized.\n      return message;\n    } else if (message instanceof Element &&\n        (message.ownerDocument == null || message.ownerDocument == document)) {\n      return [ 'domref', serializeElement(message) ];\n    } else if (typeof(message) == 'function') {\n      if ('_dart_id' in message) {\n        // Remote function proxy.\n        var remoteId = message._dart_id;\n        var remoteSendPort = message._dart_port;\n        return [ 'funcref', remoteId, remoteSendPort ];\n      } else {\n        // Local function proxy.\n        return [ 'funcref',\n                 proxiedObjectTable.add(message),\n                 proxiedObjectTable.sendPort ];\n      }\n    } else if (message instanceof DartProxy) {\n      // Remote object proxy.\n      return [ 'objref', message.id, message.port ];\n    } else {\n      // Local object proxy.\n      return [ 'objref',\n               proxiedObjectTable.add(message),\n               proxiedObjectTable.sendPort ];\n    }\n  }\n\n  function deserialize(message) {\n    if (message == null) {\n      return null;  // Convert undefined to null.\n    } else if (typeof(message) == 'string' ||\n               typeof(message) == 'number' ||\n               typeof(message) == 'boolean') {\n      // Primitives are passed directly through.\n      return message;\n    } else if (message instanceof SendPortSync) {\n      // Serialized type.\n      return message;\n    }\n    var tag = message[0];\n    switch (tag) {\n      case 'funcref': return deserializeFunction(message);\n      case 'objref': return deserializeObject(message);\n      case 'domref': return deserializeElement(message[1]);\n    }\n    throw 'Unsupported serialized data: ' + message;\n  }\n\n  // Create a local function that forwards to the remote function.\n  function deserializeFunction(message) {\n    var id = message[1];\n    var port = message[2];\n    // TODO(vsm): Add a more robust check for a local SendPortSync.\n    if (\"receivePort\" in port) {\n      // Local function.\n      return proxiedObjectTable.get(id);\n    } else {\n      // Remote function.  Forward to its port.\n      var f = function () {\n        var depth = enterScope();\n        try {\n          var args = Array.prototype.slice.apply(arguments).map(serialize);\n          var result = port.callSync([id, '#call', args]);\n          if (result[0] == 'throws') throw deserialize(result[1]);\n          return deserialize(result[1]);\n        } finally {\n          exitScope(depth);\n        }\n      };\n      // Cache the remote id and port.\n      f._dart_id = id;\n      f._dart_port = port;\n      return f;\n    }\n  }\n\n  // Creates a DartProxy to forwards to the remote object.\n  function deserializeObject(message) {\n    var id = message[1];\n    var port = message[2];\n    // TODO(vsm): Add a more robust check for a local SendPortSync.\n    if (\"receivePort\" in port) {\n      // Local object.\n      return proxiedObjectTable.get(id);\n    } else {\n      // Remote object.\n      return new DartProxy(id, port);\n    }\n  }\n\n  // Instantiate a Date with arguments.\n  function instantiateDate(args) {\n    // 7 arguments because the longest constructor is : new Date(year, month,\n    // day, hour, minute, second, millisecond)\n    if (args.length === 0) {\n      return new Date();\n    } else if (args.length === 1) {\n      return new Date(args[0]);\n    } else if (args.length === 2) {\n      return new Date(args[0], args[1]);\n    } else if (args.length === 3) {\n      return new Date(args[0], args[1], args[2]);\n    } else if (args.length === 4) {\n      return new Date(args[0], args[1], args[2], args[3]);\n    } else if (args.length === 5) {\n      return new Date(args[0], args[1], args[2], args[3], args[4]);\n    } else if (args.length === 6) {\n      return new Date(args[0], args[1], args[2], args[3], args[4], args[5]);\n    } else if (args.length === 7) {\n      return new Date(args[0], args[1], args[2], args[3], args[4], args[5],\n                     args[6]);\n    }\n    return null;\n  }\n\n  // Remote handler to construct a new JavaScript object given its\n  // serialized constructor and arguments.\n  function construct(args) {\n    args = args.map(deserialize);\n    var constructor = args[0];\n    args = Array.prototype.slice.call(args, 1);\n\n    var ret = null;\n    // Date can only be instantiated with the new operator.\n    if (constructor === Date) {\n      ret = instantiateDate(args);\n    } else {\n      // Dummy Type with correct constructor.\n      var Type = function(){};\n      Type.prototype = constructor.prototype;\n  \n      // Create a new instance\n      var instance = new Type();\n  \n      // Call the original constructor.\n      ret = constructor.apply(instance, args);\n      ret = Object(ret) === ret ? ret : instance;\n    }\n    return serialize(ret);\n  }\n\n  // Remote handler to return the top-level JavaScript context.\n  function context(data) {\n    return serialize(globalContext);\n  }\n\n  // Remote handler for debugging.\n  function debug() {\n    var live = proxiedObjectTable.count();\n    var total = proxiedObjectTable.total();\n    return 'JS objects Live : ' + live +\n           ' (out of ' + total + ' ever allocated).';\n  }\n\n  // Return true if two JavaScript proxies are equal (==).\n  function proxyEquals(args) {\n    return deserialize(args[0]) == deserialize(args[1]);\n  }\n\n  // Return true if a JavaScript proxy is instance of a given type (instanceof).\n  function proxyInstanceof(args) {\n    return deserialize(args[0]) instanceof deserialize(args[1]);\n  }\n\n  function proxyConvert(args) {\n    return serialize(deserializeDataTree(args));\n  }\n\n  function deserializeDataTree(data) {\n    var type = data[0];\n    var value = data[1];\n    if (type === 'map') {\n      var obj = {};\n      for (var i = 0; i < value.length; i++) {\n        obj[value[i][0]] = deserializeDataTree(value[i][1]);\n      }\n      return obj;\n    } else if (type === 'list') {\n      var list = [];\n      for (var i = 0; i < value.length; i++) {\n        list.push(deserializeDataTree(value[i]));\n      }\n      return list;\n    } else /* 'simple' */ {\n      return deserialize(value);\n    }\n  }\n\n  function makeGlobalPort(name, f) {\n    var port = new ReceivePortSync();\n    port.receive(f);\n    window.registerPort(name, port.toSendPort());\n  }\n\n  // Enters a new scope in the JavaScript context.\n  function enterJavaScriptScope() {\n    proxiedObjectTable.enterScope();\n  }\n\n  // Enters a new scope in both the JavaScript and Dart context.\n  var _dartEnterScopePort = null;\n  function enterScope() {\n    enterJavaScriptScope();\n    if (!_dartEnterScopePort) {\n      _dartEnterScopePort = window.lookupPort('js-dart-enter-scope');\n    }\n    return _dartEnterScopePort.callSync([]);\n  }\n\n  // Exits the current scope (and invalidate local IDs) in the JavaScript\n  // context.\n  function exitJavaScriptScope() {\n    proxiedObjectTable.exitScope();\n  }\n\n  // Exits the current scope in both the JavaScript and Dart context.\n  var _dartExitScopePort = null;\n  function exitScope(depth) {\n    exitJavaScriptScope();\n    if (!_dartExitScopePort) {\n      _dartExitScopePort = window.lookupPort('js-dart-exit-scope');\n    }\n    return _dartExitScopePort.callSync([ depth ]);\n  }\n\n  makeGlobalPort('dart-js-context', context);\n  makeGlobalPort('dart-js-create', construct);\n  makeGlobalPort('dart-js-debug', debug);\n  makeGlobalPort('dart-js-equals', proxyEquals);\n  makeGlobalPort('dart-js-instanceof', proxyInstanceof);\n  makeGlobalPort('dart-js-convert', proxyConvert);\n  makeGlobalPort('dart-js-enter-scope', enterJavaScriptScope);\n  makeGlobalPort('dart-js-exit-scope', exitJavaScriptScope);\n  makeGlobalPort('dart-js-globalize', function(data) {\n    if (data[0] == \"objref\") return proxiedObjectTable.globalize(data[1]);\n    // TODO(vsm): Do we ever need to globalize functions?\n    throw 'Illegal type: ' + data[0];\n  });\n  makeGlobalPort('dart-js-invalidate', function(data) {\n    if (data[0] == \"objref\") return proxiedObjectTable.invalidate(data[1]);\n    // TODO(vsm): Do we ever need to globalize functions?\n    throw 'Illegal type: ' + data[0];\n  });\n})();\n");
+    $._jsPortSync = $.window().lookupPort$1("dart-js-context");
+  }
+  $._jsPortCreate = $.window().lookupPort$1("dart-js-create");
+  $._jsPortDebug = $.window().lookupPort$1("dart-js-debug");
+  $._jsPortEquals = $.window().lookupPort$1("dart-js-equals");
+  $._jsPortInstanceof = $.window().lookupPort$1("dart-js-instanceof");
+  $._jsPortConvert = $.window().lookupPort$1("dart-js-convert");
+  $._jsEnterJavaScriptScope = $.window().lookupPort$1("dart-js-enter-scope");
+  $._jsExitJavaScriptScope = $.window().lookupPort$1("dart-js-exit-scope");
+  $._jsGlobalize = $.window().lookupPort$1("dart-js-globalize");
+  $._jsInvalidate = $.window().lookupPort$1("dart-js-invalidate");
+  t1 = $.ReceivePortSync$();
+  t1.receive$1(new $._initialize_anon());
+  $._dartEnterDartScope = t1;
+  t1 = $.ReceivePortSync$();
+  t1.receive$1(new $._initialize_anon0());
+  $._dartExitDartScope = t1;
+  $.window().registerPort$2("js-dart-enter-scope", $._dartEnterDartScope.toSendPort$0());
+  $.window().registerPort$2("js-dart-exit-scope", $._dartExitDartScope.toSendPort$0());
+};
+
+$.context = function() {
+  if ($.eqB($._depth(), 0))
+    throw $.$$throw("Cannot get JavaScript context out of scope.");
+  return $._deserialize($._jsPortSync.callSync$1([]));
+};
+
+$._depth = function() {
+  var t1 = $.get$_proxiedObjectTable().get$_scopeIndices();
+  return $.getInterceptor$JSStringJSArray(t1).get$length(t1);
+};
+
+$.scoped = function(f) {
+  var depth, t1;
+  depth = $._enterScope();
+  try {
+    t1 = f.call$0();
+    return t1;
+  } finally {
+    $._exitScope(depth);
+  }
+};
+
+$._enterScope = function() {
+  $._initialize();
+  $.get$_proxiedObjectTable().enterScope$0();
+  $._jsEnterJavaScriptScope.callSync$1([]);
+  var t1 = $.get$_proxiedObjectTable().get$_scopeIndices();
+  return $.getInterceptor$JSStringJSArray(t1).get$length(t1);
+};
+
+$._exitScope = function(depth) {
+  $._jsExitJavaScriptScope.callSync$1([]);
+  $.get$_proxiedObjectTable().exitScope$0();
+};
+
+$.ScriptProcessorNodeEvents$ = function(_ptr) {
+  return new $.ScriptProcessorNodeEvents(_ptr);
+};
+
+$.retain = function(proxy) {
+  $._jsGlobalize.callSync$1($._serialize(proxy));
+  return proxy;
+};
+
+$.map = function(data) {
+  return $.Proxy_Proxy$_json(data);
+};
+
+$.$$experimentalFunctionProxy = function(f) {
+  if (f == null)
+    throw $.$$throw($.ArgumentError$("f must not be null"));
+  if ($.get$_FunctionProxy__map().containsKey$1(f) !== true)
+    throw $.$$throw($.ArgumentError$("f doesn't represent a JavaScript function. Failed to lookup proxy object."));
+  return $.index($.get$_FunctionProxy__map(), f);
+};
+
+$.UnsupportedError$ = function(message) {
+  return new $.UnsupportedError(message);
+};
+
+$.Error_safeToString = function(object) {
+  var t1;
+  if (typeof object === 'number' && Math.floor(object) === object || typeof object === 'number' || typeof object === 'boolean' || null == object)
+    return $.getInterceptor(object).toString$0(object);
+  if (typeof object === 'string') {
+    t1 = $.CTC2.replaceAll$2(object, "\\", "\\\\");
+    t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\n", "\\n");
+    t1 = $.getInterceptor$JSString(t1).replaceAll$2(t1, "\r", "\\r");
+    return "\"" + $.S($.getInterceptor$JSString(t1).replaceAll$2(t1, "\"", "\\\"")) + "\"";
+  }
+  return $.Primitives_objectToString(object);
+};
+
+$._deserialize = function(message) {
+  var t1, t2;
+  t1 = new $._deserialize_deserializeFunction();
+  t2 = new $._deserialize_deserializeObject();
+  if (message == null)
+    return;
+  else if (typeof message === 'string' || typeof message === 'number' || typeof message === 'boolean')
+    return message;
+  else if (typeof message === 'object' && message !== null && !!message.is$SendPortSync)
+    return message;
+  switch ($.index(message, 0)) {
+    case "funcref":
+      return t1.call$1(message);
+    case "objref":
+      return t2.call$1(message);
+    case "domref":
+      return $._deserializeElement($.index(message, 1));
+  }
+  throw $.$$throw("Unsupported serialized data: " + $.S(message));
+};
+
+$._serialize = function(message) {
+  var t1, proxy;
+  if (message == null)
+    return;
+  else if (typeof message === 'string' || typeof message === 'number' || typeof message === 'boolean')
+    return message;
+  else if (typeof message === 'object' && message !== null && !!message.is$SendPortSync)
+    return message;
+  else {
+    if (typeof message === 'object' && message !== null && message.is$Element()) {
+      t1 = message.ownerDocument;
+      t1 = t1 == null || $.eqB(t1, $.document());
+    } else
+      t1 = false;
+    if (t1)
+      return ["domref", $._serializeElement(message)];
+    else if (typeof message === 'object' && message !== null && !!message.is$Callback)
+      return message.get$_serialized();
+    else if (typeof message === 'function' || typeof message === 'object' && message !== null && !!message.is$Function)
+      if ($.get$_FunctionProxy__map().containsKey$1(message) === true) {
+        proxy = $.index($.get$_FunctionProxy__map(), message);
+        return ["funcref", proxy.get$_lib1_id(), proxy.get$_port()];
+      } else
+        throw $.$$throw("A function must be converted to a Callback before it can be serialized.");
+    else if (typeof message === 'object' && message !== null && !!message.is$Proxy)
+      return ["objref", message._lib1_id, message._port];
+    else {
+      t1 = $.get$_proxiedObjectTable();
+      return ["objref", $.getInterceptor$JSArray(t1).add$1(t1, message), $.get$_proxiedObjectTable().get$sendPort()];
+    }
+  }
+};
+
+$._serializeElement = function(e) {
+  var id, t1, top$, oldValue, newValue, t2;
+  if (e.get$attributes().containsKey$1("data-dart_id") === true)
+    id = $.index(e.get$attributes(), "data-dart_id");
+  else {
+    t1 = $._localNextElementId;
+    $._localNextElementId = $.add(t1, 1);
+    id = "dart-" + $.S(t1);
+    $.indexSet(e.get$attributes(), "data-dart_id", id);
+  }
+  t1 = $.document().get$documentElement();
+  if (!(e == null ? t1 == null : e === t1))
+    for (top$ = e; true;) {
+      if (top$.get$attributes().containsKey$1("data-dart_temporary_attached") === true) {
+        oldValue = $.index(top$.get$attributes(), "data-dart_temporary_attached");
+        newValue = $.getInterceptor$JSString(oldValue).concat$1(oldValue, "a");
+        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", newValue);
+        break;
+      }
+      if (top$.get$parent() == null) {
+        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", "a");
+        t1 = $.document().get$documentElement().get$elements();
+        $.getInterceptor$JSArray(t1).add$1(t1, top$);
+        break;
+      }
+      t1 = top$.get$parent();
+      t2 = $.document().get$documentElement();
+      if (t1 == null ? t2 == null : t1 === t2)
+        break;
+      top$ = top$.get$parent();
+    }
+  return id;
+};
+
+$._deserializeElement = function(id) {
+  var list, t1, e, top$, oldValue, newValue, t2;
+  list = $.queryAll("[data-dart_id=\"" + $.S(id) + "\"]");
+  t1 = $.getInterceptor$JSStringJSArray(list);
+  if ($.gtB(t1.get$length(list), 1))
+    throw $.$$throw("Non unique ID: " + $.S(id));
+  if ($.eqB(t1.get$length(list), 0))
+    throw $.$$throw("Only elements attached to document can be serialized: " + $.S(id));
+  e = $.index(list, 0);
+  t1 = $.document().get$documentElement();
+  if (!(e == null ? t1 == null : e === t1))
+    for (top$ = e; true;) {
+      if (top$.get$attributes().containsKey$1("data-dart_temporary_attached") === true) {
+        oldValue = $.index(top$.get$attributes(), "data-dart_temporary_attached");
+        newValue = $.getInterceptor$JSString(oldValue).substring$1(oldValue, 1);
+        $.indexSet(top$.get$attributes(), "data-dart_temporary_attached", newValue);
+        t1 = $.index(top$.get$attributes(), "data-dart_temporary_attached");
+        if ($.eqB($.getInterceptor$JSStringJSArray(t1).get$length(t1), 0)) {
+          top$.get$attributes().remove$1("data-dart_temporary_attached");
+          top$.remove$0();
+        }
+        break;
+      }
+      t1 = top$.get$parent();
+      t2 = $.document().get$documentElement();
+      if (t1 == null ? t2 == null : t1 === t2)
+        break;
+      top$ = top$.get$parent();
+    }
+  return e;
+};
+
+$.String_String$fromCharCodes = function(charCodes) {
+  var charCodes0;
+  if (!$.isJsArray(charCodes)) {
+    if (!(typeof charCodes === 'object' && charCodes !== null && (charCodes.constructor === Array || charCodes.is$List())))
+      throw $.$$throw($.ArgumentError$(charCodes));
+    charCodes0 = $.List_List$from(charCodes);
+    charCodes = charCodes0;
+  }
+  return $.Primitives_stringFromCharCodes(charCodes);
+};
+
+$.List_List = function(length$) {
+  return $.Primitives_newList(length$);
+};
+
+$.List_List$from = function(other) {
+  var list, t1;
+  list = $.List_List(null);
+  for (t1 = $.getInterceptor$JSArray(other).iterator$0(other); t1.get$hasNext() === true;)
+    list.push(t1.next$0());
+  return list;
+};
+
+$._FrozenElementList$_wrap = function(_nodeList) {
+  return new $._FrozenElementList(_nodeList);
+};
+
+$.SharedWorkerContextEvents$ = function(_ptr) {
+  return new $.SharedWorkerContextEvents(_ptr);
+};
+
+$.ListIterator$ = function(list) {
+  return new $.ListIterator(0, list);
+};
+
+$.Map_Map = function() {
+  return $._HashMapImpl$();
+};
+
+$._FrozenElementListIterator$ = function(_list) {
+  return new $._FrozenElementListIterator(_list, 0);
+};
+
+$.UnimplementedError$ = function(message) {
+  return new $.UnimplementedError(message);
+};
+
+$.RegExp_RegExp = function(pattern, ignoreCase, multiLine) {
+  return $.JSSyntaxRegExp$(pattern, ignoreCase, multiLine);
+};
+
+$._Collections_contains = function(iterable, element) {
+  var t1;
+  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
+    if ($.eqB(t1.next$0(), element))
+      return true;
+  return false;
+};
+
+$._Collections_map = function(source, destination, f) {
+  var t1;
+  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;)
+    destination.push(f.call$1(t1.next$0()));
+  return destination;
+};
+
+$._Collections_filter = function(source, destination, f) {
+  var t1, t2;
+  for (t1 = $.getInterceptor$JSArray(source).iterator$0(source); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (f.call$1(t2) === true)
+      destination.push(t2);
+  }
+  return destination;
+};
+
+$.FixedSizeListIterator$ = function(array) {
+  return new $.FixedSizeListIterator($.getInterceptor$JSStringJSArray(array).get$length(array), array, 0);
+};
+
+$.StateError$ = function(message) {
+  return new $.StateError(message);
+};
+
+$.int_parse = function(source) {
+  return $.Primitives_parseInt(source);
+};
+
+$.Collections_forEach = function(iterable, f) {
+  var t1;
+  for (t1 = $.CTC0.iterator$0(iterable); t1.get$hasNext() === true;)
+    f.call$1(t1.next$0());
+};
+
+$.SpeechRecognitionEvents$ = function(_ptr) {
+  return new $.SpeechRecognitionEvents(_ptr);
+};
+
+$.Collections_map = function(source, destination, f) {
+  var t1;
+  for (t1 = $.CTC0.iterator$0(source); t1.get$hasNext() === true;)
+    destination.push(f.call$1(t1.next$0()));
+  return destination;
+};
+
+$.Collections_reduce = function(iterable, initialValue, combine) {
+  var t1;
+  for (t1 = $.getInterceptor$JSArray(iterable).iterator$0(iterable); t1.get$hasNext() === true;)
+    initialValue = combine.call$2(initialValue, t1.next$0());
+  return initialValue;
+};
+
+$.Collections_filter = function(source, destination, f) {
+  var t1, t2;
+  for (t1 = $.CTC0.iterator$0(source); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (f.call$1(t2) === true)
+      destination.push(t2);
+  }
+  return destination;
+};
+
+$.Collections_collectionToString = function(c) {
+  var result = $.StringBuffer_StringBuffer("");
+  $.Collections__emitCollection(c, result, $.List_List(null));
+  return $.getInterceptor(result).toString$0(result);
+};
+
+$.Collections__emitCollection = function(c, result, visiting) {
+  var t1, isList, t2, t3, first, t4;
+  t1 = $.getInterceptor$JSArray(visiting);
+  t1.add$1(visiting, c);
+  isList = typeof c === 'object' && c !== null && (c.constructor === Array || c.is$List());
+  t2 = $.getInterceptor$JSArray(result);
+  t2.add$1(result, isList ? "[" : "{");
+  for (t3 = $.getInterceptor$JSArray(c).iterator$0(c), first = true; t3.get$hasNext() === true; first = false) {
+    t4 = t3.next$0();
+    if (!first)
+      t2.add$1(result, ", ");
+    $.Collections__emitObject(t4, result, visiting);
+  }
+  t2.add$1(result, isList ? "]" : "}");
+  t1.removeLast$0(visiting);
+};
+
+$.Collections__emitObject = function(o, result, visiting) {
+  var t1;
+  if (typeof o === 'object' && o !== null && (o.constructor === Array || o.is$Collection()))
+    if ($.Collections__containsRef(visiting, o)) {
+      t1 = $.getInterceptor$JSArray(result);
+      t1.add$1(result, typeof o === 'object' && o !== null && (o.constructor === Array || o.is$List()) ? "[...]" : "{...}");
+    } else
+      $.Collections__emitCollection(o, result, visiting);
+  else if (typeof o === 'object' && o !== null && o.is$Map())
+    if ($.Collections__containsRef(visiting, o))
+      $.getInterceptor$JSArray(result).add$1(result, "{...}");
+    else
+      $.Maps__emitMap(o, result, visiting);
+  else
+    $.getInterceptor$JSArray(result).add$1(result, o);
+};
+
+$.Collections__containsRef = function(c, ref) {
+  var t1, t2;
+  for (t1 = $.getInterceptor$JSArray(c).iterator$0(c); t1.get$hasNext() === true;) {
+    t2 = t1.next$0();
+    if (t2 == null ? ref == null : t2 === ref)
+      return true;
+  }
+  return false;
+};
+
+$._HashMapImpl$ = function() {
+  var t1 = new $._HashMapImpl(null, null, null, null, null);
+  t1._HashMapImpl$0();
+  return t1;
+};
+
+$._HashMapImpl__computeLoadLimit = function(capacity) {
+  return $.tdiv(capacity * 3, 4);
+};
+
+$._HashMapImpl__nextProbe = function(currentProbe, numberOfProbes, length$) {
+  return $.and($.add(currentProbe, numberOfProbes), $.sub(length$, 1));
+};
+
+$.ArgumentError$ = function(message) {
+  return new $.ArgumentError(message);
 };
 
 $.HashMap_HashMap = function() {
   return $._HashMapImpl$();
 };
 
+$.ANTLRStringStream$ = function(input) {
+  var t1 = new $.ANTLRStringStream(null, null, 0, 1, 0, 0, null, null, null);
+  t1.ANTLRStringStream$1(input);
+  return t1;
+};
+
+$.Maps_mapToString = function(m) {
+  var result = $.StringBuffer_StringBuffer("");
+  $.Maps__emitMap(m, result, $.List_List(null));
+  return $.getInterceptor(result).toString$0(result);
+};
+
+$.Maps__emitMap = function(m, result, visiting) {
+  var t1, t2, t3;
+  t1 = {};
+  t2 = $.getInterceptor$JSArray(visiting);
+  t2.add$1(visiting, m);
+  t3 = $.getInterceptor$JSArray(result);
+  t3.add$1(result, "{");
+  t1.first_1 = true;
+  $.getInterceptor$JSArray(m).forEach$1(m, new $.Maps__emitMap_anon(t1, visiting, result));
+  t3.add$1(result, "}");
+  t2.removeLast$0(visiting);
+};
+
+$.TextTrackEvents$ = function(_ptr) {
+  return new $.TextTrackEvents(_ptr);
+};
+
+$.TextTrackCueEvents$ = function(_ptr) {
+  return new $.TextTrackCueEvents(_ptr);
+};
+
+$.TextTrackListEvents$ = function(_ptr) {
+  return new $.TextTrackListEvents(_ptr);
+};
+
+$.Element_Element$tag = function(tag) {
+  return document.createElement(tag);
+};
+
+$._DOMWindowCrossFrame$ = function(_window) {
+  return new $._DOMWindowCrossFrame(_window);
+};
+
+$._DOMWindowCrossFrame__createSafe = function(w) {
+  var t1 = $.window();
+  if (w == null ? t1 == null : w === t1)
+    return w;
+  else
+    return $._DOMWindowCrossFrame$(w);
+};
+
+$.CustomEvent_CustomEvent = function(type, canBubble, cancelable, detail) {
+  return $._CustomEventFactoryProvider_createCustomEvent(type, canBubble, cancelable, detail);
+};
+
+$._DateImpl$fromMillisecondsSinceEpoch = function(millisecondsSinceEpoch, isUtc) {
+  var t1 = new $._DateImpl(millisecondsSinceEpoch, isUtc);
+  t1._DateImpl$fromMillisecondsSinceEpoch$2(millisecondsSinceEpoch, isUtc);
+  return t1;
+};
+
+$._DateImpl$now = function() {
+  var t1 = new $._DateImpl($.Primitives_dateNow(), false);
+  t1._DateImpl$now$0();
+  return t1;
+};
+
+$.DOMApplicationCacheEvents$ = function(_ptr) {
+  return new $.DOMApplicationCacheEvents(_ptr);
+};
+
+$.MapCSSParser$ = function(input) {
+  var t1, t2;
+  t1 = [];
+  t2 = $.RecognizerSharedState$();
+  t1 = new $.MapCSSParser(null, null, t1, input, t2, null, "");
+  t1.BaseRecognizer$1(t2);
+  t1.MapCSSParser$1(input);
+  return t1;
+};
+
+$.RewriteEarlyExitException$ = function(elementDescription) {
+  return new $.RewriteEarlyExitException(elementDescription);
+};
+
+$.NoViableAltException$ = function(grammarDecisionDescription, decisionNumber, stateNumber, input) {
+  var t1 = new $.NoViableAltException(grammarDecisionDescription, decisionNumber, stateNumber, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$.EarlyExitException$ = function(decisionNumber, input) {
+  var t1 = new $.EarlyExitException(decisionNumber, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$.MismatchedSetException$ = function(expecting, input) {
+  var t1 = new $.MismatchedSetException(expecting, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$.MissingTokenException$ = function(inserted, expecting, input) {
+  var t1 = new $.MissingTokenException(inserted, expecting, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$.FailedPredicateException$ = function(input, ruleName, predicateText) {
+  var t1 = new $.FailedPredicateException(ruleName, predicateText, input, null, null, null, null, null, null, null);
+  t1.RecognitionException$1(input);
+  return t1;
+};
+
+$.IllegalJSRegExpException$ = function(_pattern, _errmsg) {
+  return new $.IllegalJSRegExpException(_pattern, _errmsg);
+};
+
+$.DedicatedWorkerContextEvents$ = function(_ptr) {
+  return new $.DedicatedWorkerContextEvents(_ptr);
+};
+
+$.WorkerContextEvents$ = function(_ptr) {
+  return new $.WorkerContextEvents(_ptr);
+};
+
+$._AllMatchesIterable$ = function(_re, _str) {
+  return new $._AllMatchesIterable(_re, _str);
+};
+
+$._AllMatchesIterator$ = function(re, _str) {
+  return new $._AllMatchesIterator($.JSSyntaxRegExp__globalVersionOf(re), _str, null, false);
+};
+
+$._MatchImplementation$ = function(pattern, str, start, end, _groups) {
+  return new $._MatchImplementation(pattern, str, start, end, _groups);
+};
+
+$.CommonTree$fromToken = function(_token) {
+  var t1 = new $.CommonTree(_token, -1, -1, null, null, null, null, -1, null, null);
+  t1.BaseTree$2$charPos$node(-1, null);
+  return t1;
+};
+
 $.DocumentEvents$ = function(_ptr) {
   return new $.DocumentEvents(_ptr);
 };
 
+$.CommonTokenStream$ = function(tokenSource) {
+  var t1 = new $.CommonTokenStream(0, tokenSource, null, null, -1, -1);
+  t1.BufferedTokenStream$1(tokenSource);
+  return t1;
+};
+
+$.CommonTree$ = function(node) {
+  var t1 = new $.CommonTree(null, -1, -1, null, null, null, null, -1, null, null);
+  t1.BaseTree$2$charPos$node(-1, node);
+  t1.CommonTree$1(node);
+  return t1;
+};
+
+$.CharStreamState$ = function() {
+  return new $.CharStreamState(null, null, null);
+};
+
+$.EventSourceEvents$ = function(_ptr) {
+  return new $.EventSourceEvents(_ptr);
+};
+
+$.Date_Date$now = function() {
+  return $._DateImpl$now();
+};
+
+$.Date_Date$fromMillisecondsSinceEpoch = function(millisecondsSinceEpoch, isUtc) {
+  return $._DateImpl$fromMillisecondsSinceEpoch(millisecondsSinceEpoch, isUtc);
+};
+
+$.FileReaderEvents$ = function(_ptr) {
+  return new $.FileReaderEvents(_ptr);
+};
+
+$.FileWriterEvents$ = function(_ptr) {
+  return new $.FileWriterEvents(_ptr);
+};
+
+$.MapCSSLexer$ = function(input) {
+  var t1, t2;
+  t1 = $.RecognizerSharedState$();
+  t2 = new $.MapCSSLexer(false, false, null, input, t1, null, "");
+  t2.BaseRecognizer$1(t1);
+  t2.MapCSSLexer$1(input);
+  return t2;
+};
+
+$.ScriptElement_ScriptElement = function() {
+  return $.document().$dom_createElement$1("script");
+};
+
+$.WebSocketEvents$ = function(_ptr) {
+  return new $.WebSocketEvents(_ptr);
+};
+
+$.FrameSetElementEvents$ = function(_ptr) {
+  return new $.FrameSetElementEvents(_ptr);
+};
+
+$.WorkerEvents$ = function(_ptr) {
+  return new $.WorkerEvents(_ptr);
+};
+
 $.DFA_unpackEncodedString = function(encodedString) {
-  var t1, i, size, t2, data, di, n, v, j, di0;
-  for (t1 = $.getInterceptor$JSStringJSArray(encodedString), i = 0, size = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
+  var t1, size, i, t2, data, di, n, v, j, di0;
+  for (t1 = $.getInterceptor$JSStringJSArray(encodedString), size = 0, i = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
     t2 = t1.charCodeAt$1(encodedString, i);
     if (typeof t2 !== 'number')
       throw $.iae(t2);
     size += t2;
   }
   data = $.List_List(size);
-  for (i = 0, di = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
+  for (di = 0, i = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
     n = t1.charCodeAt$1(encodedString, i);
     if (typeof n !== 'number')
-      return $.DFA_unpackEncodedString$bailout(1, di, encodedString, data, n, i, t1);
+      return $.DFA_unpackEncodedString$bailout(1, i, encodedString, data, n, t1, di);
     v = t1.charCodeAt$1(encodedString, i + 1);
     if ($.eqB(v, 65535))
       v = -1;
     if (typeof v !== 'number')
-      return $.DFA_unpackEncodedString$bailout(2, di, encodedString, data, v, i, n, t1);
+      return $.DFA_unpackEncodedString$bailout(2, i, encodedString, data, v, n, t1, di);
     for (t2 = data.length, j = 1; j <= n; ++j, di = di0) {
       di0 = di + 1;
       if (di < 0 || di >= t2)
@@ -24244,7 +24695,7 @@ $.DFA_unpackEncodedStringToUnsignedChars = function(encodedString) {
   for (di = 0, i = 0; i < t1; i += 2) {
     n = $.CTC2.charCodeAt$1(encodedString, i);
     if (typeof n !== 'number')
-      return $.DFA_unpackEncodedStringToUnsignedChars$bailout(1, encodedString, t1, data, n, di, i);
+      return $.DFA_unpackEncodedStringToUnsignedChars$bailout(1, i, encodedString, t1, data, n, di);
     v = $.CTC2.charCodeAt$1(encodedString, i + 1);
     for (t2 = data.length, j = 1; j <= n; ++j, di = di0) {
       di0 = di + 1;
@@ -24262,276 +24713,21 @@ $.RecognizerSharedState$ = function() {
   return t1;
 };
 
-$.FormatException$ = function(message) {
-  return new $.FormatException(message);
-};
-
-$.Exception_Exception = function(message) {
-  return $._ExceptionImplementation$(message);
-};
-
-$._IsolateContext$ = function() {
-  var t1 = new $._IsolateContext(null, null, null);
-  t1._IsolateContext$0();
-  return t1;
-};
-
-$._Manager$ = function() {
-  var t1 = new $._Manager(0, 0, 1, null, null, null, null, null, null, null, null, null);
-  t1._Manager$0();
-  return t1;
-};
-
-$._EventLoop$ = function() {
-  return new $._EventLoop($.Queue_Queue());
-};
-
-$.EventSourceEvents$ = function(_ptr) {
-  return new $.EventSourceEvents(_ptr);
-};
-
-$.Logger_Logger = function(name$) {
-  var t1, dot, parent$, thisName, res;
-  t1 = $.getInterceptor$JSString(name$);
-  if (t1.startsWith$1(name$, ".") === true)
-    throw $.$$throw($.ArgumentError$("name shouldn't start with a '.'"));
-  if ($.Logger__loggers == null)
-    $.Logger__loggers = $.makeLiteralMap([]);
-  if ($.Logger__loggers.containsKey$1(name$) === true)
-    return $.index($.Logger__loggers, name$);
-  dot = t1.lastIndexOf$1(name$, ".");
-  if ($.eqB(dot, -1)) {
-    parent$ = !$.eqB(name$, "") ? $.Logger_Logger("") : null;
-    thisName = name$;
-  } else {
-    parent$ = $.Logger_Logger(t1.substring$2(name$, 0, dot));
-    thisName = t1.substring$1(name$, $.add(dot, 1));
+$.Futures_wait$bailout = function(state0, futures, t1) {
+  var t2, completer, result, values, i, future;
+  t2 = $.getInterceptor$JSStringJSArray(futures);
+  if (t2.get$isEmpty(futures) === true)
+    return $.Future_Future$immediate($.CTC13);
+  completer = $.Completer_Completer();
+  result = completer.get$future();
+  t1.remaining_1 = t2.get$length(futures);
+  values = $.List_List(t2.get$length(futures));
+  for (i = 0; $.ltB(i, t2.get$length(futures)); ++i) {
+    future = $.index(futures, i);
+    future.then$1(new $.Futures_wait_anon(t1, values, i, result, completer));
+    future.handleException$1(new $.Futures_wait_anon0(future, result, completer));
   }
-  res = $.Logger$_internal(thisName, parent$);
-  $.indexSet($.Logger__loggers, name$, res);
-  return res;
-};
-
-$.Logger$_internal = function(name$, parent$) {
-  var t1 = new $.Logger(name$, parent$, null, $.Map_Map(), null);
-  t1.Logger$_internal$2(name$, parent$);
-  return t1;
-};
-
-$.Logger_root = function() {
-  return $.Logger_Logger("");
-};
-
-$._Timer$repeating = function(milliSeconds, callback) {
-  var t1 = new $._Timer(false, null);
-  t1._Timer$repeating$2(milliSeconds, callback);
-  return t1;
-};
-
-$._Timer$ = function(milliSeconds, callback) {
-  var t1 = new $._Timer(true, null);
-  t1._Timer$2(milliSeconds, callback);
-  return t1;
-};
-
-$.Date_Date$now = function() {
-  return $._DateImpl$now();
-};
-
-$.Date_Date$fromMillisecondsSinceEpoch = function(millisecondsSinceEpoch, isUtc) {
-  return $._DateImpl$fromMillisecondsSinceEpoch(millisecondsSinceEpoch, isUtc);
-};
-
-$.BitSet$ = function(nbits) {
-  var t1 = new $.BitSet(null);
-  t1.BitSet$1(nbits);
-  return t1;
-};
-
-$._HashMapImpl$ = function() {
-  var t1 = new $._HashMapImpl(null, null, null, null, null);
-  t1._HashMapImpl$0();
-  return t1;
-};
-
-$._HashMapImpl__computeLoadLimit = function(capacity) {
-  return $.tdiv(capacity * 3, 4);
-};
-
-$._HashMapImpl__nextProbe = function(currentProbe, numberOfProbes, length$) {
-  return $.and($.add(currentProbe, numberOfProbes), $.sub(length$, 1));
-};
-
-$.FileReaderEvents$ = function(_ptr) {
-  return new $.FileReaderEvents(_ptr);
-};
-
-$.BitSet$fromList = function(bits) {
-  return new $.BitSet(bits);
-};
-
-$.FileWriterEvents$ = function(_ptr) {
-  return new $.FileWriterEvents(_ptr);
-};
-
-$.Queue_Queue = function() {
-  return $.DoubleLinkedQueue$();
-};
-
-$._MainManagerStub$ = function() {
-  return new $._MainManagerStub();
-};
-
-$._IsolateEvent$ = function(isolate, fn, message) {
-  return new $._IsolateEvent(isolate, fn, message);
-};
-
-$.CommonTreeAdaptor$ = function() {
-  return new $.CommonTreeAdaptor(null, 1);
-};
-
-$.ScriptElement_ScriptElement = function() {
-  return $.document().$dom_createElement$1("script");
-};
-
-$._JsSerializer$0 = function() {
-  var t1 = new $._JsSerializer0(0, $._MessageTraverserVisitedMap$0());
-  t1._JsSerializer$0();
-  return t1;
-};
-
-$.WebSocketEvents$ = function(_ptr) {
-  return new $.WebSocketEvents(_ptr);
-};
-
-$.MapCSSParser_stylesheet_return$ = function() {
-  return new $.MapCSSParser_stylesheet_return(null, null, null, null);
-};
-
-$._NativeJsSendPort$ = function(_receivePort, isolateId) {
-  return new $._NativeJsSendPort(_receivePort, isolateId);
-};
-
-$.MapCSSParser_entry_return$ = function() {
-  return new $.MapCSSParser_entry_return(null, null, null, null);
-};
-
-$.MapCSSParser_rule_return$ = function() {
-  return new $.MapCSSParser_rule_return(null, null, null, null);
-};
-
-$.FrameSetElementEvents$ = function(_ptr) {
-  return new $.FrameSetElementEvents(_ptr);
-};
-
-$.MapCSSParser_link_selector_return$ = function() {
-  return new $.MapCSSParser_link_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_layer_id_selector_return$ = function() {
-  return new $.MapCSSParser_layer_id_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_int_operator_return$ = function() {
-  return new $.MapCSSParser_int_operator_return(null, null, null, null);
-};
-
-$.MapCSSParser_import_statement_return$ = function() {
-  return new $.MapCSSParser_import_statement_return(null, null, null, null);
-};
-
-$.WorkerEvents$ = function(_ptr) {
-  return new $.WorkerEvents(_ptr);
-};
-
-$.MapCSSParser_simple_selector_return$ = function() {
-  return new $.MapCSSParser_simple_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_zoom_selector_return$ = function() {
-  return new $.MapCSSParser_zoom_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_quoted_return$ = function() {
-  return new $.MapCSSParser_quoted_return(null, null, null, null);
-};
-
-$.MapCSSParser_cssident_return$ = function() {
-  return new $.MapCSSParser_cssident_return(null, null, null, null);
-};
-
-$._WorkerSendPort$ = function(_workerId, isolateId, _receivePortId) {
-  return new $._WorkerSendPort(_workerId, _receivePortId, isolateId);
-};
-
-$.MapCSSParser_attribute_selector_return$ = function() {
-  return new $.MapCSSParser_attribute_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_selector_return$ = function() {
-  return new $.MapCSSParser_selector_return(null, null, null, null);
-};
-
-$._MessageTraverserVisitedMap$0 = function() {
-  return new $._MessageTraverserVisitedMap0();
-};
-
-$.MapCSSParser_predicate_return$ = function() {
-  return new $.MapCSSParser_predicate_return(null, null, null, null);
-};
-
-$._JsCopier$ = function() {
-  var t1 = new $._JsCopier($._MessageTraverserVisitedMap$0());
-  t1._JsCopier$0();
-  return t1;
-};
-
-$.MapCSSParser_predicate_ident_return$ = function() {
-  return new $.MapCSSParser_predicate_ident_return(null, null, null, null);
-};
-
-$.MapCSSParser_predicate_primitive_return$ = function() {
-  return new $.MapCSSParser_predicate_primitive_return(null, null, null, null);
-};
-
-$.MapCSSParser_rhs_match_return$ = function() {
-  return new $.MapCSSParser_rhs_match_return(null, null, null, null);
-};
-
-$.MapCSSParser_binary_operator_return$ = function() {
-  return new $.MapCSSParser_binary_operator_return(null, null, null, null);
-};
-
-$.MapCSSParser_class_selector_return$ = function() {
-  return new $.MapCSSParser_class_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_pseudo_class_selector_return$ = function() {
-  return new $.MapCSSParser_pseudo_class_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_type_selector_return$ = function() {
-  return new $.MapCSSParser_type_selector_return(null, null, null, null);
-};
-
-$.MapCSSParser_declaration_block_return$ = function() {
-  return new $.MapCSSParser_declaration_block_return(null, null, null, null);
-};
-
-$.MapCSSParser_declarations_return$ = function() {
-  return new $.MapCSSParser_declarations_return(null, null, null, null);
-};
-
-$.MapCSSParser_declaration_return$ = function() {
-  return new $.MapCSSParser_declaration_return(null, null, null, null);
-};
-
-$.Completer_Completer = function() {
-  return $._CompleterImpl$();
-};
-
-$.MapCSSParser_declaration_property_return$ = function() {
-  return new $.MapCSSParser_declaration_property_return(null, null, null, null);
+  return result;
 };
 
 $.Primitives__fromCharCodeApply$bailout = function(state0, array, end) {
@@ -24547,6 +24743,210 @@ $.Primitives__fromCharCodeApply$bailout = function(state0, array, end) {
     result = result + String.fromCharCode.apply(null, subarray);
   }
   return result;
+};
+
+$.Arrays_copy$bailout = function(state0, src, srcStart, dst, dstStart, count) {
+  var i, j;
+  if (srcStart < dstStart) {
+    if (typeof count !== 'number')
+      throw $.iae(count);
+    i = srcStart + count - 1;
+    j = dstStart + count - 1;
+    for (; i >= srcStart; --i, --j)
+      $.indexSet(dst, j, $.index(src, i));
+  } else {
+    j = dstStart;
+    i = srcStart;
+    while (true) {
+      if (typeof count !== 'number')
+        throw $.iae(count);
+      if (!(i < srcStart + count))
+        break;
+      $.indexSet(dst, j, $.index(src, i));
+      ++i;
+      ++j;
+    }
+  }
+};
+
+$.Arrays_lastIndexOf$bailout = function(state0, a, element, startIndex) {
+  var i;
+  if ($.ltB(startIndex, 0))
+    return -1;
+  if ($.geB(startIndex, a.length))
+    startIndex = a.length - 1;
+  for (i = startIndex; $.geB(i, 0); --i) {
+    if (i !== (i | 0))
+      throw $.iae(i);
+    if (i < 0 || i >= a.length)
+      throw $.ioore(i);
+    if ($.eqB(a[i], element))
+      return i;
+  }
+  return -1;
+};
+
+$.DFA_unpackEncodedString$bailout = function(state0, env0, env1, env2, env3, env4, env5, env6) {
+  switch (state0) {
+    case 1:
+      di = env5;
+      t1 = env4;
+      n = env3;
+      data = env2;
+      encodedString = env1;
+      i = env0;
+      break;
+    case 2:
+      di = env6;
+      t1 = env5;
+      n = env4;
+      v = env3;
+      data = env2;
+      encodedString = env1;
+      i = env0;
+      break;
+  }
+  switch (state0) {
+    case 0:
+      for (t1 = $.getInterceptor$JSStringJSArray(encodedString), size = 0, i = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
+        t2 = t1.charCodeAt$1(encodedString, i);
+        if (typeof t2 !== 'number')
+          throw $.iae(t2);
+        size += t2;
+      }
+      data = $.List_List(size);
+      di = 0;
+      i = 0;
+    default:
+      var t1, size, i, t2, data, di, n, encodedString, v, j, di0;
+      L0:
+        while (true)
+          switch (state0) {
+            case 0:
+              if (!$.ltB(i, t1.get$length(encodedString)))
+                break L0;
+              n = t1.charCodeAt$1(encodedString, i);
+            case 1:
+              state0 = 0;
+              v = t1.charCodeAt$1(encodedString, i + 1);
+              if ($.eqB(v, 65535))
+                v = -1;
+            case 2:
+              state0 = 0;
+              for (j = 1; $.leB(j, n); ++j, di = di0) {
+                di0 = di + 1;
+                if (di < 0 || di >= data.length)
+                  throw $.ioore(di);
+                data[di] = v;
+              }
+              i += 2;
+          }
+      return data;
+  }
+};
+
+$.DFA_unpackEncodedStringToUnsignedChars$bailout = function(state0, env0, env1, env2, env3, env4, env5) {
+  switch (state0) {
+    case 1:
+      di = env5;
+      n = env4;
+      data = env3;
+      t1 = env2;
+      encodedString = env1;
+      i = env0;
+      break;
+  }
+  switch (state0) {
+    case 0:
+      for (size = 0, i = 0; t1 = encodedString.length, i < t1; i += 2) {
+        t1 = $.CTC2.charCodeAt$1(encodedString, i);
+        if (typeof t1 !== 'number')
+          throw $.iae(t1);
+        size += t1;
+      }
+      data = $.List_List(size);
+      di = 0;
+      i = 0;
+    case 1:
+      var size, i, t1, data, di, n, encodedString, v, j, di0;
+      L0:
+        while (true)
+          switch (state0) {
+            case 0:
+              if (!(i < t1))
+                break L0;
+              n = $.CTC2.charCodeAt$1(encodedString, i);
+            case 1:
+              state0 = 0;
+              v = $.CTC2.charCodeAt$1(encodedString, i + 1);
+              for (j = 1; $.leB(j, n); ++j, di = di0) {
+                di0 = di + 1;
+                if (di < 0 || di >= data.length)
+                  throw $.ioore(di);
+                data[di] = v;
+              }
+              i += 2;
+          }
+      return data;
+  }
+};
+
+$._Lists_indexOf$bailout = function(state0, a, element, startIndex, endIndex) {
+  var i;
+  if ($.geB(startIndex, $.getInterceptor$JSStringJSArray(a).get$length(a)))
+    return -1;
+  if ($.ltB(startIndex, 0))
+    startIndex = 0;
+  for (i = startIndex; $.ltB(i, endIndex); i = $.add(i, 1))
+    if ($.eqB($.index(a, i), element))
+      return i;
+  return -1;
+};
+
+$._Lists_lastIndexOf$bailout = function(state0, env0, env1, env2) {
+  switch (state0) {
+    case 1:
+      startIndex = env2;
+      element = env1;
+      a = env0;
+      break;
+    case 2:
+      startIndex = env2;
+      element = env1;
+      a = env0;
+      break;
+  }
+  switch (state0) {
+    case 0:
+    case 1:
+      state0 = 0;
+      if ($.ltB(startIndex, 0))
+        return -1;
+      t1 = $.getInterceptor$JSStringJSArray(a);
+      if ($.geB(startIndex, t1.get$length(a)))
+        startIndex = $.sub(t1.get$length(a), 1);
+    case 2:
+      var startIndex, element, a, t1, i;
+      state0 = 0;
+      for (i = startIndex; $.geB(i, 0); i = $.sub(i, 1))
+        if ($.eqB($.index(a, i), element))
+          return i;
+      return -1;
+  }
+};
+
+$._Lists_getRange$bailout = function(state0, a, start, length$, accumulator) {
+  var end, i;
+  if ($.ltB(length$, 0))
+    throw $.$$throw($.ArgumentError$("length"));
+  if ($.ltB(start, 0))
+    throw $.$$throw($.RangeError$value(start));
+  end = $.add(start, length$);
+  if ($.gtB(end, $.getInterceptor$JSStringJSArray(a).get$length(a)))
+    throw $.$$throw($.RangeError$value(end));
+  for (i = start; $.ltB(i, end); i = $.add(i, 1))
+    accumulator.push($.index(a, i));
+  return accumulator;
 };
 
 $.Strings__toJsStringArray$bailout = function(state0, env0, env1, env2) {
@@ -24598,227 +24998,6 @@ $.Strings__toJsStringArray$bailout = function(state0, env0, env1, env2) {
   }
 };
 
-$._Lists_indexOf$bailout = function(state0, a, element, startIndex, endIndex) {
-  var i;
-  if ($.geB(startIndex, $.getInterceptor$JSStringJSArray(a).get$length(a)))
-    return -1;
-  if ($.ltB(startIndex, 0))
-    startIndex = 0;
-  for (i = startIndex; $.ltB(i, endIndex); i = $.add(i, 1))
-    if ($.eqB($.index(a, i), element))
-      return i;
-  return -1;
-};
-
-$._Lists_getRange$bailout = function(state0, a, start, length$, accumulator) {
-  var end, i;
-  if ($.ltB(length$, 0))
-    throw $.$$throw($.ArgumentError$("length"));
-  if ($.ltB(start, 0))
-    throw $.$$throw($.RangeError$value(start));
-  end = $.add(start, length$);
-  if ($.gtB(end, $.getInterceptor$JSStringJSArray(a).get$length(a)))
-    throw $.$$throw($.RangeError$value(end));
-  for (i = start; $.ltB(i, end); i = $.add(i, 1))
-    accumulator.push($.index(a, i));
-  return accumulator;
-};
-
-$._Lists_lastIndexOf$bailout = function(state0, env0, env1, env2) {
-  switch (state0) {
-    case 1:
-      startIndex = env2;
-      element = env1;
-      a = env0;
-      break;
-    case 2:
-      startIndex = env2;
-      element = env1;
-      a = env0;
-      break;
-  }
-  switch (state0) {
-    case 0:
-    case 1:
-      state0 = 0;
-      if ($.ltB(startIndex, 0))
-        return -1;
-      t1 = $.getInterceptor$JSStringJSArray(a);
-      if ($.geB(startIndex, t1.get$length(a)))
-        startIndex = $.sub(t1.get$length(a), 1);
-    case 2:
-      var startIndex, element, a, t1, i;
-      state0 = 0;
-      for (i = startIndex; $.geB(i, 0); i = $.sub(i, 1))
-        if ($.eqB($.index(a, i), element))
-          return i;
-      return -1;
-  }
-};
-
-$.Futures_wait$bailout = function(state0, futures, t1) {
-  var t2, completer, result, values, i, future;
-  t2 = $.getInterceptor$JSStringJSArray(futures);
-  if (t2.get$isEmpty(futures) === true)
-    return $.Future_Future$immediate($.CTC13);
-  completer = $.Completer_Completer();
-  result = completer.get$future();
-  t1.remaining_1 = t2.get$length(futures);
-  values = $.List_List(t2.get$length(futures));
-  for (i = 0; $.ltB(i, t2.get$length(futures)); ++i) {
-    future = $.index(futures, i);
-    future.then$1(new $.Futures_wait_anon(i, result, completer, values, t1));
-    future.handleException$1(new $.Futures_wait_anon0(result, completer, future));
-  }
-  return result;
-};
-
-$.Arrays_copy$bailout = function(state0, src, srcStart, dst, dstStart, count) {
-  var i, j;
-  if (srcStart < dstStart) {
-    if (typeof count !== 'number')
-      throw $.iae(count);
-    i = srcStart + count - 1;
-    j = dstStart + count - 1;
-    for (; i >= srcStart; --i, --j)
-      $.indexSet(dst, j, $.index(src, i));
-  } else {
-    j = dstStart;
-    i = srcStart;
-    while (true) {
-      if (typeof count !== 'number')
-        throw $.iae(count);
-      if (!(i < srcStart + count))
-        break;
-      $.indexSet(dst, j, $.index(src, i));
-      ++i;
-      ++j;
-    }
-  }
-};
-
-$.Arrays_lastIndexOf$bailout = function(state0, a, element, startIndex) {
-  var i;
-  if ($.ltB(startIndex, 0))
-    return -1;
-  if ($.geB(startIndex, a.length))
-    startIndex = a.length - 1;
-  for (i = startIndex; $.geB(i, 0); --i) {
-    if (i !== (i | 0))
-      throw $.iae(i);
-    if (i < 0 || i >= a.length)
-      throw $.ioore(i);
-    if ($.eqB(a[i], element))
-      return i;
-  }
-  return -1;
-};
-
-$.DFA_unpackEncodedString$bailout = function(state0, env0, env1, env2, env3, env4, env5, env6) {
-  switch (state0) {
-    case 1:
-      t1 = env5;
-      i = env4;
-      n = env3;
-      data = env2;
-      encodedString = env1;
-      di = env0;
-      break;
-    case 2:
-      t1 = env6;
-      n = env5;
-      i = env4;
-      v = env3;
-      data = env2;
-      encodedString = env1;
-      di = env0;
-      break;
-  }
-  switch (state0) {
-    case 0:
-      for (t1 = $.getInterceptor$JSStringJSArray(encodedString), i = 0, size = 0; $.ltB(i, t1.get$length(encodedString)); i += 2) {
-        t2 = t1.charCodeAt$1(encodedString, i);
-        if (typeof t2 !== 'number')
-          throw $.iae(t2);
-        size += t2;
-      }
-      data = $.List_List(size);
-      i = 0;
-      di = 0;
-    default:
-      var t1, i, size, t2, data, di, n, encodedString, v, j, di0;
-      L0:
-        while (true)
-          switch (state0) {
-            case 0:
-              if (!$.ltB(i, t1.get$length(encodedString)))
-                break L0;
-              n = t1.charCodeAt$1(encodedString, i);
-            case 1:
-              state0 = 0;
-              v = t1.charCodeAt$1(encodedString, i + 1);
-              if ($.eqB(v, 65535))
-                v = -1;
-            case 2:
-              state0 = 0;
-              for (j = 1; $.leB(j, n); ++j, di = di0) {
-                di0 = di + 1;
-                if (di < 0 || di >= data.length)
-                  throw $.ioore(di);
-                data[di] = v;
-              }
-              i += 2;
-          }
-      return data;
-  }
-};
-
-$.DFA_unpackEncodedStringToUnsignedChars$bailout = function(state0, env0, env1, env2, env3, env4, env5) {
-  switch (state0) {
-    case 1:
-      i = env5;
-      di = env4;
-      n = env3;
-      data = env2;
-      t1 = env1;
-      encodedString = env0;
-      break;
-  }
-  switch (state0) {
-    case 0:
-      for (size = 0, i = 0; t1 = encodedString.length, i < t1; i += 2) {
-        t1 = $.CTC2.charCodeAt$1(encodedString, i);
-        if (typeof t1 !== 'number')
-          throw $.iae(t1);
-        size += t1;
-      }
-      data = $.List_List(size);
-      di = 0;
-      i = 0;
-    case 1:
-      var size, i, t1, data, di, n, encodedString, v, j, di0;
-      L0:
-        while (true)
-          switch (state0) {
-            case 0:
-              if (!(i < t1))
-                break L0;
-              n = $.CTC2.charCodeAt$1(encodedString, i);
-            case 1:
-              state0 = 0;
-              v = $.CTC2.charCodeAt$1(encodedString, i + 1);
-              for (j = 1; $.leB(j, n); ++j, di = di0) {
-                di0 = di + 1;
-                if (di < 0 || di >= data.length)
-                  throw $.ioore(di);
-                data[di] = v;
-              }
-              i += 2;
-          }
-      return data;
-  }
-};
-
 $.typeNameInChrome.call$1 = $.typeNameInChrome;
 $.typeNameInChrome.$name = "typeNameInChrome";
 $.typeNameInSafari.call$1 = $.typeNameInSafari;
@@ -24829,10 +25008,10 @@ $.typeNameInFirefox.call$1 = $.typeNameInFirefox;
 $.typeNameInFirefox.$name = "typeNameInFirefox";
 $.typeNameInIE.call$1 = $.typeNameInIE;
 $.typeNameInIE.$name = "typeNameInIE";
-$.constructorNameFallback.call$1 = $.constructorNameFallback;
-$.constructorNameFallback.$name = "constructorNameFallback";
 $.typeNameInOpera.call$1 = $.typeNameInOpera;
 $.typeNameInOpera.$name = "typeNameInOpera";
+$.constructorNameFallback.call$1 = $.constructorNameFallback;
+$.constructorNameFallback.$name = "constructorNameFallback";
 $._timerFactory.call$3 = $._timerFactory;
 $._timerFactory.$name = "_timerFactory";
 $._serialize.call$1 = $._serialize;
@@ -24867,228 +25046,104 @@ $.CTC9 = Isolate.makeConstantList(["\u0002&\u0001\uffff\u0002&\u0012\uffff\u0001
 $.CTC15 = new Isolate.$isolateProperties.Level("INFO", 800);
 $.CTC0 = new Isolate.$isolateProperties.JSArray();
 $.CTC1 = new Isolate.$isolateProperties.JSNumber();
+$.Token_EOR_TOKEN_TYPE = 1;
+$.Token_EOF = -1;
+$.Token_INVALID_TOKEN_TYPE = 0;
+$.Token_DEFAULT_CHANNEL = 0;
+$.Token_HIDDEN_CHANNEL = 99;
+$._jsPortSync = null;
+$._jsPortDebug = null;
+$._jsPortCreate = null;
+$._jsPortEquals = null;
+$._jsPortInstanceof = null;
+$._jsPortConvert = null;
+$._jsEnterJavaScriptScope = null;
+$._jsExitJavaScriptScope = null;
+$._jsGlobalize = null;
+$._jsInvalidate = null;
+$._dartEnterDartScope = null;
+$._dartExitDartScope = null;
+$._getTypeNameOf = null;
+$._DART_ID = "data-dart_id";
+$._localNextElementId = 0;
+$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
+$.Logger__loggers = null;
+$.BitSet__BITS = 64;
+$.BitSet__LOG_BITS = 6;
+$.BitSet__MOD_MASK = 63;
+$._JsonParser_BACKSPACE = 8;
 $._JsonParser_TAB = 9;
-$.MapCSSLexer_OP_PLUS = 61;
+$.MIRROR_OPT_IN_MESSAGE = "\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n";
 $._JsonParser_NEW_LINE = 10;
-$.MapCSSLexer_OP_STARTS_WITH = 62;
 $._JsonParser_FORM_FEED = 12;
-$.MapCSSLexer_OP_SUBSTRING = 63;
 $._JsonParser_CARRIAGE_RETURN = 13;
-$.MapCSSParser_NEGATIVE_INT = 37;
 $._JsonParser_SPACE = 32;
-$.MapCSSLexer_OP_OR = 60;
 $._JsonParser_QUOTE = 34;
 $._JsonParser_PLUS = 43;
 $._JsonParser_COMMA = 44;
-$.MapCSSLexer_PERCENTAGE = 68;
 $._JsonParser_MINUS = 45;
 $._JsonParser_DOT = 46;
 $._JsonParser_SLASH = 47;
-$.MapCSSLexer_POSITIVE_FLOAT = 71;
 $._JsonParser_CHAR_0 = 48;
-$.MapCSSLexer_POSITIVE_INT = 72;
 $._JsonParser_CHAR_1 = 49;
-$.MapCSSLexer_POINTS = 70;
 $._JsonParser_CHAR_2 = 50;
 $._JsonParser_CHAR_3 = 51;
 $._JsonParser_CHAR_4 = 52;
 $._JsonParser_CHAR_5 = 53;
 $._JsonParser_CHAR_6 = 54;
-$.MapCSSLexer_RANGE = 75;
 $._JsonParser_CHAR_7 = 55;
-$.MapCSSLexer_OSM_TAG = 65;
 $._JsonParser_CHAR_8 = 56;
 $._JsonParser_CHAR_9 = 57;
-$.MapCSSLexer_REGEXP = 78;
 $._JsonParser_COLON = 58;
-$.MapCSSLexer_RGB = 82;
 $._JsonParser_CHAR_CAPITAL_E = 69;
-$.MapCSSLexer_PIXELS = 69;
 $._JsonParser_LBRACKET = 91;
-$.MapCSSLexer_ROLE = 84;
 $._JsonParser_BACKSLASH = 92;
 $._JsonParser_RBRACKET = 93;
-$.MapCSSLexer_RGBA = 83;
 $._JsonParser_CHAR_B = 98;
-$.MapCSSLexer_SEMICOLON = 87;
 $._JsonParser_CHAR_E = 101;
 $._JsonParser_CHAR_F = 102;
-$.MapCSSLexer_SL_COMMENT = 89;
 $._JsonParser_CHAR_N = 110;
 $._JsonParser_CHAR_R = 114;
-$.MapCSSLexer_RBRACKET = 77;
 $._JsonParser_CHAR_T = 116;
 $._JsonParser_CHAR_U = 117;
-$.MapCSSLexer_SQUOTED_STRING = 90;
 $._JsonParser_LBRACE = 123;
 $._JsonParser_RBRACE = 125;
-$.MapCSSParser_PERCENTAGE = 68;
 $._JsonParser_STRING_LITERAL = 34;
-$.MapCSSLexer_URL = 96;
 $._JsonParser_NUMBER_LITERAL = 45;
 $._JsonParser_NULL_LITERAL = 110;
 $._JsonParser_FALSE_LITERAL = 102;
-$.MapCSSParser_POSITIVE_INT = 72;
 $._JsonParser_TRUE_LITERAL = 116;
-$.MapCSSParser_POINTS = 70;
 $._JsonParser_WHITESPACE = 32;
-$.MapCSSParser_POSITIVE_FLOAT = 71;
 $._JsonParser_LAST_ASCII = 125;
 $._JsonParser_NULL_STRING = "null";
-$.MapCSSParser_RBRACE = 76;
 $._JsonParser_TRUE_STRING = "true";
-$.MapCSSParser_OP_DIV = 44;
 $._JsonParser_FALSE_STRING = "false";
-$.MapCSSParser_OP_OR = 60;
 $._JsonParser_tokens = null;
-$.MapCSSParser_OSM_TAG = 65;
-$.MapCSSParser_PIXELS = 69;
-$.MapCSSParser_RBRACKET = 77;
-$.MapCSSParser_OP_MINUS = 53;
-$.MapCSSParser_OP_AND = 42;
-$.MapCSSParser_NEGATIVE_FLOAT = 36;
-$.MapCSSParser_RGB = 82;
-$.MapCSSParser_RGBA = 83;
-$._jsPortSync = null;
-$._jsPortCreate = null;
-$.MapCSSParser_OP_EQ = 46;
-$._jsPortDebug = null;
-$.MapCSSParser_RULE = 86;
-$._jsPortEquals = null;
-$.MapCSSLexer_WS = 111;
-$._jsPortInstanceof = null;
-$.MapCSSLexer_RBRACE = 76;
-$._jsPortConvert = null;
-$.MapCSSParser_OP_LE = 50;
-$._jsEnterJavaScriptScope = null;
-$._jsExitJavaScriptScope = null;
-$._jsGlobalize = null;
-$._jsInvalidate = null;
-$.MapCSSParser_SQUOTED_STRING = 90;
-$._dartEnterDartScope = null;
-$.MapCSSParser_STYLESHEET = 91;
-$._dartExitDartScope = null;
-$.MapCSSParser_OP_STARTS_WITH = 62;
-$.MapCSSParser_ROLE_SELECTOR = 85;
-$.MapCSSParser_URL = 96;
-$.MapCSSParser_OP_LT = 51;
-$.MapCSSParser_OP_NOT = 58;
-$.MapCSSParser_SEMICOLON = 87;
-$.MapCSSParser_VALUE_FLOAT = 98;
-$.MapCSSParser_VALUE_INCREMENT = 99;
-$.MapCSSParser_OP_MOD = 54;
-$.MapCSSParser_OP_GE = 48;
-$.MapCSSParser_VALUE_KEYWORD = 101;
-$.MapCSSParser_OP_GT = 49;
-$.MapCSSParser_VALUE_LIST = 102;
-$.MapCSSParser_OP_NEQ = 57;
-$.MapCSSParser_VALUE_PERCENTAGE = 103;
-$.MapCSSParser_VALUE_PIXELS = 104;
-$.MapCSSParser_OP_NOT_EXIST = 59;
-$.MapCSSParser_VALUE_INT = 100;
-$.MapCSSParser_VALUE_QUOTED = 106;
-$.MapCSSParser_OP_PLUS = 61;
-$.MapCSSParser_PSEUDO_CLASS_SELECTOR = 74;
-$._DART_ID = "data-dart_id";
-$._localNextElementId = 0;
-$._DART_TEMPORARY_ATTACHED = "data-dart_temporary_attached";
-$.MapCSSParser_VALUE_RGB = 108;
-$.MapCSSParser_VALUE_URL = 110;
-$.MapCSSParser_VALUE_RGBA = 109;
-$.MapCSSParser_OP_ENDS_WITH = 45;
-$.MapCSSParser_RANGE = 75;
-$.MapCSSParser_VALUE_REGEXP = 107;
-$.MapCSSParser_OP_MUL = 55;
-$.MapCSSParser_ZOOM_SELECTOR = 113;
-$.MapCSSParser_OP_TRUTHY = 64;
-$.MapCSSParser_ROLE = 84;
-$.MapCSSParser_LIST = 33;
-$.MapCSSParser_VALUE_POINTS = 105;
-$.MapCSSParser_SIMPLE_SELECTOR = 88;
-$.MapCSSParser_CHILD_COMBINATOR = 6;
-$.MapCSSParser_OP_SUBSTRING = 63;
-$.MIRROR_OPT_IN_MESSAGE = "\nThis program is using an experimental feature called \"mirrors\".  As\ncurrently implemented, mirrors do not work with minification, and will\ncause spurious errors depending on how code was optimized.\n\nThe authors of this program are aware of these problems and have\ndecided the thrill of using an experimental feature is outweighing the\nrisks.  Furthermore, the authors of this program understand that\nlong-term, to fix the problems mentioned above, mirrors may have\nnegative impact on size and performance of Dart programs compiled to\nJavaScript.\n";
-$.MapCSSParser_PREDICATE = 73;
-$.MapCSSParser_PARENT_COMBINATOR = 67;
-$._getTypeNameOf = null;
-$.MapCSSParser_OP_CONTAINS = 43;
-$.MapCSSParser_REGEXP = 78;
-$.MapCSSParser_OP_EXIST = 47;
-$.MapCSSParser_TYPE_SELECTOR = 94;
-$._ReceivePortImpl__nextFreeId = 1;
-$.MapCSSLexer_DFA_MapCSSLexer_27_eotS = "\u0002\uffff\u0001\u0003\u0001\uffff\u0001\u0005\u0002\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_27_eofS = "\u0007\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_27_minS = "\u0001-\u0001\uffff\u0001-\u0001\uffff\u00010\u0002\uffff";
-$.MapCSSParser_CLASS_SELECTOR = 7;
-$.MapCSSLexer_DFA_MapCSSLexer_27_maxS = "\u00019\u0001\uffff\u00019\u0001\uffff\u00019\u0002\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_27_acceptS = "\u0001\uffff\u0001\u0001\u0001\uffff\u0001\u0002\u0001\uffff\u0001\u0003\u0001\u0004";
-$.MapCSSParser_OP_MATCH = 52;
-$.MapCSSLexer_DFA_MapCSSLexer_27_specialS = "\u0007\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_27_transitionS = Isolate.$isolateProperties.CTC10;
-$.MapCSSParser_DFA_MapCSSParser_6_eotS = "6\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_36_eotS = "\u0001#\u0003\uffff\u0001(\u0001*\u0001,\u0001\uffff\u0001/\u00013\u0001\uffff\u00016\u0004\uffff\u00017\u00018\u0001;\u0001\uffff\u0004$\u0001\uffff\u0002$\n\uffff\u0001F\u0016\uffff\u0006$\u0005\uffff\u0001N\u0005$\u0001T\u0001\uffff\u0001U\u0001$\u0001W\u0001X\u0003\uffff\u0001Y\u0003\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_36_eofS = "Z\uffff";
-$.MapCSSParser_DFA_MapCSSParser_6_minS = "\u0001\t\u0002\u0008\u0002\t\u0001\u0008\u0005\t\u0004\uffff\u0002\u0008\u0008+\u0001\t\u0003\u0008\u0001\t\u0001\u000f\u0001\u0008\u0001\t\u0001\u000f\u0006M\u0002v\u000cM";
-$.MapCSSLexer_DFA_MapCSSLexer_36_maxS = "\u0001~\u0003\uffff\u0001~\u0002=\u0001\uffff\u0002=\u0001|\u00019\u0004\uffff\u0001z\u00019\u0001:\u0001\uffff\u0001o\u0001n\u0001v\u0001i\u0001\uffff\u0001r\u0001x\n\uffff\u0001/\u0016\uffff\u0001b\u0001l\u0001d\u0001a\u0001s\u0001l\u0005\uffff\u0001z\u0002e\u0001l\u0001t\u0001(\u0001z\u0001\uffff\u0001z\u0001x\u0002z\u0003\uffff\u0001z\u0003\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_36_minS = "\u0001\t\u0003\uffff\u0001~\u0002=\u0001\uffff\u0001=\u0001.\u0001z\u00010\u0004\uffff\u0001%\u00010\u0001!\u0001\uffff\u0001G\u0001N\u0001V\u0001I\u0001\uffff\u0001R\u0001T\n\uffff\u0001*\u0016\uffff\u0001B\u0001L\u0001D\u0001A\u0001S\u0001L\u0005\uffff\u0001-\u0002E\u0001L\u0001T\u0001\t\u0001-\u0001\uffff\u0001-\u0001X\u0002-\u0003\uffff\u0001-\u0003\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_36_acceptS = "\u0001\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0003\uffff\u0001\n\u0004\uffff\u0001\u000f\u0001\u0014\u0001\u0015\u0001\u0016\u0003\uffff\u0001\u001b\u0004\uffff\u0001\"\u0002\uffff\u0001%\u0001&\u0001'\u0001(\u0001*\u0001+\u0001,\u0001-\u0001.\u0001$\u0001\uffff\u00011\u0001\t\u0001\u0004\u0001\u0005\u0001\u0006\u0001\u0007\u0001\u0008\u0001\n\u0001\u0010\u0001\u000b\u0001\u000c\u0001\u0012\u0001\u0013\u0001\u0011\u0001\r\u0001/\u0001\u000e\u0001\u0017\u0001\u0018\u0001\u0019\u0001\u001a\u0001)\u0006\uffff\u0002$\u00012\u00013\u00010\u0007\uffff\u0001\u001c\u0004\uffff\u0001#\u0001\u001d\u0001\u001e\u0001\uffff\u0001 \u0001!\u0001\u001f";
-$.MapCSSLexer_DFA_MapCSSLexer_36_specialS = "Z\uffff";
-$.MapCSSParser_DFA_MapCSSParser_6_transitionS = Isolate.$isolateProperties.CTC11;
-$.MapCSSParser_DFA_MapCSSParser_6_acceptS = "\u000b\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0001\u0004'\uffff";
-$.MapCSSLexer_DFA_MapCSSLexer_36_transitionS = Isolate.$isolateProperties.CTC9;
-$.MapCSSParser_DFA_MapCSSParser_6_specialS = "6\uffff";
-$.MapCSSParser_DFA_MapCSSParser_6_maxS = "\u00017\u0002{\u0002\t\u0001{\u0001r\u0004\t\u0004\uffff\u0002{\u0004|\u0004?\u0001Z\u0003{\u0001w\u0001Z\u0001{\u0002Z\u0006M\u0002v\u000cM";
-$.MapCSSParser_DFA_MapCSSParser_6_eofS = "6\uffff";
-$.Lexer__CR = 13;
-$.Lexer__TAB = 9;
-$.Lexer__LF = 10;
-$.DFA_debug = false;
+$.BaseRecognizer_INITIAL_FOLLOW_STACK_SIZE = 100;
+$.BaseRecognizer_DEFAULT_TOKEN_CHANNEL = 0;
 $.JSInvocationMirror_METHOD = 0;
 $.JSInvocationMirror_GETTER = 1;
 $.JSInvocationMirror_SETTER = 2;
-$.Token_EOR_TOKEN_TYPE = 1;
-$.Token_EOF = -1;
-$.Token_INVALID_TOKEN_TYPE = 0;
-$.editor = null;
-$.Token_DEFAULT_CHANNEL = 0;
-$.Token_HIDDEN_CHANNEL = 99;
-$.ReceivePortSync__portIdCount = null;
-$.ReceivePortSync__portMap = null;
-$.ReceivePortSync__cachedIsolateId = null;
-$._cachedBrowserPrefix = null;
-$.Primitives_hashCodeSeed = 0;
-$.Primitives_mirrorsEnabled = false;
-$.Primitives_DOLLAR_CHAR_VALUE = 36;
-$._TimerFactory__factory = null;
-$.Level_ALL = Isolate.$isolateProperties.CTC14;
-$.Logger__loggers = null;
-$.Level_INFO = Isolate.$isolateProperties.CTC15;
-$.BitSet__BITS = 64;
-$.Level_SEVERE = Isolate.$isolateProperties.CTC7;
-$.BitSet__LOG_BITS = 6;
-$.BitSet__MOD_MASK = 63;
 $._HashMapImpl__DELETED_KEY = Isolate.$isolateProperties.CTC4;
 $._HashMapImpl__INITIAL_CAPACITY = 8;
-$.LogRecord__nextNumber = 0;
-$._DateImpl__MAX_MILLISECONDS_SINCE_EPOCH = 8640000000000000;
-$.BaseRecognizer_INITIAL_FOLLOW_STACK_SIZE = 100;
-$.BaseRecognizer_DEFAULT_TOKEN_CHANNEL = 0;
-$.hierarchicalLoggingEnabled = false;
-$._rootLevel = Isolate.$isolateProperties.CTC15;
+$.editor = null;
+$.defaultContent = "/*\n* sample MapCSS stylesheet\n*/\nway[highway=residential] {\n  line-color: red;\n  line-width: 5pt;\n}\n";
+$._TimerFactory__factory = null;
 $.CharStream_EOF = -1;
 $.MapCSSLexer_T__114 = 114;
 $.MapCSSLexer_T__115 = 115;
 $.MapCSSLexer_T__116 = 116;
-$.MapCSSLexer_T__117 = 117;
+$._cachedBrowserPrefix = null;
 $.MapCSSLexer_T__118 = 118;
+$.MapCSSLexer_T__117 = 117;
 $.MapCSSLexer_T__119 = 119;
 $.MapCSSLexer_T__120 = 120;
 $.MapCSSLexer_T__121 = 121;
+$.MapCSSLexer_T__122 = 122;
 $.MapCSSLexer_T__123 = 123;
 $.MapCSSLexer_T__124 = 124;
-$.MapCSSLexer_T__122 = 122;
-$.MapCSSLexer_CSS_IDENT = 9;
 $.MapCSSLexer_COLON = 8;
+$.MapCSSLexer_CSS_IDENT = 9;
 $.MapCSSLexer_DIV = 14;
 $.MapCSSLexer_DQUOTED_STRING = 15;
 $.MapCSSParser_tokens = Isolate.$isolateProperties.CTC8;
@@ -25096,48 +25151,173 @@ $.MapCSSParser_EOF = -1;
 $.MapCSSLexer_EVAL = 19;
 $.MapCSSLexer_HEXCOLOR = 22;
 $.MapCSSLexer_IDENTS = 25;
-$.MapCSSLexer_IMPORT = 26;
 $.MapCSSLexer_INCREMENT = 27;
+$.MapCSSLexer_IMPORT = 26;
 $.MapCSSLexer_INDEX = 28;
-$.MapCSSLexer_LBRACE = 31;
 $.MapCSSParser_ATTRIBUTE_SELECTOR = 4;
+$.MapCSSLexer_LBRACE = 31;
+$.MapCSSParser_CHILD_COMBINATOR = 6;
 $.MapCSSLexer_LBRACKET = 32;
+$.MapCSSParser_CLASS_SELECTOR = 7;
 $.MapCSSLexer_LIST = 33;
-$.MapCSSLexer_ML_COMMENT = 34;
 $.MapCSSParser_COLON = 8;
-$.MapCSSLexer_NEGATIVE_FLOAT = 36;
+$.MapCSSLexer_ML_COMMENT = 34;
 $.MapCSSParser_CSS_IDENT = 9;
-$.MapCSSLexer_NEGATIVE_INT = 37;
 $.MapCSSParser_DECLARATION = 10;
+$.MapCSSLexer_NEGATIVE_FLOAT = 36;
 $.MapCSSParser_DECLARATION_BLOCK = 11;
 $.MapCSSParser_DESCENDANT_COMBINATOR = 12;
+$.MapCSSParser_DIV = 14;
+$.MapCSSLexer_NEGATIVE_INT = 37;
+$.MapCSSParser_DQUOTED_STRING = 15;
 $.MapCSSLexer_NUMBER = 41;
 $.MapCSSLexer_OP_AND = 42;
-$.MapCSSParser_DQUOTED_STRING = 15;
-$.MapCSSParser_DIV = 14;
 $.MapCSSLexer_OP_CONTAINS = 43;
-$.MapCSSLexer_OP_ENDS_WITH = 45;
-$.MapCSSLexer_OP_EQ = 46;
 $.MapCSSParser_EVAL = 19;
+$.MapCSSLexer_OP_ENDS_WITH = 45;
 $.MapCSSParser_EVAL_CALL = 20;
+$.MapCSSLexer_OP_EQ = 46;
+$.MapCSSParser_FUNCTION_CALL = 21;
+$.MapCSSParser_HEXCOLOR = 22;
 $.MapCSSLexer_OP_GE = 48;
 $.MapCSSLexer_OP_GT = 49;
-$.MapCSSParser_HEXCOLOR = 22;
 $.MapCSSLexer_OP_LE = 50;
 $.MapCSSLexer_OP_LT = 51;
 $.MapCSSLexer_OP_MATCH = 52;
+$.MapCSSParser_INCREMENT = 27;
 $.MapCSSParser_IMPORT = 26;
 $.MapCSSLexer_OP_MOD = 54;
-$.MapCSSParser_INCREMENT = 27;
 $.MapCSSLexer_OP_MUL = 55;
-$.MapCSSParser_FUNCTION_CALL = 21;
-$.MapCSSParser_INDEX_SELECTOR = 29;
-$.MapCSSParser_INDEX = 28;
-$.MapCSSLexer_OP_NEQ = 57;
 $.MapCSSParser_LAYER_ID_SELECTOR = 30;
+$.MapCSSParser_INDEX_SELECTOR = 29;
 $.MapCSSParser_LBRACE = 31;
+$.MapCSSLexer_OP_NEQ = 57;
 $.MapCSSParser_LBRACKET = 32;
-$._JsonParser_BACKSPACE = 8;
+$.MapCSSParser_LIST = 33;
+$.MapCSSLexer_OP_OR = 60;
+$.MapCSSLexer_OP_PLUS = 61;
+$.MapCSSParser_NEGATIVE_FLOAT = 36;
+$.MapCSSLexer_OP_STARTS_WITH = 62;
+$.MapCSSLexer_OP_SUBSTRING = 63;
+$.MapCSSParser_NEGATIVE_INT = 37;
+$.MapCSSParser_OP_AND = 42;
+$.MapCSSLexer_PERCENTAGE = 68;
+$.MapCSSLexer_PIXELS = 69;
+$.MapCSSParser_OP_DIV = 44;
+$.MapCSSLexer_POINTS = 70;
+$.MapCSSParser_OP_ENDS_WITH = 45;
+$.MapCSSLexer_POSITIVE_FLOAT = 71;
+$.MapCSSParser_OP_EQ = 46;
+$.MapCSSLexer_POSITIVE_INT = 72;
+$.MapCSSLexer_OSM_TAG = 65;
+$.MapCSSParser_OP_EXIST = 47;
+$.MapCSSParser_OP_GE = 48;
+$.MapCSSParser_OP_GT = 49;
+$.MapCSSLexer_RANGE = 75;
+$.MapCSSParser_OP_LE = 50;
+$.MapCSSLexer_RBRACE = 76;
+$.MapCSSParser_OP_LT = 51;
+$.MapCSSLexer_RBRACKET = 77;
+$.MapCSSParser_OP_MATCH = 52;
+$.MapCSSLexer_REGEXP = 78;
+$.MapCSSParser_OP_MINUS = 53;
+$.MapCSSParser_OP_CONTAINS = 43;
+$.MapCSSParser_OP_MOD = 54;
+$.MapCSSParser_OP_MUL = 55;
+$.MapCSSParser_INDEX = 28;
+$.MapCSSLexer_RGB = 82;
+$.MapCSSLexer_RGBA = 83;
+$.MapCSSLexer_ROLE = 84;
+$.MapCSSParser_OP_NOT = 58;
+$.MapCSSParser_OP_OR = 60;
+$.MapCSSParser_OP_PLUS = 61;
+$.MapCSSLexer_SEMICOLON = 87;
+$.MapCSSParser_OP_STARTS_WITH = 62;
+$.MapCSSParser_OP_SUBSTRING = 63;
+$.MapCSSLexer_SL_COMMENT = 89;
+$.MapCSSParser_OP_NOT_EXIST = 59;
+$.MapCSSLexer_SQUOTED_STRING = 90;
+$.MapCSSParser_OSM_TAG = 65;
+$.MapCSSParser_PARENT_COMBINATOR = 67;
+$.MapCSSParser_PIXELS = 69;
+$.MapCSSLexer_URL = 96;
+$.MapCSSParser_POSITIVE_FLOAT = 71;
+$.MapCSSParser_POSITIVE_INT = 72;
+$.MapCSSParser_POINTS = 70;
+$.MapCSSParser_PREDICATE = 73;
+$.MapCSSParser_PSEUDO_CLASS_SELECTOR = 74;
+$.MapCSSParser_OP_TRUTHY = 64;
+$.MapCSSParser_OP_NEQ = 57;
+$.MapCSSParser_PERCENTAGE = 68;
+$.MapCSSParser_RBRACE = 76;
+$.MapCSSParser_RANGE = 75;
+$.MapCSSParser_RBRACKET = 77;
+$.MapCSSParser_REGEXP = 78;
+$.MapCSSParser_RGB = 82;
+$.MapCSSParser_RGBA = 83;
+$.MapCSSParser_ROLE = 84;
+$.MapCSSParser_ROLE_SELECTOR = 85;
+$.MapCSSLexer_WS = 111;
+$._DateImpl__MAX_MILLISECONDS_SINCE_EPOCH = 8640000000000000;
+$.MapCSSParser_RULE = 86;
+$.MapCSSParser_SEMICOLON = 87;
+$.MapCSSParser_SIMPLE_SELECTOR = 88;
+$.MapCSSParser_SQUOTED_STRING = 90;
+$.MapCSSParser_STYLESHEET = 91;
+$.MapCSSParser_TYPE_SELECTOR = 94;
+$._ReceivePortImpl__nextFreeId = 1;
+$.MapCSSParser_URL = 96;
+$.MapCSSParser_VALUE_FLOAT = 98;
+$.MapCSSParser_VALUE_INT = 100;
+$.MapCSSParser_VALUE_INCREMENT = 99;
+$.MapCSSParser_VALUE_KEYWORD = 101;
+$.MapCSSParser_VALUE_LIST = 102;
+$.MapCSSParser_VALUE_PERCENTAGE = 103;
+$.MapCSSParser_VALUE_PIXELS = 104;
+$.MapCSSParser_VALUE_POINTS = 105;
+$.MapCSSParser_VALUE_QUOTED = 106;
+$.MapCSSParser_VALUE_REGEXP = 107;
+$.MapCSSParser_VALUE_RGB = 108;
+$.MapCSSParser_VALUE_RGBA = 109;
+$.MapCSSParser_VALUE_URL = 110;
+$.Level_ALL = Isolate.$isolateProperties.CTC14;
+$.MapCSSParser_ZOOM_SELECTOR = 113;
+$.Level_INFO = Isolate.$isolateProperties.CTC15;
+$.Level_SEVERE = Isolate.$isolateProperties.CTC7;
+$.ReceivePortSync__portMap = null;
+$.ReceivePortSync__portIdCount = null;
+$.ReceivePortSync__cachedIsolateId = null;
+$.hierarchicalLoggingEnabled = false;
+$._rootLevel = Isolate.$isolateProperties.CTC15;
+$.MapCSSLexer_DFA_MapCSSLexer_27_eotS = "\u0002\uffff\u0001\u0003\u0001\uffff\u0001\u0005\u0002\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_27_eofS = "\u0007\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_27_minS = "\u0001-\u0001\uffff\u0001-\u0001\uffff\u00010\u0002\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_27_maxS = "\u00019\u0001\uffff\u00019\u0001\uffff\u00019\u0002\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_27_acceptS = "\u0001\uffff\u0001\u0001\u0001\uffff\u0001\u0002\u0001\uffff\u0001\u0003\u0001\u0004";
+$.MapCSSLexer_DFA_MapCSSLexer_27_transitionS = Isolate.$isolateProperties.CTC10;
+$.MapCSSLexer_DFA_MapCSSLexer_27_specialS = "\u0007\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_36_eotS = "\u0001#\u0003\uffff\u0001(\u0001*\u0001,\u0001\uffff\u0001/\u00013\u0001\uffff\u00016\u0004\uffff\u00017\u00018\u0001;\u0001\uffff\u0004$\u0001\uffff\u0002$\n\uffff\u0001F\u0016\uffff\u0006$\u0005\uffff\u0001N\u0005$\u0001T\u0001\uffff\u0001U\u0001$\u0001W\u0001X\u0003\uffff\u0001Y\u0003\uffff";
+$.MapCSSParser_DFA_MapCSSParser_6_eofS = "6\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_36_eofS = "Z\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_36_minS = "\u0001\t\u0003\uffff\u0001~\u0002=\u0001\uffff\u0001=\u0001.\u0001z\u00010\u0004\uffff\u0001%\u00010\u0001!\u0001\uffff\u0001G\u0001N\u0001V\u0001I\u0001\uffff\u0001R\u0001T\n\uffff\u0001*\u0016\uffff\u0001B\u0001L\u0001D\u0001A\u0001S\u0001L\u0005\uffff\u0001-\u0002E\u0001L\u0001T\u0001\t\u0001-\u0001\uffff\u0001-\u0001X\u0002-\u0003\uffff\u0001-\u0003\uffff";
+$.LogRecord__nextNumber = 0;
+$.MapCSSLexer_DFA_MapCSSLexer_36_maxS = "\u0001~\u0003\uffff\u0001~\u0002=\u0001\uffff\u0002=\u0001|\u00019\u0004\uffff\u0001z\u00019\u0001:\u0001\uffff\u0001o\u0001n\u0001v\u0001i\u0001\uffff\u0001r\u0001x\n\uffff\u0001/\u0016\uffff\u0001b\u0001l\u0001d\u0001a\u0001s\u0001l\u0005\uffff\u0001z\u0002e\u0001l\u0001t\u0001(\u0001z\u0001\uffff\u0001z\u0001x\u0002z\u0003\uffff\u0001z\u0003\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_36_acceptS = "\u0001\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0003\uffff\u0001\n\u0004\uffff\u0001\u000f\u0001\u0014\u0001\u0015\u0001\u0016\u0003\uffff\u0001\u001b\u0004\uffff\u0001\"\u0002\uffff\u0001%\u0001&\u0001'\u0001(\u0001*\u0001+\u0001,\u0001-\u0001.\u0001$\u0001\uffff\u00011\u0001\t\u0001\u0004\u0001\u0005\u0001\u0006\u0001\u0007\u0001\u0008\u0001\n\u0001\u0010\u0001\u000b\u0001\u000c\u0001\u0012\u0001\u0013\u0001\u0011\u0001\r\u0001/\u0001\u000e\u0001\u0017\u0001\u0018\u0001\u0019\u0001\u001a\u0001)\u0006\uffff\u0002$\u00012\u00013\u00010\u0007\uffff\u0001\u001c\u0004\uffff\u0001#\u0001\u001d\u0001\u001e\u0001\uffff\u0001 \u0001!\u0001\u001f";
+$.MapCSSParser_DFA_MapCSSParser_6_specialS = "6\uffff";
+$.MapCSSLexer_DFA_MapCSSLexer_36_specialS = "Z\uffff";
+$.MapCSSParser_DFA_MapCSSParser_6_transitionS = Isolate.$isolateProperties.CTC11;
+$.MapCSSLexer_DFA_MapCSSLexer_36_transitionS = Isolate.$isolateProperties.CTC9;
+$.MapCSSParser_DFA_MapCSSParser_6_acceptS = "\u000b\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0001\u0004'\uffff";
+$.MapCSSParser_DFA_MapCSSParser_6_eotS = "6\uffff";
+$.MapCSSParser_DFA_MapCSSParser_6_maxS = "\u00017\u0002{\u0002\t\u0001{\u0001r\u0004\t\u0004\uffff\u0002{\u0004|\u0004?\u0001Z\u0003{\u0001w\u0001Z\u0001{\u0002Z\u0006M\u0002v\u000cM";
+$.MapCSSParser_DFA_MapCSSParser_6_minS = "\u0001\t\u0002\u0008\u0002\t\u0001\u0008\u0005\t\u0004\uffff\u0002\u0008\u0008+\u0001\t\u0003\u0008\u0001\t\u0001\u000f\u0001\u0008\u0001\t\u0001\u000f\u0006M\u0002v\u000cM";
+$.Lexer__CR = 13;
+$.Lexer__TAB = 9;
+$.Lexer__LF = 10;
+$.Primitives_hashCodeSeed = 0;
+$.DFA_debug = false;
+$.Primitives_mirrorsEnabled = false;
+$.Primitives_DOLLAR_CHAR_VALUE = 36;
 $.getInterceptor$JSStringJSArray = function(receiver) {
   if (typeof receiver == 'string') return $.JSString.prototype;
   if (receiver != null && receiver.constructor == Array) return $.JSArray.prototype;
@@ -25166,331 +25346,484 @@ $.getInterceptor$JSArray = function(receiver) {
   if (receiver != null && receiver.constructor == Array) return $.JSArray.prototype;
   return $.ObjectInterceptor.prototype;
 };
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value4014', 'MapCSSParser_FOLLOW_single_value_in_declaration_value4014', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value4014', function() {
-  return $.BitSet$fromList([0, 54043195528445950.0]);
-});
-Isolate.$lazy($, 'FOLLOW_118_in_declaration_value4018', 'MapCSSParser_FOLLOW_118_in_declaration_value4018', 'get$MapCSSParser_FOLLOW_118_in_declaration_value4018', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_LIST_in_declaration_value4034', 'MapCSSParser_FOLLOW_LIST_in_declaration_value4034', 'get$MapCSSParser_FOLLOW_LIST_in_declaration_value4034', function() {
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_predicate3472', 'MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3472', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3472', function() {
   return $.BitSet$fromList([0, 9007199254740992.0]);
 });
-Isolate.$lazy($, 'FOLLOW_117_in_declaration_value4037', 'MapCSSParser_FOLLOW_117_in_declaration_value4037', 'get$MapCSSParser_FOLLOW_117_in_declaration_value4037', function() {
+Isolate.$lazy($, 'FOLLOW_117_in_predicate3474', 'MapCSSParser_FOLLOW_117_in_predicate3474', 'get$MapCSSParser_FOLLOW_117_in_predicate3474', function() {
+  return $.BitSet$fromList([32768, 67108864]);
+});
+Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3476', 'MapCSSParser_FOLLOW_quoted_in_predicate3476', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3476', function() {
   return $.BitSet$fromList([0, 18014398509481984.0]);
 });
-Isolate.$lazy($, 'FOLLOW_118_in_declaration_value4039', 'MapCSSParser_FOLLOW_118_in_declaration_value4039', 'get$MapCSSParser_FOLLOW_118_in_declaration_value4039', function() {
+Isolate.$lazy($, 'FOLLOW_118_in_predicate3478', 'MapCSSParser_FOLLOW_118_in_predicate3478', 'get$MapCSSParser_FOLLOW_118_in_predicate3478', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_num4060', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_num4060', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_num4060', function() {
+Isolate.$lazy($, 'FOLLOW_cssident_in_predicate_ident3507', 'MapCSSParser_FOLLOW_cssident_in_predicate_ident3507', 'get$MapCSSParser_FOLLOW_cssident_in_predicate_ident3507', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_num4080', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4080', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4080', function() {
+Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_predicate_ident3514', 'MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3514', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3514', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_num4100', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4100', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4100', function() {
+Isolate.$lazy($, 'FOLLOW_num_in_predicate_primitive3533', 'MapCSSParser_FOLLOW_num_in_predicate_primitive3533', 'get$MapCSSParser_FOLLOW_num_in_predicate_primitive3533', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_num4118', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4118', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4118', function() {
+Isolate.$lazy($, 'SKIP_TOKEN', 'Token_SKIP_TOKEN', 'get$Token_SKIP_TOKEN', function() {
+  return $.CommonToken$(0, null);
+});
+Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate_primitive3539', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3539', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3539', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4143', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4143', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4143', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_predicate_primitive3544', 'MapCSSParser_FOLLOW_quoted_in_predicate_primitive3544', 'get$MapCSSParser_FOLLOW_quoted_in_predicate_primitive3544', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_single_value4166', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4166', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4166', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_rhs_match3556', 'MapCSSParser_FOLLOW_quoted_in_rhs_match3556', 'get$MapCSSParser_FOLLOW_quoted_in_rhs_match3556', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_single_value4189', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4189', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4189', function() {
+Isolate.$lazy($, 'FOLLOW_REGEXP_in_rhs_match3563', 'MapCSSParser_FOLLOW_REGEXP_in_rhs_match3563', 'get$MapCSSParser_FOLLOW_REGEXP_in_rhs_match3563', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_single_value4210', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4210', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4210', function() {
+Isolate.$lazy($, 'FOLLOW_115_in_class_selector3661', 'MapCSSParser_FOLLOW_115_in_class_selector3661', 'get$MapCSSParser_FOLLOW_115_in_class_selector3661', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_class_selector3664', 'MapCSSParser_FOLLOW_cssident_in_class_selector3664', 'get$MapCSSParser_FOLLOW_cssident_in_class_selector3664', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_INCREMENT_in_single_value4232', 'MapCSSParser_FOLLOW_INCREMENT_in_single_value4232', 'get$MapCSSParser_FOLLOW_INCREMENT_in_single_value4232', function() {
+Isolate.$lazy($, 'FOLLOW_121_in_class_selector3681', 'MapCSSParser_FOLLOW_121_in_class_selector3681', 'get$MapCSSParser_FOLLOW_121_in_class_selector3681', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_class_selector3684', 'MapCSSParser_FOLLOW_cssident_in_class_selector3684', 'get$MapCSSParser_FOLLOW_cssident_in_class_selector3684', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POINTS_in_single_value4258', 'MapCSSParser_FOLLOW_POINTS_in_single_value4258', 'get$MapCSSParser_FOLLOW_POINTS_in_single_value4258', function() {
+Isolate.$lazy($, 'FOLLOW_122_in_pseudo_class_selector3713', 'MapCSSParser_FOLLOW_122_in_pseudo_class_selector3713', 'get$MapCSSParser_FOLLOW_122_in_pseudo_class_selector3713', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3715', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3715', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3715', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_PIXELS_in_single_value4275', 'MapCSSParser_FOLLOW_PIXELS_in_single_value4275', 'get$MapCSSParser_FOLLOW_PIXELS_in_single_value4275', function() {
+Isolate.$lazy($, 'FOLLOW_116_in_pseudo_class_selector3736', 'MapCSSParser_FOLLOW_116_in_pseudo_class_selector3736', 'get$MapCSSParser_FOLLOW_116_in_pseudo_class_selector3736', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3738', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3738', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3738', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_PERCENTAGE_in_single_value4295', 'MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4295', 'get$MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4295', function() {
+Isolate.$lazy($, 'FOLLOW_COLON_in_pseudo_class_selector3755', 'MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3755', 'get$MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3755', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3757', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3757', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3757', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_URL_in_single_value4310', 'MapCSSParser_FOLLOW_URL_in_single_value4310', 'get$MapCSSParser_FOLLOW_URL_in_single_value4310', function() {
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_type_selector3792', 'MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3792', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3792', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_RGB_in_single_value4325', 'MapCSSParser_FOLLOW_RGB_in_single_value4325', 'get$MapCSSParser_FOLLOW_RGB_in_single_value4325', function() {
+Isolate.$lazy($, 'FOLLOW_OP_MUL_in_type_selector3810', 'MapCSSParser_FOLLOW_OP_MUL_in_type_selector3810', 'get$MapCSSParser_FOLLOW_OP_MUL_in_type_selector3810', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_LBRACE_in_declaration_block3844', 'MapCSSParser_FOLLOW_LBRACE_in_declaration_block3844', 'get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3844', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_declarations_in_declaration_block3846', 'MapCSSParser_FOLLOW_declarations_in_declaration_block3846', 'get$MapCSSParser_FOLLOW_declarations_in_declaration_block3846', function() {
+  return $.BitSet$fromList([0, 4096]);
+});
+Isolate.$lazy($, 'FOLLOW_RBRACE_in_declaration_block3848', 'MapCSSParser_FOLLOW_RBRACE_in_declaration_block3848', 'get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3848', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_LBRACE_in_declaration_block3865', 'MapCSSParser_FOLLOW_LBRACE_in_declaration_block3865', 'get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3865', function() {
+  return $.BitSet$fromList([0, 4096]);
+});
+Isolate.$lazy($, 'FOLLOW_RBRACE_in_declaration_block3867', 'MapCSSParser_FOLLOW_RBRACE_in_declaration_block3867', 'get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3867', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_declaration_in_declarations3898', 'MapCSSParser_FOLLOW_declaration_in_declarations3898', 'get$MapCSSParser_FOLLOW_declaration_in_declarations3898', function() {
+  return $.BitSet$fromList([2, 8388608]);
+});
+Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_declarations3901', 'MapCSSParser_FOLLOW_SEMICOLON_in_declarations3901', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3901', function() {
+  return $.BitSet$fromList([512]);
+});
+Isolate.$lazy($, 'FOLLOW_declaration_in_declarations3903', 'MapCSSParser_FOLLOW_declaration_in_declarations3903', 'get$MapCSSParser_FOLLOW_declaration_in_declarations3903', function() {
+  return $.BitSet$fromList([2, 8388608]);
+});
+Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_declarations3907', 'MapCSSParser_FOLLOW_SEMICOLON_in_declarations3907', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3907', function() {
+  return $.BitSet$fromList([2, 8388608]);
+});
+Isolate.$lazy($, 'FOLLOW_declaration_property_in_declaration3925', 'MapCSSParser_FOLLOW_declaration_property_in_declaration3925', 'get$MapCSSParser_FOLLOW_declaration_property_in_declaration3925', function() {
+  return $.BitSet$fromList([256]);
+});
+Isolate.$lazy($, 'FOLLOW_COLON_in_declaration3927', 'MapCSSParser_FOLLOW_COLON_in_declaration3927', 'get$MapCSSParser_FOLLOW_COLON_in_declaration3927', function() {
+  return $.BitSet$fromList([214887334400, 4362863090]);
+});
+Isolate.$lazy($, 'FOLLOW_declaration_value_in_declaration3929', 'MapCSSParser_FOLLOW_declaration_value_in_declaration3929', 'get$MapCSSParser_FOLLOW_declaration_value_in_declaration3929', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_declaration_property3951', 'MapCSSParser_FOLLOW_cssident_in_declaration_property3951', 'get$MapCSSParser_FOLLOW_cssident_in_declaration_property3951', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3963', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3963', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3963', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3968', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3968', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3968', function() {
+  return $.BitSet$fromList([0, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_declaration_value3971', 'MapCSSParser_FOLLOW_119_in_declaration_value3971', 'get$MapCSSParser_FOLLOW_119_in_declaration_value3971', function() {
+  return $.BitSet$fromList([206296875520, 4362863090]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3973', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3973', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3973', function() {
+  return $.BitSet$fromList([2, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_declaration_value3976', 'MapCSSParser_FOLLOW_119_in_declaration_value3976', 'get$MapCSSParser_FOLLOW_119_in_declaration_value3976', function() {
+  return $.BitSet$fromList([206296875520, 4362863090]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3978', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3978', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3978', function() {
+  return $.BitSet$fromList([2, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_EVAL_in_declaration_value3994', 'MapCSSParser_FOLLOW_EVAL_in_declaration_value3994', 'get$MapCSSParser_FOLLOW_EVAL_in_declaration_value3994', function() {
   return $.BitSet$fromList([0, 9007199254740992.0]);
 });
-Isolate.$lazy($, 'FOLLOW_117_in_single_value4327', 'MapCSSParser_FOLLOW_117_in_single_value4327', 'get$MapCSSParser_FOLLOW_117_in_single_value4327', function() {
-  return $.BitSet$fromList([0, 256]);
+Isolate.$lazy($, 'FOLLOW_117_in_declaration_value3997', 'MapCSSParser_FOLLOW_117_in_declaration_value3997', 'get$MapCSSParser_FOLLOW_117_in_declaration_value3997', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4331', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4331', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4331', function() {
-  return $.BitSet$fromList([0, 36028797018963970.0]);
+Isolate.$lazy($, 'FOLLOW_expr_in_declaration_value3999', 'MapCSSParser_FOLLOW_expr_in_declaration_value3999', 'get$MapCSSParser_FOLLOW_expr_in_declaration_value3999', function() {
+  return $.BitSet$fromList([0, 18014398509481984.0]);
 });
-Isolate.$lazy($, 'FOLLOW_119_in_single_value4333', 'MapCSSParser_FOLLOW_119_in_single_value4333', 'get$MapCSSParser_FOLLOW_119_in_single_value4333', function() {
-  return $.BitSet$fromList([0, 256]);
+Isolate.$lazy($, 'FOLLOW_118_in_declaration_value4001', 'MapCSSParser_FOLLOW_118_in_declaration_value4001', 'get$MapCSSParser_FOLLOW_118_in_declaration_value4001', function() {
+  return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4337', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4337', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4337', function() {
-  return $.BitSet$fromList([0, 36028797018963970.0]);
+Isolate.$lazy($, 'FOLLOW_LIST_in_declaration_value4016', 'MapCSSParser_FOLLOW_LIST_in_declaration_value4016', 'get$MapCSSParser_FOLLOW_LIST_in_declaration_value4016', function() {
+  return $.BitSet$fromList([0, 9007199254740992.0]);
 });
-Isolate.$lazy($, 'FOLLOW_119_in_single_value4339', 'MapCSSParser_FOLLOW_119_in_single_value4339', 'get$MapCSSParser_FOLLOW_119_in_single_value4339', function() {
+Isolate.$lazy($, 'FOLLOW_117_in_declaration_value4019', 'MapCSSParser_FOLLOW_117_in_declaration_value4019', 'get$MapCSSParser_FOLLOW_117_in_declaration_value4019', function() {
+  return $.BitSet$fromList([206296875520, 4362863090]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value4021', 'MapCSSParser_FOLLOW_single_value_in_declaration_value4021', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value4021', function() {
+  return $.BitSet$fromList([0, 54043195528445950.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_declaration_value4024', 'MapCSSParser_FOLLOW_119_in_declaration_value4024', 'get$MapCSSParser_FOLLOW_119_in_declaration_value4024', function() {
+  return $.BitSet$fromList([206296875520, 4362863090]);
+});
+Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value4026', 'MapCSSParser_FOLLOW_single_value_in_declaration_value4026', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value4026', function() {
+  return $.BitSet$fromList([0, 54043195528445950.0]);
+});
+Isolate.$lazy($, 'FOLLOW_118_in_declaration_value4030', 'MapCSSParser_FOLLOW_118_in_declaration_value4030', 'get$MapCSSParser_FOLLOW_118_in_declaration_value4030', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_LIST_in_declaration_value4046', 'MapCSSParser_FOLLOW_LIST_in_declaration_value4046', 'get$MapCSSParser_FOLLOW_LIST_in_declaration_value4046', function() {
+  return $.BitSet$fromList([0, 9007199254740992.0]);
+});
+Isolate.$lazy($, 'FOLLOW_117_in_declaration_value4049', 'MapCSSParser_FOLLOW_117_in_declaration_value4049', 'get$MapCSSParser_FOLLOW_117_in_declaration_value4049', function() {
+  return $.BitSet$fromList([0, 18014398509481984.0]);
+});
+Isolate.$lazy($, 'FOLLOW_118_in_declaration_value4051', 'MapCSSParser_FOLLOW_118_in_declaration_value4051', 'get$MapCSSParser_FOLLOW_118_in_declaration_value4051', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_num4072', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_num4072', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_num4072', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_num4092', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4092', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_num4092', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_num4112', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4112', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_num4112', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_num4130', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4130', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_num4130', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4155', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4155', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4155', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_single_value4178', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4178', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_single_value4178', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_single_value4201', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4201', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_single_value4201', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_single_value4222', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4222', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_single_value4222', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_INCREMENT_in_single_value4244', 'MapCSSParser_FOLLOW_INCREMENT_in_single_value4244', 'get$MapCSSParser_FOLLOW_INCREMENT_in_single_value4244', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POINTS_in_single_value4270', 'MapCSSParser_FOLLOW_POINTS_in_single_value4270', 'get$MapCSSParser_FOLLOW_POINTS_in_single_value4270', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_PIXELS_in_single_value4287', 'MapCSSParser_FOLLOW_PIXELS_in_single_value4287', 'get$MapCSSParser_FOLLOW_PIXELS_in_single_value4287', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_PERCENTAGE_in_single_value4307', 'MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4307', 'get$MapCSSParser_FOLLOW_PERCENTAGE_in_single_value4307', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_URL_in_single_value4322', 'MapCSSParser_FOLLOW_URL_in_single_value4322', 'get$MapCSSParser_FOLLOW_URL_in_single_value4322', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_RGB_in_single_value4337', 'MapCSSParser_FOLLOW_RGB_in_single_value4337', 'get$MapCSSParser_FOLLOW_RGB_in_single_value4337', function() {
+  return $.BitSet$fromList([0, 9007199254740992.0]);
+});
+Isolate.$lazy($, 'FOLLOW_117_in_single_value4339', 'MapCSSParser_FOLLOW_117_in_single_value4339', 'get$MapCSSParser_FOLLOW_117_in_single_value4339', function() {
   return $.BitSet$fromList([0, 256]);
 });
 Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4343', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4343', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4343', function() {
+  return $.BitSet$fromList([0, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_single_value4345', 'MapCSSParser_FOLLOW_119_in_single_value4345', 'get$MapCSSParser_FOLLOW_119_in_single_value4345', function() {
+  return $.BitSet$fromList([0, 256]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4349', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4349', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4349', function() {
+  return $.BitSet$fromList([0, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_single_value4351', 'MapCSSParser_FOLLOW_119_in_single_value4351', 'get$MapCSSParser_FOLLOW_119_in_single_value4351', function() {
+  return $.BitSet$fromList([0, 256]);
+});
+Isolate.$lazy($, '_proxiedObjectTable', '_proxiedObjectTable', 'get$_proxiedObjectTable', function() {
+  return $._ProxiedObjectTable$();
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4355', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4355', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4355', function() {
   return $.BitSet$fromList([0, 18014398509481984.0]);
 });
-Isolate.$lazy($, 'FOLLOW_118_in_single_value4345', 'MapCSSParser_FOLLOW_118_in_single_value4345', 'get$MapCSSParser_FOLLOW_118_in_single_value4345', function() {
+Isolate.$lazy($, 'FOLLOW_118_in_single_value4357', 'MapCSSParser_FOLLOW_118_in_single_value4357', 'get$MapCSSParser_FOLLOW_118_in_single_value4357', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_RGBA_in_single_value4388', 'MapCSSParser_FOLLOW_RGBA_in_single_value4388', 'get$MapCSSParser_FOLLOW_RGBA_in_single_value4388', function() {
+Isolate.$lazy($, 'FOLLOW_RGBA_in_single_value4400', 'MapCSSParser_FOLLOW_RGBA_in_single_value4400', 'get$MapCSSParser_FOLLOW_RGBA_in_single_value4400', function() {
   return $.BitSet$fromList([0, 9007199254740992.0]);
 });
-Isolate.$lazy($, 'FOLLOW_117_in_single_value4390', 'MapCSSParser_FOLLOW_117_in_single_value4390', 'get$MapCSSParser_FOLLOW_117_in_single_value4390', function() {
-  return $.BitSet$fromList([0, 256]);
-});
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4394', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4394', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4394', function() {
-  return $.BitSet$fromList([0, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_single_value4396', 'MapCSSParser_FOLLOW_119_in_single_value4396', 'get$MapCSSParser_FOLLOW_119_in_single_value4396', function() {
-  return $.BitSet$fromList([0, 256]);
-});
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4400', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4400', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4400', function() {
-  return $.BitSet$fromList([0, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_single_value4402', 'MapCSSParser_FOLLOW_119_in_single_value4402', 'get$MapCSSParser_FOLLOW_119_in_single_value4402', function() {
+Isolate.$lazy($, 'FOLLOW_117_in_single_value4402', 'MapCSSParser_FOLLOW_117_in_single_value4402', 'get$MapCSSParser_FOLLOW_117_in_single_value4402', function() {
   return $.BitSet$fromList([0, 256]);
 });
 Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4406', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4406', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4406', function() {
   return $.BitSet$fromList([0, 36028797018963970.0]);
 });
 Isolate.$lazy($, 'FOLLOW_119_in_single_value4408', 'MapCSSParser_FOLLOW_119_in_single_value4408', 'get$MapCSSParser_FOLLOW_119_in_single_value4408', function() {
+  return $.BitSet$fromList([0, 256]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4412', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4412', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4412', function() {
+  return $.BitSet$fromList([0, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_single_value4414', 'MapCSSParser_FOLLOW_119_in_single_value4414', 'get$MapCSSParser_FOLLOW_119_in_single_value4414', function() {
+  return $.BitSet$fromList([0, 256]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_single_value4418', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4418', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_single_value4418', function() {
+  return $.BitSet$fromList([0, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_single_value4420', 'MapCSSParser_FOLLOW_119_in_single_value4420', 'get$MapCSSParser_FOLLOW_119_in_single_value4420', function() {
   return $.BitSet$fromList([206158430208, 384]);
 });
-Isolate.$lazy($, 'FOLLOW_num_in_single_value4412', 'MapCSSParser_FOLLOW_num_in_single_value4412', 'get$MapCSSParser_FOLLOW_num_in_single_value4412', function() {
+Isolate.$lazy($, 'FOLLOW_num_in_single_value4424', 'MapCSSParser_FOLLOW_num_in_single_value4424', 'get$MapCSSParser_FOLLOW_num_in_single_value4424', function() {
   return $.BitSet$fromList([0, 18014398509481984.0]);
 });
-Isolate.$lazy($, 'FOLLOW_118_in_single_value4414', 'MapCSSParser_FOLLOW_118_in_single_value4414', 'get$MapCSSParser_FOLLOW_118_in_single_value4414', function() {
+Isolate.$lazy($, 'FOLLOW_118_in_single_value4426', 'MapCSSParser_FOLLOW_118_in_single_value4426', 'get$MapCSSParser_FOLLOW_118_in_single_value4426', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_HEXCOLOR_in_single_value4449', 'MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4449', 'get$MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4449', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_quoted_in_single_value4474', 'MapCSSParser_FOLLOW_quoted_in_single_value4474', 'get$MapCSSParser_FOLLOW_quoted_in_single_value4474', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_single_value4506', 'MapCSSParser_FOLLOW_OSM_TAG_in_single_value4506', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_single_value4506', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_single_value4536', 'MapCSSParser_FOLLOW_cssident_in_single_value4536', 'get$MapCSSParser_FOLLOW_cssident_in_single_value4536', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_logicalExpression_in_expr4557', 'MapCSSParser_FOLLOW_logicalExpression_in_expr4557', 'get$MapCSSParser_FOLLOW_logicalExpression_in_expr4557', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_expr_in_args4568', 'MapCSSParser_FOLLOW_expr_in_args4568', 'get$MapCSSParser_FOLLOW_expr_in_args4568', function() {
-  return $.BitSet$fromList([2, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_args4571', 'MapCSSParser_FOLLOW_119_in_args4571', 'get$MapCSSParser_FOLLOW_119_in_args4571', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_expr_in_args4573', 'MapCSSParser_FOLLOW_expr_in_args4573', 'get$MapCSSParser_FOLLOW_expr_in_args4573', function() {
-  return $.BitSet$fromList([2, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_booleanAndExpression_in_logicalExpression4602', 'MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4602', 'get$MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4602', function() {
-  return $.BitSet$fromList([1152921504606847000.0]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_OR_in_logicalExpression4626', 'MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4626', 'get$MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4626', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_logicalExpression_in_logicalExpression4628', 'MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4628', 'get$MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4628', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_equalityExpression_in_booleanAndExpression4721', 'MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4721', 'get$MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4721', function() {
-  return $.BitSet$fromList([4398046511106]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_AND_in_booleanAndExpression4745', 'MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4745', 'get$MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4745', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_booleanAndExpression_in_booleanAndExpression4747', 'MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4747', 'get$MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4747', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4851', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4851', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4851', function() {
-  return $.BitSet$fromList([144185556820033540.0]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_EQ_in_equalityExpression4875', 'MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4875', 'get$MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4875', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4878', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4878', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4878', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_NEQ_in_equalityExpression4909', 'MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4909', 'get$MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4909', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4911', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4911', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4911', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5017', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5017', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5017', function() {
-  return $.BitSet$fromList([4222124650659842]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_LT_in_relationalExpression5041', 'MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5041', 'get$MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5041', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5043', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5043', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5043', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_LE_in_relationalExpression5074', 'MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5074', 'get$MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5074', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5076', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5076', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5076', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_GT_in_relationalExpression5107', 'MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5107', 'get$MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5107', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5109', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5109', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5109', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_GE_in_relationalExpression5140', 'MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5140', 'get$MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5140', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5142', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5142', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5142', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_additiveExpression5230', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5230', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5230', function() {
-  return $.BitSet$fromList([2305843009213694000.0, 72057594037927940.0]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_PLUS_in_additiveExpression5254', 'MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5254', 'get$MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5254', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_additiveExpression5257', 'MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5257', 'get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5257', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_120_in_additiveExpression5288', 'MapCSSParser_FOLLOW_120_in_additiveExpression5288', 'get$MapCSSParser_FOLLOW_120_in_additiveExpression5288', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_additiveExpression_in_additiveExpression5291', 'MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5291', 'get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5291', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_unaryExpression_in_multiplicativeExpression5380', 'MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5380', 'get$MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5380', function() {
-  return $.BitSet$fromList([54043195528462340.0]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_MUL_in_multiplicativeExpression5400', 'MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5400', 'get$MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5400', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5402', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5402', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5402', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, '_proxiedObjectTable', '_proxiedObjectTable', 'get$_proxiedObjectTable', function() {
-  return $._ProxiedObjectTable$();
-});
-Isolate.$lazy($, 'FOLLOW_DIV_in_multiplicativeExpression5431', 'MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5431', 'get$MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5431', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5433', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5433', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5433', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_MOD_in_multiplicativeExpression5462', 'MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5462', 'get$MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5462', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5464', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5464', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5464', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_114_in_unaryExpression5583', 'MapCSSParser_FOLLOW_114_in_unaryExpression5583', 'get$MapCSSParser_FOLLOW_114_in_unaryExpression5583', function() {
-  return $.BitSet$fromList([206158463488, 9007199321850242.0]);
-});
-Isolate.$lazy($, 'FOLLOW_primaryExpression_in_unaryExpression5585', 'MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5585', 'get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5585', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_primaryExpression_in_unaryExpression5608', 'MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5608', 'get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5608', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_117_in_primaryExpression5646', 'MapCSSParser_FOLLOW_117_in_primaryExpression5646', 'get$MapCSSParser_FOLLOW_117_in_primaryExpression5646', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_expr_in_primaryExpression5648', 'MapCSSParser_FOLLOW_expr_in_primaryExpression5648', 'get$MapCSSParser_FOLLOW_expr_in_primaryExpression5648', function() {
-  return $.BitSet$fromList([0, 18014398509481984.0]);
-});
-Isolate.$lazy($, 'FOLLOW_118_in_primaryExpression5650', 'MapCSSParser_FOLLOW_118_in_primaryExpression5650', 'get$MapCSSParser_FOLLOW_118_in_primaryExpression5650', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_primaryExpression5672', 'MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5672', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5672', function() {
-  return $.BitSet$fromList([0, 9007199254740992.0]);
-});
-Isolate.$lazy($, 'FOLLOW_117_in_primaryExpression5674', 'MapCSSParser_FOLLOW_117_in_primaryExpression5674', 'get$MapCSSParser_FOLLOW_117_in_primaryExpression5674', function() {
-  return $.BitSet$fromList([206158463488, 28147497738174850.0]);
-});
-Isolate.$lazy($, 'FOLLOW_args_in_primaryExpression5676', 'MapCSSParser_FOLLOW_args_in_primaryExpression5676', 'get$MapCSSParser_FOLLOW_args_in_primaryExpression5676', function() {
-  return $.BitSet$fromList([0, 18014398509481984.0]);
-});
-Isolate.$lazy($, 'FOLLOW_118_in_primaryExpression5679', 'MapCSSParser_FOLLOW_118_in_primaryExpression5679', 'get$MapCSSParser_FOLLOW_118_in_primaryExpression5679', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_primaryExpression5702', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5702', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5702', function() {
+Isolate.$lazy($, 'FOLLOW_HEXCOLOR_in_single_value4461', 'MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4461', 'get$MapCSSParser_FOLLOW_HEXCOLOR_in_single_value4461', function() {
   return $.BitSet$fromList([2]);
 });
 Isolate.$lazy($, 'quoteRegExp', 'quoteRegExp', 'get$quoteRegExp', function() {
   return $.JSSyntaxRegExp$("[-[\\]{}()*+?.,\\\\^$|#\\s]", false, false);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_primaryExpression5722', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5722', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5722', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_single_value4486', 'MapCSSParser_FOLLOW_quoted_in_single_value4486', 'get$MapCSSParser_FOLLOW_quoted_in_single_value4486', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5744', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5744', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5744', function() {
+Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_single_value4518', 'MapCSSParser_FOLLOW_OSM_TAG_in_single_value4518', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_single_value4518', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_primaryExpression5764', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5764', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5764', function() {
+Isolate.$lazy($, 'FOLLOW_cssident_in_single_value4548', 'MapCSSParser_FOLLOW_cssident_in_single_value4548', 'get$MapCSSParser_FOLLOW_cssident_in_single_value4548', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_quoted_in_primaryExpression5784', 'MapCSSParser_FOLLOW_quoted_in_primaryExpression5784', 'get$MapCSSParser_FOLLOW_quoted_in_primaryExpression5784', function() {
+Isolate.$lazy($, 'FOLLOW_logicalExpression_in_expr4569', 'MapCSSParser_FOLLOW_logicalExpression_in_expr4569', 'get$MapCSSParser_FOLLOW_logicalExpression_in_expr4569', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_cssident_in_primaryExpression5795', 'MapCSSParser_FOLLOW_cssident_in_primaryExpression5795', 'get$MapCSSParser_FOLLOW_cssident_in_primaryExpression5795', function() {
+Isolate.$lazy($, 'FOLLOW_expr_in_args4580', 'MapCSSParser_FOLLOW_expr_in_args4580', 'get$MapCSSParser_FOLLOW_expr_in_args4580', function() {
+  return $.BitSet$fromList([2, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_119_in_args4583', 'MapCSSParser_FOLLOW_119_in_args4583', 'get$MapCSSParser_FOLLOW_119_in_args4583', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_expr_in_args4585', 'MapCSSParser_FOLLOW_expr_in_args4585', 'get$MapCSSParser_FOLLOW_expr_in_args4585', function() {
+  return $.BitSet$fromList([2, 36028797018963970.0]);
+});
+Isolate.$lazy($, 'FOLLOW_booleanAndExpression_in_logicalExpression4614', 'MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4614', 'get$MapCSSParser_FOLLOW_booleanAndExpression_in_logicalExpression4614', function() {
+  return $.BitSet$fromList([1152921504606847000.0]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_OR_in_logicalExpression4638', 'MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4638', 'get$MapCSSParser_FOLLOW_OP_OR_in_logicalExpression4638', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_logicalExpression_in_logicalExpression4640', 'MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4640', 'get$MapCSSParser_FOLLOW_logicalExpression_in_logicalExpression4640', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_primaryExpression5808', 'MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5808', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5808', function() {
+Isolate.$lazy($, 'FOLLOW_equalityExpression_in_booleanAndExpression4733', 'MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4733', 'get$MapCSSParser_FOLLOW_equalityExpression_in_booleanAndExpression4733', function() {
+  return $.BitSet$fromList([4398046511106]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_AND_in_booleanAndExpression4757', 'MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4757', 'get$MapCSSParser_FOLLOW_OP_AND_in_booleanAndExpression4757', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_booleanAndExpression_in_booleanAndExpression4759', 'MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4759', 'get$MapCSSParser_FOLLOW_booleanAndExpression_in_booleanAndExpression4759', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_OR_in_synpred1_MapCSS4621', 'MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4621', 'get$MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4621', function() {
+Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4863', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4863', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4863', function() {
+  return $.BitSet$fromList([144185556820033540.0]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_EQ_in_equalityExpression4887', 'MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4887', 'get$MapCSSParser_FOLLOW_OP_EQ_in_equalityExpression4887', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4890', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4890', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4890', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_AND_in_synpred2_MapCSS4740', 'MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4740', 'get$MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4740', function() {
+Isolate.$lazy($, 'FOLLOW_OP_NEQ_in_equalityExpression4921', 'MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4921', 'get$MapCSSParser_FOLLOW_OP_NEQ_in_equalityExpression4921', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_relationalExpression_in_equalityExpression4923', 'MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4923', 'get$MapCSSParser_FOLLOW_relationalExpression_in_equalityExpression4923', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_EQ_in_synpred3_MapCSS4869', 'MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4869', 'get$MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4869', function() {
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5029', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5029', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5029', function() {
+  return $.BitSet$fromList([4222124650659842]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_LT_in_relationalExpression5053', 'MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5053', 'get$MapCSSParser_FOLLOW_OP_LT_in_relationalExpression5053', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5055', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5055', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5055', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_NEQ_in_synpred4_MapCSS4904', 'MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4904', 'get$MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4904', function() {
+Isolate.$lazy($, 'FOLLOW_OP_LE_in_relationalExpression5086', 'MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5086', 'get$MapCSSParser_FOLLOW_OP_LE_in_relationalExpression5086', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5088', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5088', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5088', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_LT_in_synpred5_MapCSS5035', 'MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5035', 'get$MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5035', function() {
+Isolate.$lazy($, 'FOLLOW_OP_GT_in_relationalExpression5119', 'MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5119', 'get$MapCSSParser_FOLLOW_OP_GT_in_relationalExpression5119', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5121', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5121', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5121', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_LE_in_synpred6_MapCSS5068', 'MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5068', 'get$MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5068', function() {
+Isolate.$lazy($, 'FOLLOW_OP_GE_in_relationalExpression5152', 'MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5152', 'get$MapCSSParser_FOLLOW_OP_GE_in_relationalExpression5152', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_relationalExpression5154', 'MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5154', 'get$MapCSSParser_FOLLOW_additiveExpression_in_relationalExpression5154', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_GT_in_synpred7_MapCSS5101', 'MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5101', 'get$MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5101', function() {
+Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_additiveExpression5242', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5242', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_additiveExpression5242', function() {
+  return $.BitSet$fromList([2305843009213694000.0, 72057594037927940.0]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_PLUS_in_additiveExpression5266', 'MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5266', 'get$MapCSSParser_FOLLOW_OP_PLUS_in_additiveExpression5266', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_additiveExpression5269', 'MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5269', 'get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5269', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_GE_in_synpred8_MapCSS5134', 'MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5134', 'get$MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5134', function() {
+Isolate.$lazy($, 'FOLLOW_120_in_additiveExpression5300', 'MapCSSParser_FOLLOW_120_in_additiveExpression5300', 'get$MapCSSParser_FOLLOW_120_in_additiveExpression5300', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_additiveExpression_in_additiveExpression5303', 'MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5303', 'get$MapCSSParser_FOLLOW_additiveExpression_in_additiveExpression5303', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_PLUS_in_synpred9_MapCSS5249', 'MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5249', 'get$MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5249', function() {
+Isolate.$lazy($, 'FOLLOW_unaryExpression_in_multiplicativeExpression5392', 'MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5392', 'get$MapCSSParser_FOLLOW_unaryExpression_in_multiplicativeExpression5392', function() {
+  return $.BitSet$fromList([54043195528462340.0]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_MUL_in_multiplicativeExpression5412', 'MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5412', 'get$MapCSSParser_FOLLOW_OP_MUL_in_multiplicativeExpression5412', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5414', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5414', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5414', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_120_in_synpred10_MapCSS5283', 'MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5283', 'get$MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5283', function() {
+Isolate.$lazy($, 'FOLLOW_DIV_in_multiplicativeExpression5443', 'MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5443', 'get$MapCSSParser_FOLLOW_DIV_in_multiplicativeExpression5443', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5445', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5445', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5445', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_MUL_in_synpred11_MapCSS5394', 'MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5394', 'get$MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5394', function() {
+Isolate.$lazy($, 'FOLLOW_OP_MOD_in_multiplicativeExpression5474', 'MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5474', 'get$MapCSSParser_FOLLOW_OP_MOD_in_multiplicativeExpression5474', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_multiplicativeExpression_in_multiplicativeExpression5476', 'MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5476', 'get$MapCSSParser_FOLLOW_multiplicativeExpression_in_multiplicativeExpression5476', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_DIV_in_synpred12_MapCSS5425', 'MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5425', 'get$MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5425', function() {
+Isolate.$lazy($, 'FOLLOW_114_in_unaryExpression5595', 'MapCSSParser_FOLLOW_114_in_unaryExpression5595', 'get$MapCSSParser_FOLLOW_114_in_unaryExpression5595', function() {
+  return $.BitSet$fromList([206158463488, 9007199321850242.0]);
+});
+Isolate.$lazy($, 'FOLLOW_primaryExpression_in_unaryExpression5597', 'MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5597', 'get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5597', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_MOD_in_synpred13_MapCSS5456', 'MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5456', 'get$MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5456', function() {
+Isolate.$lazy($, 'FOLLOW_primaryExpression_in_unaryExpression5620', 'MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5620', 'get$MapCSSParser_FOLLOW_primaryExpression_in_unaryExpression5620', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_114_in_synpred14_MapCSS5578', 'MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5578', 'get$MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5578', function() {
+Isolate.$lazy($, 'FOLLOW_117_in_primaryExpression5658', 'MapCSSParser_FOLLOW_117_in_primaryExpression5658', 'get$MapCSSParser_FOLLOW_117_in_primaryExpression5658', function() {
+  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
+});
+Isolate.$lazy($, 'FOLLOW_expr_in_primaryExpression5660', 'MapCSSParser_FOLLOW_expr_in_primaryExpression5660', 'get$MapCSSParser_FOLLOW_expr_in_primaryExpression5660', function() {
+  return $.BitSet$fromList([0, 18014398509481984.0]);
+});
+Isolate.$lazy($, 'FOLLOW_118_in_primaryExpression5662', 'MapCSSParser_FOLLOW_118_in_primaryExpression5662', 'get$MapCSSParser_FOLLOW_118_in_primaryExpression5662', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_primaryExpression5684', 'MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5684', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_primaryExpression5684', function() {
+  return $.BitSet$fromList([0, 9007199254740992.0]);
+});
+Isolate.$lazy($, 'FOLLOW_117_in_primaryExpression5686', 'MapCSSParser_FOLLOW_117_in_primaryExpression5686', 'get$MapCSSParser_FOLLOW_117_in_primaryExpression5686', function() {
+  return $.BitSet$fromList([206158463488, 28147497738174850.0]);
+});
+Isolate.$lazy($, 'FOLLOW_args_in_primaryExpression5688', 'MapCSSParser_FOLLOW_args_in_primaryExpression5688', 'get$MapCSSParser_FOLLOW_args_in_primaryExpression5688', function() {
+  return $.BitSet$fromList([0, 18014398509481984.0]);
+});
+Isolate.$lazy($, 'FOLLOW_118_in_primaryExpression5691', 'MapCSSParser_FOLLOW_118_in_primaryExpression5691', 'get$MapCSSParser_FOLLOW_118_in_primaryExpression5691', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_FLOAT_in_primaryExpression5714', 'MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5714', 'get$MapCSSParser_FOLLOW_POSITIVE_FLOAT_in_primaryExpression5714', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_primaryExpression5734', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5734', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_primaryExpression5734', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5756', 'MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5756', 'get$MapCSSParser_FOLLOW_NEGATIVE_FLOAT_in_primaryExpression5756', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_NEGATIVE_INT_in_primaryExpression5776', 'MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5776', 'get$MapCSSParser_FOLLOW_NEGATIVE_INT_in_primaryExpression5776', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_quoted_in_primaryExpression5796', 'MapCSSParser_FOLLOW_quoted_in_primaryExpression5796', 'get$MapCSSParser_FOLLOW_quoted_in_primaryExpression5796', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_cssident_in_primaryExpression5807', 'MapCSSParser_FOLLOW_cssident_in_primaryExpression5807', 'get$MapCSSParser_FOLLOW_cssident_in_primaryExpression5807', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_primaryExpression5820', 'MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5820', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_primaryExpression5820', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_OR_in_synpred1_MapCSS4633', 'MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4633', 'get$MapCSSParser_FOLLOW_OP_OR_in_synpred1_MapCSS4633', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_AND_in_synpred2_MapCSS4752', 'MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4752', 'get$MapCSSParser_FOLLOW_OP_AND_in_synpred2_MapCSS4752', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_EQ_in_synpred3_MapCSS4881', 'MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4881', 'get$MapCSSParser_FOLLOW_OP_EQ_in_synpred3_MapCSS4881', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_NEQ_in_synpred4_MapCSS4916', 'MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4916', 'get$MapCSSParser_FOLLOW_OP_NEQ_in_synpred4_MapCSS4916', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_LT_in_synpred5_MapCSS5047', 'MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5047', 'get$MapCSSParser_FOLLOW_OP_LT_in_synpred5_MapCSS5047', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_LE_in_synpred6_MapCSS5080', 'MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5080', 'get$MapCSSParser_FOLLOW_OP_LE_in_synpred6_MapCSS5080', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_GT_in_synpred7_MapCSS5113', 'MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5113', 'get$MapCSSParser_FOLLOW_OP_GT_in_synpred7_MapCSS5113', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_GE_in_synpred8_MapCSS5146', 'MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5146', 'get$MapCSSParser_FOLLOW_OP_GE_in_synpred8_MapCSS5146', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_PLUS_in_synpred9_MapCSS5261', 'MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5261', 'get$MapCSSParser_FOLLOW_OP_PLUS_in_synpred9_MapCSS5261', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_120_in_synpred10_MapCSS5295', 'MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5295', 'get$MapCSSParser_FOLLOW_120_in_synpred10_MapCSS5295', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_MUL_in_synpred11_MapCSS5406', 'MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5406', 'get$MapCSSParser_FOLLOW_OP_MUL_in_synpred11_MapCSS5406', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_DIV_in_synpred12_MapCSS5437', 'MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5437', 'get$MapCSSParser_FOLLOW_DIV_in_synpred12_MapCSS5437', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_MOD_in_synpred13_MapCSS5468', 'MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5468', 'get$MapCSSParser_FOLLOW_OP_MOD_in_synpred13_MapCSS5468', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_114_in_synpred14_MapCSS5590', 'MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5590', 'get$MapCSSParser_FOLLOW_114_in_synpred14_MapCSS5590', function() {
   return $.BitSet$fromList([2]);
 });
 Isolate.$lazy($, 'DFA_MapCSSLexer_27_eot', 'MapCSSLexer_DFA_MapCSSLexer_27_eot', 'get$MapCSSLexer_DFA_MapCSSLexer_27_eot', function() {
@@ -25510,6 +25843,9 @@ Isolate.$lazy($, 'DFA_MapCSSLexer_27_accept', 'MapCSSLexer_DFA_MapCSSLexer_27_ac
 });
 Isolate.$lazy($, 'DFA_MapCSSLexer_27_special', 'MapCSSLexer_DFA_MapCSSLexer_27_special', 'get$MapCSSLexer_DFA_MapCSSLexer_27_special', function() {
   return $.DFA_unpackEncodedString("\u0007\uffff");
+});
+Isolate.$lazy($, '_map', '_FunctionProxy__map', 'get$_FunctionProxy__map', function() {
+  return $.Map_Map();
 });
 Isolate.$lazy($, 'DFA_MapCSSLexer_27_transition', 'MapCSSLexer_DFA_MapCSSLexer_27_transition', 'get$MapCSSLexer_DFA_MapCSSLexer_27_transition', function() {
   return new $.anon2().call$0();
@@ -25583,335 +25919,179 @@ Isolate.$lazy($, 'FOLLOW_119_in_rule2748', 'MapCSSParser_FOLLOW_119_in_rule2748'
 Isolate.$lazy($, 'FOLLOW_declaration_block_in_rule2751', 'MapCSSParser_FOLLOW_declaration_block_in_rule2751', 'get$MapCSSParser_FOLLOW_declaration_block_in_rule2751', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2775', 'MapCSSParser_FOLLOW_simple_selector_in_selector2775', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2775', function() {
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2777', 'MapCSSParser_FOLLOW_simple_selector_in_selector2777', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2777', function() {
   return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2804', 'MapCSSParser_FOLLOW_simple_selector_in_selector2804', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2804', function() {
-  return $.BitSet$fromList([36028797018964480.0]);
 });
 Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2806', 'MapCSSParser_FOLLOW_simple_selector_in_selector2806', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2806', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2824', 'MapCSSParser_FOLLOW_simple_selector_in_selector2824', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2824', function() {
-  return $.BitSet$fromList([562949953421312]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_GT_in_selector2826', 'MapCSSParser_FOLLOW_OP_GT_in_selector2826', 'get$MapCSSParser_FOLLOW_OP_GT_in_selector2826', function() {
-  return $.BitSet$fromList([36028801313931780.0]);
-});
-Isolate.$lazy($, 'FOLLOW_link_selector_in_selector2828', 'MapCSSParser_FOLLOW_link_selector_in_selector2828', 'get$MapCSSParser_FOLLOW_link_selector_in_selector2828', function() {
-  return $.BitSet$fromList([36028801313931780.0]);
-});
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2832', 'MapCSSParser_FOLLOW_simple_selector_in_selector2832', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2832', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2849', 'MapCSSParser_FOLLOW_simple_selector_in_selector2849', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2849', function() {
-  return $.BitSet$fromList([2251799813685248]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_LT_in_selector2851', 'MapCSSParser_FOLLOW_OP_LT_in_selector2851', 'get$MapCSSParser_FOLLOW_OP_LT_in_selector2851', function() {
   return $.BitSet$fromList([36028797018964480.0]);
 });
-Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2853', 'MapCSSParser_FOLLOW_simple_selector_in_selector2853', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2853', function() {
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2808', 'MapCSSParser_FOLLOW_simple_selector_in_selector2808', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2808', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_LBRACKET_in_link_selector2873', 'MapCSSParser_FOLLOW_LBRACKET_in_link_selector2873', 'get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2873', function() {
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2826', 'MapCSSParser_FOLLOW_simple_selector_in_selector2826', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2826', function() {
+  return $.BitSet$fromList([562949953421312]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_GT_in_selector2828', 'MapCSSParser_FOLLOW_OP_GT_in_selector2828', 'get$MapCSSParser_FOLLOW_OP_GT_in_selector2828', function() {
+  return $.BitSet$fromList([36028801313931780.0]);
+});
+Isolate.$lazy($, 'FOLLOW_link_selector_in_selector2830', 'MapCSSParser_FOLLOW_link_selector_in_selector2830', 'get$MapCSSParser_FOLLOW_link_selector_in_selector2830', function() {
+  return $.BitSet$fromList([36028801313931780.0]);
+});
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2834', 'MapCSSParser_FOLLOW_simple_selector_in_selector2834', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2834', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2851', 'MapCSSParser_FOLLOW_simple_selector_in_selector2851', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2851', function() {
+  return $.BitSet$fromList([2251799813685248]);
+});
+Isolate.$lazy($, 'FOLLOW_OP_LT_in_selector2853', 'MapCSSParser_FOLLOW_OP_LT_in_selector2853', 'get$MapCSSParser_FOLLOW_OP_LT_in_selector2853', function() {
+  return $.BitSet$fromList([36028797018964480.0]);
+});
+Isolate.$lazy($, 'FOLLOW_simple_selector_in_selector2855', 'MapCSSParser_FOLLOW_simple_selector_in_selector2855', 'get$MapCSSParser_FOLLOW_simple_selector_in_selector2855', function() {
+  return $.BitSet$fromList([2]);
+});
+Isolate.$lazy($, 'FOLLOW_LBRACKET_in_link_selector2875', 'MapCSSParser_FOLLOW_LBRACKET_in_link_selector2875', 'get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2875', function() {
   return $.BitSet$fromList([0, 1048576]);
 });
-Isolate.$lazy($, '_map', '_FunctionProxy__map', 'get$_FunctionProxy__map', function() {
-  return $.Map_Map();
-});
-Isolate.$lazy($, 'FOLLOW_ROLE_in_link_selector2875', 'MapCSSParser_FOLLOW_ROLE_in_link_selector2875', 'get$MapCSSParser_FOLLOW_ROLE_in_link_selector2875', function() {
+Isolate.$lazy($, 'FOLLOW_ROLE_in_link_selector2877', 'MapCSSParser_FOLLOW_ROLE_in_link_selector2877', 'get$MapCSSParser_FOLLOW_ROLE_in_link_selector2877', function() {
   return $.BitSet$fromList([13983509717217968000.0]);
 });
-Isolate.$lazy($, 'FOLLOW_binary_operator_in_link_selector2877', 'MapCSSParser_FOLLOW_binary_operator_in_link_selector2877', 'get$MapCSSParser_FOLLOW_binary_operator_in_link_selector2877', function() {
+Isolate.$lazy($, 'FOLLOW_binary_operator_in_link_selector2879', 'MapCSSParser_FOLLOW_binary_operator_in_link_selector2879', 'get$MapCSSParser_FOLLOW_binary_operator_in_link_selector2879', function() {
   return $.BitSet$fromList([206158463488, 67109250]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_link_selector2879', 'MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2879', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2879', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_link_selector2881', 'MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2881', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_link_selector2881', function() {
   return $.BitSet$fromList([0, 8192]);
 });
-Isolate.$lazy($, 'FOLLOW_RBRACKET_in_link_selector2881', 'MapCSSParser_FOLLOW_RBRACKET_in_link_selector2881', 'get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2881', function() {
+Isolate.$lazy($, 'FOLLOW_RBRACKET_in_link_selector2883', 'MapCSSParser_FOLLOW_RBRACKET_in_link_selector2883', 'get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2883', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_LBRACKET_in_link_selector2897', 'MapCSSParser_FOLLOW_LBRACKET_in_link_selector2897', 'get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2897', function() {
+Isolate.$lazy($, 'FOLLOW_LBRACKET_in_link_selector2899', 'MapCSSParser_FOLLOW_LBRACKET_in_link_selector2899', 'get$MapCSSParser_FOLLOW_LBRACKET_in_link_selector2899', function() {
   return $.BitSet$fromList([268435456]);
 });
-Isolate.$lazy($, 'FOLLOW_INDEX_in_link_selector2899', 'MapCSSParser_FOLLOW_INDEX_in_link_selector2899', 'get$MapCSSParser_FOLLOW_INDEX_in_link_selector2899', function() {
+Isolate.$lazy($, 'FOLLOW_INDEX_in_link_selector2901', 'MapCSSParser_FOLLOW_INDEX_in_link_selector2901', 'get$MapCSSParser_FOLLOW_INDEX_in_link_selector2901', function() {
   return $.BitSet$fromList([148407681470693380.0]);
 });
-Isolate.$lazy($, 'FOLLOW_int_operator_in_link_selector2903', 'MapCSSParser_FOLLOW_int_operator_in_link_selector2903', 'get$MapCSSParser_FOLLOW_int_operator_in_link_selector2903', function() {
+Isolate.$lazy($, 'FOLLOW_int_operator_in_link_selector2905', 'MapCSSParser_FOLLOW_int_operator_in_link_selector2905', 'get$MapCSSParser_FOLLOW_int_operator_in_link_selector2905', function() {
   return $.BitSet$fromList([0, 256]);
 });
-Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_link_selector2907', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2907', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2907', function() {
+Isolate.$lazy($, 'FOLLOW_POSITIVE_INT_in_link_selector2909', 'MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2909', 'get$MapCSSParser_FOLLOW_POSITIVE_INT_in_link_selector2909', function() {
   return $.BitSet$fromList([0, 8192]);
 });
-Isolate.$lazy($, 'FOLLOW_RBRACKET_in_link_selector2909', 'MapCSSParser_FOLLOW_RBRACKET_in_link_selector2909', 'get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2909', function() {
+Isolate.$lazy($, 'FOLLOW_RBRACKET_in_link_selector2911', 'MapCSSParser_FOLLOW_RBRACKET_in_link_selector2911', 'get$MapCSSParser_FOLLOW_RBRACKET_in_link_selector2911', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_123_in_layer_id_selector2933', 'MapCSSParser_FOLLOW_123_in_layer_id_selector2933', 'get$MapCSSParser_FOLLOW_123_in_layer_id_selector2933', function() {
+Isolate.$lazy($, 'FOLLOW_123_in_layer_id_selector2936', 'MapCSSParser_FOLLOW_123_in_layer_id_selector2936', 'get$MapCSSParser_FOLLOW_123_in_layer_id_selector2936', function() {
   return $.BitSet$fromList([512]);
 });
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_layer_id_selector2937', 'MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2937', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2937', function() {
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_layer_id_selector2940', 'MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2940', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_layer_id_selector2940', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_IMPORT_in_import_statement2981', 'MapCSSParser_FOLLOW_IMPORT_in_import_statement2981', 'get$MapCSSParser_FOLLOW_IMPORT_in_import_statement2981', function() {
+Isolate.$lazy($, 'FOLLOW_IMPORT_in_import_statement2984', 'MapCSSParser_FOLLOW_IMPORT_in_import_statement2984', 'get$MapCSSParser_FOLLOW_IMPORT_in_import_statement2984', function() {
   return $.BitSet$fromList([0, 4294967296]);
 });
-Isolate.$lazy($, 'FOLLOW_URL_in_import_statement2983', 'MapCSSParser_FOLLOW_URL_in_import_statement2983', 'get$MapCSSParser_FOLLOW_URL_in_import_statement2983', function() {
+Isolate.$lazy($, 'FOLLOW_URL_in_import_statement2986', 'MapCSSParser_FOLLOW_URL_in_import_statement2986', 'get$MapCSSParser_FOLLOW_URL_in_import_statement2986', function() {
   return $.BitSet$fromList([0, 9007199254740992.0]);
 });
-Isolate.$lazy($, 'FOLLOW_117_in_import_statement2985', 'MapCSSParser_FOLLOW_117_in_import_statement2985', 'get$MapCSSParser_FOLLOW_117_in_import_statement2985', function() {
+Isolate.$lazy($, 'FOLLOW_117_in_import_statement2988', 'MapCSSParser_FOLLOW_117_in_import_statement2988', 'get$MapCSSParser_FOLLOW_117_in_import_statement2988', function() {
   return $.BitSet$fromList([32768, 67108864]);
 });
-Isolate.$lazy($, 'FOLLOW_quoted_in_import_statement2989', 'MapCSSParser_FOLLOW_quoted_in_import_statement2989', 'get$MapCSSParser_FOLLOW_quoted_in_import_statement2989', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_import_statement2992', 'MapCSSParser_FOLLOW_quoted_in_import_statement2992', 'get$MapCSSParser_FOLLOW_quoted_in_import_statement2992', function() {
   return $.BitSet$fromList([0, 18014398509481984.0]);
 });
-Isolate.$lazy($, 'FOLLOW_118_in_import_statement2991', 'MapCSSParser_FOLLOW_118_in_import_statement2991', 'get$MapCSSParser_FOLLOW_118_in_import_statement2991', function() {
+Isolate.$lazy($, 'FOLLOW_118_in_import_statement2994', 'MapCSSParser_FOLLOW_118_in_import_statement2994', 'get$MapCSSParser_FOLLOW_118_in_import_statement2994', function() {
   return $.BitSet$fromList([512]);
 });
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_import_statement2995', 'MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2995', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2995', function() {
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_import_statement2998', 'MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2998', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_import_statement2998', function() {
   return $.BitSet$fromList([0, 8388608]);
 });
-Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_import_statement2997', 'MapCSSParser_FOLLOW_SEMICOLON_in_import_statement2997', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_import_statement2997', function() {
+Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_import_statement3000', 'MapCSSParser_FOLLOW_SEMICOLON_in_import_statement3000', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_import_statement3000', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_type_selector_in_simple_selector3020', 'MapCSSParser_FOLLOW_type_selector_in_simple_selector3020', 'get$MapCSSParser_FOLLOW_type_selector_in_simple_selector3020', function() {
+Isolate.$lazy($, 'FOLLOW_type_selector_in_simple_selector3023', 'MapCSSParser_FOLLOW_type_selector_in_simple_selector3023', 'get$MapCSSParser_FOLLOW_type_selector_in_simple_selector3023', function() {
   return $.BitSet$fromList([4294967554, 1015561715972048900.0]);
 });
-Isolate.$lazy($, 'FOLLOW_class_selector_in_simple_selector3022', 'MapCSSParser_FOLLOW_class_selector_in_simple_selector3022', 'get$MapCSSParser_FOLLOW_class_selector_in_simple_selector3022', function() {
+Isolate.$lazy($, 'FOLLOW_class_selector_in_simple_selector3025', 'MapCSSParser_FOLLOW_class_selector_in_simple_selector3025', 'get$MapCSSParser_FOLLOW_class_selector_in_simple_selector3025', function() {
   return $.BitSet$fromList([4294967554, 869194728082507800.0]);
 });
-Isolate.$lazy($, 'FOLLOW_zoom_selector_in_simple_selector3025', 'MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3025', 'get$MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3025', function() {
+Isolate.$lazy($, 'FOLLOW_zoom_selector_in_simple_selector3028', 'MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3028', 'get$MapCSSParser_FOLLOW_zoom_selector_in_simple_selector3028', function() {
   return $.BitSet$fromList([4294967554, 869194728082505700.0]);
 });
-Isolate.$lazy($, 'FOLLOW_attribute_selector_in_simple_selector3028', 'MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3028', 'get$MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3028', function() {
+Isolate.$lazy($, 'FOLLOW_attribute_selector_in_simple_selector3031', 'MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3031', 'get$MapCSSParser_FOLLOW_attribute_selector_in_simple_selector3031', function() {
   return $.BitSet$fromList([4294967554, 869194728082505700.0]);
 });
-Isolate.$lazy($, 'FOLLOW_pseudo_class_selector_in_simple_selector3031', 'MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3031', 'get$MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3031', function() {
+Isolate.$lazy($, 'FOLLOW_pseudo_class_selector_in_simple_selector3034', 'MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3034', 'get$MapCSSParser_FOLLOW_pseudo_class_selector_in_simple_selector3034', function() {
   return $.BitSet$fromList([258, 869194728082505700.0]);
 });
-Isolate.$lazy($, 'FOLLOW_layer_id_selector_in_simple_selector3034', 'MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3034', 'get$MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3034', function() {
+Isolate.$lazy($, 'FOLLOW_layer_id_selector_in_simple_selector3037', 'MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3037', 'get$MapCSSParser_FOLLOW_layer_id_selector_in_simple_selector3037', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_RANGE_in_zoom_selector3077', 'MapCSSParser_FOLLOW_RANGE_in_zoom_selector3077', 'get$MapCSSParser_FOLLOW_RANGE_in_zoom_selector3077', function() {
+Isolate.$lazy($, 'FOLLOW_RANGE_in_zoom_selector3089', 'MapCSSParser_FOLLOW_RANGE_in_zoom_selector3089', 'get$MapCSSParser_FOLLOW_RANGE_in_zoom_selector3089', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_DQUOTED_STRING_in_quoted3102', 'MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3102', 'get$MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3102', function() {
+Isolate.$lazy($, 'FOLLOW_DQUOTED_STRING_in_quoted3114', 'MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3114', 'get$MapCSSParser_FOLLOW_DQUOTED_STRING_in_quoted3114', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_SQUOTED_STRING_in_quoted3116', 'MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3116', 'get$MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3116', function() {
+Isolate.$lazy($, 'FOLLOW_SQUOTED_STRING_in_quoted3128', 'MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3128', 'get$MapCSSParser_FOLLOW_SQUOTED_STRING_in_quoted3128', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_cssident3138', 'MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3138', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3138', function() {
+Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_cssident3150', 'MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3150', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_cssident3150', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_LBRACKET_in_attribute_selector3157', 'MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3157', 'get$MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3157', function() {
+Isolate.$lazy($, 'FOLLOW_LBRACKET_in_attribute_selector3169', 'MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3169', 'get$MapCSSParser_FOLLOW_LBRACKET_in_attribute_selector3169', function() {
   return $.BitSet$fromList([206158463488, 1125899973951874]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_in_attribute_selector3160', 'MapCSSParser_FOLLOW_predicate_in_attribute_selector3160', 'get$MapCSSParser_FOLLOW_predicate_in_attribute_selector3160', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_in_attribute_selector3172', 'MapCSSParser_FOLLOW_predicate_in_attribute_selector3172', 'get$MapCSSParser_FOLLOW_predicate_in_attribute_selector3172', function() {
   return $.BitSet$fromList([0, 8192]);
 });
-Isolate.$lazy($, 'FOLLOW_RBRACKET_in_attribute_selector3162', 'MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3162', 'get$MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3162', function() {
+Isolate.$lazy($, 'FOLLOW_RBRACKET_in_attribute_selector3174', 'MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3174', 'get$MapCSSParser_FOLLOW_RBRACKET_in_attribute_selector3174', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3228', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3228', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3228', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3240', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3240', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3240', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3259', 'MapCSSParser_FOLLOW_quoted_in_predicate3259', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3259', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3271', 'MapCSSParser_FOLLOW_quoted_in_predicate3271', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3271', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_predicate3294', 'MapCSSParser_FOLLOW_predicate_primitive_in_predicate3294', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3294', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_predicate3306', 'MapCSSParser_FOLLOW_predicate_primitive_in_predicate3306', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3306', function() {
   return $.BitSet$fromList([13983509717217968000.0]);
 });
-Isolate.$lazy($, 'FOLLOW_binary_operator_in_predicate3296', 'MapCSSParser_FOLLOW_binary_operator_in_predicate3296', 'get$MapCSSParser_FOLLOW_binary_operator_in_predicate3296', function() {
+Isolate.$lazy($, 'FOLLOW_binary_operator_in_predicate3308', 'MapCSSParser_FOLLOW_binary_operator_in_predicate3308', 'get$MapCSSParser_FOLLOW_binary_operator_in_predicate3308', function() {
   return $.BitSet$fromList([206158463488, 67109250]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_predicate3298', 'MapCSSParser_FOLLOW_predicate_primitive_in_predicate3298', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3298', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_primitive_in_predicate3310', 'MapCSSParser_FOLLOW_predicate_primitive_in_predicate3310', 'get$MapCSSParser_FOLLOW_predicate_primitive_in_predicate3310', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3314', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3314', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3314', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3326', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3326', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3326', function() {
   return $.BitSet$fromList([4503599627370496]);
 });
-Isolate.$lazy($, 'FOLLOW_OP_MATCH_in_predicate3316', 'MapCSSParser_FOLLOW_OP_MATCH_in_predicate3316', 'get$MapCSSParser_FOLLOW_OP_MATCH_in_predicate3316', function() {
+Isolate.$lazy($, 'FOLLOW_OP_MATCH_in_predicate3328', 'MapCSSParser_FOLLOW_OP_MATCH_in_predicate3328', 'get$MapCSSParser_FOLLOW_OP_MATCH_in_predicate3328', function() {
   return $.BitSet$fromList([32768, 67125248]);
 });
-Isolate.$lazy($, 'FOLLOW_rhs_match_in_predicate3318', 'MapCSSParser_FOLLOW_rhs_match_in_predicate3318', 'get$MapCSSParser_FOLLOW_rhs_match_in_predicate3318', function() {
+Isolate.$lazy($, 'FOLLOW_rhs_match_in_predicate3330', 'MapCSSParser_FOLLOW_rhs_match_in_predicate3330', 'get$MapCSSParser_FOLLOW_rhs_match_in_predicate3330', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_114_in_predicate3334', 'MapCSSParser_FOLLOW_114_in_predicate3334', 'get$MapCSSParser_FOLLOW_114_in_predicate3334', function() {
+Isolate.$lazy($, 'FOLLOW_114_in_predicate3346', 'MapCSSParser_FOLLOW_114_in_predicate3346', 'get$MapCSSParser_FOLLOW_114_in_predicate3346', function() {
   return $.BitSet$fromList([512, 2]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3336', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3336', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3336', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3348', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3348', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3348', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3363', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3363', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3363', function() {
+Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate3375', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate3375', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate3375', function() {
   return $.BitSet$fromList([0, 1152921504606847000.0]);
 });
-Isolate.$lazy($, 'FOLLOW_124_in_predicate3365', 'MapCSSParser_FOLLOW_124_in_predicate3365', 'get$MapCSSParser_FOLLOW_124_in_predicate3365', function() {
+Isolate.$lazy($, 'FOLLOW_124_in_predicate3377', 'MapCSSParser_FOLLOW_124_in_predicate3377', 'get$MapCSSParser_FOLLOW_124_in_predicate3377', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_114_in_predicate3392', 'MapCSSParser_FOLLOW_114_in_predicate3392', 'get$MapCSSParser_FOLLOW_114_in_predicate3392', function() {
+Isolate.$lazy($, 'FOLLOW_114_in_predicate3404', 'MapCSSParser_FOLLOW_114_in_predicate3404', 'get$MapCSSParser_FOLLOW_114_in_predicate3404', function() {
   return $.BitSet$fromList([32768, 67108864]);
 });
-Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3394', 'MapCSSParser_FOLLOW_quoted_in_predicate3394', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3394', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3406', 'MapCSSParser_FOLLOW_quoted_in_predicate3406', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3406', function() {
   return $.BitSet$fromList([2]);
 });
-Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3425', 'MapCSSParser_FOLLOW_quoted_in_predicate3425', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3425', function() {
+Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3437', 'MapCSSParser_FOLLOW_quoted_in_predicate3437', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3437', function() {
   return $.BitSet$fromList([0, 1152921504606847000.0]);
 });
-Isolate.$lazy($, 'FOLLOW_124_in_predicate3427', 'MapCSSParser_FOLLOW_124_in_predicate3427', 'get$MapCSSParser_FOLLOW_124_in_predicate3427', function() {
+Isolate.$lazy($, 'FOLLOW_124_in_predicate3439', 'MapCSSParser_FOLLOW_124_in_predicate3439', 'get$MapCSSParser_FOLLOW_124_in_predicate3439', function() {
   return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_predicate3460', 'MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3460', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_predicate3460', function() {
-  return $.BitSet$fromList([0, 9007199254740992.0]);
-});
-Isolate.$lazy($, 'FOLLOW_117_in_predicate3462', 'MapCSSParser_FOLLOW_117_in_predicate3462', 'get$MapCSSParser_FOLLOW_117_in_predicate3462', function() {
-  return $.BitSet$fromList([32768, 67108864]);
-});
-Isolate.$lazy($, 'FOLLOW_quoted_in_predicate3464', 'MapCSSParser_FOLLOW_quoted_in_predicate3464', 'get$MapCSSParser_FOLLOW_quoted_in_predicate3464', function() {
-  return $.BitSet$fromList([0, 18014398509481984.0]);
-});
-Isolate.$lazy($, 'FOLLOW_118_in_predicate3466', 'MapCSSParser_FOLLOW_118_in_predicate3466', 'get$MapCSSParser_FOLLOW_118_in_predicate3466', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_predicate_ident3495', 'MapCSSParser_FOLLOW_cssident_in_predicate_ident3495', 'get$MapCSSParser_FOLLOW_cssident_in_predicate_ident3495', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OSM_TAG_in_predicate_ident3502', 'MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3502', 'get$MapCSSParser_FOLLOW_OSM_TAG_in_predicate_ident3502', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_num_in_predicate_primitive3521', 'MapCSSParser_FOLLOW_num_in_predicate_primitive3521', 'get$MapCSSParser_FOLLOW_num_in_predicate_primitive3521', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'SKIP_TOKEN', 'Token_SKIP_TOKEN', 'get$Token_SKIP_TOKEN', function() {
-  return $.CommonToken$(0, null);
-});
-Isolate.$lazy($, 'FOLLOW_predicate_ident_in_predicate_primitive3527', 'MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3527', 'get$MapCSSParser_FOLLOW_predicate_ident_in_predicate_primitive3527', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_quoted_in_predicate_primitive3532', 'MapCSSParser_FOLLOW_quoted_in_predicate_primitive3532', 'get$MapCSSParser_FOLLOW_quoted_in_predicate_primitive3532', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_quoted_in_rhs_match3544', 'MapCSSParser_FOLLOW_quoted_in_rhs_match3544', 'get$MapCSSParser_FOLLOW_quoted_in_rhs_match3544', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_REGEXP_in_rhs_match3551', 'MapCSSParser_FOLLOW_REGEXP_in_rhs_match3551', 'get$MapCSSParser_FOLLOW_REGEXP_in_rhs_match3551', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_115_in_class_selector3649', 'MapCSSParser_FOLLOW_115_in_class_selector3649', 'get$MapCSSParser_FOLLOW_115_in_class_selector3649', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_class_selector3652', 'MapCSSParser_FOLLOW_cssident_in_class_selector3652', 'get$MapCSSParser_FOLLOW_cssident_in_class_selector3652', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_121_in_class_selector3669', 'MapCSSParser_FOLLOW_121_in_class_selector3669', 'get$MapCSSParser_FOLLOW_121_in_class_selector3669', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_class_selector3672', 'MapCSSParser_FOLLOW_cssident_in_class_selector3672', 'get$MapCSSParser_FOLLOW_cssident_in_class_selector3672', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_122_in_pseudo_class_selector3701', 'MapCSSParser_FOLLOW_122_in_pseudo_class_selector3701', 'get$MapCSSParser_FOLLOW_122_in_pseudo_class_selector3701', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3703', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3703', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3703', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_116_in_pseudo_class_selector3724', 'MapCSSParser_FOLLOW_116_in_pseudo_class_selector3724', 'get$MapCSSParser_FOLLOW_116_in_pseudo_class_selector3724', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3726', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3726', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3726', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_COLON_in_pseudo_class_selector3743', 'MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3743', 'get$MapCSSParser_FOLLOW_COLON_in_pseudo_class_selector3743', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_pseudo_class_selector3745', 'MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3745', 'get$MapCSSParser_FOLLOW_cssident_in_pseudo_class_selector3745', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_CSS_IDENT_in_type_selector3780', 'MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3780', 'get$MapCSSParser_FOLLOW_CSS_IDENT_in_type_selector3780', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_OP_MUL_in_type_selector3798', 'MapCSSParser_FOLLOW_OP_MUL_in_type_selector3798', 'get$MapCSSParser_FOLLOW_OP_MUL_in_type_selector3798', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_LBRACE_in_declaration_block3832', 'MapCSSParser_FOLLOW_LBRACE_in_declaration_block3832', 'get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3832', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_declarations_in_declaration_block3834', 'MapCSSParser_FOLLOW_declarations_in_declaration_block3834', 'get$MapCSSParser_FOLLOW_declarations_in_declaration_block3834', function() {
-  return $.BitSet$fromList([0, 4096]);
-});
-Isolate.$lazy($, 'FOLLOW_RBRACE_in_declaration_block3836', 'MapCSSParser_FOLLOW_RBRACE_in_declaration_block3836', 'get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3836', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_LBRACE_in_declaration_block3853', 'MapCSSParser_FOLLOW_LBRACE_in_declaration_block3853', 'get$MapCSSParser_FOLLOW_LBRACE_in_declaration_block3853', function() {
-  return $.BitSet$fromList([0, 4096]);
-});
-Isolate.$lazy($, 'FOLLOW_RBRACE_in_declaration_block3855', 'MapCSSParser_FOLLOW_RBRACE_in_declaration_block3855', 'get$MapCSSParser_FOLLOW_RBRACE_in_declaration_block3855', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_declaration_in_declarations3886', 'MapCSSParser_FOLLOW_declaration_in_declarations3886', 'get$MapCSSParser_FOLLOW_declaration_in_declarations3886', function() {
-  return $.BitSet$fromList([2, 8388608]);
-});
-Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_declarations3889', 'MapCSSParser_FOLLOW_SEMICOLON_in_declarations3889', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3889', function() {
-  return $.BitSet$fromList([512]);
-});
-Isolate.$lazy($, 'FOLLOW_declaration_in_declarations3891', 'MapCSSParser_FOLLOW_declaration_in_declarations3891', 'get$MapCSSParser_FOLLOW_declaration_in_declarations3891', function() {
-  return $.BitSet$fromList([2, 8388608]);
-});
-Isolate.$lazy($, 'FOLLOW_SEMICOLON_in_declarations3895', 'MapCSSParser_FOLLOW_SEMICOLON_in_declarations3895', 'get$MapCSSParser_FOLLOW_SEMICOLON_in_declarations3895', function() {
-  return $.BitSet$fromList([2, 8388608]);
-});
-Isolate.$lazy($, 'FOLLOW_declaration_property_in_declaration3913', 'MapCSSParser_FOLLOW_declaration_property_in_declaration3913', 'get$MapCSSParser_FOLLOW_declaration_property_in_declaration3913', function() {
-  return $.BitSet$fromList([256]);
-});
-Isolate.$lazy($, 'FOLLOW_COLON_in_declaration3915', 'MapCSSParser_FOLLOW_COLON_in_declaration3915', 'get$MapCSSParser_FOLLOW_COLON_in_declaration3915', function() {
-  return $.BitSet$fromList([214887334400, 4362863090]);
-});
-Isolate.$lazy($, 'FOLLOW_declaration_value_in_declaration3917', 'MapCSSParser_FOLLOW_declaration_value_in_declaration3917', 'get$MapCSSParser_FOLLOW_declaration_value_in_declaration3917', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_cssident_in_declaration_property3939', 'MapCSSParser_FOLLOW_cssident_in_declaration_property3939', 'get$MapCSSParser_FOLLOW_cssident_in_declaration_property3939', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3951', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3951', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3951', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3956', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3956', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3956', function() {
-  return $.BitSet$fromList([0, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_declaration_value3959', 'MapCSSParser_FOLLOW_119_in_declaration_value3959', 'get$MapCSSParser_FOLLOW_119_in_declaration_value3959', function() {
-  return $.BitSet$fromList([206296875520, 4362863090]);
-});
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3961', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3961', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3961', function() {
-  return $.BitSet$fromList([2, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_declaration_value3964', 'MapCSSParser_FOLLOW_119_in_declaration_value3964', 'get$MapCSSParser_FOLLOW_119_in_declaration_value3964', function() {
-  return $.BitSet$fromList([206296875520, 4362863090]);
-});
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value3966', 'MapCSSParser_FOLLOW_single_value_in_declaration_value3966', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value3966', function() {
-  return $.BitSet$fromList([2, 36028797018963970.0]);
-});
-Isolate.$lazy($, 'FOLLOW_EVAL_in_declaration_value3982', 'MapCSSParser_FOLLOW_EVAL_in_declaration_value3982', 'get$MapCSSParser_FOLLOW_EVAL_in_declaration_value3982', function() {
-  return $.BitSet$fromList([0, 9007199254740992.0]);
-});
-Isolate.$lazy($, 'FOLLOW_117_in_declaration_value3985', 'MapCSSParser_FOLLOW_117_in_declaration_value3985', 'get$MapCSSParser_FOLLOW_117_in_declaration_value3985', function() {
-  return $.BitSet$fromList([206158463488, 10133099228692866.0]);
-});
-Isolate.$lazy($, 'FOLLOW_expr_in_declaration_value3987', 'MapCSSParser_FOLLOW_expr_in_declaration_value3987', 'get$MapCSSParser_FOLLOW_expr_in_declaration_value3987', function() {
-  return $.BitSet$fromList([0, 18014398509481984.0]);
-});
-Isolate.$lazy($, 'FOLLOW_118_in_declaration_value3989', 'MapCSSParser_FOLLOW_118_in_declaration_value3989', 'get$MapCSSParser_FOLLOW_118_in_declaration_value3989', function() {
-  return $.BitSet$fromList([2]);
-});
-Isolate.$lazy($, 'FOLLOW_LIST_in_declaration_value4004', 'MapCSSParser_FOLLOW_LIST_in_declaration_value4004', 'get$MapCSSParser_FOLLOW_LIST_in_declaration_value4004', function() {
-  return $.BitSet$fromList([0, 9007199254740992.0]);
-});
-Isolate.$lazy($, 'FOLLOW_117_in_declaration_value4007', 'MapCSSParser_FOLLOW_117_in_declaration_value4007', 'get$MapCSSParser_FOLLOW_117_in_declaration_value4007', function() {
-  return $.BitSet$fromList([206296875520, 4362863090]);
-});
-Isolate.$lazy($, 'FOLLOW_single_value_in_declaration_value4009', 'MapCSSParser_FOLLOW_single_value_in_declaration_value4009', 'get$MapCSSParser_FOLLOW_single_value_in_declaration_value4009', function() {
-  return $.BitSet$fromList([0, 54043195528445950.0]);
-});
-Isolate.$lazy($, 'FOLLOW_119_in_declaration_value4012', 'MapCSSParser_FOLLOW_119_in_declaration_value4012', 'get$MapCSSParser_FOLLOW_119_in_declaration_value4012', function() {
-  return $.BitSet$fromList([206296875520, 4362863090]);
 });
 var $ = null;
 Isolate.$finishClasses($$);
@@ -26525,6 +26705,10 @@ $.$defineNativeClass('DocumentFragment', {
     return Object.prototype.set$innerHtml.call(this, value);
   }
 },
+ append$1: function(element) {
+  var t1 = this.get$children();
+  $.getInterceptor$JSArray(t1).add$1(t1, element);
+},
  get$id: function() {
   return "";
 },
@@ -26540,6 +26724,9 @@ $.$defineNativeClass('DocumentFragment', {
  click$0: function() {
 },
  get$click: function() { return new $.BoundClosure(this, 'click$0'); },
+ set$id: function(value) {
+  throw $.$$throw($.UnsupportedError$("ID can't be set for document fragments."));
+},
  get$on: function() {
   return $.ElementEvents$(this);
 },
@@ -26557,7 +26744,7 @@ $.$defineNativeClass('DocumentType', {"":"name?",
 }
 });
 
-$.$defineNativeClass('Element', {"":"id?",
+$.$defineNativeClass('Element', {"":"id=",
  set$innerHtml: function(v) { this.innerHTML = v; },
  get$$$dom_className: function() { return this.className; },
  set$$$dom_className: function(v) { this.className = v; },
@@ -26607,6 +26794,10 @@ $.$defineNativeClass('Element', {"":"id?",
   } else {
     return Object.prototype.get$classes.call(this);
   }
+},
+ append$1: function(e) {
+  var t1 = this.get$children();
+  $.getInterceptor$JSArray(t1).add$1(t1, e);
 },
  get$on: function() {
   if (Object.getPrototypeOf(this).hasOwnProperty('get$on')) {
@@ -28159,6 +28350,12 @@ $.$defineNativeClass('SharedWorkerContext', {"":"name?",
 }
 });
 
+$.$defineNativeClass('SourceBuffer', {
+ append$1: function(data) {
+  return this.append(data);
+}
+});
+
 $.$defineNativeClass('SourceBufferList', {"":"length?",
  operator$index$1: function(index) {
   return this[index];
@@ -28449,7 +28646,7 @@ $.$defineNativeClass('TextTrack', {
 }
 });
 
-$.$defineNativeClass('TextTrackCue', {"":"id?,line=,size?,text=",
+$.$defineNativeClass('TextTrackCue', {"":"id=,line=,size?,text=",
  get$on: function() {
   return $.TextTrackCueEvents$(this);
 },
@@ -29865,6 +30062,9 @@ $.$defineNativeClass('Worker', {
  get$id: function() {
   return this.id;
 },
+ set$id: function(i) {
+  this.id = i;
+},
  postMessage$1: function(msg) {
   return this.postMessage(msg);
 }
@@ -30400,6 +30600,9 @@ $.$defineNativeClass('SVGElement', {
 },
  get$id: function() {
   return this.id;
+},
+ set$id: function(value) {
+  this.id = value;
 }
 });
 
@@ -30608,8 +30811,8 @@ $.$defineNativeClass('ScriptProcessorNode', {
 }
 });
 
-// 243 dynamic classes.
-// 385 classes
+// 244 dynamic classes.
+// 386 classes
 // 35 !leaf
 (function() {
   var v0_Uint8Array = 'Uint8Array|Uint8ClampedArray', v1_ComponentTransferFunctionElement = 'SVGComponentTransferFunctionElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement', v2_MediaElement = 'HTMLMediaElement|HTMLVideoElement|HTMLAudioElement', v3_SvgElement = [v1_ComponentTransferFunctionElement, 'SVGElement|SVGAElement|SVGAltGlyphDefElement|SVGTextContentElement|SVGTextPositioningElement|SVGAltGlyphElement|SVGTRefElement|SVGTSpanElement|SVGTextElement|SVGTextPathElement|SVGAltGlyphItemElement|SVGAnimationElement|SVGAnimateColorElement|SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGSetElement|SVGCircleElement|SVGClipPathElement|SVGCursorElement|SVGDefsElement|SVGDescElement|SVGEllipseElement|SVGFEBlendElement|SVGFEColorMatrixElement|SVGFEComponentTransferElement|SVGFECompositeElement|SVGFEConvolveMatrixElement|SVGFEDiffuseLightingElement|SVGFEDisplacementMapElement|SVGFEDistantLightElement|SVGFEDropShadowElement|SVGFEFloodElement|SVGFEGaussianBlurElement|SVGFEImageElement|SVGFEMergeElement|SVGFEMergeNodeElement|SVGFEMorphologyElement|SVGFEOffsetElement|SVGFEPointLightElement|SVGFESpecularLightingElement|SVGFESpotLightElement|SVGFETileElement|SVGFETurbulenceElement|SVGFilterElement|SVGFontElement|SVGFontFaceElement|SVGFontFaceFormatElement|SVGFontFaceNameElement|SVGFontFaceSrcElement|SVGFontFaceUriElement|SVGForeignObjectElement|SVGGElement|SVGGlyphElement|SVGGlyphRefElement|SVGGradientElement|SVGLinearGradientElement|SVGRadialGradientElement|SVGHKernElement|SVGImageElement|SVGLineElement|SVGMPathElement|SVGMarkerElement|SVGMaskElement|SVGMetadataElement|SVGMissingGlyphElement|SVGPathElement|SVGPatternElement|SVGPolygonElement|SVGPolylineElement|SVGRectElement|SVGScriptElement|SVGStopElement|SVGStyleElement|SVGSVGElement|SVGSwitchElement|SVGSymbolElement|SVGTitleElement|SVGUseElement|SVGVKernElement|SVGViewElement'].join('|'), v4_UIEvent = 'UIEvent|CompositionEvent|KeyboardEvent|MouseEvent|WheelEvent|TextEvent|TouchEvent|SVGZoomEvent', v5_Element = [v2_MediaElement, v3_SvgElement, 'Element|HTMLElement|HTMLAnchorElement|HTMLAppletElement|HTMLAreaElement|HTMLBRElement|HTMLBaseElement|HTMLBaseFontElement|HTMLBodyElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFormElement|HTMLFrameElement|HTMLFrameSetElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLInputElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLSelectElement|HTMLShadowElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement'].join('|'), v6_CharacterData = 'CharacterData|Text|CDATASection|Comment', v7_Document = 'Document|HTMLDocument|SVGDocument', v8_DocumentFragment = 'DocumentFragment|ShadowRoot', v9_Node = [v5_Element, v6_CharacterData, v7_Document, v8_DocumentFragment, 'Node|Attr|DocumentType|EntityReference|Notation|ProcessingInstruction'].join('|'), v10_AbstractWorker = 'AbstractWorker|SharedWorker|Worker', v11_WorkerContext = 'WorkerContext|DedicatedWorkerContext|SharedWorkerContext', v12_IDBRequest = 'IDBRequest|IDBOpenDBRequest|IDBVersionChangeRequest', v13_MediaStream = 'MediaStream|LocalMediaStream';
