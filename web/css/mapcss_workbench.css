@@ -7,3 +7,8 @@
     border-width: 1pt;
     border-style: solid;  
  }
+ 
+ .parse-error-position {
+   font-weight: bold;
+   cursor: pointer;
+ }
