@@ -1,4 +1,4 @@
-// $ANTLR 3.5-SNAPSHOT MapCSSLexer.g 2012-12-11 13:54:03
+// $ANTLR 3.5-SNAPSHOT MapCSSLexer.g 2012-12-11 17:07:43
 
 
   part of mapcss;
@@ -2139,14 +2139,13 @@ class MapCSSLexer extends Lexer {
   void mNCOMPONENT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   163:20: ( ( NONASCII | CHAR | '_' ) ( NONASCII | CHAR | DIGIT | '_' | '-' )* )*/
+  	   164:20: ( ( CHAR | '_' ) ( CHAR | DIGIT | '_' | '-' )* )*/
   	  /* grammar/MapCSS.g:
-  	   163:22: ( NONASCII | CHAR | '_' ) ( NONASCII | CHAR | DIGIT | '_' | '-' )**/
+  	   164:22: ( CHAR | '_' ) ( CHAR | DIGIT | '_' | '-' )**/
   	  {
   	  	if((input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
   	  	  || input.LA(1) == 95 /*'_'*/
-  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)
-  	  	  || (input.LA(1) >= 160 /*'\u00A0'*/ && input.LA(1) <= 65535 /*'\uFFFF'*/)) {
+  	  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
   	  	  input.consume();
   	  	  state.failed = false;
   	  	}
@@ -2162,7 +2161,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 163:46: ( NONASCII | CHAR | DIGIT | '_' | '-' )**/
+  	  	 164:36: ( CHAR | DIGIT | '_' | '-' )**/
   	  	loop6:
   	  	do {
   	  	  int alt6 = 2;
@@ -2172,8 +2171,7 @@ class MapCSSLexer extends Lexer {
   	  	    || (LA6_0 >= 48 /*'0'*/ && LA6_0 <= 57 /*'9'*/)
   	  	    || (LA6_0 >= 65 /*'A'*/ && LA6_0 <= 90 /*'Z'*/)
   	  	    || LA6_0 == 95/*95 /*'_'*/*/
-  	  	    || (LA6_0 >= 97 /*'a'*/ && LA6_0 <= 122 /*'z'*/)
-  	  	    || (LA6_0 >= 160 /*'\u00A0'*/ && LA6_0 <= 65535 /*'\uFFFF'*/))) {
+  	  	    || (LA6_0 >= 97 /*'a'*/ && LA6_0 <= 122 /*'z'*/))) {
   	  	    alt6 = 1;
   	  	  }
 
@@ -2187,8 +2185,7 @@ class MapCSSLexer extends Lexer {
   	  			  	  || (input.LA(1) >= 48 /*'0'*/ && input.LA(1) <= 57 /*'9'*/)
   	  			  	  || (input.LA(1) >= 65 /*'A'*/ && input.LA(1) <= 90 /*'Z'*/)
   	  			  	  || input.LA(1) == 95 /*'_'*/
-  	  			  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)
-  	  			  	  || (input.LA(1) >= 160 /*'\u00A0'*/ && input.LA(1) <= 65535 /*'\uFFFF'*/)) {
+  	  			  	  || (input.LA(1) >= 97 /*'a'*/ && input.LA(1) <= 122 /*'z'*/)) {
   	  			  	  input.consume();
   	  			  	  state.failed = false;
   	  			  	}
@@ -2226,7 +2223,7 @@ class MapCSSLexer extends Lexer {
   void mTAGSEPARATOR() {
     try {
   	  /* grammar/MapCSS.g:
-  	   164:22: ( ( ':' ) | ( '.' ) )*/
+  	   165:22: ( ( ':' ) | ( '.' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -2260,9 +2257,9 @@ class MapCSSLexer extends Lexer {
   void mCSS_IDENT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   167:19: ()*/
+  	   168:19: ()*/
   	  /* grammar/MapCSS.g:
-  	   167:20: */
+  	   168:20: */
   	  {
   	  }
 
@@ -2278,9 +2275,9 @@ class MapCSSLexer extends Lexer {
   void mOSM_TAG() {
     try {
   	  /* grammar/MapCSS.g:
-  	   168:17: ()*/
+  	   169:17: ()*/
   	  /* grammar/MapCSS.g:
-  	   168:18: */
+  	   169:18: */
   	  {
   	  }
 
@@ -2298,12 +2295,12 @@ class MapCSSLexer extends Lexer {
   	  int _type = IDENTS;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   169:7: ( ( '-' )? NCOMPONENT ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) ) */
+  	   170:7: ( ( '-' )? NCOMPONENT ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) ) */
   	  /* grammar/MapCSS.g:
-  	   170:2: ( '-' )? NCOMPONENT ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) */
+  	   171:2: ( '-' )? NCOMPONENT ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) */
   	  {
   	  	/* grammar/MapCSS.g:
-  	  	 170:2: ( '-' )?*/
+  	  	 171:2: ( '-' )?*/
   	  	int alt7 = 2;
   	  	int LA7_0 = input.LA(1);
 
@@ -2313,7 +2310,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt7) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     170:2: '-'*/
+  	  	     171:2: '-'*/
   	  	    {
   	  	    	match(45 /*'-'*/); 
   	  	    	if(state.failed) 
@@ -2331,7 +2328,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 170:20: ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) */
+  	  	 171:20: ({...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) |) */
   	  	int alt10 = 2;
   	  	int LA10_0 = input.LA(1);
 
@@ -2359,7 +2356,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt10) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     171:8: {...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) */
+  	  	     172:8: {...}? => ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) */
   	  	    {
   	  	    	if(!(isOsmTagAllowed)) {
   	  	    	  if(state.backtracking > 0) {
@@ -2370,7 +2367,7 @@ class MapCSSLexer extends Lexer {
   	  	    	}
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 171:31: ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) */
+  	  	    	 172:31: ( ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )* |) */
   	  	    	int alt9 = 2;
   	  	    	int LA9_0 = input.LA(1);
 
@@ -2384,7 +2381,7 @@ class MapCSSLexer extends Lexer {
   	  	    	switch (alt9) {
   	  	    	  case 1 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     172:12: ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )**/
+  	  	    	     173:12: ( TAGSEPARATOR )=> TAGSEPARATOR NCOMPONENT ( TAGSEPARATOR NCOMPONENT )**/
   	  	    	    {
   	  	    	    	mTAGSEPARATOR(); 
   	  	    	    	if(state.failed) 
@@ -2397,7 +2394,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	    	    	/* grammar/MapCSS.g:
-  	  	    	    	 172:55: ( TAGSEPARATOR NCOMPONENT )**/
+  	  	    	    	 173:55: ( TAGSEPARATOR NCOMPONENT )**/
   	  	    	    	loop8:
   	  	    	    	do {
   	  	    	    	  int alt8 = 2;
@@ -2412,7 +2409,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    	  switch (alt8) {
   	  	    	    			case 1 :
   	  	    	    			  /* grammar/MapCSS.g:
-  	  	    	    			   172:56: TAGSEPARATOR NCOMPONENT*/
+  	  	    	    			   173:56: TAGSEPARATOR NCOMPONENT*/
   	  	    	    			  {
   	  	    	    			  	mTAGSEPARATOR(); 
   	  	    	    			  	if(state.failed) 
@@ -2442,7 +2439,7 @@ class MapCSSLexer extends Lexer {
   	  	    	    break;
   	  	    	  case 2 :
   	  	    	    /* grammar/MapCSS.g:
-  	  	    	     173:12: */
+  	  	    	     174:12: */
   	  	    	    {
   	  	    	    	if(state.backtracking == 0) {
   	  	    	    	  _type=CSS_IDENT;
@@ -2459,7 +2456,7 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     175:8: */
+  	  	     176:8: */
   	  	    {
   	  	    	if(state.backtracking == 0) {
   	  	    	  _type=CSS_IDENT;
@@ -2489,9 +2486,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = LBRACKET;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   183:3: ( '[' )*/
+  	   184:3: ( '[' )*/
   	  /* grammar/MapCSS.g:
-  	   183:5: '['*/
+  	   184:5: '['*/
   	  {
   	  	match(91 /*'['*/); 
   	  	if(state.failed) 
@@ -2518,9 +2515,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = RBRACKET;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   187:3: ( ']' )*/
+  	   188:3: ( ']' )*/
   	  /* grammar/MapCSS.g:
-  	   187:5: ']'*/
+  	   188:5: ']'*/
   	  {
   	  	match(93 /*']'*/); 
   	  	if(state.failed) 
@@ -2547,9 +2544,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = LBRACE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   200:3: ( '{' )*/
+  	   201:3: ( '{' )*/
   	  /* grammar/MapCSS.g:
-  	   200:5: '{'*/
+  	   201:5: '{'*/
   	  {
   	  	match(123 /*'{'*/); 
   	  	if(state.failed) 
@@ -2579,9 +2576,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = RBRACE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   207:3: ( '}' )*/
+  	   208:3: ( '}' )*/
   	  /* grammar/MapCSS.g:
-  	   207:5: '}'*/
+  	   208:5: '}'*/
   	  {
   	  	match(125 /*'}'*/); 
   	  	if(state.failed) 
@@ -2611,9 +2608,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = COLON;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   213:3: ( ':' )*/
+  	   214:3: ( ':' )*/
   	  /* grammar/MapCSS.g:
-  	   213:5: ':'*/
+  	   214:5: ':'*/
   	  {
   	  	match(58 /*':'*/); 
   	  	if(state.failed) 
@@ -2642,9 +2639,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = SEMICOLON;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   219:3: ( ';' )*/
+  	   220:3: ( ';' )*/
   	  /* grammar/MapCSS.g:
-  	   219:5: ';'*/
+  	   220:5: ';'*/
   	  {
   	  	match(59 /*';'*/); 
   	  	if(state.failed) 
@@ -2671,9 +2668,9 @@ class MapCSSLexer extends Lexer {
   void mEDQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   222:17: ( '\\\\\"' )*/
+  	   223:17: ( '\\\\\"' )*/
   	  /* grammar/MapCSS.g:
-  	   222:19: '\\\\\"'*/
+  	   223:19: '\\\\\"'*/
   	  {
   	  	match("\\\""); 
   	  	if(state.failed) 
@@ -2695,9 +2692,9 @@ class MapCSSLexer extends Lexer {
   void mESQUOTE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   223:17: ( '\\\\\\'' )*/
+  	   224:17: ( '\\\\\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   223:19: '\\\\\\''*/
+  	   224:19: '\\\\\\''*/
   	  {
   	  	match("\\'"); 
   	  	if(state.failed) 
@@ -2721,10 +2718,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = DQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   224:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   225:15: ( '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"' )*/
   	  /* grammar/MapCSS.g:
-  	   224:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
+  	   225:17: '\"' ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | 
   	   EDQUOTE | EBACKSLASH )* '\"'*/
   	  {
   	  	match(34 /*'\"'*/); 
@@ -2732,7 +2729,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 224:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | 
+  	  	 225:21: ( ' ' | '!' | '#' .. '[' | ']' .. '~' | UNICODE | EDQUOTE | 
   	  	 EBACKSLASH )**/
   	  	loop11:
   	  	do {
@@ -2771,7 +2768,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt11) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:22: ' '*/
+  	  			   225:22: ' '*/
   	  			  {
   	  			  	match(32 /*' '*/); 
   	  			  	if(state.failed) 
@@ -2781,7 +2778,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:28: '!'*/
+  	  			   225:28: '!'*/
   	  			  {
   	  			  	match(33 /*'!'*/); 
   	  			  	if(state.failed) 
@@ -2791,7 +2788,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:34: '#' .. '['*/
+  	  			   225:34: '#' .. '['*/
   	  			  {
   	  			  	matchRange(35 /*'#'*/, 91 /*'['*/); 
   	  			  	if(state.failed) 
@@ -2801,7 +2798,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:45: ']' .. '~'*/
+  	  			   225:45: ']' .. '~'*/
   	  			  {
   	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	  			  	if(state.failed) 
@@ -2811,7 +2808,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:56: UNICODE*/
+  	  			   225:56: UNICODE*/
   	  			  {
   	  			  	mUNICODE(); 
   	  			  	if(state.failed) 
@@ -2822,7 +2819,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:66: EDQUOTE*/
+  	  			   225:66: EDQUOTE*/
   	  			  {
   	  			  	mEDQUOTE(); 
   	  			  	if(state.failed) 
@@ -2833,7 +2830,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 7 :
   	  			  /* grammar/MapCSS.g:
-  	  			   224:76: EBACKSLASH*/
+  	  			   225:76: EBACKSLASH*/
   	  			  {
   	  			  	mEBACKSLASH(); 
   	  			  	if(state.failed) 
@@ -2870,10 +2867,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = SQUOTED_STRING;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   225:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   226:15: ( '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\'' )*/
   	  /* grammar/MapCSS.g:
-  	   225:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
+  	   226:17: '\\'' ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | 
   	   ESQUOTE | EBACKSLASH )* '\\''*/
   	  {
   	  	match(39 /*'\''*/); 
@@ -2881,7 +2878,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 225:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
+  	  	 226:22: ( ' ' .. '&' | '(' .. '[' | ']' .. '~' | UNICODE | ESQUOTE | 
   	  	 EBACKSLASH )**/
   	  	loop12:
   	  	do {
@@ -2917,7 +2914,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt12) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:23: ' ' .. '&'*/
+  	  			   226:23: ' ' .. '&'*/
   	  			  {
   	  			  	matchRange(32 /*' '*/, 38 /*'&'*/); 
   	  			  	if(state.failed) 
@@ -2927,7 +2924,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 2 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:34: '(' .. '['*/
+  	  			   226:34: '(' .. '['*/
   	  			  {
   	  			  	matchRange(40 /*'('*/, 91 /*'['*/); 
   	  			  	if(state.failed) 
@@ -2937,7 +2934,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 3 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:45: ']' .. '~'*/
+  	  			   226:45: ']' .. '~'*/
   	  			  {
   	  			  	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	  			  	if(state.failed) 
@@ -2947,7 +2944,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 4 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:56: UNICODE*/
+  	  			   226:56: UNICODE*/
   	  			  {
   	  			  	mUNICODE(); 
   	  			  	if(state.failed) 
@@ -2958,7 +2955,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 5 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:66: ESQUOTE*/
+  	  			   226:66: ESQUOTE*/
   	  			  {
   	  			  	mESQUOTE(); 
   	  			  	if(state.failed) 
@@ -2969,7 +2966,7 @@ class MapCSSLexer extends Lexer {
   	  			  break;
   	  			case 6 :
   	  			  /* grammar/MapCSS.g:
-  	  			   225:76: EBACKSLASH*/
+  	  			   226:76: EBACKSLASH*/
   	  			  {
   	  			  	mEBACKSLASH(); 
   	  			  	if(state.failed) 
@@ -3004,7 +3001,7 @@ class MapCSSLexer extends Lexer {
   void mHEXDIGIT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   228:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
+  	   229:18: ( DIGIT | 'a' .. 'f' | 'A' .. 'F' )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3041,10 +3038,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = HEXCOLOR;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   229:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   230:9: ( '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) ) )*/
   	  /* grammar/MapCSS.g:
-  	   229:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	   230:11: '#' ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	   ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  {
   	  	match(35 /*'#'*/); 
@@ -3052,7 +3049,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 229:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
+  	  	 230:15: ( ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT ) | 
   	  	 ( HEXDIGIT HEXDIGIT HEXDIGIT ) )*/
   	  	int alt13 = 2;
   	  	int LA13_0 = input.LA(1);
@@ -3119,12 +3116,12 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt13) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     229:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     230:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 229:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 230:16: ( HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 229:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 230:17: HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
   	  	    		mHEXDIGIT(); 
   	  	    		if(state.failed) 
@@ -3163,12 +3160,12 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     229:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	     230:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 229:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
+  	  	    	 230:74: ( HEXDIGIT HEXDIGIT HEXDIGIT )*/
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 229:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
+  	  	    	 230:75: HEXDIGIT HEXDIGIT HEXDIGIT*/
   	  	    	{
   	  	    		mHEXDIGIT(); 
   	  	    		if(state.failed) 
@@ -3209,9 +3206,9 @@ class MapCSSLexer extends Lexer {
   void mPERCENTAGE() {
     try {
   	  /* grammar/MapCSS.g:
-  	   235:20: ()*/
+  	   236:20: ()*/
   	  /* grammar/MapCSS.g:
-  	   235:21: */
+  	   236:21: */
   	  {
   	  }
 
@@ -3227,9 +3224,9 @@ class MapCSSLexer extends Lexer {
   void mPIXELS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   236:16: ()*/
+  	   237:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   236:17: */
+  	   237:17: */
   	  {
   	  }
 
@@ -3245,9 +3242,9 @@ class MapCSSLexer extends Lexer {
   void mPOINTS() {
     try {
   	  /* grammar/MapCSS.g:
-  	   237:16: ()*/
+  	   238:16: ()*/
   	  /* grammar/MapCSS.g:
-  	   237:17: */
+  	   238:17: */
   	  {
   	  }
 
@@ -3263,9 +3260,9 @@ class MapCSSLexer extends Lexer {
   void mPOSITIVE_FLOAT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   238:24: ()*/
+  	   239:24: ()*/
   	  /* grammar/MapCSS.g:
-  	   238:25: */
+  	   239:25: */
   	  {
   	  }
 
@@ -3281,9 +3278,9 @@ class MapCSSLexer extends Lexer {
   void mPOSITIVE_INT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   239:22: ()*/
+  	   240:22: ()*/
   	  /* grammar/MapCSS.g:
-  	   239:23: */
+  	   240:23: */
   	  {
   	  }
 
@@ -3299,9 +3296,9 @@ class MapCSSLexer extends Lexer {
   void mNEGATIVE_FLOAT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   240:24: ()*/
+  	   241:24: ()*/
   	  /* grammar/MapCSS.g:
-  	   240:25: */
+  	   241:25: */
   	  {
   	  }
 
@@ -3317,9 +3314,9 @@ class MapCSSLexer extends Lexer {
   void mNEGATIVE_INT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   241:22: ()*/
+  	   242:22: ()*/
   	  /* grammar/MapCSS.g:
-  	   241:23: */
+  	   242:23: */
   	  {
   	  }
 
@@ -3335,9 +3332,9 @@ class MapCSSLexer extends Lexer {
   void mINCREMENT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   242:19: ()*/
+  	   243:19: ()*/
   	  /* grammar/MapCSS.g:
-  	   242:20: */
+  	   243:20: */
   	  {
   	  }
 
@@ -3353,7 +3350,7 @@ class MapCSSLexer extends Lexer {
   void mP() {
     try {
   	  /* grammar/MapCSS.g:
-  	   243:11: ( ( 'p' | 'P' ) )*/
+  	   244:11: ( ( 'p' | 'P' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3387,7 +3384,7 @@ class MapCSSLexer extends Lexer {
   void mT() {
     try {
   	  /* grammar/MapCSS.g:
-  	   244:11: ( ( 't' | 'T' ) )*/
+  	   245:11: ( ( 't' | 'T' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3421,7 +3418,7 @@ class MapCSSLexer extends Lexer {
   void mX() {
     try {
   	  /* grammar/MapCSS.g:
-  	   245:11: ( ( 'x' | 'X' ) )*/
+  	   246:11: ( ( 'x' | 'X' ) )*/
   	  /* grammar/MapCSS.g:
   	  */
   	  {
@@ -3460,7 +3457,7 @@ class MapCSSLexer extends Lexer {
   	  int d;
 
   	  /* grammar/MapCSS.g: 
-  	   249:2: ( ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )=> (s= '-' )? ( DIGIT )* (d= '.' ( DIGIT )+ )? ( ( P ( T | 
+  	   250:2: ( ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )=> (s= '-' )? ( DIGIT )* (d= '.' ( DIGIT )+ )? ( ( P ( T | 
   	   X ) )=> P ( T | X ) | ( '%' )=> '%' |) | ( '+' )=> '+' ( DIGIT )+ ) */
   	  int alt21 = 2;
   	  int LA21_0 = input.LA(1);
@@ -3490,11 +3487,11 @@ class MapCSSLexer extends Lexer {
   	  switch (alt21) {
   	    case 1 :
   	      /* grammar/MapCSS.g:
-  	       249:4: ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )=> (s= '-' )? ( DIGIT )* (d= '.' ( DIGIT )+ )? ( ( P ( T | 
+  	       250:4: ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )=> (s= '-' )? ( DIGIT )* (d= '.' ( DIGIT )+ )? ( ( P ( T | 
   	       X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
   	      {
   	      	/* grammar/MapCSS.g:
-  	      	 249:36: (s= '-' )?*/
+  	      	 250:36: (s= '-' )?*/
   	      	int alt14 = 2;
   	      	int LA14_0 = input.LA(1);
 
@@ -3504,7 +3501,7 @@ class MapCSSLexer extends Lexer {
   	      	switch (alt14) {
   	      	  case 1 :
   	      	    /* grammar/MapCSS.g:
-  	      	     249:36: s= '-'*/
+  	      	     250:36: s= '-'*/
   	      	    {
   	      	    	s = input.LA(1);
 
@@ -3519,7 +3516,7 @@ class MapCSSLexer extends Lexer {
 
 
   	      	/* grammar/MapCSS.g:
-  	      	 249:42: ( DIGIT )**/
+  	      	 250:42: ( DIGIT )**/
   	      	loop15:
   	      	do {
   	      	  int alt15 = 2;
@@ -3560,7 +3557,7 @@ class MapCSSLexer extends Lexer {
 
 
   	      	/* grammar/MapCSS.g:
-  	      	 249:49: (d= '.' ( DIGIT )+ )?*/
+  	      	 250:49: (d= '.' ( DIGIT )+ )?*/
   	      	int alt17 = 2;
   	      	int LA17_0 = input.LA(1);
 
@@ -3570,7 +3567,7 @@ class MapCSSLexer extends Lexer {
   	      	switch (alt17) {
   	      	  case 1 :
   	      	    /* grammar/MapCSS.g:
-  	      	     249:50: d= '.' ( DIGIT )+*/
+  	      	     250:50: d= '.' ( DIGIT )+*/
   	      	    {
   	      	    	d = input.LA(1);
 
@@ -3579,7 +3576,7 @@ class MapCSSLexer extends Lexer {
   	      	    	  return ;
 
   	      	    	/* grammar/MapCSS.g:
-  	      	    	 249:56: ( DIGIT )+*/
+  	      	    	 250:56: ( DIGIT )+*/
   	      	    	int cnt16 = 0;
   	      	    	loop16:
   	      	    	do {
@@ -3634,7 +3631,7 @@ class MapCSSLexer extends Lexer {
 
 
   	      	/* grammar/MapCSS.g:
-  	      	 250:6: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
+  	      	 251:6: ( ( P ( T | X ) )=> P ( T | X ) | ( '%' )=> '%' |)*/
   	      	int alt19 = 3;
   	      	int LA19_0 = input.LA(1);
 
@@ -3651,7 +3648,7 @@ class MapCSSLexer extends Lexer {
   	      	switch (alt19) {
   	      	  case 1 :
   	      	    /* grammar/MapCSS.g:
-  	      	     251:6: ( P ( T | X ) )=> P ( T | X )*/
+  	      	     252:6: ( P ( T | X ) )=> P ( T | X )*/
   	      	    {
   	      	    	mP(); 
   	      	    	if(state.failed) 
@@ -3659,7 +3656,7 @@ class MapCSSLexer extends Lexer {
 
 
   	      	    	/* grammar/MapCSS.g:
-  	      	    	 253:6: ( T | X )*/
+  	      	    	 254:6: ( T | X )*/
   	      	    	int alt18 = 2;
   	      	    	int LA18_0 = input.LA(1);
 
@@ -3685,7 +3682,7 @@ class MapCSSLexer extends Lexer {
   	      	    	switch (alt18) {
   	      	    	  case 1 :
   	      	    	    /* grammar/MapCSS.g:
-  	      	    	     254:8: T*/
+  	      	    	     255:8: T*/
   	      	    	    {
   	      	    	    	mT(); 
   	      	    	    	if(state.failed) 
@@ -3701,7 +3698,7 @@ class MapCSSLexer extends Lexer {
   	      	    	    break;
   	      	    	  case 2 :
   	      	    	    /* grammar/MapCSS.g:
-  	      	    	     255:11: X*/
+  	      	    	     256:11: X*/
   	      	    	    {
   	      	    	    	mX(); 
   	      	    	    	if(state.failed) 
@@ -3723,7 +3720,7 @@ class MapCSSLexer extends Lexer {
   	      	    break;
   	      	  case 2 :
   	      	    /* grammar/MapCSS.g:
-  	      	     257:10: ( '%' )=> '%'*/
+  	      	     258:10: ( '%' )=> '%'*/
   	      	    {
   	      	    	match(37 /*'%'*/); 
   	      	    	if(state.failed) 
@@ -3738,7 +3735,7 @@ class MapCSSLexer extends Lexer {
   	      	    break;
   	      	  case 3 :
   	      	    /* grammar/MapCSS.g:
-  	      	     259:10: */
+  	      	     260:10: */
   	      	    {
   	      	    	if(state.backtracking == 0) {
 
@@ -3761,14 +3758,14 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 2 :
   	      /* grammar/MapCSS.g:
-  	       267:4: ( '+' )=> '+' ( DIGIT )+*/
+  	       268:4: ( '+' )=> '+' ( DIGIT )+*/
   	      {
   	      	match(43 /*'+'*/); 
   	      	if(state.failed) 
   	      	  return ;
 
   	      	/* grammar/MapCSS.g:
-  	      	 267:17: ( DIGIT )+*/
+  	      	 268:17: ( DIGIT )+*/
   	      	int cnt20 = 0;
   	      	loop20:
   	      	do {
@@ -3840,10 +3837,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = RANGE;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   274:2: ( '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   275:2: ( '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
   	   ( DIGIT )+ '-' ( DIGIT )+ ) )*/
   	  /* grammar/MapCSS.g:
-  	   274:4: '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
+  	   275:4: '|z' ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | 
   	   ( DIGIT )+ '-' ( DIGIT )+ )*/
   	  {
   	  	match("|z"); 
@@ -3853,20 +3850,20 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 274:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) */
+  	  	 275:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) */
   	  	int alt27 = 4;
   	  	alt27 = dfas["dfa27"].predict(input);
   	  	switch (alt27) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     275:5: '-' ( DIGIT )+*/
+  	  	     276:5: '-' ( DIGIT )+*/
   	  	    {
   	  	    	match(45 /*'-'*/); 
   	  	    	if(state.failed) 
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 275:9: ( DIGIT )+*/
+  	  	    	 276:9: ( DIGIT )+*/
   	  	    	int cnt22 = 0;
   	  	    	loop22:
   	  	    	do {
@@ -3918,10 +3915,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     276:5: ( DIGIT )+*/
+  	  	     277:5: ( DIGIT )+*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 276:5: ( DIGIT )+*/
+  	  	    	 277:5: ( DIGIT )+*/
   	  	    	int cnt23 = 0;
   	  	    	loop23:
   	  	    	do {
@@ -3973,10 +3970,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 3 :
   	  	    /* grammar/MapCSS.g:
-  	  	     277:5: ( DIGIT )+ '-'*/
+  	  	     278:5: ( DIGIT )+ '-'*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 277:5: ( DIGIT )+*/
+  	  	    	 278:5: ( DIGIT )+*/
   	  	    	int cnt24 = 0;
   	  	    	loop24:
   	  	    	do {
@@ -4032,10 +4029,10 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 4 :
   	  	    /* grammar/MapCSS.g:
-  	  	     278:5: ( DIGIT )+ '-' ( DIGIT )+*/
+  	  	     279:5: ( DIGIT )+ '-' ( DIGIT )+*/
   	  	    {
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 278:5: ( DIGIT )+*/
+  	  	    	 279:5: ( DIGIT )+*/
   	  	    	int cnt25 = 0;
   	  	    	loop25:
   	  	    	do {
@@ -4088,7 +4085,7 @@ class MapCSSLexer extends Lexer {
   	  	    	  return ;
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 278:16: ( DIGIT )+*/
+  	  	    	 279:16: ( DIGIT )+*/
   	  	    	int cnt26 = 0;
   	  	    	loop26:
   	  	    	do {
@@ -4157,7 +4154,7 @@ class MapCSSLexer extends Lexer {
   void mREGEX_ESCAPE() {
     try {
   	  /* grammar/MapCSS.g: 
-  	   285:22: ( '\\\\\\\\' | '\\\\/' | '\\\\(' | '\\\\)' | '\\\\|' | 
+  	   286:22: ( '\\\\\\\\' | '\\\\/' | '\\\\(' | '\\\\)' | '\\\\|' | 
   	   '\\\\$' | '\\\\*' | '\\\\.' | '\\\\^' | '\\\\?' | '\\\\+' | '\\\\-' | 
   	   '\\\\n' | '\\\\r' | '\\\\t' | '\\\\s' | '\\\\S' | '\\\\d' | '\\\\D' | 
   	   '\\\\w' | '\\\\W' )*/
@@ -4298,7 +4295,7 @@ class MapCSSLexer extends Lexer {
   	  switch (alt28) {
   	    case 1 :
   	      /* grammar/MapCSS.g:
-  	       285:26: '\\\\\\\\'*/
+  	       286:26: '\\\\\\\\'*/
   	      {
   	      	match("\\\\"); 
   	      	if(state.failed) 
@@ -4310,7 +4307,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 2 :
   	      /* grammar/MapCSS.g:
-  	       285:35: '\\\\/'*/
+  	       286:35: '\\\\/'*/
   	      {
   	      	match("\\/"); 
   	      	if(state.failed) 
@@ -4322,7 +4319,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 3 :
   	      /* grammar/MapCSS.g:
-  	       285:43: '\\\\('*/
+  	       286:43: '\\\\('*/
   	      {
   	      	match("\\("); 
   	      	if(state.failed) 
@@ -4334,7 +4331,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 4 :
   	      /* grammar/MapCSS.g:
-  	       285:51: '\\\\)'*/
+  	       286:51: '\\\\)'*/
   	      {
   	      	match("\\)"); 
   	      	if(state.failed) 
@@ -4346,7 +4343,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 5 :
   	      /* grammar/MapCSS.g:
-  	       286:26: '\\\\|'*/
+  	       287:26: '\\\\|'*/
   	      {
   	      	match("\\|"); 
   	      	if(state.failed) 
@@ -4358,7 +4355,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 6 :
   	      /* grammar/MapCSS.g:
-  	       286:34: '\\\\$'*/
+  	       287:34: '\\\\$'*/
   	      {
   	      	match("\\\$"); 
   	      	if(state.failed) 
@@ -4370,7 +4367,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 7 :
   	      /* grammar/MapCSS.g:
-  	       286:42: '\\\\*'*/
+  	       287:42: '\\\\*'*/
   	      {
   	      	match("\\*"); 
   	      	if(state.failed) 
@@ -4382,7 +4379,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 8 :
   	      /* grammar/MapCSS.g:
-  	       286:50: '\\\\.'*/
+  	       287:50: '\\\\.'*/
   	      {
   	      	match("\\."); 
   	      	if(state.failed) 
@@ -4394,7 +4391,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 9 :
   	      /* grammar/MapCSS.g:
-  	       286:58: '\\\\^'*/
+  	       287:58: '\\\\^'*/
   	      {
   	      	match("\\^"); 
   	      	if(state.failed) 
@@ -4406,7 +4403,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 10 :
   	      /* grammar/MapCSS.g:
-  	       286:66: '\\\\?'*/
+  	       287:66: '\\\\?'*/
   	      {
   	      	match("\\?"); 
   	      	if(state.failed) 
@@ -4418,7 +4415,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 11 :
   	      /* grammar/MapCSS.g:
-  	       286:74: '\\\\+'*/
+  	       287:74: '\\\\+'*/
   	      {
   	      	match("\\+"); 
   	      	if(state.failed) 
@@ -4430,7 +4427,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 12 :
   	      /* grammar/MapCSS.g:
-  	       286:82: '\\\\-'*/
+  	       287:82: '\\\\-'*/
   	      {
   	      	match("\\-"); 
   	      	if(state.failed) 
@@ -4442,7 +4439,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 13 :
   	      /* grammar/MapCSS.g:
-  	       287:26: '\\\\n'*/
+  	       288:26: '\\\\n'*/
   	      {
   	      	match("\\n"); 
   	      	if(state.failed) 
@@ -4454,7 +4451,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 14 :
   	      /* grammar/MapCSS.g:
-  	       287:34: '\\\\r'*/
+  	       288:34: '\\\\r'*/
   	      {
   	      	match("\\r"); 
   	      	if(state.failed) 
@@ -4466,7 +4463,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 15 :
   	      /* grammar/MapCSS.g:
-  	       287:42: '\\\\t'*/
+  	       288:42: '\\\\t'*/
   	      {
   	      	match("\\t"); 
   	      	if(state.failed) 
@@ -4478,7 +4475,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 16 :
   	      /* grammar/MapCSS.g:
-  	       288:26: '\\\\s'*/
+  	       289:26: '\\\\s'*/
   	      {
   	      	match("\\s"); 
   	      	if(state.failed) 
@@ -4490,7 +4487,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 17 :
   	      /* grammar/MapCSS.g:
-  	       288:34: '\\\\S'*/
+  	       289:34: '\\\\S'*/
   	      {
   	      	match("\\S"); 
   	      	if(state.failed) 
@@ -4502,7 +4499,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 18 :
   	      /* grammar/MapCSS.g:
-  	       289:26: '\\\\d'*/
+  	       290:26: '\\\\d'*/
   	      {
   	      	match("\\d"); 
   	      	if(state.failed) 
@@ -4514,7 +4511,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 19 :
   	      /* grammar/MapCSS.g:
-  	       289:34: '\\\\D'*/
+  	       290:34: '\\\\D'*/
   	      {
   	      	match("\\D"); 
   	      	if(state.failed) 
@@ -4526,7 +4523,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 20 :
   	      /* grammar/MapCSS.g:
-  	       290:26: '\\\\w'*/
+  	       291:26: '\\\\w'*/
   	      {
   	      	match("\\w"); 
   	      	if(state.failed) 
@@ -4538,7 +4535,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 21 :
   	      /* grammar/MapCSS.g:
-  	       290:34: '\\\\W'*/
+  	       291:34: '\\\\W'*/
   	      {
   	      	match("\\W"); 
   	      	if(state.failed) 
@@ -4562,7 +4559,7 @@ class MapCSSLexer extends Lexer {
   void mREGEX_START() {
     try {
   	  /* grammar/MapCSS.g: 
-  	   291:21: ( ' ' .. ')' | '+' .. '.' | '0' .. '[' | ']' .. '~' | 
+  	   292:21: ( ' ' .. ')' | '+' .. '.' | '0' .. '[' | ']' .. '~' | 
   	   UNICODE | REGEX_ESCAPE )*/
   	  int alt29 = 6;
   	  int LA29_0 = input.LA(1);
@@ -4599,7 +4596,7 @@ class MapCSSLexer extends Lexer {
   	  switch (alt29) {
   	    case 1 :
   	      /* grammar/MapCSS.g:
-  	       291:24: ' ' .. ')'*/
+  	       292:24: ' ' .. ')'*/
   	      {
   	      	matchRange(32 /*' '*/, 41 /*')'*/); 
   	      	if(state.failed) 
@@ -4609,7 +4606,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 2 :
   	      /* grammar/MapCSS.g:
-  	       291:35: '+' .. '.'*/
+  	       292:35: '+' .. '.'*/
   	      {
   	      	matchRange(43 /*'+'*/, 46 /*'.'*/); 
   	      	if(state.failed) 
@@ -4619,7 +4616,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 3 :
   	      /* grammar/MapCSS.g:
-  	       291:45: '0' .. '['*/
+  	       292:45: '0' .. '['*/
   	      {
   	      	matchRange(48 /*'0'*/, 91 /*'['*/); 
   	      	if(state.failed) 
@@ -4629,7 +4626,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 4 :
   	      /* grammar/MapCSS.g:
-  	       291:56: ']' .. '~'*/
+  	       292:56: ']' .. '~'*/
   	      {
   	      	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	      	if(state.failed) 
@@ -4639,7 +4636,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 5 :
   	      /* grammar/MapCSS.g:
-  	       291:67: UNICODE*/
+  	       292:67: UNICODE*/
   	      {
   	      	mUNICODE(); 
   	      	if(state.failed) 
@@ -4650,7 +4647,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 6 :
   	      /* grammar/MapCSS.g:
-  	       291:77: REGEX_ESCAPE*/
+  	       292:77: REGEX_ESCAPE*/
   	      {
   	      	mREGEX_ESCAPE(); 
   	      	if(state.failed) 
@@ -4673,7 +4670,7 @@ class MapCSSLexer extends Lexer {
   void mREGEX_CHAR() {
     try {
   	  /* grammar/MapCSS.g: 
-  	   292:20: ( ' ' .. '.' | '0' .. '[' | ']' .. '~' | UNICODE | REGEX_ESCAPE )*/
+  	   293:20: ( ' ' .. '.' | '0' .. '[' | ']' .. '~' | UNICODE | REGEX_ESCAPE )*/
   	  int alt30 = 5;
   	  int LA30_0 = input.LA(1);
 
@@ -4706,7 +4703,7 @@ class MapCSSLexer extends Lexer {
   	  switch (alt30) {
   	    case 1 :
   	      /* grammar/MapCSS.g:
-  	       292:23: ' ' .. '.'*/
+  	       293:23: ' ' .. '.'*/
   	      {
   	      	matchRange(32 /*' '*/, 46 /*'.'*/); 
   	      	if(state.failed) 
@@ -4716,7 +4713,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 2 :
   	      /* grammar/MapCSS.g:
-  	       292:33: '0' .. '['*/
+  	       293:33: '0' .. '['*/
   	      {
   	      	matchRange(48 /*'0'*/, 91 /*'['*/); 
   	      	if(state.failed) 
@@ -4726,7 +4723,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 3 :
   	      /* grammar/MapCSS.g:
-  	       292:44: ']' .. '~'*/
+  	       293:44: ']' .. '~'*/
   	      {
   	      	matchRange(93 /*']'*/, 126 /*'~'*/); 
   	      	if(state.failed) 
@@ -4736,7 +4733,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 4 :
   	      /* grammar/MapCSS.g:
-  	       292:55: UNICODE*/
+  	       293:55: UNICODE*/
   	      {
   	      	mUNICODE(); 
   	      	if(state.failed) 
@@ -4747,7 +4744,7 @@ class MapCSSLexer extends Lexer {
   	      break;
   	    case 5 :
   	      /* grammar/MapCSS.g:
-  	       292:65: REGEX_ESCAPE*/
+  	       293:65: REGEX_ESCAPE*/
   	      {
   	      	mREGEX_ESCAPE(); 
   	      	if(state.failed) 
@@ -4770,9 +4767,9 @@ class MapCSSLexer extends Lexer {
   void mDIV() {
     try {
   	  /* grammar/MapCSS.g:
-  	   299:13: ()*/
+  	   300:13: ()*/
   	  /* grammar/MapCSS.g:
-  	   299:14: */
+  	   300:14: */
   	  {
   	  }
 
@@ -4790,10 +4787,10 @@ class MapCSSLexer extends Lexer {
   	  int _type = REGEXP;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   300:7: ( '/' ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
+  	   301:7: ( '/' ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
   	   ( . )=>) )*/
   	  /* grammar/MapCSS.g:
-  	   300:10: '/' ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
+  	   301:10: '/' ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
   	   ( . )=>)*/
   	  {
   	  	match(47 /*'/'*/); 
@@ -4801,7 +4798,7 @@ class MapCSSLexer extends Lexer {
   	  	  return ;
 
   	  	/* grammar/MapCSS.g:
-  	  	 300:15: ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
+  	  	 301:15: ( ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/' | 
   	  	 ( . )=>)*/
   	  	int alt32 = 2;
   	  	int LA32_0 = input.LA(1);
@@ -4830,7 +4827,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt32) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     301:15: ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/'*/
+  	  	     302:15: ( REGEX_START ( REGEX_CHAR )* '/' )=> REGEX_START ( REGEX_CHAR )* '/'*/
   	  	    {
   	  	    	mREGEX_START(); 
   	  	    	if(state.failed) 
@@ -4838,7 +4835,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	    	/* grammar/MapCSS.g:
-  	  	    	 302:36: ( REGEX_CHAR )**/
+  	  	    	 303:36: ( REGEX_CHAR )**/
   	  	    	loop31:
   	  	    	do {
   	  	    	  int alt31 = 2;
@@ -4854,7 +4851,7 @@ class MapCSSLexer extends Lexer {
   	  	    	  switch (alt31) {
   	  	    			case 1 :
   	  	    			  /* grammar/MapCSS.g:
-  	  	    			   302:36: REGEX_CHAR*/
+  	  	    			   303:36: REGEX_CHAR*/
   	  	    			  {
   	  	    			  	mREGEX_CHAR(); 
   	  	    			  	if(state.failed) 
@@ -4883,7 +4880,7 @@ class MapCSSLexer extends Lexer {
   	  	    break;
   	  	  case 2 :
   	  	    /* grammar/MapCSS.g:
-  	  	     303:15: ( . )=>*/
+  	  	     304:15: ( . )=>*/
   	  	    {
   	  	    	if(state.backtracking == 0) {
   	  	    	  _type=DIV;
@@ -4913,9 +4910,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = WS;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   309:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
+  	   310:3: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' ) )*/
   	  /* grammar/MapCSS.g:
-  	   309:10: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
+  	   310:10: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )*/
   	  {
   	  	if((input.LA(1) >= 9 /*'\t'*/ && input.LA(1) <= 10 /*'\n'*/)
   	  	  || (input.LA(1) >= 12 /*'\f'*/ && input.LA(1) <= 13 /*'\r'*/)
@@ -4956,9 +4953,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = SL_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   310:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
+  	   311:11: ( '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n' )*/
   	  /* grammar/MapCSS.g:
-  	   310:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
+  	   311:15: '//' ( options {greedy=false; } : . )* ( '\\r' )? '\\n'*/
   	  {
   	  	match("//"); 
   	  	if(state.failed) 
@@ -4967,7 +4964,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 310:20: ( options {greedy=false; } : . )**/
+  	  	 311:20: ( options {greedy=false; } : . )**/
   	  	loop33:
   	  	do {
   	  	  int alt33 = 2;
@@ -4989,7 +4986,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt33) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   310:46: .*/
+  	  			   311:46: .*/
   	  			  {
   	  			  	matchAny(); 
   	  			  	if(state.failed) 
@@ -5005,7 +5002,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 310:50: ( '\\r' )?*/
+  	  	 311:50: ( '\\r' )?*/
   	  	int alt34 = 2;
   	  	int LA34_0 = input.LA(1);
 
@@ -5015,7 +5012,7 @@ class MapCSSLexer extends Lexer {
   	  	switch (alt34) {
   	  	  case 1 :
   	  	    /* grammar/MapCSS.g:
-  	  	     310:50: '\\r'*/
+  	  	     311:50: '\\r'*/
   	  	    {
   	  	    	match(13 /*'\r'*/); 
   	  	    	if(state.failed) 
@@ -5053,9 +5050,9 @@ class MapCSSLexer extends Lexer {
   	  int _type = ML_COMMENT;
   	  int _channel = BaseRecognizer.DEFAULT_TOKEN_CHANNEL;
   	  /* grammar/MapCSS.g:
-  	   311:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
+  	   312:11: ( '/*' ( options {greedy=false; } : . )* '*/' )*/
   	  /* grammar/MapCSS.g:
-  	   311:15: '/*' ( options {greedy=false; } : . )* '*/'*/
+  	   312:15: '/*' ( options {greedy=false; } : . )* '*/'*/
   	  {
   	  	match("/*"); 
   	  	if(state.failed) 
@@ -5064,7 +5061,7 @@ class MapCSSLexer extends Lexer {
 
 
   	  	/* grammar/MapCSS.g:
-  	  	 311:21: ( options {greedy=false; } : . )**/
+  	  	 312:21: ( options {greedy=false; } : . )**/
   	  	loop35:
   	  	do {
   	  	  int alt35 = 2;
@@ -5092,7 +5089,7 @@ class MapCSSLexer extends Lexer {
   	  	  switch (alt35) {
   	  			case 1 :
   	  			  /* grammar/MapCSS.g:
-  	  			   311:48: .*/
+  	  			   312:48: .*/
   	  			  {
   	  			  	matchAny(); 
   	  			  	if(state.failed) 
@@ -5711,7 +5708,7 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred1_MapCSS
   void synpred1_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     172:12: ( TAGSEPARATOR )*/
+     173:12: ( TAGSEPARATOR )*/
     /* grammar/MapCSS.g:
     */
     {
@@ -5739,12 +5736,12 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred2_MapCSS
   void synpred2_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     249:4: ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )*/
+     250:4: ( ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )? )*/
     /* grammar/MapCSS.g:
-     249:5: ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )?*/
+     250:5: ( '-' )? ( DIGIT )* ( '.' ( DIGIT )+ )?*/
     {
     	/* grammar/MapCSS.g:
-    	 249:5: ( '-' )?*/
+    	 250:5: ( '-' )?*/
     	int alt37 = 2;
     	int LA37_0 = input.LA(1);
 
@@ -5754,7 +5751,7 @@ class MapCSSLexer extends Lexer {
     	switch (alt37) {
     	  case 1 :
     	    /* grammar/MapCSS.g:
-    	     249:5: '-'*/
+    	     250:5: '-'*/
     	    {
     	    	match(45 /*'-'*/); 
     	    	if(state.failed) 
@@ -5767,7 +5764,7 @@ class MapCSSLexer extends Lexer {
 
 
     	/* grammar/MapCSS.g:
-    	 249:10: ( DIGIT )**/
+    	 250:10: ( DIGIT )**/
     	loop38:
     	do {
     	  int alt38 = 2;
@@ -5808,7 +5805,7 @@ class MapCSSLexer extends Lexer {
 
 
     	/* grammar/MapCSS.g:
-    	 249:17: ( '.' ( DIGIT )+ )?*/
+    	 250:17: ( '.' ( DIGIT )+ )?*/
     	int alt40 = 2;
     	int LA40_0 = input.LA(1);
 
@@ -5818,14 +5815,14 @@ class MapCSSLexer extends Lexer {
     	switch (alt40) {
     	  case 1 :
     	    /* grammar/MapCSS.g:
-    	     249:18: '.' ( DIGIT )+*/
+    	     250:18: '.' ( DIGIT )+*/
     	    {
     	    	match(46 /*'.'*/); 
     	    	if(state.failed) 
     	    	  return ;
 
     	    	/* grammar/MapCSS.g:
-    	    	 249:22: ( DIGIT )+*/
+    	    	 250:22: ( DIGIT )+*/
     	    	int cnt39 = 0;
     	    	loop39:
     	    	do {
@@ -5887,9 +5884,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred3_MapCSS
   void synpred3_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     251:6: ( P ( T | X ) )*/
+     252:6: ( P ( T | X ) )*/
     /* grammar/MapCSS.g:
-     251:7: P ( T | X )*/
+     252:7: P ( T | X )*/
     {
     	mP(); 
     	if(state.failed) 
@@ -5922,9 +5919,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred4_MapCSS
   void synpred4_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     257:10: ( '%' )*/
+     258:10: ( '%' )*/
     /* grammar/MapCSS.g:
-     257:11: '%'*/
+     258:11: '%'*/
     {
     	match(37 /*'%'*/); 
     	if(state.failed) 
@@ -5938,9 +5935,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred5_MapCSS
   void synpred5_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     267:4: ( '+' )*/
+     268:4: ( '+' )*/
     /* grammar/MapCSS.g:
-     267:5: '+'*/
+     268:5: '+'*/
     {
     	match(43 /*'+'*/); 
     	if(state.failed) 
@@ -5954,9 +5951,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred6_MapCSS
   void synpred6_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     301:15: ( REGEX_START ( REGEX_CHAR )* '/' )*/
+     302:15: ( REGEX_START ( REGEX_CHAR )* '/' )*/
     /* grammar/MapCSS.g:
-     301:16: REGEX_START ( REGEX_CHAR )* '/'*/
+     302:16: REGEX_START ( REGEX_CHAR )* '/'*/
     {
     	mREGEX_START(); 
     	if(state.failed) 
@@ -5964,7 +5961,7 @@ class MapCSSLexer extends Lexer {
 
 
     	/* grammar/MapCSS.g:
-    	 301:28: ( REGEX_CHAR )**/
+    	 302:28: ( REGEX_CHAR )**/
     	loop41:
     	do {
     	  int alt41 = 2;
@@ -5980,7 +5977,7 @@ class MapCSSLexer extends Lexer {
     	  switch (alt41) {
     			case 1 :
     			  /* grammar/MapCSS.g:
-    			   301:28: REGEX_CHAR*/
+    			   302:28: REGEX_CHAR*/
     			  {
     			  	mREGEX_CHAR(); 
     			  	if(state.failed) 
@@ -6008,9 +6005,9 @@ class MapCSSLexer extends Lexer {
   // $ANTLR start synpred7_MapCSS
   void synpred7_MapCSS_fragment() {
     /* grammar/MapCSS.g:
-     303:15: ( . )*/
+     304:15: ( . )*/
     /* grammar/MapCSS.g:
-     303:16: .*/
+     304:16: .*/
     {
     	matchAny(); 
     	if(state.failed) 
@@ -6191,14 +6188,14 @@ class MapCSSLexer extends Lexer {
       "\u0001\u004c\u0001\u0054\u0001\u0009\u0001\u002d\u0001\uffff\u0001"
       "\u002d\u0001\u0058\u0002\u002d\u0003\uffff\u0001\u002d\u0003\uffff";
   static const String DFA_MapCSSLexer_36_maxS =
-      "\u0001\uffff\u0003\uffff\u0001\u007e\u0002\u003d\u0001\uffff\u0002"
-      "\u003d\u0001\u007c\u0001\u0039\u0004\uffff\u0001\uffff\u0001\u0039"
+      "\u0001\u007e\u0003\uffff\u0001\u007e\u0002\u003d\u0001\uffff\u0002"
+      "\u003d\u0001\u007c\u0001\u0039\u0004\uffff\u0001\u007a\u0001\u0039"
       "\u0001\u003a\u0001\uffff\u0001\u006f\u0001\u006e\u0001\u0076\u0001"
       "\u0069\u0001\uffff\u0001\u0072\u0001\u0078\u000a\uffff\u0001\u002f"
       "\u0016\uffff\u0001\u0062\u0001\u006c\u0001\u0064\u0001\u0061\u0001"
-      "\u0073\u0001\u006c\u0005\uffff\u0001\uffff\u0002\u0065\u0001\u006c"
-      "\u0001\u0074\u0001\u0028\u0001\uffff\u0001\uffff\u0001\uffff\u0001"
-      "\u0078\u0002\uffff\u0003\uffff\u0001\uffff\u0003\uffff";
+      "\u0073\u0001\u006c\u0005\uffff\u0001\u007a\u0002\u0065\u0001\u006c"
+      "\u0001\u0074\u0001\u0028\u0001\u007a\u0001\uffff\u0001\u007a\u0001"
+      "\u0078\u0002\u007a\u0003\uffff\u0001\u007a\u0003\uffff";
   static const String DFA_MapCSSLexer_36_acceptS =
       "\u0001\uffff\u0001\u0001\u0001\u0002\u0001\u0003\u0003\uffff\u0001"
       "\u000a\u0004\uffff\u0001\u000f\u0001\u0014\u0001\u0015\u0001\u0016"
@@ -6226,7 +6223,7 @@ class MapCSSLexer extends Lexer {
       "\u0001\u000c\u0001\u0024\u0001\uffff\u0004\u0024\u0001\u0016\u0003"
       "\u0024\u0001\u0015\u0002\u0024\u0001\u0017\u0003\u0024\u0001\u001a"
       "\u0001\u0024\u0001\u0014\u0002\u0024\u0001\u0019\u0005\u0024\u0001"
-      "\u001d\u0001\u000a\u0001\u001e\u0001\u0002\u0021\uffff\uff60\u0024",
+      "\u001d\u0001\u000a\u0001\u001e\u0001\u0002",
       "",
       "",
       "",
@@ -6244,8 +6241,7 @@ class MapCSSLexer extends Lexer {
       "",
       "\u0001\u0023\u0008\uffff\u0001\u0023\u0001\uffff\u000a\u0023\u0007"
       "\uffff\u000f\u0024\u0001\u001a\u000a\u0024\u0004\uffff\u0001\u0024"
-      "\u0001\uffff\u000f\u0024\u0001\u001a\u000a\u0024\u0025\uffff\uff60"
-      "\u0024",
+      "\u0001\uffff\u000f\u0024\u0001\u001a\u000a\u0024",
       "\u000a\u0023",
       "\u0001\u0039\u0018\uffff\u0001\u003a",
       "",
@@ -6303,8 +6299,7 @@ class MapCSSLexer extends Lexer {
       "",
       "",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u0001\u004d\u0019"
-      "\u0024\u0004\uffff\u0001\u0024\u0001\uffff\u0001\u004d\u0019\u0024"
-      "\u0025\uffff\uff60\u0024",
+      "\u0024\u0004\uffff\u0001\u0024\u0001\uffff\u0001\u004d\u0019\u0024",
       "\u0001\u004f\u001f\uffff\u0001\u004f",
       "\u0001\u0050\u001f\uffff\u0001\u0050",
       "\u0001\u0051\u001f\uffff\u0001\u0051",
@@ -6312,20 +6307,20 @@ class MapCSSLexer extends Lexer {
       "\u0001\u0053\u0002\uffff\u0001\u0053\u0013\uffff\u0001\u0053\u0007"
       "\uffff\u0001\u0053",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u001a\u0024\u0004"
-      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024\u0025\uffff\uff60\u0024",
+      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024",
       "",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u001a\u0024\u0004"
-      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024\u0025\uffff\uff60\u0024",
+      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024",
       "\u0001\u0056\u001f\uffff\u0001\u0056",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u001a\u0024\u0004"
-      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024\u0025\uffff\uff60\u0024",
+      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u001a\u0024\u0004"
-      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024\u0025\uffff\uff60\u0024",
+      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024",
       "",
       "",
       "",
       "\u0002\u0024\u0001\uffff\u000b\u0024\u0006\uffff\u001a\u0024\u0004"
-      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024\u0025\uffff\uff60\u0024",
+      "\uffff\u0001\u0024\u0001\uffff\u001a\u0024",
       "",
       "",
       ""
@@ -6375,7 +6370,7 @@ class DFA_MapCSSLexer_27 extends DFA {
   }
 
   String get description => 
-        """274:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) """;
+        """275:9: ( '-' ( DIGIT )+ | ( DIGIT )+ | ( DIGIT )+ '-' | ( DIGIT )+ '-' ( DIGIT )+ ) """;
 
 }
 class DFA_MapCSSLexer_36 extends DFA {

@@ -160,7 +160,8 @@ fragment NMSTART: 'a'..'z' | 'A'..'Z' | '_' | NONASCII;
 fragment NMCHAR: 'a'..'z' | 'A'..'Z' | '_' | '-' | NONASCII;
 
 /* helpers */
-fragment NCOMPONENT: (NONASCII | CHAR | '_') (NONASCII | CHAR | DIGIT | '_' | '-')*;
+//fragment NCOMPONENT: (NONASCII | CHAR | '_') (NONASCII | CHAR | DIGIT | '_' | '-')*;
+fragment NCOMPONENT: (CHAR | '_' ) (CHAR | DIGIT | '_' | '-')*;
 fragment TAGSEPARATOR: (':') | ('.');
 
 /* context specific lexer for identifiers. Recognizes CSS idents and OSM tag names */

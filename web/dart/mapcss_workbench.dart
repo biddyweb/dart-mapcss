@@ -1,5 +1,6 @@
 
 import "dart:html";
+import "package:dartlr/dartlr_client.dart";
 import "package:mapcss/mapcss.dart";
 import 'package:js/js.dart' as js;
 
@@ -85,7 +86,6 @@ class ParserResultView {
   
   _onSelectSourcePosition(line, col) {
     if (line is String) line = int.parse(line.trim());
-    print("scrolling to $line, $col");
     js.scoped(() {
       // editor seems to expect 0-based line index
       editor.setCursor(line -1, col);
@@ -99,8 +99,7 @@ class ParserResultView {
     });
   }
   
-  var _listeners = [];
-  
+  var _listeners = [];  
   _bindListener(Element e) {    
      var l = (Event evt) {
        AnchorElement a;
@@ -140,6 +139,7 @@ class ParserResultView {
     if (e is UnwantedTokenException) return _formatUnwantedTokenException(e);
     else return _formatRecognitionException(e);
   }
+  
   static _formatParseErrorList(l) {
     StringBuffer sb = new StringBuffer();
     sb.add("<ul>");
@@ -171,5 +171,5 @@ var parseResultView = new ParserResultView();
 
 main() {
   initEditor();
-  query("#btnParse").on.click.add((event) => onParse());
+  query("#btnParse").on.click.add((_) => onParse());
 }
