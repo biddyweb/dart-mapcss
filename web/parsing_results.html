@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>parsing_results</title>
+  </head>
+  <body>
+    <element name="x-parsing-results" extends="div" constructor="ParsingResult">
+        <script type="application/dart" src="parsing_result.dart" ></script>
+        <template>
+         <div class="{{classes}}">
+           <template instantiate="if errors.isEmpty">
+             Parsing OK
+           </template>
+           <template instantiate="if !errors.isEmpty">
+             Parsing failed with the following errors:
+             <ul>
+                <template iterate="error in errors">
+                  <li><a on-click="navigateToError(error.line, error.col)" class="parse-error-position">({{error.line}}, {{error.col}})</a> <span class="parse-error-text">{{error.message}}</span></li>
+                </template>               
+             </ul>
+           </template>           
+         </div> 
+        </template>
+    </element>
+  </body>
+</html>
